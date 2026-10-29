@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-29T22:38:44.869Z",
+  "generated_at": "2026-10-29T22:45:16.477Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
     "export_retrieved_at": "2026-10-29T22:04:40.090Z",
-    "x402scan_retrieved_at": "2026-10-29T22:38:44.744Z",
-    "defillama_retrieved_at": "2026-10-29T22:38:44.797Z"
+    "x402scan_retrieved_at": "2026-10-29T22:45:07.463Z",
+    "defillama_retrieved_at": "2026-10-29T22:45:07.522Z"
   },
   "numbers": {
     "vet402.rows": {
@@ -125,7 +125,7 @@
         "days": 30,
         "to": "2026-10-29T20:45:45.000Z"
       },
-      "as_of": "2026-10-29T22:38:44.744Z",
+      "as_of": "2026-10-29T22:45:07.463Z",
       "source": "x402scan",
       "definition": "x402scan total_amount for 30 days with no chain filter, divided by 1e6 into USD."
     },
@@ -136,7 +136,7 @@
         "days": 30,
         "to": "2026-10-29T20:45:45.000Z"
       },
-      "as_of": "2026-10-29T22:38:44.744Z",
+      "as_of": "2026-10-29T22:45:07.463Z",
       "source": "x402scan",
       "definition": "Base total_amount divided by the no-chain total_amount."
     },
@@ -147,7 +147,7 @@
         "days": 30,
         "to": "2026-10-29T20:45:45.000Z"
       },
-      "as_of": "2026-10-29T22:38:44.744Z",
+      "as_of": "2026-10-29T22:45:07.463Z",
       "source": "x402scan",
       "definition": "Base total_transactions divided by the no-chain total_transactions."
     },
@@ -160,7 +160,7 @@
         "to": "2026-10-28T00:00:00.000Z",
         "dropped_last_day": false
       },
-      "as_of": "2026-10-29T22:38:44.797Z",
+      "as_of": "2026-10-29T22:45:07.522Z",
       "source": "defillama_intents",
       "definition": "Sum of DefiLlama totalDataChart daily USD for near-intents over 30 days. The last day is dropped when total24h is null or it equals the previous day."
     },
@@ -171,9 +171,31 @@
         "all_time": true,
         "to": "2026-10-28T00:00:00.000Z"
       },
-      "as_of": "2026-10-29T22:38:44.797Z",
+      "as_of": "2026-10-29T22:45:07.522Z",
       "source": "defillama_intents",
       "definition": "DefiLlama totalAllTime for near-intents."
+    },
+    "vault.usdc_out_30d.count": {
+      "value": 45840,
+      "unit": "transfers",
+      "range": {
+        "from_block": 51965969,
+        "to_block": 53261969
+      },
+      "as_of": "2026-10-29T22:38:06.066Z",
+      "source": "base_vault",
+      "definition": "USDC sent out of the NEAR Intents treasury on Base (all purposes)"
+    },
+    "vault.usdc_out_30d.usd": {
+      "value": 41050145.312122,
+      "unit": "USD",
+      "range": {
+        "from_block": 51965969,
+        "to_block": 53261969
+      },
+      "as_of": "2026-10-29T22:38:06.066Z",
+      "source": "base_vault",
+      "definition": "USDC sent out of the NEAR Intents treasury on Base (all purposes)"
     }
   },
   "breakdown": [
