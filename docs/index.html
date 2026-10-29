@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NEAR agent payments</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f4ef;
+      --fg: #1c1915;
+      --card: #fffefb;
+      --line: #e4e0d8;
+      --muted: #57534e;
+      --missing: #9f1239;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1916;
+        --fg: #f4f1ea;
+        --card: #26241f;
+        --line: #3f3c36;
+        --muted: #c4bfb4;
+        --missing: #fecdd3;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; overflow-x: hidden; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Iowan Old Style", Palatino, Georgia, serif;
+      line-height: 1.45;
+    }
+    main {
+      width: min(72rem, 100%);
+      margin: 0 auto;
+      padding: 16px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 1.6rem;
+      font-weight: 650;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+    h2 { margin: 28px 0 8px; font-size: 1.25rem; }
+    p { margin: 0 0 8px; }
+    .count { color: var(--muted); font-family: ui-sans-serif, system-ui, sans-serif; }
+    .missing { color: var(--missing); font-weight: 700; }
+    #cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    @media (min-width: 800px) {
+      #cards { grid-template-columns: 1fr 1fr; }
+    }
+    .card, .table-scroll { min-width: 0; max-width: 100%; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 12px;
+    }
+    .card h3, .figure h3 {
+      margin: 0 0 4px;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 650;
+    }
+    .value {
+      margin: 0 0 8px;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 2rem;
+      font-variant-numeric: tabular-nums;
+      overflow-wrap: anywhere;
+    }
+    .meta {
+      margin: 0;
+      color: var(--muted);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.8rem;
+      overflow-wrap: anywhere;
+    }
+    .figure + .figure { margin-top: 12px; }
+    .note {
+      color: var(--muted);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.8rem;
+    }
+    .table-scroll { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.8rem;
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--line);
+      overflow-wrap: anywhere;
+    }
+    a { color: inherit; }
+    a:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <main id="app">
+    <h1>Where does NEAR fit in agent payments? Numbers from one re-runnable script.</h1>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

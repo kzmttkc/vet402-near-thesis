@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-29T22:45:16.477Z",
+  "generated_at": "2026-10-29T23:27:12.631Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
     "export_retrieved_at": "2026-10-29T22:04:40.090Z",
-    "x402scan_retrieved_at": "2026-10-29T22:45:07.463Z",
-    "defillama_retrieved_at": "2026-10-29T22:45:07.522Z"
+    "x402scan_retrieved_at": "2026-10-29T23:18:32.677Z",
+    "defillama_retrieved_at": "2026-10-29T23:18:32.768Z"
   },
   "numbers": {
     "vet402.rows": {
@@ -119,35 +119,35 @@
       "definition": "unexplained"
     },
     "x402.total.amount_30d": {
-      "value": 1580292.752882,
+      "value": 1579184.911378,
       "unit": "USD",
       "range": {
         "days": 30,
-        "to": "2026-10-29T20:45:45.000Z"
+        "to": "2026-10-29T22:45:39.000Z"
       },
-      "as_of": "2026-10-29T22:45:07.463Z",
+      "as_of": "2026-10-29T23:18:32.677Z",
       "source": "x402scan",
       "definition": "x402scan total_amount for 30 days with no chain filter, divided by 1e6 into USD."
     },
     "x402.base.share_amount_30d": {
-      "value": 0.7297337748755142,
+      "value": 0.7297542594694617,
       "unit": "share of USD",
       "range": {
         "days": 30,
-        "to": "2026-10-29T20:45:45.000Z"
+        "to": "2026-10-29T22:45:39.000Z"
       },
-      "as_of": "2026-10-29T22:45:07.463Z",
+      "as_of": "2026-10-29T23:18:32.677Z",
       "source": "x402scan",
       "definition": "Base total_amount divided by the no-chain total_amount."
     },
     "x402.base.share_count_30d": {
-      "value": 0.7731946840278581,
+      "value": 0.7727125178693498,
       "unit": "share of count",
       "range": {
         "days": 30,
-        "to": "2026-10-29T20:45:45.000Z"
+        "to": "2026-10-29T22:45:39.000Z"
       },
-      "as_of": "2026-10-29T22:45:07.463Z",
+      "as_of": "2026-10-29T23:18:32.677Z",
       "source": "x402scan",
       "definition": "Base total_transactions divided by the no-chain total_transactions."
     },
@@ -160,7 +160,7 @@
         "to": "2026-10-28T00:00:00.000Z",
         "dropped_last_day": false
       },
-      "as_of": "2026-10-29T22:45:07.522Z",
+      "as_of": "2026-10-29T23:18:32.768Z",
       "source": "defillama_intents",
       "definition": "Sum of DefiLlama totalDataChart daily USD for near-intents over 30 days. The last day is dropped when total24h is null or it equals the previous day."
     },
@@ -171,7 +171,7 @@
         "all_time": true,
         "to": "2026-10-28T00:00:00.000Z"
       },
-      "as_of": "2026-10-29T22:45:07.522Z",
+      "as_of": "2026-10-29T23:18:32.768Z",
       "source": "defillama_intents",
       "definition": "DefiLlama totalAllTime for near-intents."
     },
@@ -196,6 +196,133 @@
       "as_of": "2026-10-29T22:38:06.066Z",
       "source": "base_vault",
       "definition": "USDC sent out of the NEAR Intents treasury on Base (all purposes)"
+    },
+    "vet402.delivered_share": {
+      "value": 0.9154053832937904,
+      "unit": "share of settled purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "delivered"
+    },
+    "vet402.unexplained_share_excl_held": {
+      "value": 0.02915401301518438,
+      "unit": "share of settled purchases, vet402-held excluded",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "unexplained"
+    },
+    "compare.vault_over_x402_base_30d": {
+      "value": 35.62091527603908,
+      "unit": "times",
+      "range": {
+        "vault": {
+          "from_block": 51965969,
+          "to_block": 53261969
+        },
+        "x402": {
+          "days": 30,
+          "to": "2026-10-29T22:45:39.000Z"
+        }
+      },
+      "as_of": "2026-10-29T23:18:32.677Z",
+      "source": "base_vault+x402scan",
+      "definition": "USDC sent out of the NEAR Intents treasury on Base (all purposes) over x402 dollars on Base, both 30 days"
+    },
+    "recheck.base.checked": {
+      "value": 100,
+      "unit": "settled purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T23:25:27.796Z",
+      "source": "base_public_rpc",
+      "definition": "settled"
+    },
+    "recheck.base.match": {
+      "value": 100,
+      "unit": "settled purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T23:25:27.796Z",
+      "source": "base_public_rpc",
+      "definition": "settled"
+    },
+    "recheck.base.mismatch": {
+      "value": 0,
+      "unit": "settled purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T23:25:27.796Z",
+      "source": "base_public_rpc",
+      "definition": "settled"
+    },
+    "recheck.base.not_rechecked": {
+      "value": 0,
+      "unit": "settled purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T23:25:27.796Z",
+      "source": "base_public_rpc",
+      "definition": "settled"
+    },
+    "recheck.solana.checked": {
+      "value": 100,
+      "unit": "settled purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T23:25:27.796Z",
+      "source": "solana_public_rpc",
+      "definition": "settled"
+    },
+    "recheck.solana.match": {
+      "value": 100,
+      "unit": "settled purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T23:25:27.796Z",
+      "source": "solana_public_rpc",
+      "definition": "settled"
+    },
+    "recheck.solana.mismatch": {
+      "value": 0,
+      "unit": "settled purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T23:25:27.796Z",
+      "source": "solana_public_rpc",
+      "definition": "settled"
+    },
+    "recheck.solana.not_rechecked": {
+      "value": 0,
+      "unit": "settled purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T23:25:27.796Z",
+      "source": "solana_public_rpc",
+      "definition": "settled"
     }
   },
   "breakdown": [
@@ -354,22 +481,22 @@
   ],
   "definitions": {
     "row": "A row in the vet402 observatory export.",
-    "attempt": "A row whose network is non-empty. Rows with empty network (no_eligible_accept and similar cases where there was no payee) are excluded from the attempt count; their count is reported separately.",
-    "not_attempt": "A row whose network is empty.",
-    "settled": "A row whose status is settled (both empty held_reason and settled_4xx).",
-    "delivered": "A settled row whose http_status_paid is 2xx. Includes 202 Accepted. The count excluding 202 is also reported. Whether the body was empty cannot be checked from the public CSV (that column is absent) and cannot be verified on re-run.",
-    "pending": "A row whose status is delivered_no_receipt (treated as delivered without a receipt; all 2xx with no tx) or settle_claimed (the seller named a tx).",
-    "not_settled": "settle_failed (payer_unfunded, unsettled_4xx, or empty), settle_claim_refuted, over_cap, price_mismatch, payto_mismatch, no_fee_payer, no_402.",
-    "held": "settled with held_reason=settled_4xx. The portion vet402 itself excludes from the denominator.",
-    "unexplained": "Settled rows that are neither 2xx nor settled_4xx."
+    "attempt": "A row with a network. Rows without one never reached a payee and are counted separately as not_attempt.",
+    "not_attempt": "A row without a network: no_eligible_accept, over_cap, no_402, price_mismatch, no_fee_payer or payto_mismatch.",
+    "settled": "A row whose status is settled, with held_reason empty or settled_4xx.",
+    "delivered": "A settled row whose http_status_paid is 2xx, 202 Accepted included. The count without 202 is reported too. The public CSV has no column for an empty body, so a rerun cannot check that.",
+    "pending": "A row whose status is delivered_no_receipt (a 2xx answer with no tx yet) or settle_claimed (the seller named a tx that is not confirmed).",
+    "not_settled": "A row with a network whose status is settle_failed (payer_unfunded, unsettled_4xx or empty) or settle_claim_refuted.",
+    "held": "A settled row with held_reason settled_4xx. The 4xx may come from how vet402 asked, so vet402 leaves it out of its own rates.",
+    "unexplained": "A settled row that is neither 2xx nor held."
   },
   "checks": [
     {
-      "name": "①〜④の合計＝行数",
+      "name": "groups 1 to 4 add up to all rows",
       "ok": true
     },
     {
-      "name": "attempts＝①＋②＋③",
+      "name": "attempts equal groups 1 + 2 + 3",
       "ok": true
     }
   ],
@@ -401,12 +528,61 @@
       "full_sentence": "In Q3 2026, the near.com front-end processed ~$2.57 billion in volume, which was roughly a quarter of the total volume on NEAR Intents ($10.4 billion).",
       "context": "Same report, section on near.com. This is the only place the report states Q3 Intents volume.",
       "retrieved_at": "2026-10-29T22:50:00Z"
+    },
+    {
+      "id": "near_blog.around_payment",
+      "url": "https://www.near.org/blog/near-foundation-joins-x402-foundation",
+      "full_sentence": "The intention is that an agent can pay through x402 and rely on NEAR infrastructure for everything around that payment.",
+      "context": "NEAR Foundation, \"NEAR Foundation Joins the x402 Foundation\", 2026-07-14.",
+      "retrieved_at": "2026-10-29T23:10:00Z"
+    },
+    {
+      "id": "near_blog.alongside",
+      "url": "https://www.near.org/blog/near-foundation-joins-x402-foundation",
+      "full_sentence": "NEAR joins as a builder of key agent infrastructure, including cross-chain liquidity, confidential execution, private inference, and agent-to-agent discovery and coordination that is needed alongside x402’s payments protocol.",
+      "context": "Same post, opening section.",
+      "retrieved_at": "2026-10-29T23:10:00Z"
+    },
+    {
+      "id": "near_blog.settlement",
+      "url": "https://www.near.org/blog/near-foundation-joins-x402-foundation",
+      "full_sentence": "Today, NEAR offers a combination of capabilities across its tech stack that intends to bring them together as one system that works alongside x402: universal liquidity and confidential execution through NEAR Intents, private inference and a secure agent harness through NEAR AI, agent-to-agent discovery and coordination through the NEAR Agent Market, and scalable, quantum-resistant settlement through NEAR Protocol.",
+      "context": "Same post. This sentence also names settlement on NEAR Protocol, which argues against the thesis below.",
+      "retrieved_at": "2026-10-29T23:10:00Z"
+    },
+    {
+      "id": "visa_artemis.base",
+      "url": "https://www.visa.com/vcom-assets/content/dam/visa/reimagine-visa/thought-leadership/documents/agentic-payments-report.pdf",
+      "full_sentence": "In practice, activity today is concentrated on Base, Solana, and Polygon, with Base carrying the vast majority of transaction volume.",
+      "context": "Visa and Artemis Analytics, agentic payments report, section 3.3. Footnote 2 dates the data to April 21, 2026.",
+      "retrieved_at": "2026-10-29T23:10:00Z"
+    },
+    {
+      "id": "illia.audit_link",
+      "url": "https://x.com/ilblackdragon/status/2112768975855907186",
+      "full_sentence": "Each payment can generate a verifiable audit link + can share view key for audit of the full books.",
+      "context": "Illia Polosukhin, reply on X, 2026-10-21.",
+      "retrieved_at": "2026-10-29T23:10:00Z"
+    },
+    {
+      "id": "eddy.any_chain",
+      "url": "https://x.com/eddylazzarin/status/2112596538119848324",
+      "full_sentence": "I float a balance in Alcove and I can send/receive payments to/from basically any blockchain at nearly no cost.",
+      "context": "Eddy Lazzarin, post on X, 2026-10-20, about the Alcove wallet. The next sentence says this used to take a stack of tools. The post does not mention NEAR.",
+      "retrieved_at": "2026-10-29T23:10:00Z"
+    },
+    {
+      "id": "haseeb.humans",
+      "url": "https://x.com/hosseeb/status/2112182846110732348",
+      "full_sentence": "Agents don't need crypto. It's us humans who do.",
+      "context": "Haseeb Qureshi, post on X, 2026-10-19, introducing his TOKEN2049 talk. This argues against agent-first theses, including this one.",
+      "retrieved_at": "2026-10-29T23:10:00Z"
     }
   ],
   "model": {
-    "x402_over_intents_30d": 0.00039851603037541395,
+    "x402_over_intents_30d": 0.00039823665644444194,
     "x402_over_intents_30d_display": "0.040%",
-    "x402_30d_usd": 1580292.752882,
+    "x402_30d_usd": 1579184.911378,
     "intents_30d_usd": 3965443376,
     "formula": "annual_near_usd = x402_30d_usd * 12 * multiple * pass_through * (cumulative_fees_usd / cumulative_intents_usd) * take_rate",
     "inputs": {
@@ -425,7 +601,7 @@
       {
         "multiple": 1,
         "pass_through": 0.01,
-        "annual_near_usd": 50.53776223716635,
+        "annual_near_usd": 50.502333465868425,
         "assumption_ids": [
           "annualize_30d_x12",
           "multiple_1",
@@ -437,7 +613,7 @@
       {
         "multiple": 1,
         "pass_through": 0.1,
-        "annual_near_usd": 505.3776223716635,
+        "annual_near_usd": 505.02333465868435,
         "assumption_ids": [
           "annualize_30d_x12",
           "multiple_1",
@@ -449,7 +625,7 @@
       {
         "multiple": 1,
         "pass_through": 0.5,
-        "annual_near_usd": 2526.8881118583176,
+        "annual_near_usd": 2525.116673293421,
         "assumption_ids": [
           "annualize_30d_x12",
           "multiple_1",
@@ -461,7 +637,7 @@
       {
         "multiple": 10,
         "pass_through": 0.01,
-        "annual_near_usd": 505.3776223716635,
+        "annual_near_usd": 505.02333465868435,
         "assumption_ids": [
           "annualize_30d_x12",
           "multiple_10",
@@ -473,7 +649,7 @@
       {
         "multiple": 10,
         "pass_through": 0.1,
-        "annual_near_usd": 5053.776223716635,
+        "annual_near_usd": 5050.233346586842,
         "assumption_ids": [
           "annualize_30d_x12",
           "multiple_10",
@@ -485,7 +661,7 @@
       {
         "multiple": 10,
         "pass_through": 0.5,
-        "annual_near_usd": 25268.881118583176,
+        "annual_near_usd": 25251.166732934216,
         "assumption_ids": [
           "annualize_30d_x12",
           "multiple_10",
@@ -497,7 +673,7 @@
       {
         "multiple": 100,
         "pass_through": 0.01,
-        "annual_near_usd": 5053.776223716635,
+        "annual_near_usd": 5050.233346586842,
         "assumption_ids": [
           "annualize_30d_x12",
           "multiple_100",
@@ -509,7 +685,7 @@
       {
         "multiple": 100,
         "pass_through": 0.1,
-        "annual_near_usd": 50537.76223716635,
+        "annual_near_usd": 50502.33346586844,
         "assumption_ids": [
           "annualize_30d_x12",
           "multiple_100",
@@ -521,7 +697,7 @@
       {
         "multiple": 100,
         "pass_through": 0.5,
-        "annual_near_usd": 252688.81118583173,
+        "annual_near_usd": 252511.66732934216,
         "assumption_ids": [
           "annualize_30d_x12",
           "multiple_100",
@@ -533,7 +709,7 @@
       {
         "multiple": 1000,
         "pass_through": 0.01,
-        "annual_near_usd": 50537.76223716635,
+        "annual_near_usd": 50502.33346586843,
         "assumption_ids": [
           "annualize_30d_x12",
           "multiple_1000",
@@ -545,7 +721,7 @@
       {
         "multiple": 1000,
         "pass_through": 0.1,
-        "annual_near_usd": 505377.62237166346,
+        "annual_near_usd": 505023.3346586843,
         "assumption_ids": [
           "annualize_30d_x12",
           "multiple_1000",
@@ -557,7 +733,7 @@
       {
         "multiple": 1000,
         "pass_through": 0.5,
-        "annual_near_usd": 2526888.1118583176,
+        "annual_near_usd": 2525116.6732934215,
         "assumption_ids": [
           "annualize_30d_x12",
           "multiple_1000",
@@ -567,5 +743,20 @@
         ]
       }
     ]
+  },
+  "rechecks": {
+    "base": {
+      "checked": 100,
+      "match": 100,
+      "mismatch": 0,
+      "not_rechecked": 0
+    },
+    "solana": {
+      "checked": 100,
+      "match": 100,
+      "mismatch": 0,
+      "not_rechecked": 0
+    },
+    "other": "not re-checked"
   }
 }

@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { access, mkdir, readFile, stat, writeFile } from "node:fs/promises";
+import { access, copyFile, mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { summarize } from "./lib/classify.mjs";
@@ -13,6 +13,8 @@ import { readQuotes } from "./lib/quotes.mjs";
 import { loadDefillama } from "./lib/sources/defillama.mjs";
 import { loadVaultNumbers, fetchVaultLogs, writeVault, DEFAULT_RPCS } from "./lib/sources/vault.mjs";
 import { loadX402 } from "./lib/sources/x402scan.mjs";
+import { recheckRows, summaryFromFile } from "./lib/recheck.mjs";
+import { renderTemplate } from "./lib/render.mjs";
 import { checkSurfaces } from "./lib/surface.mjs";
 
 export { USER_AGENT };
@@ -41,6 +43,16 @@ function parseArgs(argv) {
       checkFiles.push(argv[i]);
     }
   }
+  const renderIdx = argv.indexOf("--render");
+  let renderPairs = null;
+  if (renderIdx >= 0) {
+    renderPairs = [];
+    for (let i = renderIdx + 1; i < argv.length; i += 1) {
+      if (argv[i].startsWith("--")) break;
+      renderPairs.push(argv[i]);
+    }
+    if (renderPairs.length === 0) renderPairs.push("README.tmpl.md:README.md");
+  }
   const vaultRpcs = [];
   for (let i = 0; i < argv.length; i += 1) {
     if (argv[i] === "--vault-rpc" && argv[i + 1]) vaultRpcs.push(argv[i + 1]);
@@ -53,6 +65,9 @@ function parseArgs(argv) {
     fromBlock: fromIdx >= 0 ? Number(argv[fromIdx + 1]) : null,
     toBlock: toIdx >= 0 ? Number(argv[toIdx + 1]) : null,
     checkFiles,
+    renderPairs,
+    recheck: argv.includes("--recheck"),
+    recheckAll: argv.includes("--all"),
     vaultRpcs,
   };
 }
@@ -176,6 +191,106 @@ function buildThesis({ summary, snapshot, generated_at, extraNumbers = {}, model
   };
 }
 
+// Ratios the README quotes. Each one is computed here from numbers above, never typed by hand.
+export function derivedNumbers(n) {
+  const out = {};
+  const base = n["vet402.settled"];
+  out["vet402.delivered_share"] = record("vet402.delivered_share", {
+    value: n["vet402.delivered"].value / base.value,
+    unit: "share of settled purchases",
+    range: base.range,
+    as_of: base.as_of,
+    source: base.source,
+    definition: "delivered",
+  });
+  out["vet402.unexplained_share_excl_held"] = record("vet402.unexplained_share_excl_held", {
+    value: n["vet402.unexplained"].value / (base.value - n["vet402.held"].value),
+    unit: "share of settled purchases, vet402-held excluded",
+    range: base.range,
+    as_of: base.as_of,
+    source: base.source,
+    definition: "unexplained",
+  });
+  const vault = n["vault.usdc_out_30d.usd"];
+  const x402 = n["x402.total.amount_30d"];
+  const baseShare = n["x402.base.share_amount_30d"];
+  if (vault && x402 && baseShare) {
+    out["compare.vault_over_x402_base_30d"] = record("compare.vault_over_x402_base_30d", {
+      value: vault.value / (x402.value * baseShare.value),
+      unit: "times",
+      range: { vault: vault.range, x402: x402.range },
+      as_of: x402.as_of,
+      source: `${vault.source}+${x402.source}`,
+      definition: "USDC sent out of the NEAR Intents treasury on Base (all purposes) over x402 dollars on Base, both 30 days",
+    });
+  }
+  return out;
+}
+
+function splitPair(pair) {
+  const colon = pair.indexOf(":");
+  if (colon <= 0 || colon === pair.length - 1) {
+    throw new Error("usage: node thesis.mjs --render <in.tmpl.md:out.md>");
+  }
+  return [pair.slice(0, colon), pair.slice(colon + 1)];
+}
+
+async function runRender(args, cwd) {
+  const thesisPath = args.thesisPath ? resolve(cwd, args.thesisPath) : join(cwd, "data", "thesis.json");
+  const thesis = JSON.parse(await readFile(thesisPath, "utf8"));
+  const docsDir = join(cwd, "docs");
+  await mkdir(docsDir, { recursive: true });
+  const snapshotCopy = join(cwd, "data", "thesis.json");
+  if (await exists(snapshotCopy)) {
+    await copyFile(snapshotCopy, join(docsDir, "thesis.json"));
+  }
+  for (const pair of args.renderPairs) {
+    const [fromRel, toRel] = splitPair(pair);
+    const from = resolve(cwd, fromRel);
+    const to = resolve(cwd, toRel);
+    const rendered = renderTemplate(await readFile(from, "utf8"), thesis);
+    await mkdir(dirname(to), { recursive: true });
+    await writeFile(to, rendered);
+  }
+  return { exitCode: 0 };
+}
+
+async function loadRecheckSummary(snapshotPath) {
+  const path = join(snapshotPath, "recheck.json");
+  if (!(await exists(path))) return null;
+  return summaryFromFile(JSON.parse(await readFile(path, "utf8")));
+}
+
+async function runRecheck(args, cwd) {
+  const snapshotPath = resolve(cwd, args.snapshotDir);
+  const derivedPath = join(snapshotPath, "export.derived.csv");
+  const parsed = parseCsv(await readFile(derivedPath, "utf8"));
+  const result = await recheckRows(parsed.rows, { all: args.recheckAll });
+  const stored = {
+    retrieved_at: new Date().toISOString(),
+    base: result.base,
+    solana: result.solana,
+    other: "not re-checked",
+  };
+  await mkdir(snapshotPath, { recursive: true });
+  await writeFile(join(snapshotPath, "recheck.json"), `${JSON.stringify(stored, null, 2)}\n`);
+  const summary = summaryFromFile(stored);
+  const thesisPath = join(cwd, "data", "thesis.json");
+  if (await exists(thesisPath)) {
+    const thesis = JSON.parse(await readFile(thesisPath, "utf8"));
+    thesis.rechecks = summary;
+    await writeFile(thesisPath, `${JSON.stringify(thesis, null, 2)}\n`);
+  }
+  const line = (name, side) =>
+    `${name} checked=${side.checked} match=${side.match} mismatch=${side.mismatch} not_rechecked=${side.not_rechecked}`;
+  console.log(line("base", summary.base));
+  console.log(line("solana", summary.solana));
+  console.log("other: not re-checked");
+  if (summary.base.checked === 0) console.log("base had no re-checked receipt");
+  if (summary.solana.checked === 0) console.log("solana had no re-checked receipt");
+  return { exitCode: 0 };
+}
+
 async function runCheck(args, cwd) {
   if (!args.checkFiles || args.checkFiles.length === 0) {
     throw new Error("usage: node thesis.mjs --check <files...>");
@@ -228,6 +343,8 @@ async function loadQuotes(cwd) {
 export async function main(argv, { cwd = ROOT } = {}) {
   const args = parseArgs(argv);
   if (args.checkFiles) return runCheck(args, cwd);
+  if (args.renderPairs) return runRender(args, cwd);
+  if (args.recheck && !args.offline) return runRecheck(args, cwd);
 
   const snapshotPath = resolve(cwd, args.snapshotDir);
   if (args.fetchVault) {
@@ -322,6 +439,25 @@ export async function main(argv, { cwd = ROOT } = {}) {
     model,
     quotes,
   });
+  Object.assign(thesis.numbers, derivedNumbers(thesis.numbers));
+  const rechecks = await loadRecheckSummary(snapshotPath);
+  if (rechecks) {
+    thesis.rechecks = rechecks;
+    const rec = JSON.parse(await readFile(join(snapshotPath, "recheck.json"), "utf8"));
+    for (const chain of ["base", "solana"]) {
+      for (const key of ["checked", "match", "mismatch", "not_rechecked"]) {
+        const id = `recheck.${chain}.${key}`;
+        thesis.numbers[id] = record(id, {
+          value: rechecks[chain][key],
+          unit: "settled purchases",
+          range: thesis.numbers["vet402.settled"].range,
+          as_of: rec.retrieved_at,
+          source: chain === "base" ? "base_public_rpc" : "solana_public_rpc",
+          definition: "settled",
+        });
+      }
+    }
+  }
   await mkdir(dirname(thesisPath), { recursive: true });
   await writeFile(thesisPath, `${JSON.stringify(thesis, null, 2)}\n`);
   const allOk = thesis.checks.every((c) => c.ok);

@@ -1,16 +1,18 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { readFile } from "node:fs/promises";
+import { cp, mkdtemp, readFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
-function runThesis(args) {
+// Runs in a throwaway copy so the test never rewrites the committed snapshot.
+function runThesis(dir, args) {
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, ["thesis.mjs", ...args], {
-      cwd: ROOT,
+      cwd: dir,
       stdio: ["ignore", "pipe", "pipe"],
     });
     let stdout = "";
@@ -29,11 +31,17 @@ function runThesis(args) {
 }
 
 test("--offline numbers match a normal run for the export", async () => {
-  const online = await runThesis([]);
-  assert.equal(online.code, 0, online.stderr);
-  const first = JSON.parse(await readFile(join(ROOT, "data", "thesis.json"), "utf8"));
-  const offline = await runThesis(["--offline"]);
-  assert.equal(offline.code, 0, offline.stderr);
-  const second = JSON.parse(await readFile(join(ROOT, "data", "thesis.json"), "utf8"));
-  assert.deepEqual(second.numbers, first.numbers);
+  const dir = await mkdtemp(join(tmpdir(), "near-thesis-"));
+  try {
+    await cp(ROOT, dir, { recursive: true, filter: (src) => !/[\\/](\.git|node_modules)$/.test(src) });
+    const online = await runThesis(dir, []);
+    assert.equal(online.code, 0, online.stderr);
+    const first = JSON.parse(await readFile(join(dir, "data", "thesis.json"), "utf8"));
+    const offline = await runThesis(dir, ["--offline"]);
+    assert.equal(offline.code, 0, offline.stderr);
+    const second = JSON.parse(await readFile(join(dir, "data", "thesis.json"), "utf8"));
+    assert.deepEqual(second.numbers, first.numbers);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
 });
