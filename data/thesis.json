@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-29T22:37:46.980Z",
+  "generated_at": "2026-10-29T22:38:44.869Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
     "export_retrieved_at": "2026-10-29T22:04:40.090Z",
-    "x402scan_retrieved_at": "2026-10-29T22:37:46.846Z",
-    "defillama_retrieved_at": "2026-10-29T22:37:46.908Z"
+    "x402scan_retrieved_at": "2026-10-29T22:38:44.744Z",
+    "defillama_retrieved_at": "2026-10-29T22:38:44.797Z"
   },
   "numbers": {
     "vet402.rows": {
@@ -125,7 +125,7 @@
         "days": 30,
         "to": "2026-10-29T20:45:45.000Z"
       },
-      "as_of": "2026-10-29T22:37:46.846Z",
+      "as_of": "2026-10-29T22:38:44.744Z",
       "source": "x402scan",
       "definition": "x402scan total_amount for 30 days with no chain filter, divided by 1e6 into USD."
     },
@@ -136,7 +136,7 @@
         "days": 30,
         "to": "2026-10-29T20:45:45.000Z"
       },
-      "as_of": "2026-10-29T22:37:46.846Z",
+      "as_of": "2026-10-29T22:38:44.744Z",
       "source": "x402scan",
       "definition": "Base total_amount divided by the no-chain total_amount."
     },
@@ -147,7 +147,7 @@
         "days": 30,
         "to": "2026-10-29T20:45:45.000Z"
       },
-      "as_of": "2026-10-29T22:37:46.846Z",
+      "as_of": "2026-10-29T22:38:44.744Z",
       "source": "x402scan",
       "definition": "Base total_transactions divided by the no-chain total_transactions."
     },
@@ -160,7 +160,7 @@
         "to": "2026-10-28T00:00:00.000Z",
         "dropped_last_day": false
       },
-      "as_of": "2026-10-29T22:37:46.908Z",
+      "as_of": "2026-10-29T22:38:44.797Z",
       "source": "defillama_intents",
       "definition": "Sum of DefiLlama totalDataChart daily USD for near-intents over 30 days. The last day is dropped when total24h is null or it equals the previous day."
     },
@@ -171,7 +171,7 @@
         "all_time": true,
         "to": "2026-10-28T00:00:00.000Z"
       },
-      "as_of": "2026-10-29T22:37:46.908Z",
+      "as_of": "2026-10-29T22:38:44.797Z",
       "source": "defillama_intents",
       "definition": "DefiLlama totalAllTime for near-intents."
     }
@@ -351,13 +351,199 @@
       "ok": true
     }
   ],
-  "quotes": [],
+  "quotes": [
+    {
+      "id": "near_q3.cumulative",
+      "url": "https://x.com/NEARProtocol/status/2112225472071311506",
+      "full_sentence": "Cumulative Intents volume increased from ~$22 billion at the end of Q2, to over $32 billion at the end of Q3, a 45% QoQ increase.",
+      "context": "NEAR, \"The State of NEAR: Q3 2026\", 2026-10-19, section on the NEAR Intents fee switch.",
+      "retrieved_at": "2026-10-29T22:50:00Z"
+    },
+    {
+      "id": "near_q3.fees_buyback",
+      "url": "https://x.com/NEARProtocol/status/2112225472071311506",
+      "full_sentence": "The September traction report for NEAR Intents reported over $52 million in cumulative fees, with over $8 million captured by NEAR and directed toward buybacks.",
+      "context": "Same report and section. The figures come from NEAR's September traction report.",
+      "retrieved_at": "2026-10-29T22:50:00Z"
+    },
+    {
+      "id": "near_q3.capture",
+      "url": "https://x.com/NEARProtocol/status/2112225472071311506",
+      "full_sentence": "As of October 6, lifetime fee capture stands at approximately 16.4%, up 4.9% from the 11.5% in Q2.",
+      "context": "Same report. The next sentences define capture as net revenue retained per dollar of gross fees and give the trailing 30-day rate of 28.4%.",
+      "retrieved_at": "2026-10-29T22:50:00Z"
+    },
+    {
+      "id": "near_q3.q3_volume",
+      "url": "https://x.com/NEARProtocol/status/2112225472071311506",
+      "full_sentence": "In Q3 2026, the near.com front-end processed ~$2.57 billion in volume, which was roughly a quarter of the total volume on NEAR Intents ($10.4 billion).",
+      "context": "Same report, section on near.com. This is the only place the report states Q3 Intents volume.",
+      "retrieved_at": "2026-10-29T22:50:00Z"
+    }
+  ],
   "model": {
     "x402_over_intents_30d": 0.00039851603037541395,
     "x402_over_intents_30d_display": "0.040%",
     "x402_30d_usd": 1580292.752882,
     "intents_30d_usd": 3965443376,
     "formula": "annual_near_usd = x402_30d_usd * 12 * multiple * pass_through * (cumulative_fees_usd / cumulative_intents_usd) * take_rate",
-    "table": null
+    "inputs": {
+      "q3_intents_usd": 10400000000,
+      "cumulative_intents_usd": 32000000000,
+      "cumulative_fees_usd": 52000000,
+      "buyback_usd": 8000000,
+      "take_rate": 0.16399999999999998
+    },
+    "fee_rate": 0.001625,
+    "buyback_over_fees": 0.15384615384615385,
+    "q3_defillama_usd": 9786001341,
+    "q3_gap": 0.05903833259615385,
+    "note": "Q3 gap is (official Q3 Intents - DefiLlama daily sum) / official Q3 Intents. Fee rate is cumulative fees over cumulative Intents volume.",
+    "table": [
+      {
+        "multiple": 1,
+        "pass_through": 0.01,
+        "annual_near_usd": 50.53776223716635,
+        "assumption_ids": [
+          "annualize_30d_x12",
+          "multiple_1",
+          "pass_1pct",
+          "fee_rate_cumulative",
+          "take_rate"
+        ]
+      },
+      {
+        "multiple": 1,
+        "pass_through": 0.1,
+        "annual_near_usd": 505.3776223716635,
+        "assumption_ids": [
+          "annualize_30d_x12",
+          "multiple_1",
+          "pass_10pct",
+          "fee_rate_cumulative",
+          "take_rate"
+        ]
+      },
+      {
+        "multiple": 1,
+        "pass_through": 0.5,
+        "annual_near_usd": 2526.8881118583176,
+        "assumption_ids": [
+          "annualize_30d_x12",
+          "multiple_1",
+          "pass_50pct",
+          "fee_rate_cumulative",
+          "take_rate"
+        ]
+      },
+      {
+        "multiple": 10,
+        "pass_through": 0.01,
+        "annual_near_usd": 505.3776223716635,
+        "assumption_ids": [
+          "annualize_30d_x12",
+          "multiple_10",
+          "pass_1pct",
+          "fee_rate_cumulative",
+          "take_rate"
+        ]
+      },
+      {
+        "multiple": 10,
+        "pass_through": 0.1,
+        "annual_near_usd": 5053.776223716635,
+        "assumption_ids": [
+          "annualize_30d_x12",
+          "multiple_10",
+          "pass_10pct",
+          "fee_rate_cumulative",
+          "take_rate"
+        ]
+      },
+      {
+        "multiple": 10,
+        "pass_through": 0.5,
+        "annual_near_usd": 25268.881118583176,
+        "assumption_ids": [
+          "annualize_30d_x12",
+          "multiple_10",
+          "pass_50pct",
+          "fee_rate_cumulative",
+          "take_rate"
+        ]
+      },
+      {
+        "multiple": 100,
+        "pass_through": 0.01,
+        "annual_near_usd": 5053.776223716635,
+        "assumption_ids": [
+          "annualize_30d_x12",
+          "multiple_100",
+          "pass_1pct",
+          "fee_rate_cumulative",
+          "take_rate"
+        ]
+      },
+      {
+        "multiple": 100,
+        "pass_through": 0.1,
+        "annual_near_usd": 50537.76223716635,
+        "assumption_ids": [
+          "annualize_30d_x12",
+          "multiple_100",
+          "pass_10pct",
+          "fee_rate_cumulative",
+          "take_rate"
+        ]
+      },
+      {
+        "multiple": 100,
+        "pass_through": 0.5,
+        "annual_near_usd": 252688.81118583173,
+        "assumption_ids": [
+          "annualize_30d_x12",
+          "multiple_100",
+          "pass_50pct",
+          "fee_rate_cumulative",
+          "take_rate"
+        ]
+      },
+      {
+        "multiple": 1000,
+        "pass_through": 0.01,
+        "annual_near_usd": 50537.76223716635,
+        "assumption_ids": [
+          "annualize_30d_x12",
+          "multiple_1000",
+          "pass_1pct",
+          "fee_rate_cumulative",
+          "take_rate"
+        ]
+      },
+      {
+        "multiple": 1000,
+        "pass_through": 0.1,
+        "annual_near_usd": 505377.62237166346,
+        "assumption_ids": [
+          "annualize_30d_x12",
+          "multiple_1000",
+          "pass_10pct",
+          "fee_rate_cumulative",
+          "take_rate"
+        ]
+      },
+      {
+        "multiple": 1000,
+        "pass_through": 0.5,
+        "annual_near_usd": 2526888.1118583176,
+        "assumption_ids": [
+          "annualize_30d_x12",
+          "multiple_1000",
+          "pass_50pct",
+          "fee_rate_cumulative",
+          "take_rate"
+        ]
+      }
+    ]
   }
 }

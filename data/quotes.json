@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "id": "near_q3.cumulative",
+    "url": "https://x.com/NEARProtocol/status/2112225472071311506",
+    "full_sentence": "Cumulative Intents volume increased from ~$22 billion at the end of Q2, to over $32 billion at the end of Q3, a 45% QoQ increase.",
+    "context": "NEAR, \"The State of NEAR: Q3 2026\", 2026-10-19, section on the NEAR Intents fee switch.",
+    "retrieved_at": "2026-10-29T22:50:00Z"
+  },
+  {
+    "id": "near_q3.fees_buyback",
+    "url": "https://x.com/NEARProtocol/status/2112225472071311506",
+    "full_sentence": "The September traction report for NEAR Intents reported over $52 million in cumulative fees, with over $8 million captured by NEAR and directed toward buybacks.",
+    "context": "Same report and section. The figures come from NEAR's September traction report.",
+    "retrieved_at": "2026-10-29T22:50:00Z"
+  },
+  {
+    "id": "near_q3.capture",
+    "url": "https://x.com/NEARProtocol/status/2112225472071311506",
+    "full_sentence": "As of October 6, lifetime fee capture stands at approximately 16.4%, up 4.9% from the 11.5% in Q2.",
+    "context": "Same report. The next sentences define capture as net revenue retained per dollar of gross fees and give the trailing 30-day rate of 28.4%.",
+    "retrieved_at": "2026-10-29T22:50:00Z"
+  },
+  {
+    "id": "near_q3.q3_volume",
+    "url": "https://x.com/NEARProtocol/status/2112225472071311506",
+    "full_sentence": "In Q3 2026, the near.com front-end processed ~$2.57 billion in volume, which was roughly a quarter of the total volume on NEAR Intents ($10.4 billion).",
+    "context": "Same report, section on near.com. This is the only place the report states Q3 Intents volume.",
+    "retrieved_at": "2026-10-29T22:50:00Z"
+  }
+]

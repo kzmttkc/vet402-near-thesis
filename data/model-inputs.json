@@ -1,0 +1,15 @@
+{
+  "q3_intents_usd": 10400000000.0,
+  "cumulative_intents_usd": 32000000000.0,
+  "cumulative_fees_usd": 52000000.0,
+  "buyback_usd": 8000000.0,
+  "take_rate": 16.4,
+  "sources": {
+    "q3_intents_usd": "near_q3.q3_volume",
+    "cumulative_intents_usd": "near_q3.cumulative",
+    "cumulative_fees_usd": "near_q3.fees_buyback",
+    "buyback_usd": "near_q3.fees_buyback",
+    "take_rate": "near_q3.capture"
+  },
+  "note": "Lower bounds. The report says over $32 billion, over $52 million and over $8 million; the model uses those floors."
+}
