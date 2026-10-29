@@ -106,3 +106,22 @@ test("fake RPC counts match and not re-checked, and a total refusal is not a mat
   assert.equal(refused.solana.match, 0);
   assert.equal(refused.solana.not_rechecked, 2);
 });
+
+test("recheck matches the purchase amount, not just any transfer", async () => {
+  const { judgeBaseReceipt, judgeSolanaTx, SOLANA_USDC_MINT, USDC, TOPIC_TRANSFER } = await import("../lib/recheck.mjs");
+  const receipt = {
+    status: "0x1",
+    logs: [{ address: USDC, topics: [TOPIC_TRANSFER], data: "0x" + (10000).toString(16).padStart(64, "0") }],
+  };
+  assert.equal(judgeBaseReceipt(receipt, "10000"), "match");
+  assert.equal(judgeBaseReceipt(receipt, "10001"), "mismatch");
+  const tx = (delta) => ({
+    meta: {
+      err: null,
+      preTokenBalances: [{ accountIndex: 2, mint: SOLANA_USDC_MINT, uiTokenAmount: { amount: "500" } }],
+      postTokenBalances: [{ accountIndex: 2, mint: SOLANA_USDC_MINT, uiTokenAmount: { amount: String(500 + delta) } }],
+    },
+  });
+  assert.equal(judgeSolanaTx(tx(1000), "1000"), "match");
+  assert.equal(judgeSolanaTx(tx(999), "1000"), "mismatch");
+});

@@ -16,6 +16,7 @@ import { loadX402 } from "./lib/sources/x402scan.mjs";
 import { recheckRows, summaryFromFile } from "./lib/recheck.mjs";
 import { renderTemplate } from "./lib/render.mjs";
 import { checkSurfaces } from "./lib/surface.mjs";
+import { checkQuotes } from "./lib/quotecheck.mjs";
 
 export { USER_AGENT };
 export const EXPORT_URL = "https://vet402.com/api/v1/observatory/export.csv?days=365";
@@ -67,6 +68,7 @@ function parseArgs(argv) {
     checkFiles,
     renderPairs,
     recheck: argv.includes("--recheck"),
+    checkQuotes: argv.includes("--check-quotes"),
     recheckAll: argv.includes("--all"),
     vaultRpcs,
   };
@@ -192,9 +194,25 @@ function buildThesis({ summary, snapshot, generated_at, extraNumbers = {}, model
 }
 
 // Ratios the README quotes. Each one is computed here from numbers above, never typed by hand.
-export function derivedNumbers(n) {
+export function derivedNumbers(n, breakdown = []) {
   const out = {};
   const base = n["vet402.settled"];
+  out["vet402.settled_no_tx"] = record("vet402.settled_no_tx", {
+    value: breakdown.filter((b) => b.status === "settled" && !b.has_tx).reduce((sum, b) => sum + b.count, 0),
+    unit: "purchases",
+    range: base.range,
+    as_of: base.as_of,
+    source: base.source,
+    definition: "settled",
+  });
+  out["vet402.settled_not_held"] = record("vet402.settled_not_held", {
+    value: base.value - n["vet402.held"].value,
+    unit: "purchases",
+    range: base.range,
+    as_of: base.as_of,
+    source: base.source,
+    definition: "settled",
+  });
   out["vet402.delivered_share"] = record("vet402.delivered_share", {
     value: n["vet402.delivered"].value / base.value,
     unit: "share of settled purchases",
@@ -342,6 +360,14 @@ async function loadQuotes(cwd) {
 
 export async function main(argv, { cwd = ROOT } = {}) {
   const args = parseArgs(argv);
+  if (args.checkQuotes) {
+    const quotes = JSON.parse(await readFile(join(cwd, "data", "quotes.json"), "utf8"));
+    const results = await checkQuotes(quotes);
+    for (const r of results) console.log(`${r.result.padEnd(9)} ${r.id}`);
+    const missing = results.filter((r) => r.result === "missing").length;
+    console.log(`quotes: ${results.length}, missing: ${missing}`);
+    return { exitCode: missing ? 1 : 0 };
+  }
   if (args.checkFiles) return runCheck(args, cwd);
   if (args.renderPairs) return runRender(args, cwd);
   if (args.recheck && !args.offline) return runRecheck(args, cwd);
@@ -439,7 +465,7 @@ export async function main(argv, { cwd = ROOT } = {}) {
     model,
     quotes,
   });
-  Object.assign(thesis.numbers, derivedNumbers(thesis.numbers));
+  Object.assign(thesis.numbers, derivedNumbers(thesis.numbers, thesis.breakdown));
   const rechecks = await loadRecheckSummary(snapshotPath);
   if (rechecks) {
     thesis.rechecks = rechecks;
@@ -465,6 +491,9 @@ export async function main(argv, { cwd = ROOT } = {}) {
     const failed = thesis.checks.filter((c) => !c.ok).map((c) => c.name);
     throw new Error(`checks failed: ${failed.join(", ")}`);
   }
+  console.log(
+    `rebuilt ${Object.keys(thesis.numbers).length} numbers from ${args.offline ? "data/snapshot (no network)" : "the public sources"}, ${thesis.checks.length} checks ok, wrote data/thesis.json`,
+  );
   return thesis;
 }
 

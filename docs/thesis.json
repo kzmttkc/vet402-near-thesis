@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T23:27:12.631Z",
+  "generated_at": "2026-10-29T23:41:15.711Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
@@ -197,6 +197,28 @@
       "source": "base_vault",
       "definition": "USDC sent out of the NEAR Intents treasury on Base (all purposes)"
     },
+    "vet402.settled_no_tx": {
+      "value": 13,
+      "unit": "purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "settled"
+    },
+    "vet402.settled_not_held": {
+      "value": 11525,
+      "unit": "purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "settled"
+    },
     "vet402.delivered_share": {
       "value": 0.9154053832937904,
       "unit": "share of settled purchases",
@@ -243,7 +265,7 @@
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
       },
-      "as_of": "2026-10-29T23:25:27.796Z",
+      "as_of": "2026-10-29T23:39:12.744Z",
       "source": "base_public_rpc",
       "definition": "settled"
     },
@@ -254,7 +276,7 @@
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
       },
-      "as_of": "2026-10-29T23:25:27.796Z",
+      "as_of": "2026-10-29T23:39:12.744Z",
       "source": "base_public_rpc",
       "definition": "settled"
     },
@@ -265,7 +287,7 @@
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
       },
-      "as_of": "2026-10-29T23:25:27.796Z",
+      "as_of": "2026-10-29T23:39:12.744Z",
       "source": "base_public_rpc",
       "definition": "settled"
     },
@@ -276,7 +298,7 @@
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
       },
-      "as_of": "2026-10-29T23:25:27.796Z",
+      "as_of": "2026-10-29T23:39:12.744Z",
       "source": "base_public_rpc",
       "definition": "settled"
     },
@@ -287,7 +309,7 @@
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
       },
-      "as_of": "2026-10-29T23:25:27.796Z",
+      "as_of": "2026-10-29T23:39:12.744Z",
       "source": "solana_public_rpc",
       "definition": "settled"
     },
@@ -298,7 +320,7 @@
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
       },
-      "as_of": "2026-10-29T23:25:27.796Z",
+      "as_of": "2026-10-29T23:39:12.744Z",
       "source": "solana_public_rpc",
       "definition": "settled"
     },
@@ -309,7 +331,7 @@
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
       },
-      "as_of": "2026-10-29T23:25:27.796Z",
+      "as_of": "2026-10-29T23:39:12.744Z",
       "source": "solana_public_rpc",
       "definition": "settled"
     },
@@ -320,7 +342,7 @@
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
       },
-      "as_of": "2026-10-29T23:25:27.796Z",
+      "as_of": "2026-10-29T23:39:12.744Z",
       "source": "solana_public_rpc",
       "definition": "settled"
     }
@@ -546,7 +568,7 @@
     {
       "id": "near_blog.settlement",
       "url": "https://www.near.org/blog/near-foundation-joins-x402-foundation",
-      "full_sentence": "Today, NEAR offers a combination of capabilities across its tech stack that intends to bring them together as one system that works alongside x402: universal liquidity and confidential execution through NEAR Intents, private inference and a secure agent harness through NEAR AI, agent-to-agent discovery and coordination through the NEAR Agent Market, and scalable, quantum-resistant settlement through NEAR Protocol.",
+      "full_sentence": "NEAR is building infrastructure that intends to bring them together as one system that works alongside x402: universal liquidity and confidential execution through NEAR Intents, private inference and a secure agent harness through NEAR AI, agent-to-agent discovery and coordination through the NEAR Agent Market, and scalable, quantum-resistant settlement through NEAR Protocol.",
       "context": "Same post. This sentence also names settlement on NEAR Protocol, which argues against the thesis below.",
       "retrieved_at": "2026-10-29T23:10:00Z"
     },
@@ -561,22 +583,36 @@
       "id": "illia.audit_link",
       "url": "https://x.com/ilblackdragon/status/2112768975855907186",
       "full_sentence": "Each payment can generate a verifiable audit link + can share view key for audit of the full books.",
-      "context": "Illia Polosukhin, reply on X, 2026-10-21.",
+      "context": "Illia Polosukhin, reply on X, 2026-10-21, to a question about how an auditor gets the approval trail for confidential payouts. It is about the payer's books, not about whether an answer arrived.",
       "retrieved_at": "2026-10-29T23:10:00Z"
     },
     {
       "id": "eddy.any_chain",
       "url": "https://x.com/eddylazzarin/status/2112596538119848324",
       "full_sentence": "I float a balance in Alcove and I can send/receive payments to/from basically any blockchain at nearly no cost.",
-      "context": "Eddy Lazzarin, post on X, 2026-10-20, about the Alcove wallet. The next sentence says this used to take a stack of tools. The post does not mention NEAR.",
+      "context": "Eddy Lazzarin, post on X, 2026-10-20, recommending the Alcove wallet. The next sentence says this used to take a stack of tools. The post does not mention NEAR.",
       "retrieved_at": "2026-10-29T23:10:00Z"
     },
     {
       "id": "haseeb.humans",
       "url": "https://x.com/hosseeb/status/2112182846110732348",
       "full_sentence": "Agents don't need crypto. It's us humans who do.",
-      "context": "Haseeb Qureshi, post on X, 2026-10-19, introducing his TOKEN2049 talk. This argues against agent-first theses, including this one.",
+      "context": "Haseeb Qureshi, post on X, 2026-10-19. The post starts \"I was wrong.\" and introduces his TOKEN2049 talk. It argues against agent-first theses, including this one.",
       "retrieved_at": "2026-10-29T23:10:00Z"
+    },
+    {
+      "id": "near_intents.treasury",
+      "url": "https://docs.near-intents.org/security-compliance/treasury-addresses",
+      "full_sentence": "For transparency and AML compliance, below are the treasury and refill addresses used by NEAR Intents and HOT Bridge, listed by network.",
+      "context": "NEAR Intents documentation, Treasury Addresses. Under EVM chains (Base included) it lists NEAR Intents at 0x2CfF890f0378a11913B6129B2E97417a2c302680.",
+      "retrieved_at": "2026-10-29T23:50:00Z"
+    },
+    {
+      "id": "near_q3.fee_switch",
+      "url": "https://x.com/NEARProtocol/status/2112225472071311506",
+      "full_sentence": "The fee switch for NEAR Intents has been live for seven months, capturing a portion of swap fees to fund NEAR buybacks.",
+      "context": "NEAR, \"The State of NEAR: Q3 2026\", 2026-10-19. The sentence right before near_q3.fees_buyback.",
+      "retrieved_at": "2026-10-29T23:50:00Z"
     }
   ],
   "model": {
