@@ -1,0 +1,295 @@
+{
+  "generated_at": "2026-10-29T22:15:15.831Z",
+  "snapshot": {
+    "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
+    "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
+    "export_retrieved_at": "2026-10-29T22:04:40.090Z"
+  },
+  "numbers": {
+    "vet402.rows": {
+      "value": 20058,
+      "unit": "rows",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "row"
+    },
+    "vet402.attempts": {
+      "value": 18683,
+      "unit": "purchase attempts",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "attempt"
+    },
+    "vet402.not_attempts": {
+      "value": 1375,
+      "unit": "rows",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "not_attempt"
+    },
+    "vet402.not_settled": {
+      "value": 6326,
+      "unit": "purchase attempts",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "not_settled"
+    },
+    "vet402.pending": {
+      "value": 134,
+      "unit": "purchase attempts",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "pending"
+    },
+    "vet402.settled": {
+      "value": 12223,
+      "unit": "purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "settled"
+    },
+    "vet402.held": {
+      "value": 698,
+      "unit": "purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "held"
+    },
+    "vet402.delivered": {
+      "value": 11189,
+      "unit": "purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "delivered"
+    },
+    "vet402.delivered_excl_202": {
+      "value": 11091,
+      "unit": "purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "delivered"
+    },
+    "vet402.unexplained": {
+      "value": 336,
+      "unit": "purchases",
+      "range": {
+        "from": "2026-08-14T09:54:31Z",
+        "to": "2026-10-29T21:32:37Z"
+      },
+      "as_of": "2026-10-29T22:04:40.090Z",
+      "source": "vet402_export",
+      "definition": "unexplained"
+    }
+  },
+  "breakdown": [
+    {
+      "category": "1-not-settled",
+      "status": "settle_claim_refuted",
+      "held_reason": "",
+      "has_tx": true,
+      "http_2xx": true,
+      "count": 3
+    },
+    {
+      "category": "1-not-settled",
+      "status": "settle_failed",
+      "held_reason": "",
+      "has_tx": false,
+      "http_2xx": false,
+      "count": 1105
+    },
+    {
+      "category": "1-not-settled",
+      "status": "settle_failed",
+      "held_reason": "",
+      "has_tx": false,
+      "http_2xx": true,
+      "count": 2
+    },
+    {
+      "category": "1-not-settled",
+      "status": "settle_failed",
+      "held_reason": "",
+      "has_tx": true,
+      "http_2xx": false,
+      "count": 3
+    },
+    {
+      "category": "1-not-settled",
+      "status": "settle_failed",
+      "held_reason": "payer_unfunded",
+      "has_tx": false,
+      "http_2xx": false,
+      "count": 1032
+    },
+    {
+      "category": "1-not-settled",
+      "status": "settle_failed",
+      "held_reason": "unsettled_4xx",
+      "has_tx": false,
+      "http_2xx": false,
+      "count": 4181
+    },
+    {
+      "category": "2-pending",
+      "status": "delivered_no_receipt",
+      "held_reason": "",
+      "has_tx": false,
+      "http_2xx": true,
+      "count": 108
+    },
+    {
+      "category": "2-pending",
+      "status": "settle_claimed",
+      "held_reason": "",
+      "has_tx": true,
+      "http_2xx": true,
+      "count": 26
+    },
+    {
+      "category": "3-settled",
+      "status": "settled",
+      "held_reason": "",
+      "has_tx": false,
+      "http_2xx": true,
+      "count": 12
+    },
+    {
+      "category": "3-settled",
+      "status": "settled",
+      "held_reason": "",
+      "has_tx": true,
+      "http_2xx": false,
+      "count": 336
+    },
+    {
+      "category": "3-settled",
+      "status": "settled",
+      "held_reason": "",
+      "has_tx": true,
+      "http_2xx": true,
+      "count": 11177
+    },
+    {
+      "category": "3-settled",
+      "status": "settled",
+      "held_reason": "settled_4xx",
+      "has_tx": false,
+      "http_2xx": false,
+      "count": 1
+    },
+    {
+      "category": "3-settled",
+      "status": "settled",
+      "held_reason": "settled_4xx",
+      "has_tx": true,
+      "http_2xx": false,
+      "count": 697
+    },
+    {
+      "category": "4-not-an-attempt",
+      "status": "no_402",
+      "held_reason": "",
+      "has_tx": false,
+      "http_2xx": false,
+      "count": 143
+    },
+    {
+      "category": "4-not-an-attempt",
+      "status": "no_eligible_accept",
+      "held_reason": "",
+      "has_tx": false,
+      "http_2xx": false,
+      "count": 937
+    },
+    {
+      "category": "4-not-an-attempt",
+      "status": "no_fee_payer",
+      "held_reason": "",
+      "has_tx": false,
+      "http_2xx": false,
+      "count": 41
+    },
+    {
+      "category": "4-not-an-attempt",
+      "status": "over_cap",
+      "held_reason": "",
+      "has_tx": false,
+      "http_2xx": false,
+      "count": 169
+    },
+    {
+      "category": "4-not-an-attempt",
+      "status": "payto_mismatch",
+      "held_reason": "",
+      "has_tx": false,
+      "http_2xx": false,
+      "count": 29
+    },
+    {
+      "category": "4-not-an-attempt",
+      "status": "price_mismatch",
+      "held_reason": "",
+      "has_tx": false,
+      "http_2xx": false,
+      "count": 56
+    }
+  ],
+  "definitions": {
+    "row": "A row in the vet402 observatory export.",
+    "attempt": "A row whose network is non-empty. Rows with empty network (no_eligible_accept and similar cases where there was no payee) are excluded from the attempt count; their count is reported separately.",
+    "not_attempt": "A row whose network is empty.",
+    "settled": "A row whose status is settled (both empty held_reason and settled_4xx).",
+    "delivered": "A settled row whose http_status_paid is 2xx. Includes 202 Accepted. The count excluding 202 is also reported. Whether the body was empty cannot be checked from the public CSV (that column is absent) and cannot be verified on re-run.",
+    "pending": "A row whose status is delivered_no_receipt (treated as delivered without a receipt; all 2xx with no tx) or settle_claimed (the seller named a tx).",
+    "not_settled": "settle_failed (payer_unfunded, unsettled_4xx, or empty), settle_claim_refuted, over_cap, price_mismatch, payto_mismatch, no_fee_payer, no_402.",
+    "held": "settled with held_reason=settled_4xx. The portion vet402 itself excludes from the denominator.",
+    "unexplained": "Settled rows that are neither 2xx nor settled_4xx."
+  },
+  "checks": [
+    {
+      "name": "①〜④の合計＝行数",
+      "ok": true
+    },
+    {
+      "name": "attempts＝①＋②＋③",
+      "ok": true
+    }
+  ]
+}
