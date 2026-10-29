@@ -1,9 +1,11 @@
 {
-  "generated_at": "2026-10-29T22:15:15.831Z",
+  "generated_at": "2026-10-29T22:37:46.980Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
-    "export_retrieved_at": "2026-10-29T22:04:40.090Z"
+    "export_retrieved_at": "2026-10-29T22:04:40.090Z",
+    "x402scan_retrieved_at": "2026-10-29T22:37:46.846Z",
+    "defillama_retrieved_at": "2026-10-29T22:37:46.908Z"
   },
   "numbers": {
     "vet402.rows": {
@@ -115,6 +117,63 @@
       "as_of": "2026-10-29T22:04:40.090Z",
       "source": "vet402_export",
       "definition": "unexplained"
+    },
+    "x402.total.amount_30d": {
+      "value": 1580292.752882,
+      "unit": "USD",
+      "range": {
+        "days": 30,
+        "to": "2026-10-29T20:45:45.000Z"
+      },
+      "as_of": "2026-10-29T22:37:46.846Z",
+      "source": "x402scan",
+      "definition": "x402scan total_amount for 30 days with no chain filter, divided by 1e6 into USD."
+    },
+    "x402.base.share_amount_30d": {
+      "value": 0.7297337748755142,
+      "unit": "share of USD",
+      "range": {
+        "days": 30,
+        "to": "2026-10-29T20:45:45.000Z"
+      },
+      "as_of": "2026-10-29T22:37:46.846Z",
+      "source": "x402scan",
+      "definition": "Base total_amount divided by the no-chain total_amount."
+    },
+    "x402.base.share_count_30d": {
+      "value": 0.7731946840278581,
+      "unit": "share of count",
+      "range": {
+        "days": 30,
+        "to": "2026-10-29T20:45:45.000Z"
+      },
+      "as_of": "2026-10-29T22:37:46.846Z",
+      "source": "x402scan",
+      "definition": "Base total_transactions divided by the no-chain total_transactions."
+    },
+    "intents.volume_30d": {
+      "value": 3965443376,
+      "unit": "USD",
+      "range": {
+        "days": 30,
+        "from": "2026-09-29T00:00:00.000Z",
+        "to": "2026-10-28T00:00:00.000Z",
+        "dropped_last_day": false
+      },
+      "as_of": "2026-10-29T22:37:46.908Z",
+      "source": "defillama_intents",
+      "definition": "Sum of DefiLlama totalDataChart daily USD for near-intents over 30 days. The last day is dropped when total24h is null or it equals the previous day."
+    },
+    "intents.volume_all_time": {
+      "value": 35604361213,
+      "unit": "USD",
+      "range": {
+        "all_time": true,
+        "to": "2026-10-28T00:00:00.000Z"
+      },
+      "as_of": "2026-10-29T22:37:46.908Z",
+      "source": "defillama_intents",
+      "definition": "DefiLlama totalAllTime for near-intents."
     }
   },
   "breakdown": [
@@ -291,5 +350,14 @@
       "name": "attempts＝①＋②＋③",
       "ok": true
     }
-  ]
+  ],
+  "quotes": [],
+  "model": {
+    "x402_over_intents_30d": 0.00039851603037541395,
+    "x402_over_intents_30d_display": "0.040%",
+    "x402_30d_usd": 1580292.752882,
+    "intents_30d_usd": 3965443376,
+    "formula": "annual_near_usd = x402_30d_usd * 12 * multiple * pass_through * (cumulative_fees_usd / cumulative_intents_usd) * take_rate",
+    "table": null
+  }
 }

@@ -1,0 +1,20 @@
+{
+  "numbers": {
+    "vet402.attempts": {
+      "value": 18683,
+      "unit": "purchase attempts"
+    },
+    "x402.base.share_amount_30d": {
+      "value": 0.726,
+      "unit": "share of USD"
+    },
+    "x402.total.amount_30d": {
+      "value": 1556904.97,
+      "unit": "USD"
+    },
+    "intents.volume_30d": {
+      "value": 4260019770,
+      "unit": "USD"
+    }
+  }
+}
