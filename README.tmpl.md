@@ -45,7 +45,7 @@ Every row lands in exactly one group. An unknown status stops the script instead
 
 I rechecked {{n:recheck.base.checked}} Base and {{n:recheck.solana.checked}} Solana settlements from this export against public RPCs. On Base, {{n:recheck.base.match}} receipts succeeded and carry a USDC transfer of exactly the purchase amount. On Solana, {{n:recheck.solana.match}} transactions succeeded and credit one USDC account with exactly that amount. The recheck does not compare the payee with the seller, because the export does not list the payee. Other chains are not rechecked.
 
-vet402 records whether each answer arrived for its own purchases. In the sources I checked, I found no such record kept for the person who funds an agent. Illia Polosukhin describes a verifiable audit link for each payment (quote `illia.audit_link`). That covers the payer's books, which is one part of the same record.
+vet402 records whether each answer arrived for its own purchases, and the gap above is what that record shows. Illia Polosukhin describes a verifiable audit link for each payment (quote `illia.audit_link`). That covers the payer's books, which is one part of the same record.
 
 ## 3. NEAR already moves money around payments
 
