@@ -51,7 +51,7 @@ test("render fills model, breakdown, quotes, definitions, and snapshot", () => {
     "{{model.ratio}} {{model.fee_rate}}\n{{model.table}}\n{{n:vet402.attempts}} {{range:vet402.attempts}} {{asof:vet402.attempts}} {{source:vet402.attempts}}\n{{breakdown.table}}\n{{definitions.table}}\n{{quotes.table}}\n{{snapshot.sha256}} {{snapshot.retrieved_at}}\n",
     thesis,
   );
-  assert.match(out, /^0\.040% 0\.163%/);
+  assert.match(out, /^0\.040% 0\.1625%/);
   assert.match(out, /\| 1x \| \$51 \| \$1,000 \| \$1,000 \|/);
   assert.match(out, /18,683 from 2026-08-14 09:54 to 2026-10-29 21:32 2026-10-29 22:04 vet402_export/);
   assert.match(out, /\| 1-not-settled \| settle_failed \| payer_unfunded \| false \| false \| 1,032 \|/);

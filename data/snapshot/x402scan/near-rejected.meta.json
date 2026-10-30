@@ -1,0 +1,6 @@
+{
+  "url": "https://www.x402scan.com/api/trpc/public.stats.overall?input={\"json\":{\"timeframe\":30,\"chain\":\"near\"}}",
+  "http_status": 400,
+  "retrieved_at": "2026-10-30T00:10:14Z",
+  "note": "x402scan accepts only base, solana, polygon and optimism as chain."
+}

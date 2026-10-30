@@ -487,6 +487,17 @@ export async function main(argv, { cwd = ROOT } = {}) {
     quotes,
   });
   Object.assign(thesis.numbers, derivedNumbers(thesis.numbers, thesis.breakdown));
+  {
+    const settledRec = thesis.numbers["vet402.settled"];
+    thesis.numbers["vet402.settled_seller_claim"] = record("vet402.settled_seller_claim", {
+      value: rows.filter((r) => r.status === "settled" && r.settlement_source === "seller_claim").length,
+      unit: "purchases",
+      range: settledRec.range,
+      as_of: settledRec.as_of,
+      source: settledRec.source,
+      definition: "settled",
+    });
+  }
   const rechecks = await loadRecheckSummary(snapshotPath);
   if (rechecks) {
     thesis.rechecks = rechecks;

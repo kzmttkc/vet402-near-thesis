@@ -1,6 +1,6 @@
 # NEAR in agent payments: a thesis you can rerun
 
-x402 payments settle mostly on Base today. NEAR Intents already moves $3.97B in 30 days across chains. I argue that funding agents and moving their money is where NEAR could earn from agent payments. The data here does not say how much of that volume comes from agents. Every number below comes from this repository, either from one script you can rerun without a key or an account, or from a quote in the table at the end.
+x402 payments settle mostly on Base today. NEAR Intents already moves $3.97B in 30 days across chains. I argue that funding agents and moving their money is where NEAR could earn from agent payments. The data here does not say how much of that volume comes from agents. Every figure about the market and about vet402 below comes from this repository, either from one script you can rerun without a key or an account, or from a quote in the table at the end.
 
 This is an entry for the NEAR HACKATHON track "Investment Thesis", which is judged on the evidence.
 
@@ -10,8 +10,8 @@ Node 20 or newer. Nothing to install.
 
 | Do this | See this |
 |---|---|
-| `node thesis.mjs --offline` | `rebuilt … numbers from data/snapshot (no network), 2 checks ok`. The numbers on this page, rebuilt from the frozen snapshot in `data/snapshot/`. |
-| `node thesis.mjs --check README.md` | `mismatches: 0`. The script builds this page again from `README.tmpl.md` and `data/thesis.json` and compares it line by line, so an edited figure shows up as a mismatch. |
+| `node thesis.mjs --offline` | `rebuilt … numbers from data/snapshot (no network), 2 checks ok`. The numbers on this page, rebuilt from the frozen snapshot in `data/snapshot/`. It rewrites `data/thesis.json`, and only `generated_at` changes. |
+| `node thesis.mjs --check README.md` | `mismatches: 0`. The script builds this page again from `README.tmpl.md` and `data/thesis.json` and compares it line by line, so an edited figure on this page shows up as a mismatch. Figures typed into the template itself are not covered by this check. The quotes cover them. |
 | `node thesis.mjs --check-quotes` | `missing: 0`. Each quote below is fetched again and found word for word. Web pages are read directly, X posts through the public fxtwitter API, and the one PDF is reported as not machine-checked. |
 | `node --test` | All tests pass in about a minute, including one that stops on an unknown purchase status and one that runs the offline build in a throwaway copy. |
 | `node thesis.mjs` | A fresh fetch from the public sources. The figures move and the dates change. |
@@ -37,15 +37,15 @@ vet402 buys from x402 sellers with its own money to measure whether they deliver
 
 ## 1. Where agent payments settle
 
-x402scan lists Base, Solana, Polygon and Optimism. Across those, it counted $1,579,185 of x402 payments in its latest 30 days (retrieved 2026-10-29 23:18 UTC). Base carried 73.0% of the dollars and 77.3% of the payments.
+x402scan lists Base, Solana, Polygon and Optimism. Polygon and Optimism show zero in the latest 30 days, so the total below is Base plus Solana: $1,579,185 of x402 payments (retrieved 2026-10-29 23:18 UTC). Base carried 73.0% of the dollars and 77.3% of the payments.
 
-Visa and Artemis Analytics describe a longer window the same way: Base carries "the vast majority of transaction volume", with data as of April 21, 2026 (quote `visa_artemis.base`). These are raw totals. Visa and Artemis also publish figures without wash and test transactions, and nothing here is adjusted that way.
+Visa and Artemis Analytics describe a longer window the same way: Base carries "the vast majority of transaction volume", with data as of April 21, 2026 (quote `visa_artemis.base`). The report calls the figures in its section 1 raw onchain totals and gives adjusted figures without wash and test transactions elsewhere. Section 3.3 does not say which kind it uses. Nothing here is adjusted.
 
-x402scan does not list NEAR, so this repository cannot measure x402 settlement on NEAR, and no source here shows any. I treat Base as where agent payments settle today.
+x402scan's chain filter accepts only those four chains (its answer to a NEAR filter is saved in `data/snapshot/x402scan/near-rejected.json`), so this repository cannot measure x402 settlement on NEAR, and no source here shows any. I treat Base as where agent payments settle today.
 
 ## 2. A payment and a delivered answer are two different records
 
-vet402 tried to buy from x402 sellers from 2026-08-14 09:54 to 2026-10-29 21:32 UTC. Of 18,683 attempts, 12,223 settled. For 13 of those, all on Arc mainnet (eip155:5042), the export has no transaction hash. Of the settled purchases, 11,189 came back with an HTTP 2xx answer (91.5%).
+vet402 tried to buy from x402 sellers from 2026-08-14 09:54 to 2026-10-29 21:32 UTC. Of 18,683 attempts, 12,223 settled. For 13 of those, all on Arc mainnet (eip155:5042), the export has no transaction hash. For 11,194 of the settled purchases, the export records the seller's claim as the evidence of settlement. The rechecks below cover samples of those on Base and Solana. Of the settled purchases, 11,189 came back with an HTTP 2xx answer (91.5%).
 
 698 settled purchases got a 4xx answer that may come from how vet402 asked, so vet402 holds them out of its own rates. Of the 11,525 settled purchases left, 336 (2.9%) paid and got no usable answer, with no explanation in the record.
 
@@ -81,7 +81,7 @@ vet402 records whether each answer arrived for its own purchases, and the gap ab
 
 NEAR Intents moved $3.97B in its latest 30 days on DefiLlama (retrieved 2026-10-29 23:18 UTC).
 
-NEAR Intents lists `0x2CfF890f0378a11913B6129B2E97417a2c302680` as its treasury address on EVM chains, Base included (quote `near_intents.treasury`). On Base, over blocks 51965969 to 53261969, that address sent out $41.05M of USDC in 45,840 transfers. The transfers carry no label, so this counts every purpose. It is a separate flow from x402. For scale only, it is about 36 times the x402 dollars on Base over a similar 30 days.
+NEAR Intents lists `0x2CfF890f0378a11913B6129B2E97417a2c302680` as its treasury address on EVM chains, Base included (quote `near_intents.treasury`). On Base, over blocks 51965969 to 53261969, that address sent out $41.05M of USDC in 45,840 transfers. The transfers carry no label, so this counts every purpose, and the data here cannot say how much of it, if any, is x402. For scale only, it is about 36 times the x402 dollars on Base over a similar 30 days.
 
 NEAR Foundation names the same layer (quote `near_blog.around_payment`). Its stated intention is that an agent can pay through x402 and rely on NEAR infrastructure for everything around that payment. The same post also names settlement on NEAR Protocol, covered in section 5. Eddy Lazzarin wrote that one balance in his wallet pays to and from almost any chain (quote `eddy.any_chain`). His post is about a wallet that does not mention NEAR. I read it as a sign that people want this layer, not as evidence for NEAR.
 
@@ -89,7 +89,7 @@ NEAR Foundation names the same layer (quote `near_blog.around_payment`). Its sta
 
 Today x402 is 0.040% of NEAR Intents volume over 30 days. At this size, x402 adds almost nothing to NEAR. The table shows how large it would need to grow.
 
-Each cell is a yearly amount, the 30-day x402 figure times 12, that would reach NEAR if x402 grew by the row's multiple and the column's share of it passed through NEAR Intents and paid its average fee. The fee rate is 0.163%, cumulative fees over cumulative volume, and NEAR keeps its reported lifetime share of those fees, 16.4% (quotes `near_q3.fees_buyback`, `near_q3.cumulative` and `near_q3.capture`). The same report gives a trailing 30-day share of 28.4% (quote `near_q3.capture_30d`). Using it would raise every cell by about 1.7 times. NEAR reports $10.4 billion for Q3 (quote `near_q3.q3_volume`). DefiLlama's daily sum for the same quarter is 5.9% lower. The report gives both fees and volume as floors ("over"), so the rate is an estimate, not a bound. Whether x402 flows would pay the average Intents fee at all is an assumption the data here does not test.
+Each cell is a yearly amount, the 30-day x402 figure times 12, that would reach NEAR if x402 grew by the row's multiple and the column's share of it passed through NEAR Intents and paid its average fee. The fee rate is 0.1625%, cumulative fees over cumulative volume, and NEAR keeps its reported lifetime share of those fees, 16.4% (quotes `near_q3.fees_buyback`, `near_q3.cumulative` and `near_q3.capture`). The same report gives a trailing 30-day share of 28.4% (quote `near_q3.capture_30d`). Using it would raise every cell by about 1.7 times. NEAR reports $10.4 billion for Q3 (quote `near_q3.q3_volume`). DefiLlama's daily sum for the same quarter is 5.9% lower. The report gives both fees and volume as floors ("over"), so the rate is an estimate, not a bound. Whether x402 flows would pay the average Intents fee at all is an assumption the data here does not test.
 
 | Multiple | 1% | 10% | 50% |
 | --- | --- | --- | --- |
