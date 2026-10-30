@@ -35,13 +35,6 @@
     "retrieved_at": "2026-10-29T23:10:00Z"
   },
   {
-    "id": "near_blog.alongside",
-    "url": "https://www.near.org/blog/near-foundation-joins-x402-foundation",
-    "full_sentence": "NEAR joins as a builder of key agent infrastructure, including cross-chain liquidity, confidential execution, private inference, and agent-to-agent discovery and coordination that is needed alongside x402’s payments protocol.",
-    "context": "Same post, opening section.",
-    "retrieved_at": "2026-10-29T23:10:00Z"
-  },
-  {
     "id": "near_blog.settlement",
     "url": "https://www.near.org/blog/near-foundation-joins-x402-foundation",
     "full_sentence": "NEAR is building infrastructure that intends to bring them together as one system that works alongside x402: universal liquidity and confidential execution through NEAR Intents, private inference and a secure agent harness through NEAR AI, agent-to-agent discovery and coordination through the NEAR Agent Market, and scalable, quantum-resistant settlement through NEAR Protocol.",
@@ -89,5 +82,12 @@
     "full_sentence": "The fee switch for NEAR Intents has been live for seven months, capturing a portion of swap fees to fund NEAR buybacks.",
     "context": "NEAR, \"The State of NEAR: Q3 2026\", 2026-10-19. The sentence right before near_q3.fees_buyback.",
     "retrieved_at": "2026-10-29T23:50:00Z"
+  },
+  {
+    "id": "near_q3.capture_30d",
+    "url": "https://x.com/NEARProtocol/status/2112225472071311506",
+    "full_sentence": "Trailing 30-day capture is 28.4%, down 2.1% from Q2’s 30.5%, but still ~1.7x the lifetime rate.",
+    "context": "NEAR, \"The State of NEAR: Q3 2026\", 2026-10-19. The sentence right after near_q3.capture.",
+    "retrieved_at": "2026-10-30T00:05:00Z"
   }
 ]

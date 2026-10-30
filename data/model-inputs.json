@@ -9,7 +9,9 @@
     "cumulative_intents_usd": "near_q3.cumulative",
     "cumulative_fees_usd": "near_q3.fees_buyback",
     "buyback_usd": "near_q3.fees_buyback",
-    "take_rate": "near_q3.capture"
+    "take_rate": "near_q3.capture",
+    "take_rate_trailing_30d": "near_q3.capture_30d"
   },
-  "note": "Lower bounds. The report says over $32 billion, over $52 million and over $8 million; the model uses those floors."
+  "note": "Lower bounds. The report says over $32 billion, over $52 million and over $8 million; the model uses those floors.",
+  "take_rate_trailing_30d": 28.4
 }

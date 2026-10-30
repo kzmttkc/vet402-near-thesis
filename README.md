@@ -1,8 +1,8 @@
 # NEAR in agent payments: a thesis you can rerun
 
-Agent payments settle on Base today. NEAR Intents already moves $3.97B in 30 days across chains. I argue that funding agents and moving their money is where NEAR could earn from agent payments. The data here does not say how much of that volume comes from agents. Every number below comes from one script in this repository, and you can rerun it without a key or an account.
+x402 payments settle mostly on Base today. NEAR Intents already moves $3.97B in 30 days across chains. I argue that funding agents and moving their money is where NEAR could earn from agent payments. The data here does not say how much of that volume comes from agents. Every number below comes from this repository, either from one script you can rerun without a key or an account, or from a quote in the table at the end.
 
-This is an entry for the NEAR HACKATHON track "Investment Thesis", which is judged on the evidence. The evidence comes first and my opinion is marked as opinion.
+This is an entry for the NEAR HACKATHON track "Investment Thesis", which is judged on the evidence.
 
 ## Try it
 
@@ -11,13 +11,13 @@ Node 20 or newer. Nothing to install.
 | Do this | See this |
 |---|---|
 | `node thesis.mjs --offline` | `rebuilt … numbers from data/snapshot (no network), 2 checks ok`. The numbers on this page, rebuilt from the frozen snapshot in `data/snapshot/`. |
-| `node thesis.mjs --check README.md` | `mismatches: 0`. Every figure here matches `data/thesis.json`. |
+| `node thesis.mjs --check README.md` | `mismatches: 0`. The script builds this page again from `README.tmpl.md` and `data/thesis.json` and compares it line by line, so an edited figure shows up as a mismatch. |
 | `node thesis.mjs --check-quotes` | `missing: 0`. Each quote below is fetched again and found word for word. Web pages are read directly, X posts through the public fxtwitter API, and the one PDF is reported as not machine-checked. |
 | `node --test` | All tests pass in about a minute, including one that stops on an unknown purchase status and one that runs the offline build in a throwaway copy. |
 | `node thesis.mjs` | A fresh fetch from the public sources. The figures move and the dates change. |
 | `python3 -m http.server -d docs 8123`, then open http://localhost:8123 | The dashboard. The same numbers, each with its range, date and source, and a count of any figure missing one of them. |
 
-The vet402 export behind this page has sha256 `43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077` and was retrieved 2026-10-29T22:04:40.090Z.
+The vet402 export behind this page has sha256 `43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077` and was retrieved 2026-10-29T22:04:40.090Z. The derived copy in this repository, `data/snapshot/export.derived.csv`, has sha256 `e47ebcf5915ca3d9ac889ae75d52ec653a54964a5dc85a0d793ffe2465744e4c`.
 
 ## Terms
 
@@ -39,13 +39,13 @@ vet402 buys from x402 sellers with its own money to measure whether they deliver
 
 x402scan lists Base, Solana, Polygon and Optimism. Across those, it counted $1,579,185 of x402 payments in its latest 30 days (retrieved 2026-10-29 23:18 UTC). Base carried 73.0% of the dollars and 77.3% of the payments.
 
-Visa and Artemis Analytics describe a longer window the same way: Base carries "the vast majority of transaction volume", with data as of April 21, 2026 (quote `visa_artemis.base`).
+Visa and Artemis Analytics describe a longer window the same way: Base carries "the vast majority of transaction volume", with data as of April 21, 2026 (quote `visa_artemis.base`). These are raw totals. Visa and Artemis also publish figures without wash and test transactions, and nothing here is adjusted that way.
 
 x402scan does not list NEAR, so this repository cannot measure x402 settlement on NEAR, and no source here shows any. I treat Base as where agent payments settle today.
 
 ## 2. A payment and a delivered answer are two different records
 
-vet402 paid x402 sellers from 2026-08-14 09:54 to 2026-10-29 21:32 UTC. Of 18,683 attempts, 12,223 settled. For 13 of those, all on Arc mainnet (eip155:5042), the export has no transaction hash. Of the settled purchases, 11,189 came back with an HTTP 2xx answer (91.5%).
+vet402 tried to buy from x402 sellers from 2026-08-14 09:54 to 2026-10-29 21:32 UTC. Of 18,683 attempts, 12,223 settled. For 13 of those, all on Arc mainnet (eip155:5042), the export has no transaction hash. Of the settled purchases, 11,189 came back with an HTTP 2xx answer (91.5%).
 
 698 settled purchases got a 4xx answer that may come from how vet402 asked, so vet402 holds them out of its own rates. Of the 11,525 settled purchases left, 336 (2.9%) paid and got no usable answer, with no explanation in the record.
 
@@ -75,21 +75,21 @@ Every row lands in exactly one group. An unknown status stops the script instead
 
 I rechecked 100 Base and 100 Solana settlements from this export against public RPCs. On Base, 100 receipts succeeded and carry a USDC transfer of exactly the purchase amount. On Solana, 100 transactions succeeded and credit one USDC account with exactly that amount. The recheck does not compare the payee with the seller, because the export does not list the payee. Other chains are not rechecked.
 
-vet402 records whether each answer arrived for its own purchases, and the gap above is what that record shows. Illia Polosukhin says each payment can generate a verifiable audit link (quote `illia.audit_link`). That covers the payer's books, which is one part of the same record.
+vet402 records whether each answer arrived for its own purchases, and the gap above is what that record shows. Illia Polosukhin says, about confidential payouts, that each payment can generate a verifiable audit link (quote `illia.audit_link`). I read that as the payer's books, which are one part of the same record.
 
 ## 3. NEAR already moves money around payments
 
 NEAR Intents moved $3.97B in its latest 30 days on DefiLlama (retrieved 2026-10-29 23:18 UTC).
 
-NEAR Intents lists `0x2CfF890f0378a11913B6129B2E97417a2c302680` as its treasury address on EVM chains, Base included (quote `near_intents.treasury`). On Base, over blocks 51965969 to 53261969, that address sent out $41.05M of USDC in 45,840 transfers. The transfers carry no label, so this counts every purpose, not only payments. It is a separate flow from x402. For scale only, it is about 36 times the x402 dollars on Base over a similar 30 days.
+NEAR Intents lists `0x2CfF890f0378a11913B6129B2E97417a2c302680` as its treasury address on EVM chains, Base included (quote `near_intents.treasury`). On Base, over blocks 51965969 to 53261969, that address sent out $41.05M of USDC in 45,840 transfers. The transfers carry no label, so this counts every purpose. It is a separate flow from x402. For scale only, it is about 36 times the x402 dollars on Base over a similar 30 days.
 
-NEAR Foundation names the same layer (quote `near_blog.around_payment`): an agent pays through x402 and relies on NEAR for everything around that payment. The same post also names settlement on NEAR Protocol, covered in section 5. Eddy Lazzarin wrote that one balance in his wallet pays to and from almost any chain (quote `eddy.any_chain`). His post is about a wallet that does not mention NEAR. I read it as a sign that people want this layer, not as evidence for NEAR.
+NEAR Foundation names the same layer (quote `near_blog.around_payment`). Its stated intention is that an agent can pay through x402 and rely on NEAR infrastructure for everything around that payment. The same post also names settlement on NEAR Protocol, covered in section 5. Eddy Lazzarin wrote that one balance in his wallet pays to and from almost any chain (quote `eddy.any_chain`). His post is about a wallet that does not mention NEAR. I read it as a sign that people want this layer, not as evidence for NEAR.
 
 ## 4. The model
 
 Today x402 is 0.040% of NEAR Intents volume over 30 days. At this size, x402 adds almost nothing to NEAR. The table shows how large it would need to grow.
 
-Each cell is a yearly amount, the 30-day x402 figure times 12, that would reach NEAR if x402 grew by the row's multiple and the column's share of it passed through NEAR Intents and paid its average fee. The fee rate is 0.163%, cumulative fees over cumulative volume, and NEAR keeps its reported lifetime share of those fees, 16.4% (quotes `near_q3.fees_buyback`, `near_q3.cumulative` and `near_q3.capture`). The same report gives a trailing 30-day share of 28.4%. Using it would raise every cell by about 1.7 times. The report gives both fees and volume as floors ("over"), so the rate is an estimate, not a bound. Whether x402 flows would pay the average Intents fee at all is an assumption the data here does not test.
+Each cell is a yearly amount, the 30-day x402 figure times 12, that would reach NEAR if x402 grew by the row's multiple and the column's share of it passed through NEAR Intents and paid its average fee. The fee rate is 0.163%, cumulative fees over cumulative volume, and NEAR keeps its reported lifetime share of those fees, 16.4% (quotes `near_q3.fees_buyback`, `near_q3.cumulative` and `near_q3.capture`). The same report gives a trailing 30-day share of 28.4% (quote `near_q3.capture_30d`). Using it would raise every cell by about 1.7 times. NEAR reports $10.4 billion for Q3 (quote `near_q3.q3_volume`). DefiLlama's daily sum for the same quarter is 5.9% lower. The report gives both fees and volume as floors ("over"), so the rate is an estimate, not a bound. Whether x402 flows would pay the average Intents fee at all is an assumption the data here does not test.
 
 | Multiple | 1% | 10% | 50% |
 | --- | --- | --- | --- |
@@ -140,7 +140,6 @@ Each quote is a full sentence with its link and one line of context. Quotes that
 | near_q3.capture | As of October 6, lifetime fee capture stands at approximately 16.4%, up 4.9% from the 11.5% in Q2. | https://x.com/NEARProtocol/status/2112225472071311506 | Same report. The next sentences define capture as net revenue retained per dollar of gross fees and give the trailing 30-day rate of 28.4%. |
 | near_q3.q3_volume | In Q3 2026, the near.com front-end processed ~$2.57 billion in volume, which was roughly a quarter of the total volume on NEAR Intents ($10.4 billion). | https://x.com/NEARProtocol/status/2112225472071311506 | Same report, section on near.com. This is the only place the report states Q3 Intents volume. |
 | near_blog.around_payment | The intention is that an agent can pay through x402 and rely on NEAR infrastructure for everything around that payment. | https://www.near.org/blog/near-foundation-joins-x402-foundation | NEAR Foundation, "NEAR Foundation Joins the x402 Foundation", 2026-07-14. |
-| near_blog.alongside | NEAR joins as a builder of key agent infrastructure, including cross-chain liquidity, confidential execution, private inference, and agent-to-agent discovery and coordination that is needed alongside x402’s payments protocol. | https://www.near.org/blog/near-foundation-joins-x402-foundation | Same post, opening section. |
 | near_blog.settlement | NEAR is building infrastructure that intends to bring them together as one system that works alongside x402: universal liquidity and confidential execution through NEAR Intents, private inference and a secure agent harness through NEAR AI, agent-to-agent discovery and coordination through the NEAR Agent Market, and scalable, quantum-resistant settlement through NEAR Protocol. | https://www.near.org/blog/near-foundation-joins-x402-foundation | Same post. This sentence also names settlement on NEAR Protocol, which argues against the thesis below. |
 | visa_artemis.base | In practice, activity today is concentrated on Base, Solana, and Polygon, with Base carrying the vast majority of transaction volume. | https://www.visa.com/vcom-assets/content/dam/visa/reimagine-visa/thought-leadership/documents/agentic-payments-report.pdf | Visa and Artemis Analytics, agentic payments report, section 3.3. Footnote 2 dates the data to April 21, 2026. |
 | illia.audit_link | Each payment can generate a verifiable audit link + can share view key for audit of the full books. | https://x.com/ilblackdragon/status/2112768975855907186 | Illia Polosukhin, reply on X, 2026-10-21, to a question about how an auditor gets the approval trail for confidential payouts. It is about the payer's books, not about whether an answer arrived. |
@@ -148,6 +147,7 @@ Each quote is a full sentence with its link and one line of context. Quotes that
 | haseeb.humans | Agents don't need crypto. It's us humans who do. | https://x.com/hosseeb/status/2112182846110732348 | Haseeb Qureshi, post on X, 2026-10-19. The post starts "I was wrong." and introduces his TOKEN2049 talk. He does not mention agent-first theses. I read the post as arguing against them. |
 | near_intents.treasury | For transparency and AML compliance, below are the treasury and refill addresses used by NEAR Intents and HOT Bridge, listed by network. | https://docs.near-intents.org/security-compliance/treasury-addresses | NEAR Intents documentation, Treasury Addresses. Under EVM chains (Base included) it lists NEAR Intents at 0x2CfF890f0378a11913B6129B2E97417a2c302680. |
 | near_q3.fee_switch | The fee switch for NEAR Intents has been live for seven months, capturing a portion of swap fees to fund NEAR buybacks. | https://x.com/NEARProtocol/status/2112225472071311506 | NEAR, "The State of NEAR: Q3 2026", 2026-10-19. The sentence right before near_q3.fees_buyback. |
+| near_q3.capture_30d | Trailing 30-day capture is 28.4%, down 2.1% from Q2’s 30.5%, but still ~1.7x the lifetime rate. | https://x.com/NEARProtocol/status/2112225472071311506 | NEAR, "The State of NEAR: Q3 2026", 2026-10-19. The sentence right after near_q3.capture. |
 
 ## Disclosure
 
@@ -159,6 +159,6 @@ This is not investment advice.
 
 ## About this repository
 
-vet402 is an existing product. It has bought from x402 sellers on several chains since 2026-08-14 and publishes every attempt. Under the hackathon rules (Q-001 and Q-002 in HACKATHON.md), only work inside the window that opened on 2026-10-19 is judged. The vet402 export starts on 2026-08-14 and is baseline data from before the window. The classification, the checks, the model, the dashboard and this thesis were written in the window. The first commit is dated 2026-10-30.
+vet402 is an existing product. It has bought from x402 sellers on several chains since 2026-08-14 and publishes every attempt. Under the hackathon rules (Q-001 and Q-002 in HACKATHON.md), only work inside the window that opened on 2026-10-19 is judged. The vet402 export starts on 2026-08-14 and is baseline data from before the window. The classification, the checks, the model, the dashboard and this thesis were written in the window. The first commit is dated 2026-10-30 (JST).
 
-The export comes from https://vet402.com/api/v1/observatory/export.csv?days=365 under CC BY 4.0, and its sha256 is given at the top. The copy in `data/snapshot/` replaces every seller URL with its sha256, so no seller is named here. The code is under the MIT License (`LICENSE`).
+The export comes from https://vet402.com/api/v1/observatory/export.csv?days=365 under CC BY 4.0, and its sha256 is given at the top. The copy in `data/snapshot/` replaces every seller URL with its sha256, so no seller is named here. The code is under the MIT License (`LICENSE`). No third-party packages are used. The code was written with AI coding agents (Claude and Grok), then run and checked by me.

@@ -1,8 +1,8 @@
 # NEAR in agent payments: a thesis you can rerun
 
-Agent payments settle on Base today. NEAR Intents already moves {{n:intents.volume_30d|M}} in 30 days across chains. I argue that funding agents and moving their money is where NEAR could earn from agent payments. The data here does not say how much of that volume comes from agents. Every number below comes from one script in this repository, and you can rerun it without a key or an account.
+x402 payments settle mostly on Base today. NEAR Intents already moves {{n:intents.volume_30d|M}} in 30 days across chains. I argue that funding agents and moving their money is where NEAR could earn from agent payments. The data here does not say how much of that volume comes from agents. Every number below comes from this repository, either from one script you can rerun without a key or an account, or from a quote in the table at the end.
 
-This is an entry for the NEAR HACKATHON track "Investment Thesis", which is judged on the evidence. The evidence comes first and my opinion is marked as opinion.
+This is an entry for the NEAR HACKATHON track "Investment Thesis", which is judged on the evidence.
 
 ## Try it
 
@@ -11,13 +11,13 @@ Node 20 or newer. Nothing to install.
 | Do this | See this |
 |---|---|
 | `node thesis.mjs --offline` | `rebuilt … numbers from data/snapshot (no network), 2 checks ok`. The numbers on this page, rebuilt from the frozen snapshot in `data/snapshot/`. |
-| `node thesis.mjs --check README.md` | `mismatches: 0`. Every figure here matches `data/thesis.json`. |
+| `node thesis.mjs --check README.md` | `mismatches: 0`. The script builds this page again from `README.tmpl.md` and `data/thesis.json` and compares it line by line, so an edited figure shows up as a mismatch. |
 | `node thesis.mjs --check-quotes` | `missing: 0`. Each quote below is fetched again and found word for word. Web pages are read directly, X posts through the public fxtwitter API, and the one PDF is reported as not machine-checked. |
 | `node --test` | All tests pass in about a minute, including one that stops on an unknown purchase status and one that runs the offline build in a throwaway copy. |
 | `node thesis.mjs` | A fresh fetch from the public sources. The figures move and the dates change. |
 | `python3 -m http.server -d docs 8123`, then open http://localhost:8123 | The dashboard. The same numbers, each with its range, date and source, and a count of any figure missing one of them. |
 
-The vet402 export behind this page has sha256 `{{snapshot.sha256}}` and was retrieved {{snapshot.retrieved_at}}.
+The vet402 export behind this page has sha256 `{{snapshot.sha256}}` and was retrieved {{snapshot.retrieved_at}}. The derived copy in this repository, `data/snapshot/export.derived.csv`, has sha256 `{{snapshot.derived_sha256}}`.
 
 ## Terms
 
@@ -29,13 +29,13 @@ vet402 buys from x402 sellers with its own money to measure whether they deliver
 
 x402scan lists Base, Solana, Polygon and Optimism. Across those, it counted {{n:x402.total.amount_30d}} of x402 payments in its latest 30 days (retrieved {{asof:x402.total.amount_30d}} UTC). Base carried {{n:x402.base.share_amount_30d}} of the dollars and {{n:x402.base.share_count_30d}} of the payments.
 
-Visa and Artemis Analytics describe a longer window the same way: Base carries "the vast majority of transaction volume", with data as of April 21, 2026 (quote `visa_artemis.base`).
+Visa and Artemis Analytics describe a longer window the same way: Base carries "the vast majority of transaction volume", with data as of April 21, 2026 (quote `visa_artemis.base`). These are raw totals. Visa and Artemis also publish figures without wash and test transactions, and nothing here is adjusted that way.
 
 x402scan does not list NEAR, so this repository cannot measure x402 settlement on NEAR, and no source here shows any. I treat Base as where agent payments settle today.
 
 ## 2. A payment and a delivered answer are two different records
 
-vet402 paid x402 sellers {{range:vet402.attempts}} UTC. Of {{n:vet402.attempts}} attempts, {{n:vet402.settled}} settled. For {{n:vet402.settled_no_tx}} of those, all on Arc mainnet (eip155:5042), the export has no transaction hash. Of the settled purchases, {{n:vet402.delivered}} came back with an HTTP 2xx answer ({{n:vet402.delivered_share}}).
+vet402 tried to buy from x402 sellers {{range:vet402.attempts}} UTC. Of {{n:vet402.attempts}} attempts, {{n:vet402.settled}} settled. For {{n:vet402.settled_no_tx}} of those, all on Arc mainnet (eip155:5042), the export has no transaction hash. Of the settled purchases, {{n:vet402.delivered}} came back with an HTTP 2xx answer ({{n:vet402.delivered_share}}).
 
 {{n:vet402.held}} settled purchases got a 4xx answer that may come from how vet402 asked, so vet402 holds them out of its own rates. Of the {{n:vet402.settled_not_held}} settled purchases left, {{n:vet402.unexplained}} ({{n:vet402.unexplained_share_excl_held}}) paid and got no usable answer, with no explanation in the record.
 
@@ -45,25 +45,25 @@ Every row lands in exactly one group. An unknown status stops the script instead
 
 I rechecked {{n:recheck.base.checked}} Base and {{n:recheck.solana.checked}} Solana settlements from this export against public RPCs. On Base, {{n:recheck.base.match}} receipts succeeded and carry a USDC transfer of exactly the purchase amount. On Solana, {{n:recheck.solana.match}} transactions succeeded and credit one USDC account with exactly that amount. The recheck does not compare the payee with the seller, because the export does not list the payee. Other chains are not rechecked.
 
-vet402 records whether each answer arrived for its own purchases, and the gap above is what that record shows. Illia Polosukhin says each payment can generate a verifiable audit link (quote `illia.audit_link`). That covers the payer's books, which is one part of the same record.
+vet402 records whether each answer arrived for its own purchases, and the gap above is what that record shows. Illia Polosukhin says, about confidential payouts, that each payment can generate a verifiable audit link (quote `illia.audit_link`). I read that as the payer's books, which are one part of the same record.
 
 ## 3. NEAR already moves money around payments
 
 NEAR Intents moved {{n:intents.volume_30d|M}} in its latest 30 days on DefiLlama (retrieved {{asof:intents.volume_30d}} UTC).
 
-NEAR Intents lists `0x2CfF890f0378a11913B6129B2E97417a2c302680` as its treasury address on EVM chains, Base included (quote `near_intents.treasury`). On Base, over {{range:vault.usdc_out_30d.usd}}, that address sent out {{n:vault.usdc_out_30d.usd|M}} of USDC in {{n:vault.usdc_out_30d.count}} transfers. The transfers carry no label, so this counts every purpose, not only payments. It is a separate flow from x402. For scale only, it is about {{n:compare.vault_over_x402_base_30d}} times the x402 dollars on Base over a similar 30 days.
+NEAR Intents lists `0x2CfF890f0378a11913B6129B2E97417a2c302680` as its treasury address on EVM chains, Base included (quote `near_intents.treasury`). On Base, over {{range:vault.usdc_out_30d.usd}}, that address sent out {{n:vault.usdc_out_30d.usd|M}} of USDC in {{n:vault.usdc_out_30d.count}} transfers. The transfers carry no label, so this counts every purpose. It is a separate flow from x402. For scale only, it is about {{n:compare.vault_over_x402_base_30d}} times the x402 dollars on Base over a similar 30 days.
 
-NEAR Foundation names the same layer (quote `near_blog.around_payment`): an agent pays through x402 and relies on NEAR for everything around that payment. The same post also names settlement on NEAR Protocol, covered in section 5. Eddy Lazzarin wrote that one balance in his wallet pays to and from almost any chain (quote `eddy.any_chain`). His post is about a wallet that does not mention NEAR. I read it as a sign that people want this layer, not as evidence for NEAR.
+NEAR Foundation names the same layer (quote `near_blog.around_payment`). Its stated intention is that an agent can pay through x402 and rely on NEAR infrastructure for everything around that payment. The same post also names settlement on NEAR Protocol, covered in section 5. Eddy Lazzarin wrote that one balance in his wallet pays to and from almost any chain (quote `eddy.any_chain`). His post is about a wallet that does not mention NEAR. I read it as a sign that people want this layer, not as evidence for NEAR.
 
 ## 4. The model
 
 Today x402 is {{model.ratio}} of NEAR Intents volume over 30 days. At this size, x402 adds almost nothing to NEAR. The table shows how large it would need to grow.
 
-Each cell is a yearly amount, the 30-day x402 figure times 12, that would reach NEAR if x402 grew by the row's multiple and the column's share of it passed through NEAR Intents and paid its average fee. The fee rate is {{model.fee_rate}}, cumulative fees over cumulative volume, and NEAR keeps its reported lifetime share of those fees, 16.4% (quotes `near_q3.fees_buyback`, `near_q3.cumulative` and `near_q3.capture`). The same report gives a trailing 30-day share of 28.4%. Using it would raise every cell by about 1.7 times. The report gives both fees and volume as floors ("over"), so the rate is an estimate, not a bound. Whether x402 flows would pay the average Intents fee at all is an assumption the data here does not test.
+Each cell is a yearly amount, the 30-day x402 figure times 12, that would reach NEAR if x402 grew by the row's multiple and the column's share of it passed through NEAR Intents and paid its average fee. The fee rate is {{model.fee_rate}}, cumulative fees over cumulative volume, and NEAR keeps its reported lifetime share of those fees, {{model.input.take_rate}} (quotes `near_q3.fees_buyback`, `near_q3.cumulative` and `near_q3.capture`). The same report gives a trailing 30-day share of {{model.input.take_rate_trailing_30d}} (quote `near_q3.capture_30d`). Using it would raise every cell by about {{model.input.trailing_over_lifetime}} times. NEAR reports {{model.input.q3_intents_usd}} for Q3 (quote `near_q3.q3_volume`). DefiLlama's daily sum for the same quarter is {{model.q3_gap}} lower. The report gives both fees and volume as floors ("over"), so the rate is an estimate, not a bound. Whether x402 flows would pay the average Intents fee at all is an assumption the data here does not test.
 
 {{model.table}}
 
-The largest cell is a yearly figure. For comparison, NEAR captured over $8 million for buybacks in the seven months its fee switch has run (quotes `near_q3.fee_switch` and `near_q3.fees_buyback`). The largest cell stays below that buyback figure.
+The largest cell is a yearly figure. For comparison, NEAR captured over {{model.input.buyback_usd}} for buybacks in the seven months its fee switch has run (quotes `near_q3.fee_switch` and `near_q3.fees_buyback`). The largest cell stays below that buyback figure.
 
 My opinion, which this data does not test: the services around an agent payment, funding and cross-chain movement and a record of what arrived, fit NEAR better than settlement does.
 
@@ -110,6 +110,6 @@ This is not investment advice.
 
 ## About this repository
 
-vet402 is an existing product. It has bought from x402 sellers on several chains since 2026-08-14 and publishes every attempt. Under the hackathon rules (Q-001 and Q-002 in HACKATHON.md), only work inside the window that opened on 2026-10-19 is judged. The vet402 export starts on 2026-08-14 and is baseline data from before the window. The classification, the checks, the model, the dashboard and this thesis were written in the window. The first commit is dated 2026-10-30.
+vet402 is an existing product. It has bought from x402 sellers on several chains since 2026-08-14 and publishes every attempt. Under the hackathon rules (Q-001 and Q-002 in HACKATHON.md), only work inside the window that opened on 2026-10-19 is judged. The vet402 export starts on 2026-08-14 and is baseline data from before the window. The classification, the checks, the model, the dashboard and this thesis were written in the window. The first commit is dated 2026-10-30 (JST).
 
-The export comes from https://vet402.com/api/v1/observatory/export.csv?days=365 under CC BY 4.0, and its sha256 is given at the top. The copy in `data/snapshot/` replaces every seller URL with its sha256, so no seller is named here. The code is under the MIT License (`LICENSE`).
+The export comes from https://vet402.com/api/v1/observatory/export.csv?days=365 under CC BY 4.0, and its sha256 is given at the top. The copy in `data/snapshot/` replaces every seller URL with its sha256, so no seller is named here. The code is under the MIT License (`LICENSE`). No third-party packages are used. The code was written with AI coding agents (Claude and Grok), then run and checked by me.

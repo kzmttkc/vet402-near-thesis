@@ -319,7 +319,27 @@ async function runCheck(args, cwd) {
   const thesis = JSON.parse(await readFile(thesisPath, "utf8"));
   if (!thesis.numbers) throw new Error("thesis has no numbers");
   const files = args.checkFiles.map((file) => resolve(cwd, file));
-  const result = checkSurfaces(files, thesis.numbers);
+  // A file built from a template is checked by building it again: any edited figure shows up as a diff.
+  const templated = [];
+  const plain = [];
+  for (const file of files) {
+    const tmpl = file.replace(/\.md$/, ".tmpl.md");
+    if (tmpl !== file && (await exists(tmpl))) templated.push([file, tmpl]);
+    else plain.push(file);
+  }
+  let diffCount = 0;
+  for (const [file, tmpl] of templated) {
+    const want = renderTemplate(await readFile(tmpl, "utf8"), thesis).split("\n");
+    const got = (await readFile(file, "utf8")).split("\n");
+    for (let i = 0; i < Math.max(want.length, got.length); i += 1) {
+      if (want[i] !== got[i]) {
+        diffCount += 1;
+        if (diffCount <= 10) console.log(`  ${file}:${i + 1} differs from ${tmpl} built with thesis.json`);
+      }
+    }
+  }
+  const result = checkSurfaces(plain, thesis.numbers);
+  result.count += diffCount;
   console.log(`mismatches: ${result.count}`);
   for (const mismatch of result.mismatches) {
     console.log(`  ${mismatch.file}: ${mismatch.id} (got ${mismatch.got}, want ${mismatch.want})`);
@@ -442,6 +462,7 @@ export async function main(argv, { cwd = ROOT } = {}) {
     ...snapshot,
     x402scan_retrieved_at: x402["x402.total.amount_30d"].as_of,
     defillama_retrieved_at: llama.numbers["intents.volume_30d"].as_of,
+    derived_sha256: sha256Buffer(await readFile(derivedPath)),
   };
 
   let inputs = null;
