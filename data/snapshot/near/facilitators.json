@@ -1,5 +1,5 @@
 {
-  "retrieved_at": "2026-11-07T11:49:39.671Z",
+  "retrieved_at": "2026-11-07T12:47:16.312Z",
   "usdc": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
   "window": {
     "days": 30,
@@ -11,7 +11,7 @@
     "to_ns": "1794051747483278898",
     "target_ns": "1791459747483278898"
   },
-  "method": "POST https://tx.main.fastnear.com/v0/account with is_signer true and the block-height window, then POST /v0/transactions in batches of 20. Each body is classified by the same Delegate rule as matchRpcTx: one outer Delegate, receiver NEAR USDC, one inner ft_transfer, one successful USDC receipt. is_real_signer is not the relayer filter.",
+  "method": "POST https://tx.main.fastnear.com/v0/account with is_signer true and the block-height window, then POST /v0/transactions in batches of 20. Each body is joined to the request by transaction.hash and classified by the same Delegate rule as matchRpcTx: one outer Delegate, receiver NEAR USDC, one inner ft_transfer, one successful USDC receipt. is_real_signer is not the relayer filter.",
   "line": 25400,
   "upper": 42675,
   "upper_kind": "existing_estimate_upper_95",
@@ -162,12 +162,12 @@
         "unchecked": 0
       },
       "unchecked": 0,
-      "first_at": "2026-10-08T11:48:57.530Z",
+      "first_at": "2026-10-08T11:43:51.970Z",
       "last_at": "2026-11-07T06:06:01.625Z",
       "sample_hashes": [
-        "76hZkqNNi359kH266MTbce7ko9nvcqwMaWjtw92Azc4b",
         "HcskUbp9Fq4ZxAKvGY5Vhg4CgZc9F8nQW1MHjr1EdQUu",
-        "Cm8WrD6nTkTLU4rfuikfZJNBFiaYS6nHSUZWzMgbyLwR"
+        "Cm8WrD6nTkTLU4rfuikfZJNBFiaYS6nHSUZWzMgbyLwR",
+        "BmhpfBMhtzksxfPjgyQeunTzYRr8zjFnXL2UKHMwwdQB"
       ],
       "includes_frozen_hit": true,
       "signer_txs_all_time": 7694
@@ -184,7 +184,7 @@
     "x402-relayer2.mike.near is the signer named by the FastNEAR reference config and by the live x402.mikedotexe.com /supported response. Those are one account, counted once.",
     "solvador.near and uvd-facilitator.near are the signer or fee payer their public /supported responses name. An escrow scheme on the same host is not this count.",
     "x402-relayer.mike.near was provisioned as a mainnet relayer. The provisioning note says that record is not evidence the service was live. The live signer is x402-relayer2.mike.near.",
-    "POST /v0/transactions does not return bodies in tx_hashes order. Counts join each body to transaction.hash. A batch whose length matches can still be a permutation of the request. The 2026-11-07 snapshot counted bodies by position; one 20-hash batch returned the same set in another order. sample_hashes in that file were opened again by hash.",
+    "POST /v0/transactions does not return bodies in tx_hashes order. Counts join each body to transaction.hash. A batch whose length matches can still be a permutation of the request, so a position join can total the same and label a different hash. sample_hashes are the earliest hashes counted by that join.",
     "uvd-facilitator.near's signer transactions in the window are escrow calls on v1.arras-escrow.near and ft_transfer_call to NEAR USDC. ft_transfer_call is not the single ft_transfer this count accepts. The escrow scheme on that host is not this count.",
     "x402-relayer.mike.testnet is the signer at test.x402.mikedotexe.com. It is not a mainnet account and is not in this sum."
   ],
@@ -193,5 +193,5 @@
     "https://facilitator.payai.network/supported (no near kind, retrieved 2026-11-07)"
   ],
   "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
-  "sha256": "8e1f635cb3dc0b8a9490fcdb1fbc4763e7b0f9ef98fb2fbe282fe32f99c3e3a7"
+  "sha256": "8dc87fd92f0e649d00f3146dfcbe7f76e885261e6c61593d92c5467e68742ef5"
 }

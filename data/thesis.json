@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T12:07:33.290Z",
+  "generated_at": "2026-11-07T12:47:34.789Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
@@ -524,7 +524,7 @@
         "from": "2026-10-08T11:42:27.636Z",
         "to": "2026-11-07T11:42:27.483Z"
       },
-      "as_of": "2026-11-07T11:49:39.671Z",
+      "as_of": "2026-11-07T12:47:16.312Z",
       "source": "fastnear_tx_api",
       "definition": "Sum of delegate-action USDC ft_transfers signed by the accounts in facilitators.json. Accounts this survey did not name are absent, so this is a lower bound on N, not N."
     },
@@ -537,7 +537,7 @@
         "from": "2026-10-08T11:42:27.636Z",
         "to": "2026-11-07T11:42:27.483Z"
       },
-      "as_of": "2026-11-07T11:49:39.671Z",
+      "as_of": "2026-11-07T12:47:16.312Z",
       "source": "fastnear_tx_api",
       "definition": "Relay accounts named in facilitators.json and counted over that window."
     },
@@ -1343,8 +1343,8 @@
         "from": "2026-10-08T11:42:27.636Z",
         "to": "2026-11-07T11:42:27.483Z"
       },
-      "retrieved_at": "2026-11-07T11:49:39.671Z",
-      "sha256": "8e1f635cb3dc0b8a9490fcdb1fbc4763e7b0f9ef98fb2fbe282fe32f99c3e3a7",
+      "retrieved_at": "2026-11-07T12:47:16.312Z",
+      "sha256": "8dc87fd92f0e649d00f3146dfcbe7f76e885261e6c61593d92c5467e68742ef5",
       "list_complete": true
     },
     "relays": {

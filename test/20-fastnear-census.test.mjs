@@ -126,7 +126,7 @@ test("the frozen facilitator file sums the known accounts and stays under the li
   const sample = doc.accounts.find((account) => account.account.startsWith("5a95b79b"));
   assert.equal(sample.delegate_usdc, 1716);
   assert.equal(sample.includes_frozen_hit, true);
-  assert.equal(sample.sample_hashes[0], "76hZkqNNi359kH266MTbce7ko9nvcqwMaWjtw92Azc4b");
+  assert.equal(sample.sample_hashes[0], "HcskUbp9Fq4ZxAKvGY5Vhg4CgZc9F8nQW1MHjr1EdQUu");
 });
 
 test("the sha256 covers the document with the hash field emptied", () => {
