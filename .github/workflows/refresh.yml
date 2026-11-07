@@ -1,0 +1,86 @@
+# Daily refresh of the threshold reading. Runs once the repository is public.
+# No API key and no stored secret. The push uses the token Actions already has.
+# The two fetch commands cannot share one process. thesis.mjs throws before any request.
+# A failed near fetch exits before anything is written, so yesterday stays.
+# The checkout copy of data/snapshot is never written back.
+
+name: refresh
+
+on:
+  schedule:
+    - cron: "30 0 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-live
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch NEAR into a copy
+        run: |
+          set -euo pipefail
+          work="${RUNNER_TEMP}/refresh"
+          rm -rf "$work"
+          mkdir -p "$work"
+          tar -C "$GITHUB_WORKSPACE" --exclude .git --exclude node_modules -cf - . | tar -C "$work" -xf -
+          cd "$work"
+          if ! node thesis.mjs --fetch-near; then
+            echo "fetch-near failed; yesterday stays"
+            exit 1
+          fi
+          cd "$GITHUB_WORKSPACE"
+          THESIS="$work/data/thesis.json" RELAYS=0 node lib/live-write.mjs
+
+      - name: Publish today's reading
+        run: |
+          set -euo pipefail
+          git add data/live docs/live.json
+          if git diff --cached --quiet; then
+            echo "no change"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Refresh the live threshold reading"
+          git push
+
+      - name: Count relayers when the census finishes
+        id: relays
+        continue-on-error: true
+        timeout-minutes: 180
+        working-directory: ${{ runner.temp }}/refresh
+        run: node thesis.mjs --fetch-relays
+
+      - name: Record the census when it finished
+        if: steps.relays.outcome == 'success'
+        run: |
+          set -euo pipefail
+          THESIS="${RUNNER_TEMP}/refresh/data/thesis.json" RELAYS=1 node lib/live-write.mjs
+
+      - name: Publish the census reading
+        if: steps.relays.outcome == 'success'
+        run: |
+          set -euo pipefail
+          git add data/live docs/live.json
+          if git diff --cached --quiet; then
+            echo "no change"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Refresh the live threshold reading"
+          git push
