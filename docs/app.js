@@ -240,8 +240,8 @@ function shortId(value) {
 function heroDek(thesis) {
   const accounts = formatValue(thesis?.numbers?.["near.known.accounts"]);
   const exact = formatValue(thesis?.numbers?.["near.known.named_delegate"]);
-  if (accounts == null || exact == null) return "The roster count is missing. The line was posted on NEAR first.";
-  return `${accounts} relay accounts. ${exact} exact-scheme payments from the named facilitators in 30 days. The line was posted on NEAR first.`;
+  if (accounts == null || exact == null) return "The roster count is missing. The line was posted before the full count.";
+  return `${accounts} relay accounts. ${exact} exact-scheme payments from the named facilitators in 30 days. The line was posted before the full count.`;
 }
 
 function renderPost(root, thesis) {
