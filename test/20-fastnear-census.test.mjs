@@ -5,6 +5,7 @@ import { NEAR_USDC } from "../lib/sources/relay-census.mjs";
 import {
   classifyBatch,
   classifyFastnearTx,
+  countSignerTxs,
   judgeKnownRelays,
   readStampedFacilitators,
   stampFacilitators,
@@ -76,6 +77,38 @@ test("a reversed batch counts the hash whose body matched", () => {
   const missing = classifyBatch([{ hash: "absent", at: null, height: null }], [hit], SIGNER);
   assert.equal(missing.rejected.unchecked, 1);
   assert.equal(missing.counted.length, 0);
+});
+
+test("shuffling the response order does not change the count", async () => {
+  const rows = [];
+  const bodies = [];
+  for (let i = 0; i < 6; i += 1) {
+    const body = entry(i % 2 === 0 ? {} : { method: "storage_deposit" });
+    const hash = `h${i}`;
+    body.transaction.hash = hash;
+    rows.push({ hash, at: `2026-11-01T00:00:0${i}.000Z`, height: 10 + i });
+    bodies.push(body);
+  }
+  const byHash = new Map(bodies.map((body) => [body.transaction.hash, body]));
+  async function run(permute) {
+    let calls = 0;
+    const post = async (_path, body) => {
+      calls += 1;
+      const hashes = permute(body.tx_hashes);
+      return { transactions: hashes.map((hash) => byHash.get(hash)) };
+    };
+    const got = await countSignerTxs(post, SIGNER, { rows });
+    assert.equal(calls, 1);
+    return got;
+  }
+  const straight = await run((hashes) => hashes);
+  const shuffled = await run((hashes) => [hashes[4], hashes[1], hashes[5], hashes[0], hashes[2], hashes[3]]);
+  assert.equal(shuffled.counted.length, straight.counted.length);
+  assert.equal(straight.counted.length, 3);
+  assert.deepEqual(
+    shuffled.counted.map((row) => row.hash),
+    straight.counted.map((row) => row.hash),
+  );
 });
 
 test("a known-relay sum below the line is not decided, and a sum on the line is crossed", () => {
