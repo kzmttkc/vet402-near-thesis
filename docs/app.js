@@ -124,9 +124,12 @@ function cite(parent, id) {
   el(parent, "p", "meta", command && url ? `Command: ${command}. Source URL: ${url}` : "Command: missing. Source URL: missing");
 }
 
+let figureNo = 0;
+
 function figure(parent, label, valueText, rec, id) {
-  const box = el(parent, "div", "figure");
-  el(box, "h3", null, label);
+  figureNo += 1;
+  const box = el(parent, "figure", "figure");
+  el(box, "p", "caption", `Figure ${figureNo}. ${label}`);
   const missingValue = valueText == null;
   el(box, "p", missingValue ? "value missing" : "value", missingValue ? "missing" : valueText);
   const rangeText = formatRange(rec?.range);
@@ -234,19 +237,6 @@ function shortId(value) {
   return `${text.slice(0, 8)}…${text.slice(-4)}`;
 }
 
-function fillHeroTitle(h1) {
-  h1.replaceChildren();
-  h1.textContent = "";
-  const lead = document.createElement("span");
-  lead.textContent = "x402 on NEAR, ";
-  const mark = document.createElement("span");
-  mark.className = "mark";
-  mark.textContent = "counted";
-  const tail = document.createElement("span");
-  tail.textContent = " before the verdict.";
-  h1.append(lead, mark, tail);
-}
-
 function heroDek(thesis) {
   const accounts = formatValue(thesis?.numbers?.["near.known.accounts"]);
   const exact = formatValue(thesis?.numbers?.["near.known.named_delegate"]);
@@ -254,11 +244,28 @@ function heroDek(thesis) {
   return `${accounts} relay accounts. ${exact} exact-scheme payments from the named facilitators in 30 days. The line was posted on NEAR first.`;
 }
 
+function renderPost(root, thesis) {
+  const post = el(root, "article", "post");
+  const brand = el(post, "p", "brand");
+  el(brand, "span", "brand-mark");
+  brand.append("vet402");
+  const title = el(post, "h1");
+  title.textContent = "x402 on NEAR, counted before the verdict.";
+  const exactRec = thesis?.numbers?.["near.known.named_delegate"];
+  const exactText = formatValue(exactRec);
+  const heroNum = el(post, "p", exactText == null ? "hero-num missing" : "hero-num");
+  if (exactText == null) heroNum.textContent = "missing";
+  else paintCount(heroNum, exactRec.value);
+  el(post, "p", "hero-note", heroDek(thesis));
+  el(post, "hr", "rule");
+  el(post, "p", "brand-foot", "vet402");
+}
+
 function renderActions(root) {
   const row = el(root, "div", "actions");
-  const primary = el(row, "a", "btn btn-primary", "Read the line");
+  const primary = el(row, "a", "text-btn", "Read the line");
   primary.href = "#threshold-meter";
-  const replay = el(row, "button", "btn", replayLabel(PREREG_RECORD.at));
+  const replay = el(row, "button", "text-btn", replayLabel(PREREG_RECORD.at));
   replay.type = "button";
   if (typeof replay.setAttribute === "function") replay.setAttribute("aria-pressed", "false");
   bindReplay(replay);
@@ -445,131 +452,6 @@ function renderFacilitators(root, thesis, sources) {
   cite(root, "near.known.lower");
 }
 
-const COS = Math.cos(Math.PI / 6);
-const SIN = Math.sin(Math.PI / 6);
-
-export function projectScheme(x, y, z) {
-  return [(x - y) * COS, (x + y) * SIN - z];
-}
-
-export const SCHEME_LABELS = ["Buyer", "Facilitator", "NEAR USDC", "Delivery receipt", "Public record"];
-
-export function schemeGeometry() {
-  const w = 64;
-  const d = 40;
-  const h = 52;
-  const gap = 36;
-  const step = w + d + gap;
-  const raw = SCHEME_LABELS.map((label, index) => {
-    const x = index * step;
-    const y = 0;
-    const p = (px, py, pz) => projectScheme(px, py, pz);
-    return {
-      label,
-      top: [p(x, y, h), p(x + w, y, h), p(x + w, y + d, h), p(x, y + d, h)],
-      left: [p(x, y + d, 0), p(x, y + d, h), p(x, y, h), p(x, y, 0)],
-      right: [p(x, y + d, 0), p(x + w, y + d, 0), p(x + w, y + d, h), p(x, y + d, h)],
-      anchor: p(x + w / 2, y + d, 0),
-    };
-  });
-  const points = raw.flatMap((box) => [...box.top, ...box.left, ...box.right, box.anchor]);
-  let minX = Infinity;
-  let minY = Infinity;
-  let maxX = -Infinity;
-  let maxY = -Infinity;
-  for (const [x, y] of points) {
-    minX = Math.min(minX, x);
-    minY = Math.min(minY, y);
-    maxX = Math.max(maxX, x);
-    maxY = Math.max(maxY, y);
-  }
-  const pad = 28;
-  const labelDrop = 36;
-  const x0 = minX - pad;
-  const y0 = minY - pad;
-  const width = maxX - minX + pad * 2;
-  const height = maxY - minY + pad * 2 + labelDrop;
-  const shift = (pt) => [pt[0] - x0, pt[1] - y0];
-  return {
-    viewBox: `0 0 ${width.toFixed(1)} ${height.toFixed(1)}`,
-    boxes: raw.map((box) => ({
-      label: box.label,
-      top: box.top.map(shift),
-      left: box.left.map(shift),
-      right: box.right.map(shift),
-      anchor: shift(box.anchor),
-    })),
-  };
-}
-
-function facePath(points) {
-  return points.map((pt, index) => `${index === 0 ? "M" : "L"}${pt[0].toFixed(1)} ${pt[1].toFixed(1)}`).join(" ") + " Z";
-}
-
-function faceMid(points) {
-  const x = points.reduce((sum, pt) => sum + pt[0], 0) / points.length;
-  const y = points.reduce((sum, pt) => sum + pt[1], 0) / points.length;
-  return [x, y];
-}
-
-function renderScheme(root, thesis) {
-  el(root, "h2", null, "Specified path");
-  const exact = formatValue(thesis?.numbers?.["near.known.named_delegate"]);
-  const path = SCHEME_LABELS.join(" → ");
-  const count = exact == null
-    ? "Named-facilitator exact count is missing."
-    : `Named facilitators settled ${exact} exact-scheme payments in this window.`;
-  const note = el(root, "p", "note", `${path}. ${count} The drawing is the specified path, not a count. `);
-  const link = document.createElement("a");
-  link.href = "../spec/delivery-proof.md";
-  link.textContent = "spec/delivery-proof.md";
-  note.append(link);
-
-  const scroll = el(root, "div", "scheme-scroll");
-  const geo = schemeGeometry();
-  if (typeof document.createElementNS !== "function") {
-    const list = el(scroll, "ol", "scheme-fallback");
-    for (const box of geo.boxes) el(list, "li", null, box.label);
-    return;
-  }
-  const ns = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(ns, "svg");
-  svg.setAttribute("viewBox", geo.viewBox);
-  svg.setAttribute("role", "img");
-  const labelText = geo.boxes.map((box) => box.label).join(" to ");
-  svg.setAttribute("aria-label", labelText);
-  const title = document.createElementNS(ns, "title");
-  title.textContent = labelText;
-  svg.append(title);
-  for (let index = 0; index < geo.boxes.length; index += 1) {
-    const box = geo.boxes[index];
-    for (const [className, points] of [["face-top", box.top], ["face-left", box.left], ["face-right", box.right]]) {
-      const pathNode = document.createElementNS(ns, "path");
-      pathNode.setAttribute("d", facePath(points));
-      pathNode.setAttribute("class", className);
-      svg.append(pathNode);
-    }
-    if (index < geo.boxes.length - 1) {
-      const from = faceMid(box.right);
-      const to = faceMid(geo.boxes[index + 1].left);
-      const line = document.createElementNS(ns, "line");
-      line.setAttribute("x1", from[0].toFixed(1));
-      line.setAttribute("y1", from[1].toFixed(1));
-      line.setAttribute("x2", to[0].toFixed(1));
-      line.setAttribute("y2", to[1].toFixed(1));
-      line.setAttribute("class", "connector");
-      svg.append(line);
-    }
-    const text = document.createElementNS(ns, "text");
-    text.setAttribute("x", box.anchor[0].toFixed(1));
-    text.setAttribute("y", (box.anchor[1] + 22).toFixed(1));
-    text.setAttribute("text-anchor", "middle");
-    text.textContent = box.label;
-    svg.append(text);
-  }
-  scroll.append(svg);
-}
-
 function claimPercents(reading) {
   const values = [reading?.line, reading?.lower].filter((number) => Number.isFinite(number) && number >= 0);
   const max = Math.max(1, ...values);
@@ -586,6 +468,8 @@ function renderMeter(root, thesis, live) {
   const reading = meterFromLive(live, thesis);
   const section = el(root, "section", "meter");
   section.id = "threshold-meter";
+  figureNo += 1;
+  el(section, "p", "caption", `Figure ${figureNo}. Lower bound on N and the posted line.`);
   el(section, "h2", null, "Threshold");
   const kind = reading.source === "live" ? "Daily reading" : "Frozen snapshot";
   const updated = reading.updated ? formatUtc(reading.updated) : "";
@@ -605,7 +489,8 @@ function renderMeter(root, thesis, live) {
   const pos = claimPercents(reading);
   const track = el(section, "div", "meter-track");
   if (pos.lower != null) {
-    track.style.backgroundImage = `linear-gradient(90deg, var(--mark) 0, var(--mark) ${pos.lower}%, var(--line) ${pos.lower}%, var(--line) 100%)`;
+    const fill = el(track, "span", "meter-fill");
+    fill.style.width = `${pos.lower}%`;
   }
   const place = (className, percent) => {
     if (percent == null) return;
@@ -671,17 +556,13 @@ export function renderDashboard(root, thesis, live = null, context = null) {
   const ratioText = thesis?.model?.x402_over_intents_30d_display;
   if (typeof ratioText !== "string" || ratioText.trim() === "") watched.push(null);
 
-  const h1 = root.querySelector("h1");
+  figureNo = 0;
   root.replaceChildren();
-  const title = h1 ?? el(root, "h1");
-  if (h1) root.append(title);
-  fillHeroTitle(title);
-  el(root, "p", "dek", heroDek(thesis));
+  renderPost(root, thesis);
   renderActions(root);
   renderBand(root, thesis, live);
   renderReplay(root, context?.preregDigest ?? null);
   renderFacilitators(root, thesis, context?.sources ?? null);
-  renderScheme(root, thesis);
   renderMeter(root, thesis, live);
   const incomplete = countMissing(watched);
   el(root, "p", incomplete > 0 ? "count missing" : "count", `Incomplete numbers: ${incomplete}`);

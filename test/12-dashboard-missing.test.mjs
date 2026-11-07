@@ -60,7 +60,9 @@ test("dashboard page states the question and does not pull a CDN", () => {
   const html = readFileSync(join(ROOT, "docs", "index.html"), "utf8");
   const js = readFileSync(join(ROOT, "docs", "app.js"), "utf8");
   assert.match(html, /x402 on NEAR, counted before the verdict\./);
-  assert.match(html, /prefers-color-scheme:\s*dark/);
+  assert.match(html, /Fragment Mono/);
+  assert.match(html, /Martian Mono/);
+  assert.doesNotMatch(html, /prefers-color-scheme:\s*dark/);
   assert.match(html, /prefers-reduced-motion:\s*reduce/);
   assert.match(html, /overflow-x:\s*auto/);
   assert.match(html, /overflow-x:\s*hidden/);
@@ -139,7 +141,7 @@ test("the facilitator table lines the five accounts up together", () => {
   assert.match(page, /Replay of the frozen record\. This page does not call an RPC\./);
   assert.match(page, new RegExp(PREREG_RECORD.tx));
   assert.match(page, /sha256 of PREREG\.md matches the posted digest/);
-  assert.match(page, /Buyer → Facilitator → NEAR USDC → Delivery receipt → Public record/);
+  assert.match(page, /Figure 1\. Lower bound on N and the posted line/);
   assert.match(page, /api\.solvador\.com/);
   assert.match(page, /usdc-delegate-sample\.json/);
   assert.doesNotMatch(page, /Five facilitators/);
@@ -225,14 +227,19 @@ test("the threshold bar leads the page and falls back to the frozen bounds", () 
     globalThis.document = previousDocument;
     globalThis.Node = previous;
   }
-  assert.equal(root.children[0].tag, "h1");
+  const title = findDescendant(root, (node) => node.tag === "h1");
+  assert.equal(title.textContent, "x402 on NEAR, counted before the verdict.");
   const meter = findDescendant(root, (node) => node.id === "threshold-meter");
   assert.equal(meter.id, "threshold-meter");
   const track = meter.children.find((node) => node.className === "meter-track");
   assert.ok(track, "one bar");
   const marks = track.children.map((node) => node.className);
-  assert.deepEqual(marks, ["meter-line", "meter-mark lower"]);
-  const left = Object.fromEntries(track.children.map((node) => [node.className, Number(node.style.left.replace("%", ""))]));
+  assert.deepEqual(marks, ["meter-fill", "meter-line", "meter-mark lower"]);
+  const left = Object.fromEntries(
+    track.children
+      .filter((node) => typeof node.style.left === "string" && node.style.left.includes("%"))
+      .map((node) => [node.className, Number(node.style.left.replace("%", ""))]),
+  );
   assert.ok(left["meter-mark lower"] < left["meter-line"]);
   assert.equal(left["meter-line"], 100);
   const text = meter.children.map((node) => node.textContent).join("\n");

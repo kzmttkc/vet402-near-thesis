@@ -5,7 +5,6 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 import { PREREG_RECORD, replayLabel, replaySteps } from "../docs/prereg.mjs";
-import { SCHEME_LABELS, schemeGeometry } from "../docs/app.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -46,22 +45,4 @@ test("replay steps compare the file digest and do not invent a chain read", () =
   const wrong = replaySteps(PREREG_RECORD, "ab");
   assert.match(wrong[3], /does not match/);
   assert.equal(replayLabel(PREREG_RECORD.at), "Replay Nov 7 10:13 UTC");
-});
-
-test("scheme boxes sit left to right without overlapping", () => {
-  const geo = schemeGeometry();
-  assert.deepEqual(geo.boxes.map((box) => box.label), SCHEME_LABELS);
-  const [, , width, height] = geo.viewBox.split(/\s+/).map(Number);
-  for (let i = 0; i < geo.boxes.length; i += 1) {
-    const box = geo.boxes[i];
-    const xs = [...box.top, ...box.left, ...box.right].map((pt) => pt[0]);
-    if (i > 0) {
-      const prev = [...geo.boxes[i - 1].top, ...geo.boxes[i - 1].left, ...geo.boxes[i - 1].right].map((pt) => pt[0]);
-      assert.ok(Math.min(...xs) > Math.max(...prev), box.label);
-    }
-    for (const pt of [...box.top, ...box.left, ...box.right, box.anchor]) {
-      assert.ok(pt[0] >= 0 && pt[0] <= width, box.label);
-      assert.ok(pt[1] >= 0 && pt[1] <= height, box.label);
-    }
-  }
 });
