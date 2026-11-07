@@ -5,7 +5,7 @@ NEAR's edge in agent payments is the funding and settlement layer: NEAR Intents 
 ## What changed in this version
 
 - x402scan still cannot count x402 settlement on NEAR. NEAR Intents already settles payments across chains. The x402 NEAR settlement spec is present. N, the delegate-action count on NEAR, is not frozen yet.
-- The threshold is N ≥ {{n:threshold.line}}, committed in f0c48d1. The line is 1% of the Base x402 count frozen on 2026-10-30, so it does not depend on NEAR data.
+- The threshold is N ≥ {{n:threshold.line}}, committed in f0c48d1. The line is 1% of the Base x402 count frozen on 2026-10-30, so it does not depend on NEAR data. The check is in [PREREG-VERIFY.md](PREREG-VERIFY.md).
 - [THESIS.md](THESIS.md) holds the claim, the evidence, and that threshold.
 
 This is an entry for the NEAR HACKATHON track "Investment Thesis", which is judged on the evidence.

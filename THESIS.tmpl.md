@@ -1,6 +1,6 @@
 # Thesis
 
-The four sections follow the NEAR HACKATHON thesis track. The threshold in "What would change my mind" was committed on its own, before any NEAR data was fetched for this version, in commit f0c48d1. `git log -- THESIS.md` shows that section came first. The same commit and the SHA-256 of that THESIS.md (d8925b096c421dc12afc77fe2421a2ec29e96581f9b66d4273984178764c24ec) were posted on NEAR at 2026-11-07 10:13 UTC, before the full relayer count ran: https://near.social/smartbread5934.near/post/1794046390265
+The four sections follow the NEAR HACKATHON thesis track. The threshold in "What would change my mind" was committed on its own, before the full count (N) was seen, in commit f0c48d1. `git log -- THESIS.md` shows that section came first. The same commit and the SHA-256 of that THESIS.md (d8925b096c421dc12afc77fe2421a2ec29e96581f9b66d4273984178764c24ec) were posted on NEAR at 2026-11-07 10:13 UTC, before the full relayer count ran: https://near.social/smartbread5934.near/post/1794046390265. The check, and the words that changed after the post, are in [PREREG-VERIFY.md](PREREG-VERIFY.md).
 
 ## Claim
 
@@ -12,7 +12,7 @@ The people this reaches are agents that pay through x402, and the accounts that 
 
 ### Sustainability
 
-Every figure here rebuilds from the frozen snapshot with `node thesis.mjs --offline`, with no key and no account. The line was fixed in commit f0c48d1 before the NEAR fetch, so a later refetch cannot move it. `node thesis.mjs --fetch-relays` walks the relayers it can see, waits out HTTP 429 by widening the gap, and resumes from `data/snapshot/near/relay-census.progress.json`. The upkeep is to run the same script on the next 30-day window. Each day the public counts are fetched again with no key, and the dashboard shows when they move toward the line of {{n:threshold.line}}.
+Every figure here rebuilds from the frozen snapshot with `node thesis.mjs --offline`, with no key and no account. The line was fixed in commit f0c48d1 from the Base count frozen on 2026-10-30, so a later NEAR fetch cannot move it. The timing of the post is in [PREREG-VERIFY.md](PREREG-VERIFY.md). `node thesis.mjs --fetch-relays` walks the relayers it can see, waits out HTTP 429 by widening the gap, and resumes from `data/snapshot/near/relay-census.progress.json`. The upkeep is to run the same script on the next 30-day window. Each day the public counts are fetched again with no key, and the dashboard shows when they move toward the line of {{n:threshold.line}}.
 
 ## Evidence for
 
