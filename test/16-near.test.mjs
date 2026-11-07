@@ -148,3 +148,15 @@ test("an edited NEAR snapshot file is refused", async () => {
 test("--fetch-near cannot run with --offline", async () => {
   await assert.rejects(main(["--fetch-near", "--offline"]), /cannot --fetch-near with --offline/);
 });
+
+test("the BigQuery upper bound is a file on disk and this test does not run it", async () => {
+  const sql = await readFile(join(ROOT, "sql", "n-upper-bound.sql"), "utf8");
+  assert.match(sql, /bigquery-public-data\.crypto_near_mainnet_us\.receipt_actions/);
+  assert.match(sql, /block_date BETWEEN DATE '2026-10-08' AND DATE '2026-11-07'/);
+  assert.match(sql, /action_kind = 'DELEGATE_ACTION'/);
+  assert.match(sql, new RegExp(NEAR_USDC));
+  assert.match(sql, /ft_transfer/);
+  assert.doesNotMatch(sql, /execution_outcomes/);
+  const readme = await readFile(join(ROOT, "README.md"), "utf8");
+  assert.match(readme, /With a GCP account you can count the overall upper bound on N with `sql\/n-upper-bound\.sql`/);
+});
