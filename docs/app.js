@@ -534,7 +534,7 @@ function renderSampleAppendix(root, thesis) {
   const numbers = thesis?.numbers ?? {};
   const box = el(root, "div");
   figure(box, "Sample estimate", formatValue(numbers["near.delegate.estimate"]), numbers["near.delegate.estimate"], "near.delegate.estimate");
-  figure(box, "Sample upper bound", formatValue(numbers["near.delegate.estimate_upper_95"]), numbers["near.delegate.estimate_upper_95"], "near.delegate.estimate_upper_95");
+  figure(box, "Biased sample estimate, 95%", formatValue(numbers["near.delegate.estimate_upper_95"]), numbers["near.delegate.estimate_upper_95"], "near.delegate.estimate_upper_95");
 }
 
 export function renderDashboard(root, thesis, live = null, context = null) {

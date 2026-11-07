@@ -122,6 +122,8 @@ test("the frozen facilitator file sums the known accounts and stays under the li
   assert.equal(doc.line, 25_400);
   assert.equal(doc.lower, 1716);
   assert.equal(doc.result, "not_decided");
+  assert.equal(doc.biased_sample_estimate, 42_675);
+  assert.equal(doc.upper, undefined);
   assert.equal(doc.list_complete, true);
   const sample = doc.accounts.find((account) => account.account.startsWith("5a95b79b"));
   assert.equal(sample.delegate_usdc, 1716);

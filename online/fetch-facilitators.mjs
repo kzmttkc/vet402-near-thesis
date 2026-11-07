@@ -139,7 +139,7 @@ export async function fetchKnownRelays(dir = OUT_DIR, { log: logImpl = log } = {
     say(`${spec.account} 該当 ${row.delegate_usdc}`);
   }
   const estimate = 20421;
-  const upper = 42675;
+  const biased_sample_estimate = 42675;
   const doc = facilitatorsDocument({
     window: {
       days: window.days,
@@ -153,7 +153,7 @@ export async function fetchKnownRelays(dir = OUT_DIR, { log: logImpl = log } = {
     },
     accounts,
     retrieved_at: new Date().toISOString(),
-    upper,
+    biased_sample_estimate,
     estimate,
   });
   doc.surveyed_without_near_exact_signer = [

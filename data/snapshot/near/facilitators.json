@@ -13,8 +13,6 @@
   },
   "method": "POST https://tx.main.fastnear.com/v0/account with is_signer true and the block-height window, then POST /v0/transactions in batches of 20. Each body is joined to the request by transaction.hash and classified by the same Delegate rule as matchRpcTx: one outer Delegate, receiver NEAR USDC, one inner ft_transfer, one successful USDC receipt. is_real_signer is not the relayer filter.",
   "line": 25400,
-  "upper": 42675,
-  "upper_kind": "existing_estimate_upper_95",
   "estimate": 20421,
   "accounts": [
     {
@@ -193,5 +191,7 @@
     "https://facilitator.payai.network/supported (no near kind, retrieved 2026-11-07)"
   ],
   "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
-  "sha256": "8dc87fd92f0e649d00f3146dfcbe7f76e885261e6c61593d92c5467e68742ef5"
+  "sha256": "4455a689a039f8b47af39c6a00c60ecc1e36c00b71fc5c971c876173e0acbeb9",
+  "biased_sample_estimate": 42675,
+  "biased_sample_estimate_kind": "clopper_pearson_95_not_N"
 }

@@ -8,6 +8,7 @@
   "lower": 1716,
   "lower_kind": "known_relays",
   "estimate": 20421,
-  "upper": 42675,
+  "upper": null,
+  "biased_sample_estimate": 42675,
   "relays_obtained": false
 }
