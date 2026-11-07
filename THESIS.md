@@ -26,7 +26,7 @@ The NEAR exact scheme is in the canonical repository x402-foundation/x402, file 
 
 That sentence is the same shape one layer up. The spec says a successful outer transaction does not mean the inner transfer succeeded. vet402's record says a settled payment does not mean the answer was delivered. Of 18,683 attempts, 12,223 settled, and 11,189 of the settled purchases came back with an HTTP 2xx answer. A payment and a delivered answer are two records.
 
-NEAR Intents settles cross-chain payments through its solver network. The frozen page is https://mpp.dev/payment-methods/nearintents. The client library named there is `@defuse-protocol/nearintents-mpp-sdk`. The snapshot has the page and no payment count, so I do not state one.
+NEAR Intents settles cross-chain payments through its solver network. The frozen page is https://mpp.dev/payment-methods/nearintents. The client library named there is `@defuse-protocol/nearintents-mpp-sdk`. The snapshot has the page and no payment count. Of 30 recent intents.near index rows from 2026-11-07 16:18 to 2026-11-07 16:20 UTC, blocks 223490307 to 223490446, 1 is a payment-scale settlement, not the delegate-action count N.
 
 The public facilitator at x402.mikedotexe.com reports scheme `exact` on `near:mainnet` and names `x402-relayer2.mike.near` as a signer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-28 00:00 UTC (retrieved 2026-10-29 23:18 UTC). That window is not the window used for N (from 2026-10-08 04:24 to 2026-11-07 04:24 UTC). On Base, the Intents treasury address sent out $41.05M of USDC in 45,840 transfers over blocks 51965969 to 53261969. This is the funding and movement layer. Nothing in those transfers says which of them, if any, are x402.
 
