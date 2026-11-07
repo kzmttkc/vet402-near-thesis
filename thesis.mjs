@@ -282,8 +282,11 @@ export function bigQueryUpperBoundNumbers(doc, line, lower) {
   if (matched !== doc.sum_of_daily_distinct) {
     throw new Error(`bigquery daily sum ${matched} != ${doc.sum_of_daily_distinct}`);
   }
-  if (!(doc.n_upper_bound < doc.line)) throw new Error("bigquery upper bound is not below the line");
+  if (!(doc.n_upper_bound_whole_dates < doc.line)) throw new Error("bigquery upper bound is not below the line");
   if (!(doc.known_relay_lower_bound <= doc.n_upper_bound)) {
+    throw new Error("known-relay lower bound exceeds the minute window");
+  }
+  if (!(doc.known_relay_lower_bound <= doc.n_upper_bound_whole_dates)) {
     throw new Error("known-relay lower bound exceeds the upper bound");
   }
   if (!(doc.n_upper_bound <= doc.n_upper_bound_whole_dates)) {
@@ -301,58 +304,99 @@ export function bigQueryUpperBoundNumbers(doc, line, lower) {
   if (typeof doc.bytes_processed !== "string" || doc.bytes_processed === "") {
     throw new Error("bigquery bytes_processed missing");
   }
+  const jobs = readBigQueryJobs(doc);
   const census = { days: 30, from, to };
   const widened = { from: "2026-10-08T00:00:00Z", to: "2026-11-08T00:00:00Z" };
-  const as_of = doc.retrieved_at;
   const source = doc.source;
-  const common = { as_of, source };
+  const decidedAt = jobs.whole.ran_at;
+  const minuteAt = jobs.minute.ran_at;
   const upper = "near.bq.n_upper_bound";
   const share = "near.bq.upper_share_of_line";
   const whole = "near.bq.whole_dates";
+  const minute = "near.bq.minute_window";
   const daily = "near.bq.sum_of_daily";
   const span = "near.bq.receipts_on_two_dates";
   return {
     [upper]: record(upper, {
-      ...common,
-      value: doc.n_upper_bound,
-      unit: "NEAR delegate-action USDC transfer receipts in 30 days",
-      range: census,
+      value: doc.n_upper_bound_whole_dates,
+      unit: "NEAR delegate-action USDC transfer receipts on the whole dates containing the census window",
+      range: widened,
+      as_of: decidedAt,
+      source,
       definition:
-        "Upper bound on N. Distinct DELEGATE_ACTION receipts in the census window whose inner receiver is NEAR USDC and whose single inner action is FunctionCall ft_transfer. The inner receipt is not required to succeed, so the count is at least N. Not a count of x402 payments.",
+        "Upper bound on N. Distinct DELEGATE_ACTION receipts on the whole dates 2026-10-08 through 2026-11-07, which contain the census window. The inner receiver is NEAR USDC and the single inner action is FunctionCall ft_transfer. The inner receipt is not required to succeed, so the count is at least N. The minute-cut window is shorter at the census end, so it is not this bound. Not a count of x402 payments.",
     }),
     [share]: record(share, {
-      ...common,
-      value: doc.n_upper_bound / line,
+      value: doc.n_upper_bound_whole_dates / line,
       unit: "share of the line",
-      range: census,
+      range: widened,
+      as_of: decidedAt,
+      source,
       definition:
-        "Upper bound on N divided by the line. The upper bound does not require the inner receipt to succeed.",
+        "Upper bound on N divided by the line. The upper bound is the whole-date count and does not require the inner receipt to succeed.",
     }),
     [whole]: record(whole, {
-      ...common,
       value: doc.n_upper_bound_whole_dates,
       unit: "NEAR delegate-action USDC transfer receipts",
       range: widened,
+      as_of: decidedAt,
+      source,
       definition:
-        "Same match as the upper bound, with the window widened to the whole dates 2026-10-08 through 2026-11-07. Distinct receipts.",
+        "Same count as the upper bound: distinct receipts on the whole dates 2026-10-08 through 2026-11-07.",
+    }),
+    [minute]: record(minute, {
+      value: doc.n_upper_bound,
+      unit: "NEAR delegate-action USDC transfer receipts in the minute-cut window",
+      range: census,
+      as_of: minuteAt,
+      source,
+      definition:
+        "Distinct receipts in the minute-cut window stored in window_utc. That window ends before the census end, so this count is not the upper bound on N.",
     }),
     [daily]: record(daily, {
-      ...common,
       value: doc.sum_of_daily_distinct,
       unit: "NEAR delegate-action USDC transfer receipts",
       range: widened,
+      as_of: minuteAt,
+      source,
       definition:
         "Sum of the per-day distinct counts for the widened window. Receipts that appear on two dates are counted on each date.",
     }),
     [span]: record(span, {
-      ...common,
       value: doc.sum_of_daily_distinct - doc.n_upper_bound_whole_dates,
       unit: "receipts",
       range: widened,
+      as_of: minuteAt,
+      source,
       definition:
         "How many receipts the daily sum counts twice. The whole-date distinct count is lower by this many.",
     }),
   };
+}
+
+// The file stores two jobs. The minute-cut job matches retrieved_at. The whole-date job is the bound.
+function readBigQueryJobs(doc) {
+  if (doc.job_location !== "us-east1") throw new Error("bigquery location");
+  if (!Array.isArray(doc.jobs) || doc.jobs.length !== 2) throw new Error("bigquery jobs missing");
+  for (const job of doc.jobs) {
+    if (job == null || typeof job !== "object" || Array.isArray(job)) throw new Error("bigquery job missing");
+    for (const key of Object.keys(job)) {
+      if (/email|project/i.test(key)) throw new Error(`bigquery job has ${key}`);
+    }
+    if (job.location !== doc.job_location) throw new Error("bigquery job location");
+    if (typeof job.id !== "string" || !/^job_[A-Za-z0-9]+$/.test(job.id)) throw new Error("bigquery job id");
+    if (typeof job.ran_at !== "string" || job.ran_at === "") throw new Error("bigquery job ran_at");
+    if (typeof job.bytes_processed !== "string" || job.bytes_processed === "") throw new Error("bigquery job bytes");
+    if (typeof job.query_file !== "string" || job.query_file === "") throw new Error("bigquery job query_file");
+    if (!Number.isInteger(job.count)) throw new Error("bigquery job count");
+  }
+  const whole = doc.jobs.find((job) => job.count === doc.n_upper_bound_whole_dates);
+  const minute = doc.jobs.find((job) => job.count === doc.n_upper_bound);
+  if (!whole || !minute || whole === minute) throw new Error("bigquery jobs do not match the counts");
+  if (minute.ran_at !== doc.retrieved_at) throw new Error("minute job time differs from retrieved_at");
+  if (minute.bytes_processed !== doc.bytes_processed) throw new Error("minute job bytes differ");
+  if (minute.query_file !== doc.query_file) throw new Error("minute job query_file differs");
+  return { whole, minute };
 }
 
 async function attachBigQueryUpperBound(thesis, nearDir) {
@@ -363,11 +407,12 @@ async function attachBigQueryUpperBound(thesis, nearDir) {
   const lower = thesis.numbers["near.known.lower"]?.value;
   Object.assign(thesis.numbers, bigQueryUpperBoundNumbers(doc, line, lower));
   const end = doc.days[doc.days.length - 1];
+  const { whole } = readBigQueryJobs(doc);
   thesis.near = {
     ...(thesis.near ?? {}),
     bq: {
-      retrieved_at: doc.retrieved_at,
-      bytes_processed: doc.bytes_processed,
+      retrieved_at: whole.ran_at,
+      bytes_processed: whole.bytes_processed,
       dates_present: doc.days.length,
       last_block: `${end.block_date} ${end.last_block_utc} UTC`,
     },

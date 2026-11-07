@@ -164,5 +164,5 @@ test("the BigQuery upper bound is a file on disk and this test does not run it",
   assert.match(daily, /TIMESTAMP '2026-11-07 11:42:00\+00'/);
   const readme = await readFile(join(ROOT, "README.md"), "utf8");
   assert.match(readme, /sql\/n-upper-bound-daily\.sql/);
-  assert.match(readme, /`sql\/n-upper-bound\.sql` remains the whole-date method/);
+  assert.match(readme, /`sql\/n-upper-bound\.sql` is the whole-date count/);
 });

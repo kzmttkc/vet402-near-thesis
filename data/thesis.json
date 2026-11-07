@@ -787,30 +787,28 @@
       "definition": "USDC sent out of the NEAR Intents treasury on Base (all purposes) over x402 dollars on Base, both 30 days"
     },
     "near.bq.n_upper_bound": {
-      "value": 2418,
-      "unit": "NEAR delegate-action USDC transfer receipts in 30 days",
+      "value": 2532,
+      "unit": "NEAR delegate-action USDC transfer receipts on the whole dates containing the census window",
       "unit_kind": "count",
       "range": {
-        "days": 30,
-        "from": "2026-10-08T11:42:00Z",
-        "to": "2026-11-07T11:42:00Z"
+        "from": "2026-10-08T00:00:00Z",
+        "to": "2026-11-08T00:00:00Z"
       },
-      "as_of": "2026-11-07T21:07:15Z",
+      "as_of": "2026-11-07T21:04:39Z",
       "source": "bigquery-public-data.crypto_near_mainnet_us.receipt_actions",
-      "definition": "Upper bound on N. Distinct DELEGATE_ACTION receipts in the census window whose inner receiver is NEAR USDC and whose single inner action is FunctionCall ft_transfer. The inner receipt is not required to succeed, so the count is at least N. Not a count of x402 payments."
+      "definition": "Upper bound on N. Distinct DELEGATE_ACTION receipts on the whole dates 2026-10-08 through 2026-11-07, which contain the census window. The inner receiver is NEAR USDC and the single inner action is FunctionCall ft_transfer. The inner receipt is not required to succeed, so the count is at least N. The minute-cut window is shorter at the census end, so it is not this bound. Not a count of x402 payments."
     },
     "near.bq.upper_share_of_line": {
-      "value": 0.0951968503937008,
+      "value": 0.09968503937007873,
       "unit": "share of the line",
       "unit_kind": "share",
       "range": {
-        "days": 30,
-        "from": "2026-10-08T11:42:00Z",
-        "to": "2026-11-07T11:42:00Z"
+        "from": "2026-10-08T00:00:00Z",
+        "to": "2026-11-08T00:00:00Z"
       },
-      "as_of": "2026-11-07T21:07:15Z",
+      "as_of": "2026-11-07T21:04:39Z",
       "source": "bigquery-public-data.crypto_near_mainnet_us.receipt_actions",
-      "definition": "Upper bound on N divided by the line. The upper bound does not require the inner receipt to succeed."
+      "definition": "Upper bound on N divided by the line. The upper bound is the whole-date count and does not require the inner receipt to succeed."
     },
     "near.bq.whole_dates": {
       "value": 2532,
@@ -820,9 +818,22 @@
         "from": "2026-10-08T00:00:00Z",
         "to": "2026-11-08T00:00:00Z"
       },
+      "as_of": "2026-11-07T21:04:39Z",
+      "source": "bigquery-public-data.crypto_near_mainnet_us.receipt_actions",
+      "definition": "Same count as the upper bound: distinct receipts on the whole dates 2026-10-08 through 2026-11-07."
+    },
+    "near.bq.minute_window": {
+      "value": 2418,
+      "unit": "NEAR delegate-action USDC transfer receipts in the minute-cut window",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:00Z",
+        "to": "2026-11-07T11:42:00Z"
+      },
       "as_of": "2026-11-07T21:07:15Z",
       "source": "bigquery-public-data.crypto_near_mainnet_us.receipt_actions",
-      "definition": "Same match as the upper bound, with the window widened to the whole dates 2026-10-08 through 2026-11-07. Distinct receipts."
+      "definition": "Distinct receipts in the minute-cut window stored in window_utc. That window ends before the census end, so this count is not the upper bound on N."
     },
     "near.bq.sum_of_daily": {
       "value": 2534,
@@ -1691,8 +1702,8 @@
       ]
     },
     "bq": {
-      "retrieved_at": "2026-11-07T21:07:15Z",
-      "bytes_processed": "85.36 GB",
+      "retrieved_at": "2026-11-07T21:04:39Z",
+      "bytes_processed": "83.96 GB",
       "dates_present": 31,
       "last_block": "2026-11-07 20:59:58 UTC"
     }

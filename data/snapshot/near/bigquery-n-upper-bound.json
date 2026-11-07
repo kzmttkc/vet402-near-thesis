@@ -13,7 +13,25 @@
   "sum_of_daily_distinct": 2534,
   "line": 25400,
   "known_relay_lower_bound": 1716,
-  "note": "Counts DELEGATE_ACTION receipts whose inner receiver is NEAR USDC with exactly one inner FunctionCall ft_transfer. The inner receipt is not required to succeed, so this is at least N. All 31 dates are present; the last block on 2026-11-07 is 20:59:58 UTC, after the window end. The daily sum is 2 higher than the whole-dates distinct count because 2 receipts appear on two dates.",
+  "jobs": [
+    {
+      "id": "job_9RryoOYvLbEXZ1Emk9d0ThJ273x2",
+      "location": "us-east1",
+      "ran_at": "2026-11-07T21:04:39Z",
+      "bytes_processed": "83.96 GB",
+      "count": 2532,
+      "query_file": "sql/n-upper-bound.sql"
+    },
+    {
+      "id": "job_P2IOUNAwg1YB614m6IbO97J1B8BV",
+      "location": "us-east1",
+      "ran_at": "2026-11-07T21:07:15Z",
+      "bytes_processed": "85.36 GB",
+      "count": 2418,
+      "query_file": "sql/n-upper-bound-daily.sql"
+    }
+  ],
+  "note": "The decision upper bound is n_upper_bound_whole_dates, the distinct count on the dates 2026-10-08 through 2026-11-07. Those dates contain the census window, and the inner receipt is not required to succeed, so the count is at least N. That count is job_9RryoOYvLbEXZ1Emk9d0ThJ273x2 at 2026-11-07T21:04:39Z, 83.96 GB, location us-east1. n_upper_bound is the minute-cut window in window_utc, which ends before the census end, from job_P2IOUNAwg1YB614m6IbO97J1B8BV at 2026-11-07T21:07:15Z, 85.36 GB, location us-east1. All 31 dates are present; the last block on 2026-11-07 is 20:59:58 UTC, after the census end. The daily sum is 2 higher than the whole-dates distinct count because 2 receipts appear on two dates.",
   "days": [
     {
       "block_date": "2026-10-08",

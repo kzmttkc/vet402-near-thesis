@@ -251,7 +251,12 @@ function heroLead(thesis) {
 
 function renderHeroNote(post, thesis) {
   const note = el(post, "p", "hero-note");
-  note.textContent = `${heroLead(thesis)}An explorer shows Failure because social has no contract, so __fastdata_kv fails, and FastNEAR's indexer stores the arguments without checking success; the arguments stay in the transaction (`;
+  note.textContent = heroLead(thesis).trim();
+}
+
+function renderPreregFailure(root) {
+  const note = el(root, "p", "meta");
+  note.textContent = "An explorer shows Failure because social has no contract, so __fastdata_kv fails, and FastNEAR's indexer stores the arguments without checking success; the arguments stay in the transaction (";
   const link = el(note, "a", null, "PREREG-VERIFY.md");
   link.href = PREREG_VERIFY_URL;
   link.rel = "noreferrer";
@@ -350,18 +355,25 @@ function renderBand(root, thesis, live) {
   const grid = el(section, "div", "band-grid");
   const tx = bandCell(grid, "Posted transaction", formatUtc(PREREG_RECORD.at));
   tx.textContent = shortId(PREREG_RECORD.tx);
-  const lowerSub = reading.lower_kind === "known_relays"
-    ? "known relays"
-    : reading.lower_kind === "sample_hits"
-      ? "sample hits"
-      : "daily reading";
-  const lowerLabel = reading.lower_kind === "known_relays" ? "Lower bound on N" : "Lower";
+  const liveDay = reading.source === "live";
+  const lowerSub = liveDay
+    ? "that day's window"
+    : reading.lower_kind === "known_relays"
+      ? "known relays"
+      : reading.lower_kind === "sample_hits"
+        ? "sample hits"
+        : "daily reading";
+  const lowerLabel = liveDay
+    ? "Lower bound for that day's window"
+    : reading.lower_kind === "known_relays"
+      ? "Lower bound on N"
+      : "Lower";
   paintCount(bandCell(grid, lowerLabel, lowerSub), reading.lower);
   const upperValue = Number(thesis?.numbers?.["near.bq.n_upper_bound"]?.value);
-  if (reading.source !== "live" && Number.isFinite(upperValue)) {
+  if (Number.isFinite(upperValue)) {
     const upperShare = shareOfLine(upperValue, reading.line);
     paintCount(
-      bandCell(grid, "Upper bound on N", upperShare ? `${upperShare} of the line` : "census window"),
+      bandCell(grid, "Upper bound on N", upperShare ? `${upperShare} of the line` : "whole dates"),
       upperValue,
     );
   }
@@ -551,19 +563,32 @@ function renderMeter(root, thesis, live) {
       ? `${textOf("Lower, known relays", reading.lower)} = lower bound on N`
       : textOf(lowerName, reading.lower);
   el(section, "p", "meta", `${lowerText}. ${textOf("Line", reading.line)}.`);
+  const frozenLower = Number(thesis?.numbers?.["near.known.lower"]?.value);
+  const frozenLine = Number(thesis?.numbers?.["threshold.line"]?.value);
+  const upperValue = Number(thesis?.numbers?.["near.bq.n_upper_bound"]?.value);
+  const lineForVerdict = Number.isFinite(frozenLine) ? frozenLine : reading.line;
   const share = shareOfLine(reading.lower, reading.line);
-  if (share != null && reading.lower < reading.line) {
-    const upperValue = Number(thesis?.numbers?.["near.bq.n_upper_bound"]?.value);
-    const upperShare = shareOfLine(upperValue, reading.line);
-    const decided = reading.source !== "live" && Number.isFinite(upperValue) && upperValue < reading.line && upperShare;
+  const frozenShare = shareOfLine(frozenLower, lineForVerdict);
+  const upperShare = shareOfLine(upperValue, lineForVerdict);
+  const decided = Number.isFinite(upperValue) && Number.isFinite(frozenLower) && Number.isFinite(lineForVerdict)
+    && upperValue < lineForVerdict && upperShare && frozenShare;
+  if (decided) {
     el(
       section,
       "p",
       "meta",
-      decided
-        ? `${formatCount(reading.lower)} is ${share} of the line. That figure is the known-relay lower bound. The upper bound on N is ${formatCount(upperValue)}, ${upperShare} of the line. N ≤ ${formatCount(upperValue)} < ${formatCount(reading.line)}, all 30 days counted: the threshold is not crossed. The claim stands.`
-        : `${formatCount(reading.lower)} is ${share} of the line. This daily figure is a lower bound for its own window.`,
+      `${formatCount(frozenLower)} is ${frozenShare} of the line. That figure is the known-relay lower bound. The upper bound on N is ${formatCount(upperValue)}, ${upperShare} of the line. N ≤ ${formatCount(upperValue)} < ${formatCount(lineForVerdict)}, all 30 days counted: the threshold is not crossed. The claim stands.`,
     );
+  } else if (share != null && reading.lower < reading.line) {
+    el(
+      section,
+      "p",
+      "meta",
+      `${formatCount(reading.lower)} is ${share} of the line. This daily figure is a lower bound for its own window.`,
+    );
+  }
+  if (reading.source === "live" && Number.isFinite(reading.lower)) {
+    el(section, "p", "meta", `${formatCount(reading.lower)} is the lower bound for that day's window.`);
   }
   cite(section, "near.known.lower");
   cite(section, "threshold.line");
@@ -606,6 +631,7 @@ export function renderDashboard(root, thesis, live = null, context = null) {
   renderPost(root, thesis);
   renderActions(root);
   renderBand(root, thesis, live);
+  renderPreregFailure(root);
   renderReplay(root, context?.preregDigest ?? null);
   renderFacilitators(root, thesis, context?.sources ?? null);
   renderMeter(root, thesis, live);

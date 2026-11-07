@@ -70,7 +70,9 @@ test("dashboard page states the question and does not pull a CDN", () => {
   assert.match(js, /threshold-meter/);
   assert.match(js, /Lower bound retrieved/);
   assert.match(js, /Pre-registered threshold/);
-  assert.doesNotMatch(html, /https?:\/\//);
+  const allowed = "https://github.com/kzmttkc/vet402-near-thesis/blob/main/PREREG-VERIFY.md";
+  assert.equal(html.includes(allowed), true);
+  assert.doesNotMatch(html.split(allowed).join(""), /https?:\/\//);
   const prose = `${html}\n${js}`.replaceAll("en-US", "");
   assert.doesNotMatch(prose, /—|–/);
   assert.doesNotMatch(prose, /\b(we|our|us)\b/i);
@@ -302,8 +304,8 @@ test("the threshold bar leads the page and falls back to the frozen bounds", () 
   assert.match(text, /Frozen snapshot/);
   assert.match(text, /Lower, known relays 1,716 = lower bound on N/);
   assert.match(text, /1,716 is 6\.8% of the line/);
-  assert.match(text, /The upper bound on N is 2,418, 9\.5% of the line/);
-  assert.match(text, /N ≤ 2,418 < 25,400, all 30 days counted: the threshold is not crossed\. The claim stands\./);
+  assert.match(text, /The upper bound on N is 2,532, 10\.0% of the line/);
+  assert.match(text, /N ≤ 2,532 < 25,400, all 30 days counted: the threshold is not crossed\. The claim stands\./);
   assert.doesNotMatch(text, /cannot be measured without a key/);
   const pageText = textOf(root);
   const lowerAt = pageText.indexOf("Lower bound on N");
@@ -312,8 +314,8 @@ test("the threshold bar leads the page and falls back to the frozen bounds", () 
   assert.ok(lowerAt !== -1 && upperAt !== -1 && lowerAt < upperAt);
   assert.ok(lineAt !== -1 && upperAt < lineAt);
   assert.match(pageText, /Upper bound on N/);
-  assert.match(pageText, /2,418/);
-  assert.match(pageText, /9\.5% of the line/);
+  assert.match(pageText, /2,532/);
+  assert.match(pageText, /10\.0% of the line/);
   assert.doesNotMatch(text, /20,421/);
   assert.doesNotMatch(text, /42,675/);
   assert.match(text, /Line 25,400/);
@@ -347,4 +349,58 @@ test("the threshold bar leads the page and falls back to the frozen bounds", () 
   assert.doesNotMatch(liveText, /sample hits/);
   globalThis.document = previousDocument;
   globalThis.Node = previous;
+});
+
+test("a live reading still draws the frozen verdict and the day's window lower bound", () => {
+  function El(tag) {
+    this.tag = tag;
+    this.children = [];
+    this.style = {};
+    this.className = "";
+    this.id = "";
+    this.textContent = "";
+    this.rel = "";
+    this.href = "";
+  }
+  El.prototype.append = function (...nodes) {
+    this.children.push(...nodes);
+  };
+  El.prototype.replaceChildren = function () {
+    this.children = [];
+  };
+  El.prototype.querySelector = function () {
+    return null;
+  };
+  const previousDocument = globalThis.document;
+  const previousNode = globalThis.Node;
+  globalThis.document = { createElement: (tag) => new El(tag) };
+  globalThis.Node = class Node {};
+  const root = new El("main");
+  const thesis = JSON.parse(readFileSync(join(ROOT, "docs", "thesis.json"), "utf8"));
+  try {
+    renderDashboard(root, thesis, {
+      date: "2026-11-08",
+      updated: "2026-11-08T00:30:00.000Z",
+      line: 25400,
+      lower: 18000,
+      lower_kind: "census",
+      estimate: 24000,
+      upper: 30000,
+      relays_obtained: true,
+      source: "live",
+    });
+  } finally {
+    globalThis.document = previousDocument;
+    globalThis.Node = previousNode;
+  }
+  const page = textOf(root);
+  assert.match(page, /The upper bound on N is 2,532, 10\.0% of the line/);
+  assert.match(page, /N ≤ 2,532 < 25,400, all 30 days counted: the threshold is not crossed\. The claim stands\./);
+  assert.match(page, /Upper bound on N/);
+  assert.match(page, /2,532/);
+  assert.match(page, /Lower bound for that day's window/);
+  assert.match(page, /18,000 is the lower bound for that day's window/);
+  const upperAt = page.indexOf("Upper bound on N");
+  const dayAt = page.indexOf("Lower bound for that day's window");
+  assert.ok(dayAt !== -1 && upperAt !== -1 && dayAt < upperAt);
 });
