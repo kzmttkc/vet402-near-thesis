@@ -39,7 +39,7 @@ The line is the next whole number above 1% of the Base x402 count. That count is
 
 ## When the post happened
 
-The post is before the full count (N) was seen. It is after the NEAR sample was fetched.
+The NEAR post at 2026-11-07 10:13 UTC is before the full-count fetch and after the NEAR sample fetch (2026-11-07 04:24 to 05:28 UTC).
 
 - Commit `f0c48d1` is dated 2026-11-07T03:35:44Z (09:05:44+05:30) in this checkout. That stamp is earlier than the NEAR snapshot. A third party cannot confirm it from the public remote. This branch is not the `main` that `git ls-remote` shows.
 - `data/snapshot/near/manifest.json` records `retrieved_at` `2026-11-07T04:24:35.741Z` and `finished_at` `2026-11-07T05:28:36.141Z`. The sample estimate comes from that snapshot.
@@ -51,9 +51,10 @@ The post is before the full count (N) was seen. It is after the NEAR sample was 
 
 The differences:
 
-1. `node thesis.mjs --fetch-near` became `node thesis.mjs --fetch-relays`. The flag name changed. It is still a free public count of N, with no key, counting each transaction once.
+1. `node thesis.mjs --fetch-near` became `node thesis.mjs --fetch-relays`. The flag name changed. `--fetch-relays` is a lower bound of accounts whose names are known. It is not a full public count of N. It still needs no key, and it still counts each transaction once.
 2. "1% is 25,399.47, so the line is **25,400**" became "The line is the next whole number above 1% of that count, **25,400**". Same line. `Math.floor(2539947 / 100) + 1` is 25,400.
 3. A stray fragment `, in f0c48d1` was inserted under the heading and then deleted. It was not part of the rule.
 4. Two sentences were added. They say `relay-census.json` is not frozen, so the sample estimate is not N, and that `--offline` prints `full count not yet fetched` while that file is absent. The printed words were first the Japanese `全数は未取得` and are now English. Neither sentence moves the line or the definition of N.
+5. The posted sentence said the lower bound is "the payments through the one known x402 facilitator relayer". The current sentence says the lower bound is the sum of the known relay accounts, the named facilitators plus the generic signer whose name this survey already had. That definition of the lower bound changed after the post. The rule and the line did not.
 
 The claim and the evidence in the current `THESIS.md` were written after `f0c48d1`. `PREREG.md` leaves those sections as "(Written after the data.)". They are not part of the posted text.

@@ -27,4 +27,9 @@ test("the current pages point at the check and do not say the post was before an
   assert.match(verify, /BbegySAyn8WSh8StsGBFxKKk4YDWzHSePyLtiH5k5vLB/);
   assert.match(verify, /223452268/);
   assert.match(verify, new RegExp(DIGEST));
+  assert.match(verify, /10:13 UTC is before the full-count fetch and after the NEAR sample fetch \(2026-11-07 04:24 to 05:28 UTC\)/);
+  assert.match(verify, /lower bound of accounts whose names are known/);
+  assert.match(verify, /one known x402 facilitator relayer/);
+  assert.match(readme, /git tag prereg-threshold f0c48d13ed5af6147daa0e7a0b444855f3186770/);
+  assert.doesNotMatch(verify, /It is still a free public count of N/);
 });

@@ -14,6 +14,14 @@ The exact-scheme spec is merged and the facilitators are named. That is the stro
 
 This is an entry for the NEAR HACKATHON track "Investment Thesis", which is judged on the evidence.
 
+## Publishing the pre-registered line
+
+When this repository is published, the history of the default branch has to contain commit `f0c48d13ed5af6147daa0e7a0b444855f3186770` (`f0c48d1`), so a third party can see the line as it was committed. At that publication, Claude tags the commit and does not tag it before then:
+
+```
+git tag prereg-threshold f0c48d13ed5af6147daa0e7a0b444855f3186770
+```
+
 ## Try it
 
 Node 20 or newer. Nothing to install.
