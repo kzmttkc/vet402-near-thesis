@@ -126,7 +126,7 @@ Of 30 intents.near index rows from 2026-11-07 16:18 to 2026-11-07 16:20 UTC, blo
 
 ## 4. The model
 
-In the 30 days to 2026-10-29, x402 was 0.040% of NEAR Intents volume. At this size, x402 adds almost nothing to NEAR. The table shows how large it would need to grow.
+In the 30-day windows read on 2026-10-29, x402 was 0.040% of NEAR Intents volume. At this size, x402 adds almost nothing to NEAR. The table shows how large it would need to grow.
 
 Each cell is a yearly amount, the 30-day x402 figure times 12, that would reach NEAR if x402 grew by the row's multiple and the column's share of it passed through NEAR Intents and paid its average fee. The fee rate is 0.1625%, cumulative fees over cumulative volume, and NEAR keeps its reported lifetime share of those fees, 16.4% (quotes `near_q3.fees_buyback`, `near_q3.cumulative` and `near_q3.capture`). The same report gives a trailing 30-day share of 28.4% (quote `near_q3.capture_30d`). Using it would raise every cell by about 1.7 times. NEAR reports $10.4 billion for Q3 (quote `near_q3.q3_volume`). DefiLlama's daily sum for the same quarter is 5.9% lower. The report gives both fees and volume as floors ("over"), so the rate is an estimate, not a bound. Whether x402 flows would pay the average Intents fee at all is an assumption the data here does not test.
 
