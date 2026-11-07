@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Re-execution record</title>
+  <style>
+    @font-face {
+      font-family: "Martian Mono";
+      src: url("./fonts/martian-600.woff2") format("woff2");
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Fragment Mono";
+      src: url("./fonts/fragment-400.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    :root {
+      color-scheme: light;
+      --paper: #ffffff;
+      --hair: #dfe3e9;
+      --navy: #233456;
+      --slate: #55688c;
+      --focus: #0891b2;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; overflow-x: hidden; }
+    body {
+      background: var(--paper);
+      color: var(--navy);
+      font-family: "Fragment Mono", ui-monospace, monospace;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    main {
+      width: min(72rem, 100%);
+      margin: 0 auto;
+      padding: 28px 16px 64px;
+    }
+    h1, h2 {
+      font-family: "Martian Mono", ui-monospace, monospace;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    h1 {
+      margin: 18px 0 12px;
+      font-size: clamp(1.25rem, 2.6vw, 1.85rem);
+      line-height: 1.25;
+    }
+    h2 {
+      margin: 28px 0 12px;
+      font-size: 1rem;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+    p { margin: 0; color: var(--slate); }
+    a { color: var(--navy); }
+    a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--hair);
+      margin: 22px 0 0;
+    }
+    pre {
+      margin: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--hair);
+      background: var(--paper);
+      color: var(--navy);
+      font-family: "Fragment Mono", ui-monospace, monospace;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Re-execution record</h1>
+    <p>Recorded 2026-11-07 18:32 UTC. Each block is the stdout of that command. stderr was empty.</p>
+    <hr>
+    <h2>npm test</h2>
+    <pre>&gt; test
+&gt; node --test --test-concurrency=1
+
+✔ known 15 triples map uniquely onto ①–④ (0.602334ms)
+✔ gateway_not_charged_expired is not settled (0.157208ms)
+✔ unknown triple throws (0.063917ms)
+✔ settled+empty splits delivered vs unexplained by 2xx; settled_4xx is held (0.049666ms)
+✔ tiny fixture CSV: 14 triples classify; quoted comma and newline survive parse (2.656042ms)
+✔ record throws when range, as_of, or source is missing (0.722958ms)
+✔ tiny fixture records counts with range, as_of, source (1.814375ms)
+✔ --offline numbers match the frozen thesis.json (327.414584ms)
+✔ git-eligible files contain zero original resource_key strings (1.23725ms)
+✔ surface rounding is commas, one-decimal percent, and $M/$B (9.915834ms)
+✔ --check exits 0 on a matching surface and 1 when one figure is shifted (127.522584ms)
+✔ quotes.json is an array of id, url, full_sentence, context, retrieved_at (0.754958ms)
+✔ fake RPC counts USDC out and reads the recipient from topic2 (17.367875ms)
+✔ falls through to the next RPC when the first refuses (4.830291ms)
+✔ unfetched_windows &gt; 0 emits no numbers and thesis exits 1 (104.789041ms)
+✔ drops the last day when it repeats the previous day, then re-sums 30 (1.281625ms)
+✔ drops the last day when total24h is null even if the value changed (0.072417ms)
+✔ keeps the last day when total24h is present and it differs from the day before (0.057208ms)
+✔ base share is base divided by the no-chain total, after dividing raw amounts by 1e6 (0.612791ms)
+✔ x402 url omits chain for the overall query and sets it otherwise (0.651791ms)
+✔ model states x402 30d over intents 30d above a 4x3 table, and omits the table without inputs (0.247666ms)
+✔ render format: share, USD, count, and range (7.777959ms)
+✔ render fills model, breakdown, quotes, definitions, and snapshot (0.957417ms)
+✔ unknown placeholder and missing id exit 1 (115.862791ms)
+✔ rendered template checks clean, and one shifted figure exits 1 (199.372292ms)
+✔ countMissing counts numbers that lack range, date, or source (0.578584ms)
+✔ dashboard dollars follow unit_kind, so a USDC count stays a count (6.674458ms)
+✔ dashboard citations use the same public URLs as the fetchers (0.07125ms)
+✔ dashboard page states the question and does not pull a CDN (0.365167ms)
+✔ the facilitator table lines the five accounts up together (4.254875ms)
+✔ docs copies match the files the page can fetch, and a miss hides the zero (1.99725ms)
+✔ the threshold bar leads the page and falls back to the frozen bounds (1.998833ms)
+✔ sample is settled Base and Solana txs ordered by sha256(tx_hash) (1.184833ms)
+✔ receipt rules: Base needs status 1 and a USDC Transfer, Solana needs meta.err null (0.121959ms)
+✔ fake RPC counts match and not re-checked, and a total refusal is not a match (45018.367292ms)
+✔ recheck matches the purchase amount, not just any transfer (1.31175ms)
+✔ quote check folds page noise but not changed words (1.00375ms)
+✔ posts are read from the tweet text and the article (0.689583ms)
+✔ --check README.md fails when one figure in the built page is edited (226.054416ms)
+✔ the committed line is the next whole number above 1% of the frozen Base count (2.7865ms)
+✔ a partial count can cross the line but never pass it (0.086ms)
+✔ relayer receipts split into payments, gas refunds, account setup and funding (0.110792ms)
+✔ a sampled receipt counts toward N only when its transaction is a Delegate with one ft_transfer to NEAR USDC (0.099542ms)
+✔ binomial upper bound matches the closed form for zero hits (0.097375ms)
+✔ transfer stats take 30 whole days before the window end (0.197584ms)
+✔ escrow retries of one intent body count once, under the best outcome (0.24025ms)
+✔ the frozen NEAR snapshot passes its sha256 check and gives the relayer figures (7.197458ms)
+✔ an edited NEAR snapshot file is refused (7.959667ms)
+✔ --fetch-near cannot run with --offline (0.382584ms)
+✔ the BigQuery upper bound is a file on disk and this test does not run it (0.352959ms)
+✔ bounds cross, miss, or stay undecided (0.553584ms)
+✔ scattered instants cover the window and are not piled on 16:2x UTC (0.751125ms)
+✔ only one successful inner ft_transfer to NEAR USDC counts (0.668084ms)
+✔ detail and frozen tx both name the relayer only for one USDC ft_transfer (0.16325ms)
+✔ the frozen delegate sample has one relayer signer (2.936458ms)
+✔ a census whose sum disagrees is refused (0.20025ms)
+✔ a lone DELEGATE_ACTION on the txn list is opened and counted (0.325792ms)
+✔ a census resumes from its progress file (2.187125ms)
+✔ HTTP 429 widens the pause before the next try (0.324333ms)
+✔ --fetch-relays cannot run with --offline (0.31175ms)
+✔ the frozen snapshot has no full relay count yet (6.170833ms)
+✔ with no live file the meter uses the frozen bounds (1.18625ms)
+✔ a census lower replaces the sample hits (0.057833ms)
+✔ a dated live reading replaces the frozen bounds (0.198709ms)
+✔ a live record is one UTC day and a later day does not delete the earlier file (4.284125ms)
+✔ named facilitators with zero settlements sit with the claim (0.265959ms)
+✔ the upkeep sentence says the daily fetch waits until the repository is public (0.101916ms)
+✔ the daily workflow runs the two fetches apart and does not open a pull request (0.415666ms)
+✔ PREREG.md is the posted THESIS.md, byte for byte (0.775417ms)
+✔ the current pages point at the check and do not say the post was before any NEAR data (0.2275ms)
+✔ a delegate USDC ft_transfer signed by the relayer counts (1.04625ms)
+✔ storage calls, a second action, a failed receipt, and another signer do not count (0.110334ms)
+✔ a reversed batch counts the hash whose body matched (0.108667ms)
+✔ shuffling the response order does not change the count (0.272125ms)
+✔ a known-relay sum below the line is not decided, and a sum on the line is crossed (0.042625ms)
+✔ the frozen facilitator file sums the known accounts and stays under the line (2.59475ms)
+✔ the sha256 covers the document with the hash field emptied (0.240042ms)
+✔ THESIS names both the emptied-field digest and the file digest (1.465542ms)
+✔ frozen vectors: valid receipt, tampered body, reused payment, forged signature (1.768833ms)
+✔ a receipt created from the test seed matches the frozen valid vector (0.841792ms)
+✔ mock NEAR RPC, not a sandbox: buyer payment, facilitator settle, seller receipt (32.594042ms)
+✔ verify rejects an expired delegate before any transaction is submitted (3.245583ms)
+✔ the README names what NEAR can use from this repository (0.203917ms)
+✔ the replay record is taken from PREREG-VERIFY.md and PREREG.md (0.903542ms)
+✔ replay steps compare the file digest and do not invent a chain read (0.589458ms)
+✔ a successful execute_intents call with a small USDC leg counts once (1.341584ms)
+✔ failures, zero, a larger leg, another receiver, and a withdrawal do not count (0.265209ms)
+✔ the stamp rejects a payment_count that the rows do not support (0.565125ms)
+✔ collect opens hashes in batches of 15 and drops a repeated list hash (0.821833ms)
+✔ thirty daily points sit on 16:20 UTC and a failed day is unavailable (1.189917ms)
+✔ the frozen sample is 30 daily points and 900 index rows (64.556667ms)
+ℹ tests 91
+ℹ suites 0
+ℹ pass 91
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 47903.383625
+</pre>
+    <h2>node thesis.mjs --offline</h2>
+    <pre>rebuilt 71 numbers from data/snapshot (no network), 2 checks ok, wrote data/thesis.json, full count not yet fetched
+</pre>
+    <h2>node thesis.mjs --check README.md</h2>
+    <pre>mismatches: 0
+note: spelled-out numbers are not checked
+</pre>
+    <h2>node online/read-prereg-tx.mjs</h2>
+    <pre>retrieved_at 2026-11-07T18:33:28.620Z
+endpoint https://rpc.mainnet.near.org
+method tx
+tx BbegySAyn8WSh8StsGBFxKKk4YDWzHSePyLtiH5k5vLB
+signer smartbread5934.near
+receiver social
+call __fastdata_kv
+status Failure
+block_hash BkKZAbq3WTfPmfupcySza3MUsA1UqQam2DUdryfd74dV
+block_height 223452268
+block_time 2026-11-07T10:13:11.570Z
+commit f0c48d13ed5af6147daa0e7a0b444855f3186770
+sha256 d8925b096c421dc12afc77fe2421a2ec29e96581f9b66d4273984178764c24ec
+</pre>
+  </main>
+</body>
+</html>
