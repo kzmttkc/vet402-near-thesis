@@ -1,6 +1,6 @@
 # Thesis
 
-The four sections follow the NEAR HACKATHON thesis track. The threshold in "What would change my mind" was committed on its own, before any NEAR data was fetched for this version, in commit f0c48d1. `git log -- THESIS.md` shows that section came first.
+The four sections follow the NEAR HACKATHON thesis track. The threshold in "What would change my mind" was committed on its own, before any NEAR data was fetched for this version, in commit f0c48d1. `git log -- THESIS.md` shows that section came first. The same commit and the SHA-256 of that THESIS.md (d8925b096c421dc12afc77fe2421a2ec29e96581f9b66d4273984178764c24ec) were posted on NEAR at 2026-11-07 10:13 UTC, before the full relayer count ran: https://near.social/smartbread5934.near/post/1794046390265
 
 ## Claim
 
