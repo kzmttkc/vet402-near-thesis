@@ -1,4 +1,5 @@
 import { PREREGISTERED_POST, meterFromLive } from "./live.mjs";
+import { PREREG_RECORD, replayLabel, replaySteps } from "./prereg.mjs";
 
 export function isMissingRecord(rec) {
   if (rec == null || typeof rec !== "object") return true;
@@ -196,29 +197,210 @@ function sensitivityRows(model) {
   });
 }
 
-function renderFacilitators(root, thesis) {
-  el(root, "h2", null, "Facilitators");
-  el(root, "p", "note", "Each facilitator sees only its own account. This table lines the five up together.");
-  const roster = thesis?.near?.known?.roster;
-  if (!Array.isArray(roster) || roster.length === 0) {
-    el(root, "p", "missing", "missing");
+function motionOn() {
+  return typeof requestAnimationFrame === "function"
+    && typeof matchMedia === "function"
+    && !matchMedia("(prefers-reduced-motion: reduce)").matches
+    && typeof performance !== "undefined";
+}
+
+function paintCount(node, value) {
+  const target = Math.round(Number(value));
+  if (!Number.isFinite(target)) {
+    node.textContent = "missing";
     return;
   }
-  root.append(
-    table(
-      ["Account", "In /supported", "Signer txs", "Delegate USDC", "exact x402 settlements (30 days)", "other activity", "What it is"],
-      roster.map((row) => [
-        row.account ?? "",
-        row.named_in_supported ? "yes" : "no",
-        formatCount(row.signer_txs),
-        formatCount(row.delegate_usdc),
-        row.kind === "sample_signer" ? "not x402" : formatCount(row.delegate_usdc),
-        otherActivity(row),
-        row.note ?? "",
-      ]),
-    ),
-  );
-  cite(root, "near.known.lower");
+  const finalText = formatCount(target);
+  if (!motionOn()) {
+    node.textContent = finalText;
+    return;
+  }
+  const start = performance.now();
+  const duration = 800;
+  const tick = (now) => {
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    node.textContent = formatCount(target * eased);
+    if (t < 1) requestAnimationFrame(tick);
+    else node.textContent = finalText;
+  };
+  node.textContent = formatCount(0);
+  requestAnimationFrame(tick);
+}
+
+function shortId(value) {
+  const text = String(value ?? "");
+  if (text.length <= 28) return text;
+  return `${text.slice(0, 8)}…${text.slice(-4)}`;
+}
+
+function fillHeroTitle(h1) {
+  h1.replaceChildren();
+  h1.textContent = "";
+  const lead = document.createElement("span");
+  lead.textContent = "x402 on NEAR, ";
+  const mark = document.createElement("span");
+  mark.className = "mark";
+  mark.textContent = "counted";
+  const tail = document.createElement("span");
+  tail.textContent = " before the verdict.";
+  h1.append(lead, mark, tail);
+}
+
+function heroDek(thesis) {
+  const accounts = formatValue(thesis?.numbers?.["near.known.accounts"]);
+  const exact = formatValue(thesis?.numbers?.["near.known.named_delegate"]);
+  if (accounts == null || exact == null) return "The roster count is missing. The line was posted on NEAR first.";
+  return `${accounts} relay accounts. ${exact} exact-scheme payments from the named facilitators in 30 days. The line was posted on NEAR first.`;
+}
+
+function renderActions(root) {
+  const row = el(root, "div", "actions");
+  const primary = el(row, "a", "btn btn-primary", "Read the line");
+  primary.href = "#threshold-meter";
+  const replay = el(row, "button", "btn", replayLabel(PREREG_RECORD.at));
+  replay.type = "button";
+  if (typeof replay.setAttribute === "function") replay.setAttribute("aria-pressed", "false");
+  bindReplay(replay);
+}
+
+let replayTimer = null;
+
+function setOn(node, on) {
+  if (node.classList && typeof node.classList.toggle === "function") {
+    node.classList.toggle("is-on", on);
+    return;
+  }
+  const parts = new Set(String(node.className || "").split(/\s+/).filter(Boolean));
+  if (on) parts.add("is-on");
+  else parts.delete("is-on");
+  node.className = [...parts].join(" ");
+}
+
+function bindReplay(button) {
+  if (typeof button.addEventListener !== "function") return;
+  button.addEventListener("click", () => {
+    if (replayTimer != null && typeof clearTimeout === "function") clearTimeout(replayTimer);
+    replayTimer = null;
+    const steps = typeof document.querySelectorAll === "function" ? [...document.querySelectorAll(".replay-step")] : [];
+    for (const step of steps) setOn(step, false);
+    const reduced = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (typeof button.setAttribute === "function") button.setAttribute("aria-pressed", "true");
+    const panel = typeof document.getElementById === "function" ? document.getElementById("replay") : null;
+    if (panel && typeof panel.scrollIntoView === "function") {
+      panel.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+    }
+    if (reduced || typeof setTimeout !== "function") {
+      for (const step of steps) setOn(step, true);
+      return;
+    }
+    let index = 0;
+    const tick = () => {
+      if (index >= steps.length) return;
+      setOn(steps[index], true);
+      index += 1;
+      if (index < steps.length) replayTimer = setTimeout(tick, 700);
+    };
+    tick();
+  });
+}
+
+function bandCell(parent, label, sub) {
+  const cell = el(parent, "div", "band-cell");
+  el(cell, "p", "meta", label);
+  const num = el(cell, "p", "band-num", "");
+  if (sub) el(cell, "p", "meta", sub);
+  return num;
+}
+
+function renderBand(root, thesis, live) {
+  const reading = meterFromLive(live, thesis);
+  const section = el(root, "section", "band");
+  const head = el(section, "div", "band-head");
+  const kind = reading.source === "live" ? "Daily reading" : "Frozen snapshot";
+  el(head, "p", "band-chip", `${kind} · read in-block`);
+  const block = el(head, "p", "band-block");
+  block.append("Block ");
+  const blockNum = document.createElement("span");
+  blockNum.className = "band-num";
+  paintCount(blockNum, PREREG_RECORD.block);
+  block.append(blockNum);
+
+  const grid = el(section, "div", "band-grid");
+  const tx = bandCell(grid, "Posted transaction", formatUtc(PREREG_RECORD.at));
+  tx.textContent = shortId(PREREG_RECORD.tx);
+  const lowerSub = reading.lower_kind === "known_relays"
+    ? "known relays"
+    : reading.lower_kind === "sample_hits"
+      ? "sample hits"
+      : "daily reading";
+  const lowerLabel = reading.lower_kind === "known_relays" ? "Lower bound on N" : "Lower";
+  paintCount(bandCell(grid, lowerLabel, lowerSub), reading.lower);
+  paintCount(bandCell(grid, "Line", "posted before the count"), reading.line);
+
+  const accounts = el(section, "div", "band-accounts");
+  const roster = thesis?.near?.known?.roster;
+  if (!Array.isArray(roster) || roster.length === 0) {
+    el(accounts, "p", "missing", "missing");
+    return;
+  }
+  for (const row of roster) {
+    const cell = el(accounts, "div", "band-cell");
+    el(cell, "p", "meta account", shortId(row.account));
+    el(cell, "p", "meta", "exact x402 settlements (30 days)");
+    const num = el(cell, "p", "band-num");
+    if (row.kind === "sample_signer") num.textContent = "not x402";
+    else paintCount(num, row.delegate_usdc);
+    el(cell, "p", "meta", `delegate USDC ${formatCount(row.delegate_usdc)}`);
+  }
+  const range = formatRange(thesis?.numbers?.["near.known.named_delegate"]?.range);
+  if (range) el(section, "p", "meta", range);
+}
+
+function renderReplay(root, fileDigest) {
+  if (replayTimer != null && typeof clearTimeout === "function") {
+    clearTimeout(replayTimer);
+    replayTimer = null;
+  }
+  const section = el(root, "section", "replay");
+  section.id = "replay";
+  const lines = replaySteps(PREREG_RECORD, fileDigest);
+  el(section, "p", "note", lines[0]);
+  const list = el(section, "ol", "replay-steps");
+  if (typeof list.setAttribute === "function") list.setAttribute("aria-live", "polite");
+  for (const line of lines.slice(1)) el(list, "li", "replay-step", line);
+}
+
+export function sourceIndex(doc) {
+  const out = {};
+  const accounts = doc?.accounts;
+  if (!Array.isArray(accounts)) return out;
+  for (const row of accounts) {
+    if (!row || typeof row.account !== "string" || !Array.isArray(row.sources)) continue;
+    out[row.account] = row.sources.map((item) => String(item));
+  }
+  return out;
+}
+
+function renderSources(card, row, sources) {
+  const list = sources?.[row.account];
+  if (!Array.isArray(list) || list.length === 0) {
+    el(card, "p", "meta", "Source missing");
+    return;
+  }
+  for (const item of list) {
+    const p = el(card, "p", "meta");
+    const url = item.match(/https?:\/\/\S+/)?.[0]?.replace(/[),.;]+$/, "");
+    if (url) {
+      const link = document.createElement("a");
+      link.href = url;
+      link.rel = "noreferrer";
+      link.textContent = item;
+      p.append("Source ", link);
+    } else {
+      p.textContent = `Source ${item}`;
+    }
+  }
 }
 
 function otherActivity(row) {
@@ -229,6 +411,163 @@ function otherActivity(row) {
     return `${formatCount(row.delegate_usdc)} delegate USDC transfers, not known to be x402`;
   }
   return formatCount(row?.signer_txs ?? 0);
+}
+
+function renderFacilitators(root, thesis, sources) {
+  el(root, "h2", null, "Evidence");
+  const accounts = formatValue(thesis?.numbers?.["near.known.accounts"]);
+  el(
+    root,
+    "p",
+    "note",
+    accounts
+      ? `${accounts} accounts are on the roster. A facilitator sees only its own account. These cards line them up together.`
+      : "The roster count is missing.",
+  );
+  const roster = thesis?.near?.known?.roster;
+  if (!Array.isArray(roster) || roster.length === 0) {
+    el(root, "p", "missing", "missing");
+    cite(root, "near.known.lower");
+    return;
+  }
+  const grid = el(root, "div", "evidence");
+  grid.id = "evidence";
+  for (const row of roster) {
+    const box = el(grid, "article", "card exhibit");
+    el(box, "h3", "account", row.account ?? "");
+    renderSources(box, row, sources);
+    el(box, "p", "meta", "exact x402 settlements (30 days)");
+    el(box, "p", "value", row.kind === "sample_signer" ? "not x402" : formatCount(row.delegate_usdc));
+    el(box, "p", "meta", "other activity");
+    el(box, "p", "activity", otherActivity(row));
+    if (row.note) el(box, "p", "meta", row.note);
+  }
+  cite(root, "near.known.lower");
+}
+
+const COS = Math.cos(Math.PI / 6);
+const SIN = Math.sin(Math.PI / 6);
+
+export function projectScheme(x, y, z) {
+  return [(x - y) * COS, (x + y) * SIN - z];
+}
+
+export const SCHEME_LABELS = ["Buyer", "Facilitator", "NEAR USDC", "Delivery receipt", "Public record"];
+
+export function schemeGeometry() {
+  const w = 64;
+  const d = 40;
+  const h = 52;
+  const gap = 36;
+  const step = w + d + gap;
+  const raw = SCHEME_LABELS.map((label, index) => {
+    const x = index * step;
+    const y = 0;
+    const p = (px, py, pz) => projectScheme(px, py, pz);
+    return {
+      label,
+      top: [p(x, y, h), p(x + w, y, h), p(x + w, y + d, h), p(x, y + d, h)],
+      left: [p(x, y + d, 0), p(x, y + d, h), p(x, y, h), p(x, y, 0)],
+      right: [p(x, y + d, 0), p(x + w, y + d, 0), p(x + w, y + d, h), p(x, y + d, h)],
+      anchor: p(x + w / 2, y + d, 0),
+    };
+  });
+  const points = raw.flatMap((box) => [...box.top, ...box.left, ...box.right, box.anchor]);
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+  for (const [x, y] of points) {
+    minX = Math.min(minX, x);
+    minY = Math.min(minY, y);
+    maxX = Math.max(maxX, x);
+    maxY = Math.max(maxY, y);
+  }
+  const pad = 28;
+  const labelDrop = 36;
+  const x0 = minX - pad;
+  const y0 = minY - pad;
+  const width = maxX - minX + pad * 2;
+  const height = maxY - minY + pad * 2 + labelDrop;
+  const shift = (pt) => [pt[0] - x0, pt[1] - y0];
+  return {
+    viewBox: `0 0 ${width.toFixed(1)} ${height.toFixed(1)}`,
+    boxes: raw.map((box) => ({
+      label: box.label,
+      top: box.top.map(shift),
+      left: box.left.map(shift),
+      right: box.right.map(shift),
+      anchor: shift(box.anchor),
+    })),
+  };
+}
+
+function facePath(points) {
+  return points.map((pt, index) => `${index === 0 ? "M" : "L"}${pt[0].toFixed(1)} ${pt[1].toFixed(1)}`).join(" ") + " Z";
+}
+
+function faceMid(points) {
+  const x = points.reduce((sum, pt) => sum + pt[0], 0) / points.length;
+  const y = points.reduce((sum, pt) => sum + pt[1], 0) / points.length;
+  return [x, y];
+}
+
+function renderScheme(root, thesis) {
+  el(root, "h2", null, "Specified path");
+  const exact = formatValue(thesis?.numbers?.["near.known.named_delegate"]);
+  const path = SCHEME_LABELS.join(" → ");
+  const count = exact == null
+    ? "Named-facilitator exact count is missing."
+    : `Named facilitators settled ${exact} exact-scheme payments in this window.`;
+  const note = el(root, "p", "note", `${path}. ${count} The drawing is the specified path, not a count. `);
+  const link = document.createElement("a");
+  link.href = "../spec/delivery-proof.md";
+  link.textContent = "spec/delivery-proof.md";
+  note.append(link);
+
+  const scroll = el(root, "div", "scheme-scroll");
+  const geo = schemeGeometry();
+  if (typeof document.createElementNS !== "function") {
+    const list = el(scroll, "ol", "scheme-fallback");
+    for (const box of geo.boxes) el(list, "li", null, box.label);
+    return;
+  }
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", geo.viewBox);
+  svg.setAttribute("role", "img");
+  const labelText = geo.boxes.map((box) => box.label).join(" to ");
+  svg.setAttribute("aria-label", labelText);
+  const title = document.createElementNS(ns, "title");
+  title.textContent = labelText;
+  svg.append(title);
+  for (let index = 0; index < geo.boxes.length; index += 1) {
+    const box = geo.boxes[index];
+    for (const [className, points] of [["face-top", box.top], ["face-left", box.left], ["face-right", box.right]]) {
+      const pathNode = document.createElementNS(ns, "path");
+      pathNode.setAttribute("d", facePath(points));
+      pathNode.setAttribute("class", className);
+      svg.append(pathNode);
+    }
+    if (index < geo.boxes.length - 1) {
+      const from = faceMid(box.right);
+      const to = faceMid(geo.boxes[index + 1].left);
+      const line = document.createElementNS(ns, "line");
+      line.setAttribute("x1", from[0].toFixed(1));
+      line.setAttribute("y1", from[1].toFixed(1));
+      line.setAttribute("x2", to[0].toFixed(1));
+      line.setAttribute("y2", to[1].toFixed(1));
+      line.setAttribute("class", "connector");
+      svg.append(line);
+    }
+    const text = document.createElementNS(ns, "text");
+    text.setAttribute("x", box.anchor[0].toFixed(1));
+    text.setAttribute("y", (box.anchor[1] + 22).toFixed(1));
+    text.setAttribute("text-anchor", "middle");
+    text.textContent = box.label;
+    svg.append(text);
+  }
+  scroll.append(svg);
 }
 
 function claimPercents(reading) {
@@ -256,8 +595,18 @@ function renderMeter(root, thesis, live) {
     "meta",
     updated ? `Last updated ${updated}. ${kind}.` : `Last updated missing. ${kind}.`,
   );
+  const pair = el(section, "div", "meter-pair");
+  const lowerBig = el(pair, "p", "meter-readout");
+  lowerBig.textContent = Number.isFinite(reading.lower) ? formatCount(reading.lower) : "missing";
+  el(pair, "p", "meta", reading.lower_kind === "known_relays" ? "lower bound on N" : "Lower");
+  const lineBig = el(pair, "p", "meter-readout meter-line-num");
+  lineBig.textContent = Number.isFinite(reading.line) ? formatCount(reading.line) : "missing";
+  el(pair, "p", "meta", "line");
   const pos = claimPercents(reading);
   const track = el(section, "div", "meter-track");
+  if (pos.lower != null) {
+    track.style.backgroundImage = `linear-gradient(90deg, var(--mark) 0, var(--mark) ${pos.lower}%, var(--line) ${pos.lower}%, var(--line) 100%)`;
+  }
   const place = (className, percent) => {
     if (percent == null) return;
     const mark = el(track, "span", className);
@@ -303,7 +652,7 @@ function renderSampleAppendix(root, thesis) {
   figure(box, "Sample upper bound", formatValue(numbers["near.delegate.estimate_upper_95"]), numbers["near.delegate.estimate_upper_95"], "near.delegate.estimate_upper_95");
 }
 
-export function renderDashboard(root, thesis, live = null) {
+export function renderDashboard(root, thesis, live = null, context = null) {
   const numbers = thesis?.numbers ?? {};
   const watched = [];
   const take = (id) => {
@@ -324,12 +673,18 @@ export function renderDashboard(root, thesis, live = null) {
 
   const h1 = root.querySelector("h1");
   root.replaceChildren();
-  if (h1) root.append(h1);
-  else el(root, "h1", null, "Where does NEAR fit in agent payments? Numbers from one re-runnable script.");
+  const title = h1 ?? el(root, "h1");
+  if (h1) root.append(title);
+  fillHeroTitle(title);
+  el(root, "p", "dek", heroDek(thesis));
+  renderActions(root);
+  renderBand(root, thesis, live);
+  renderReplay(root, context?.preregDigest ?? null);
+  renderFacilitators(root, thesis, context?.sources ?? null);
+  renderScheme(root, thesis);
   renderMeter(root, thesis, live);
   const incomplete = countMissing(watched);
   el(root, "p", incomplete > 0 ? "count missing" : "count", `Incomplete numbers: ${incomplete}`);
-  renderFacilitators(root, thesis);
 
   const cards = el(root, "div");
   cards.id = "cards";
@@ -424,6 +779,32 @@ export function renderDashboard(root, thesis, live = null) {
   }
 }
 
+async function sha256Hex(bytes) {
+  if (!globalThis.crypto?.subtle) return null;
+  const hash = await crypto.subtle.digest("SHA-256", bytes);
+  return [...new Uint8Array(hash)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+async function loadPreregDigest() {
+  try {
+    const res = await fetch(new URL("../PREREG.md", import.meta.url));
+    if (!res.ok) return null;
+    return sha256Hex(new Uint8Array(await res.arrayBuffer()));
+  } catch {
+    return null;
+  }
+}
+
+async function loadSources() {
+  try {
+    const res = await fetch(new URL("../data/snapshot/near/facilitators.json", import.meta.url));
+    if (!res.ok) return null;
+    return sourceIndex(await res.json());
+  } catch {
+    return null;
+  }
+}
+
 async function boot() {
   const root = document.querySelector("#app");
   if (!root) return;
@@ -438,7 +819,8 @@ async function boot() {
     } catch {
       live = null;
     }
-    renderDashboard(root, thesis, live);
+    const [preregDigest, sources] = await Promise.all([loadPreregDigest(), loadSources()]);
+    renderDashboard(root, thesis, live, { preregDigest, sources });
   } catch {
     const fail = document.createElement("p");
     fail.className = "missing";

@@ -3,8 +3,9 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
-import { countMissing, formatValue, isMissingRecord, renderDashboard, X402_ALL_URL, X402_BASE_URL, EXPORT_URL, DEFILLAMA_URL, FASTNEAR_ACCOUNT_URL, NEARBLOCKS_FT_URL, BASE_RPC_URL } from "../docs/app.js";
+import { countMissing, formatValue, isMissingRecord, renderDashboard, sourceIndex, X402_ALL_URL, X402_BASE_URL, EXPORT_URL, DEFILLAMA_URL, FASTNEAR_ACCOUNT_URL, NEARBLOCKS_FT_URL, BASE_RPC_URL } from "../docs/app.js";
 import { PREREGISTERED_POST } from "../docs/live.mjs";
+import { PREREG_RECORD, replayLabel } from "../docs/prereg.mjs";
 import { x402Url } from "../lib/sources/x402scan.mjs";
 import { DEFILLAMA_URL as LLAMA } from "../lib/sources/defillama.mjs";
 import { EXPORT_URL as THESIS_EXPORT } from "../thesis.mjs";
@@ -58,8 +59,9 @@ test("dashboard citations use the same public URLs as the fetchers", () => {
 test("dashboard page states the question and does not pull a CDN", () => {
   const html = readFileSync(join(ROOT, "docs", "index.html"), "utf8");
   const js = readFileSync(join(ROOT, "docs", "app.js"), "utf8");
-  assert.match(html, /Where does NEAR fit in agent payments\? Numbers from one re-runnable script\./);
+  assert.match(html, /x402 on NEAR, counted before the verdict\./);
   assert.match(html, /prefers-color-scheme:\s*dark/);
+  assert.match(html, /prefers-reduced-motion:\s*reduce/);
   assert.match(html, /overflow-x:\s*auto/);
   assert.match(html, /overflow-x:\s*hidden/);
   assert.match(html, /\.meter-track/);
@@ -76,6 +78,15 @@ function textOf(node) {
   const own = node.textContent ?? "";
   const nested = (node.children ?? []).map(textOf).join(" ");
   return `${own} ${nested}`.replace(/\s+/g, " ").trim();
+}
+
+function findDescendant(node, pred) {
+  if (pred(node)) return node;
+  for (const child of node.children ?? []) {
+    const found = findDescendant(child, pred);
+    if (found) return found;
+  }
+  return null;
 }
 
 test("the facilitator table lines the five accounts up together", () => {
@@ -113,13 +124,25 @@ test("the facilitator table lines the five accounts up together", () => {
   const h1 = new El("h1");
   root.append(h1);
   const thesis = JSON.parse(readFileSync(join(ROOT, "docs", "thesis.json"), "utf8"));
+  const sources = sourceIndex(JSON.parse(readFileSync(join(ROOT, "data/snapshot/near/facilitators.json"), "utf8")));
   try {
-    renderDashboard(root, thesis, null);
+    renderDashboard(root, thesis, null, { sources, preregDigest: PREREG_RECORD.digest });
   } finally {
     globalThis.document = previousDocument;
   }
   const page = textOf(root);
-  assert.match(page, /Each facilitator sees only its own account\. This table lines the five up together\./);
+  const accounts = Number(thesis.numbers["near.known.accounts"].value).toLocaleString("en-US");
+  const exact = Number(thesis.numbers["near.known.named_delegate"].value).toLocaleString("en-US");
+  assert.match(page, new RegExp(`${accounts} relay accounts\\. ${exact} exact-scheme payments from the named facilitators in 30 days`));
+  assert.match(page, new RegExp(`${accounts} accounts are on the roster\\. A facilitator sees only its own account\\. These cards line them up together\\.`));
+  assert.ok(page.includes(replayLabel(PREREG_RECORD.at)));
+  assert.match(page, /Replay of the frozen record\. This page does not call an RPC\./);
+  assert.match(page, new RegExp(PREREG_RECORD.tx));
+  assert.match(page, /sha256 of PREREG\.md matches the posted digest/);
+  assert.match(page, /Buyer → Facilitator → NEAR USDC → Delivery receipt → Public record/);
+  assert.match(page, /api\.solvador\.com/);
+  assert.match(page, /usdc-delegate-sample\.json/);
+  assert.doesNotMatch(page, /Five facilitators/);
   for (const account of [
     "x402-relayer2.mike.near",
     "x402-relayer.mike.near",
@@ -203,7 +226,7 @@ test("the threshold bar leads the page and falls back to the frozen bounds", () 
     globalThis.Node = previous;
   }
   assert.equal(root.children[0].tag, "h1");
-  const meter = root.children[1];
+  const meter = findDescendant(root, (node) => node.id === "threshold-meter");
   assert.equal(meter.id, "threshold-meter");
   const track = meter.children.find((node) => node.className === "meter-track");
   assert.ok(track, "one bar");
@@ -242,7 +265,8 @@ test("the threshold bar leads the page and falls back to the frozen bounds", () 
     relays_obtained: true,
     source: "live",
   });
-  const liveText = root.children[1].children.map((node) => node.textContent).join("\n");
+  const liveMeter = findDescendant(root, (node) => node.id === "threshold-meter");
+  const liveText = liveMeter.children.map((node) => node.textContent).join("\n");
   assert.match(liveText, /Last updated 2026-11-08 00:30 UTC/);
   assert.match(liveText, /Daily reading/);
   assert.match(liveText, /Lower 18,000/);

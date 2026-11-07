@@ -3,142 +3,293 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NEAR agent payments</title>
+  <title>x402 on NEAR, counted before the verdict.</title>
   <style>
     :root {
-      color-scheme: light dark;
-      --bg: #f6f4ef;
-      --fg: #1c1915;
-      --card: #fffefb;
-      --line: #e4e0d8;
-      --muted: #57534e;
-      --missing: #9f1239;
+      color-scheme: dark;
+      --bg: #08090b;
+      --fg: #f4f1e8;
+      --muted: #d7d2c6;
+      --card: #101218;
+      --line: #343841;
+      --accent: #dff34a;
+      --accent-ink: #16180c;
+      --mark: #dff34a;
+      --missing: #ffd0d8;
+      --box: #243044;
+      --box-side: #18202c;
+      --box-top: #3d5270;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #1a1916;
-        --fg: #f4f1ea;
-        --card: #26241f;
-        --line: #3f3c36;
-        --muted: #c4bfb4;
-        --missing: #fecdd3;
+        color-scheme: dark;
+        --bg: #08090b;
+        --fg: #f4f1e8;
+        --muted: #d7d2c6;
+        --card: #101218;
+        --line: #343841;
+        --accent: #dff34a;
+        --accent-ink: #16180c;
+        --mark: #dff34a;
+        --missing: #ffd0d8;
+        --box: #243044;
+        --box-side: #18202c;
+        --box-top: #3d5270;
+      }
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        color-scheme: light;
+        --bg: #f3f0e7;
+        --fg: #16180f;
+        --muted: #3a3832;
+        --card: #fffdf8;
+        --line: #d5d0c4;
+        --accent: #d4ee2a;
+        --accent-ink: #16180c;
+        --mark: #3a4800;
+        --missing: #9f1239;
+        --box: #e4dece;
+        --box-side: #cfc6b2;
+        --box-top: #f7f4ec;
       }
     }
     * { box-sizing: border-box; }
+    html { scrollbar-color: var(--line) var(--bg); }
     html, body { margin: 0; overflow-x: hidden; }
     body {
       background: var(--bg);
       color: var(--fg);
-      font-family: "Iowan Old Style", Palatino, Georgia, serif;
+      font-family: "Avenir Next", Futura, "Century Gothic", "Trebuchet MS", sans-serif;
+      font-size: 1.05rem;
       line-height: 1.45;
     }
+    ::selection { background: var(--accent); color: var(--accent-ink); }
     main {
       width: min(72rem, 100%);
       margin: 0 auto;
-      padding: 16px;
+      padding: 28px 16px 72px;
     }
     h1 {
-      margin: 0 0 12px;
-      font-size: 1.6rem;
-      font-weight: 650;
-      line-height: 1.25;
+      margin: 0;
+      max-width: 100%;
+      font-size: clamp(2.5rem, 11vw, 5.6rem);
+      font-weight: 750;
+      letter-spacing: -0.04em;
+      line-height: 0.88;
+      text-wrap: balance;
       overflow-wrap: anywhere;
     }
-    h2 { margin: 28px 0 8px; font-size: 1.25rem; }
+    h1 .mark { color: var(--mark); }
+    h2 {
+      margin: 48px 0 12px;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
     p { margin: 0 0 8px; }
-    .count { color: var(--muted); font-family: ui-sans-serif, system-ui, sans-serif; }
-    .missing { color: var(--missing); font-weight: 700; }
-    #cards {
+    a { color: inherit; text-underline-offset: 0.18em; }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--mark);
+      outline-offset: 3px;
+    }
+    .dek {
+      margin: 22px 0 0;
+      max-width: 44rem;
+      font-size: clamp(1.05rem, 2.1vw, 1.35rem);
+      line-height: 1.35;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border: 1px solid var(--fg);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--fg);
+      font: inherit;
+      font-weight: 650;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 160ms ease-out, color 160ms ease-out;
+    }
+    .btn:hover { background: var(--fg); color: var(--bg); }
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-ink);
+    }
+    .btn-primary:hover { background: var(--accent); color: var(--accent-ink); filter: brightness(1.06); }
+    .band, .replay, .card, .figure {
+      min-width: 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+    }
+    .band, .replay { margin-top: 28px; padding: 16px; scroll-margin-top: 16px; }
+    .band-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px 20px;
+      align-items: baseline;
+    }
+    .band-chip, .band-block { margin: 0; }
+    .band-chip {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .band-block { font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 700; }
+    .band-grid, .band-accounts, #evidence, #cards {
       display: grid;
       grid-template-columns: 1fr;
       gap: 12px;
-      margin-top: 12px;
     }
-    @media (min-width: 800px) {
-      #cards { grid-template-columns: 1fr 1fr; }
-    }
-    .card, .table-scroll { min-width: 0; max-width: 100%; }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      padding: 12px;
-    }
-    .card h3, .figure h3 {
-      margin: 0 0 4px;
-      font-family: ui-sans-serif, system-ui, sans-serif;
-      font-size: 0.8rem;
-      font-weight: 650;
-    }
-    .value {
-      margin: 0 0 8px;
-      font-family: ui-sans-serif, system-ui, sans-serif;
-      font-size: 2rem;
+    .band-grid, .band-accounts { margin-top: 16px; }
+    .band-cell { min-width: 0; }
+    .band-num, .account, .meter-readout {
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
       font-variant-numeric: tabular-nums;
       overflow-wrap: anywhere;
     }
-    .meta {
-      margin: 0;
+    .band-num {
+      margin: 0 0 4px;
+      font-size: clamp(1.25rem, 3vw, 1.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    .replay-steps { margin: 12px 0 0; padding-left: 1.25rem; }
+    .replay-step { display: none; margin: 0 0 10px; overflow-wrap: anywhere; }
+    .replay-step.is-on { display: list-item; }
+    #evidence, #cards { margin-top: 12px; }
+    .card, .figure { padding: 14px; }
+    .exhibit { border-top: 3px solid var(--mark); }
+    .card h3, .figure h3, .account {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .value, .activity { overflow-wrap: anywhere; }
+    .value {
+      margin: 0 0 8px;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .activity { margin: 0 0 8px; font-size: 1rem; }
+    .count { color: var(--muted); }
+    .missing { color: var(--missing); font-weight: 700; }
+    .meta, .note {
+      margin: 0 0 8px;
       color: var(--muted);
-      font-family: ui-sans-serif, system-ui, sans-serif;
-      font-size: 0.8rem;
+      font-size: 0.92rem;
       overflow-wrap: anywhere;
     }
     .figure + .figure { margin-top: 12px; }
-    .note {
-      color: var(--muted);
-      font-family: ui-sans-serif, system-ui, sans-serif;
-      font-size: 0.8rem;
+    .meter { margin-top: 12px; min-width: 0; }
+    .meter-pair {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 36px;
+      align-items: flex-end;
+      margin-top: 8px;
     }
-    .meter { margin: 0 0 8px; min-width: 0; }
-    .meter h2 { margin-top: 4px; }
+    .meter-readout {
+      margin: 0;
+      color: var(--fg);
+      font-size: clamp(3.2rem, 12vw, 5.5rem);
+      font-weight: 750;
+      letter-spacing: -0.04em;
+      line-height: 0.85;
+    }
+    .meter-line-num { color: var(--muted); font-size: clamp(2rem, 7vw, 3.4rem); }
     .meter-track {
       position: relative;
-      height: 12px;
-      margin: 18px 2px 8px;
+      height: 56px;
+      margin: 28px 0 16px;
       background: var(--line);
     }
     .meter-line, .meter-mark {
       position: absolute;
-      width: 2px;
+      width: 3px;
       transform: translateX(-1px);
     }
     .meter-line {
-      top: -12px;
-      height: 36px;
-      width: 3px;
+      top: -16px;
+      height: 88px;
       background: var(--fg);
     }
     .meter-mark {
-      top: -4px;
-      height: 20px;
-      background: var(--muted);
+      top: 8px;
+      height: 40px;
+      background: var(--mark);
     }
-    .meter-mark.estimate {
-      top: -8px;
-      height: 28px;
-      background: var(--fg);
+    .scheme-scroll { overflow-x: auto; max-width: 100%; margin-top: 8px; }
+    .scheme-scroll svg { display: block; width: 100%; min-width: 640px; height: auto; }
+    .face-top { fill: var(--box-top); stroke: var(--fg); stroke-width: 1.25; }
+    .face-left { fill: var(--box-side); stroke: var(--fg); stroke-width: 1.25; }
+    .face-right { fill: var(--box); stroke: var(--fg); stroke-width: 1.25; }
+    .connector { stroke: var(--mark); stroke-width: 2.5; }
+    .scheme-scroll text {
+      fill: var(--fg);
+      font-size: 14px;
+      font-family: "Avenir Next", Futura, "Century Gothic", sans-serif;
     }
-    .table-scroll { overflow-x: auto; }
+    .table-scroll { overflow-x: auto; max-width: 100%; }
     table {
       width: 100%;
       border-collapse: collapse;
-      font-family: ui-sans-serif, system-ui, sans-serif;
-      font-size: 0.8rem;
+      font-size: 0.92rem;
     }
     th, td {
       text-align: left;
       vertical-align: top;
-      padding: 6px 8px;
+      padding: 8px;
       border-bottom: 1px solid var(--line);
       overflow-wrap: anywhere;
     }
-    a { color: inherit; }
-    a:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+    @media (min-width: 720px) {
+      .band-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .band-accounts { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    }
+    @media (min-width: 800px) {
+      #evidence, #cards { grid-template-columns: 1fr 1fr; }
+      main { padding: 48px 28px 96px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
+  <!--
+  THESIS: The line was posted before the count. The page puts that gap at hero scale and refuses a live-chain costume over a frozen snapshot.
+  OWN-WORLD: Near-black ground, bone type, one hard lime field for the marked word, the primary action, and the meter fill. Pill buttons, filed exhibit cards, isometric boxes.
+  STORY: A visitor reads the mechanism, sees the recorded block and the named-facilitator zero, replays the posted hash against PREREG.md, then sees the roster and how far the lower bound sits under the line.
+  FIRST VIEWPORT: Full-bleed dark ground. A display headline, one sentence, two pills, then a band with the block and the counts. No eyebrow.
+  FORM: Pinned by the brief to the finalist pattern (one-line mechanism, replay, recorded band, evidence collage, isometric scheme). Seed: brief-pinned, roll not used.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+  -->
   <main id="app">
-    <h1>Where does NEAR fit in agent payments? Numbers from one re-runnable script.</h1>
+    <h1>x402 on NEAR, counted before the verdict.</h1>
+    <noscript><p class="missing">This page needs the local script to read the frozen files.</p></noscript>
   </main>
   <script type="module" src="./app.js"></script>
 </body>
