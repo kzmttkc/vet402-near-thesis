@@ -183,6 +183,55 @@ test("the facilitator table lines the five accounts up together", () => {
   assert.match(textOf(empty), /missing/);
 });
 
+test("docs copies match the files the page can fetch, and a miss hides the zero", () => {
+  const prereg = readFileSync(join(ROOT, "PREREG.md"));
+  const preregCopy = readFileSync(join(ROOT, "docs", "PREREG.md"));
+  assert.deepEqual(preregCopy, prereg);
+  const facilitators = readFileSync(join(ROOT, "data", "snapshot", "near", "facilitators.json"));
+  assert.deepEqual(readFileSync(join(ROOT, "docs", "facilitators.json")), facilitators);
+  const js = readFileSync(join(ROOT, "docs", "app.js"), "utf8");
+  assert.match(js, /new URL\("\.\/PREREG\.md"/);
+  assert.match(js, /new URL\("\.\/facilitators\.json"/);
+  assert.doesNotMatch(js, /\.\.\/PREREG\.md/);
+  assert.doesNotMatch(js, /\.\.\/data\/snapshot\/near\/facilitators\.json/);
+
+  function El(tag) {
+    this.tag = tag;
+    this.children = [];
+    this.style = {};
+    this.className = "";
+    this.id = "";
+    this.textContent = "";
+    this.rel = "";
+    this.href = "";
+  }
+  El.prototype.append = function (...nodes) {
+    this.children.push(...nodes);
+  };
+  El.prototype.replaceChildren = function () {
+    this.children = [];
+  };
+  El.prototype.querySelector = function () {
+    return null;
+  };
+  const previousDocument = globalThis.document;
+  const previousNode = globalThis.Node;
+  globalThis.document = { createElement: (tag) => new El(tag) };
+  globalThis.Node = class Node {};
+  const root = new El("main");
+  const thesis = JSON.parse(readFileSync(join(ROOT, "docs", "thesis.json"), "utf8"));
+  try {
+    renderDashboard(root, thesis, null, { preregDigest: null, sources: null });
+  } finally {
+    globalThis.document = previousDocument;
+    globalThis.Node = previousNode;
+  }
+  const page = textOf(root);
+  assert.match(page, /Evidence files were not loaded/);
+  assert.doesNotMatch(page, /Incomplete numbers: 0/);
+  assert.match(page, /Source missing/);
+});
+
 test("the threshold bar leads the page and falls back to the frozen bounds", () => {
   function El(tag) {
     this.tag = tag;

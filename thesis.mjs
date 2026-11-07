@@ -89,6 +89,17 @@ async function exists(path) {
   }
 }
 
+// GitHub Pages and `python3 -m http.server -d docs` only serve docs/.
+// The page reads these copies. It does not reach the repo root.
+export async function publishDashboardFiles(cwd) {
+  const docsDir = join(cwd, "docs");
+  await mkdir(docsDir, { recursive: true });
+  const thesisPath = join(cwd, "data", "thesis.json");
+  if (await exists(thesisPath)) await copyFile(thesisPath, join(docsDir, "thesis.json"));
+  await copyFile(join(cwd, "PREREG.md"), join(docsDir, "PREREG.md"));
+  await copyFile(join(cwd, "data", "snapshot", "near", "facilitators.json"), join(docsDir, "facilitators.json"));
+}
+
 async function fetchExport(rawPath) {
   const res = await fetch(EXPORT_URL, { headers: { "User-Agent": USER_AGENT } });
   if (!res.ok) {
@@ -262,12 +273,7 @@ function splitPair(pair) {
 async function runRender(args, cwd) {
   const thesisPath = args.thesisPath ? resolve(cwd, args.thesisPath) : join(cwd, "data", "thesis.json");
   const thesis = JSON.parse(await readFile(thesisPath, "utf8"));
-  const docsDir = join(cwd, "docs");
-  await mkdir(docsDir, { recursive: true });
-  const snapshotCopy = join(cwd, "data", "thesis.json");
-  if (await exists(snapshotCopy)) {
-    await copyFile(snapshotCopy, join(docsDir, "thesis.json"));
-  }
+  await publishDashboardFiles(cwd);
   for (const pair of args.renderPairs) {
     const [fromRel, toRel] = splitPair(pair);
     const from = resolve(cwd, fromRel);
@@ -540,6 +546,7 @@ export async function main(argv, { cwd = ROOT } = {}) {
   }
   await mkdir(dirname(thesisPath), { recursive: true });
   await writeFile(thesisPath, `${JSON.stringify(thesis, null, 2)}\n`);
+  await publishDashboardFiles(cwd);
   const allOk = thesis.checks.every((c) => c.ok);
   if (!allOk) {
     const failed = thesis.checks.filter((c) => !c.ok).map((c) => c.name);

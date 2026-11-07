@@ -564,8 +564,13 @@ export function renderDashboard(root, thesis, live = null, context = null) {
   renderReplay(root, context?.preregDigest ?? null);
   renderFacilitators(root, thesis, context?.sources ?? null);
   renderMeter(root, thesis, live);
-  const incomplete = countMissing(watched);
-  el(root, "p", incomplete > 0 ? "count missing" : "count", `Incomplete numbers: ${incomplete}`);
+  const evidenceUnread = context != null && (context.preregDigest == null || context.sources == null);
+  if (evidenceUnread) {
+    el(root, "p", "missing", "Evidence files were not loaded. The missing-number count is withheld.");
+  } else {
+    const incomplete = countMissing(watched);
+    el(root, "p", incomplete > 0 ? "count missing" : "count", `Incomplete numbers: ${incomplete}`);
+  }
 
   const cards = el(root, "div");
   cards.id = "cards";
@@ -668,7 +673,7 @@ async function sha256Hex(bytes) {
 
 async function loadPreregDigest() {
   try {
-    const res = await fetch(new URL("../PREREG.md", import.meta.url));
+    const res = await fetch(new URL("./PREREG.md", import.meta.url));
     if (!res.ok) return null;
     return sha256Hex(new Uint8Array(await res.arrayBuffer()));
   } catch {
@@ -678,7 +683,7 @@ async function loadPreregDigest() {
 
 async function loadSources() {
   try {
-    const res = await fetch(new URL("../data/snapshot/near/facilitators.json", import.meta.url));
+    const res = await fetch(new URL("./facilitators.json", import.meta.url));
     if (!res.ok) return null;
     return sourceIndex(await res.json());
   } catch {

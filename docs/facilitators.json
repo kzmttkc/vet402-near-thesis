@@ -1,0 +1,197 @@
+{
+  "retrieved_at": "2026-11-07T12:47:16.312Z",
+  "usdc": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+  "window": {
+    "days": 30,
+    "from": "2026-10-08T11:42:27.636Z",
+    "to": "2026-11-07T11:42:27.483Z",
+    "from_height": 219079204,
+    "to_height": 223461544,
+    "from_ns": "1791459747636967629",
+    "to_ns": "1794051747483278898",
+    "target_ns": "1791459747483278898"
+  },
+  "method": "POST https://tx.main.fastnear.com/v0/account with is_signer true and the block-height window, then POST /v0/transactions in batches of 20. Each body is joined to the request by transaction.hash and classified by the same Delegate rule as matchRpcTx: one outer Delegate, receiver NEAR USDC, one inner ft_transfer, one successful USDC receipt. is_real_signer is not the relayer filter.",
+  "line": 25400,
+  "upper": 42675,
+  "upper_kind": "existing_estimate_upper_95",
+  "estimate": 20421,
+  "accounts": [
+    {
+      "account": "x402-relayer2.mike.near",
+      "kind": "facilitator_signer",
+      "sources": [
+        "https://x402.mikedotexe.com/supported (signers.near:mainnet, scheme exact, retrieved 2026-11-07)",
+        "https://github.com/fastnear/x402-facilitator/blob/main/README.md (near:mainnet reference facilitator is that host)",
+        "https://github.com/fastnear/x402-facilitator/blob/main/deploy/config/mainnet.json.example (relayer_account_id)",
+        "https://github.com/x402-foundation/x402/blob/main/docs/dev-tools/facilitators.md (NEAR x402 Facilitator)"
+      ],
+      "signer_txs": 0,
+      "signer_txs_reported": 0,
+      "list_complete": true,
+      "opened": 0,
+      "delegate_usdc": 0,
+      "rejected": {
+        "no_usdc_ft": 0,
+        "not_single": 0,
+        "inner_failed": 0,
+        "unchecked": 0
+      },
+      "unchecked": 0,
+      "first_at": null,
+      "last_at": null,
+      "sample_hashes": [],
+      "includes_frozen_hit": null,
+      "signer_txs_all_time": 7,
+      "latest_signer_height": 209204774
+    },
+    {
+      "account": "x402-relayer.mike.near",
+      "kind": "provisioned_relayer",
+      "sources": [
+        "https://github.com/fastnear/x402-facilitator/blob/main/docs/evidence/2026-07-19-relayer-provisioning.md (mainnet account created; that note says the service was not shown live)"
+      ],
+      "signer_txs": 0,
+      "signer_txs_reported": 0,
+      "list_complete": true,
+      "opened": 0,
+      "delegate_usdc": 0,
+      "rejected": {
+        "no_usdc_ft": 0,
+        "not_single": 0,
+        "inner_failed": 0,
+        "unchecked": 0
+      },
+      "unchecked": 0,
+      "first_at": null,
+      "last_at": null,
+      "sample_hashes": [],
+      "includes_frozen_hit": null,
+      "signer_txs_all_time": 1,
+      "latest_signer_height": 207693820
+    },
+    {
+      "account": "solvador.near",
+      "kind": "facilitator_signer",
+      "sources": [
+        "https://github.com/x402-foundation/x402/blob/main/docs/dev-tools/facilitators.md (Solvador, NEAR named)",
+        "https://api.solvador.com/supported (signers['near:*'] is solvador.near; kind exact on near:mainnet, retrieved 2026-11-07)",
+        "https://docs.solvador.com/networks/ (NEAR exact is a relayer-sponsored NEP-366 delegate)"
+      ],
+      "signer_txs": 0,
+      "signer_txs_reported": 0,
+      "list_complete": true,
+      "opened": 0,
+      "delegate_usdc": 0,
+      "rejected": {
+        "no_usdc_ft": 0,
+        "not_single": 0,
+        "inner_failed": 0,
+        "unchecked": 0
+      },
+      "unchecked": 0,
+      "first_at": null,
+      "last_at": null,
+      "sample_hashes": [],
+      "includes_frozen_hit": null,
+      "signer_txs_all_time": 48,
+      "latest_signer_height": 216056523
+    },
+    {
+      "account": "uvd-facilitator.near",
+      "kind": "facilitator_signer",
+      "sources": [
+        "https://facilitator.ultravioletadao.xyz/supported (v2 exact near:mainnet extra.feePayer, retrieved 2026-11-07; not a row in the foundation facilitators table; the same host also advertises an escrow scheme, which this count leaves out)"
+      ],
+      "signer_txs": 51,
+      "signer_txs_reported": 51,
+      "list_complete": true,
+      "opened": 51,
+      "delegate_usdc": 0,
+      "rejected": {
+        "no_usdc_ft": 37,
+        "not_single": 14,
+        "inner_failed": 0,
+        "unchecked": 0
+      },
+      "unchecked": 0,
+      "first_at": null,
+      "last_at": null,
+      "sample_hashes": [],
+      "includes_frozen_hit": null,
+      "signer_txs_all_time": 75,
+      "latest_signer_height": 223249134,
+      "opened_shapes": [
+        {
+          "delegate_receiver": "v1.arras-escrow.near",
+          "method": "withdraw_for",
+          "n": 24
+        },
+        {
+          "delegate_receiver": "v1.arras-escrow.near",
+          "method": "release",
+          "n": 11
+        },
+        {
+          "delegate_receiver": "v1.arras-escrow.near",
+          "method": "refund",
+          "n": 2
+        },
+        {
+          "delegate_receiver": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+          "method": "ft_transfer_call",
+          "n": 14
+        }
+      ]
+    },
+    {
+      "account": "5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c",
+      "kind": "sample_signer",
+      "sources": [
+        "data/snapshot/near/usdc-delegate-sample.json (signer_id of every frozen delegate-shaped hit, including 76hZkqNNi359kH266MTbce7ko9nvcqwMaWjtw92Azc4b). Not named by a facilitator /supported response."
+      ],
+      "signer_txs": 7363,
+      "signer_txs_reported": 7363,
+      "list_complete": true,
+      "opened": 7363,
+      "delegate_usdc": 1716,
+      "rejected": {
+        "no_usdc_ft": 4526,
+        "not_single": 1120,
+        "inner_failed": 1,
+        "unchecked": 0
+      },
+      "unchecked": 0,
+      "first_at": "2026-10-08T11:43:51.970Z",
+      "last_at": "2026-11-07T06:06:01.625Z",
+      "sample_hashes": [
+        "HcskUbp9Fq4ZxAKvGY5Vhg4CgZc9F8nQW1MHjr1EdQUu",
+        "Cm8WrD6nTkTLU4rfuikfZJNBFiaYS6nHSUZWzMgbyLwR",
+        "BmhpfBMhtzksxfPjgyQeunTzYRr8zjFnXL2UKHMwwdQB"
+      ],
+      "includes_frozen_hit": true,
+      "signer_txs_all_time": 7694
+    }
+  ],
+  "lower": 1716,
+  "result": "not_decided",
+  "list_complete": true,
+  "limits": [
+    "On the relayer's /v0/account row, a delegate settlement has is_signer true and is_real_signer false. is_real_signer true on that same hash is the payer, the delegate sender. Filtering the relayer with is_real_signer drops the settlements. This count lists is_signer and then opens the transaction.",
+    "The list row has no actions. Every signer transaction in the window is opened. A transaction counts only when matchRpcTx accepts it: one Delegate, receiver NEAR USDC, one inner ft_transfer, and the USDC receipt succeeded. Exactly one USDC execution outcome is required.",
+    "The sum is a lower bound on N. A relayer this survey did not name is absent. Delegate transfers signed by an account that is not in this file are absent. N also includes transfers that are not x402.",
+    "The window is closed at the tip block read when the census started. Blocks after that tip are outside it. Block time is the FastNEAR block timestamp, not a clock on this machine.",
+    "x402-relayer2.mike.near is the signer named by the FastNEAR reference config and by the live x402.mikedotexe.com /supported response. Those are one account, counted once.",
+    "solvador.near and uvd-facilitator.near are the signer or fee payer their public /supported responses name. An escrow scheme on the same host is not this count.",
+    "x402-relayer.mike.near was provisioned as a mainnet relayer. The provisioning note says that record is not evidence the service was live. The live signer is x402-relayer2.mike.near.",
+    "POST /v0/transactions does not return bodies in tx_hashes order. Counts join each body to transaction.hash. A batch whose length matches can still be a permutation of the request, so a position join can total the same and label a different hash. sample_hashes are the earliest hashes counted by that join.",
+    "uvd-facilitator.near's signer transactions in the window are escrow calls on v1.arras-escrow.near and ft_transfer_call to NEAR USDC. ft_transfer_call is not the single ft_transfer this count accepts. The escrow scheme on that host is not this count.",
+    "x402-relayer.mike.testnet is the signer at test.x402.mikedotexe.com. It is not a mainnet account and is not in this sum."
+  ],
+  "surveyed_without_near_exact_signer": [
+    "https://x402.org/facilitator/supported (no near network, retrieved 2026-11-07)",
+    "https://facilitator.payai.network/supported (no near kind, retrieved 2026-11-07)"
+  ],
+  "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+  "sha256": "8dc87fd92f0e649d00f3146dfcbe7f76e885261e6c61593d92c5467e68742ef5"
+}
