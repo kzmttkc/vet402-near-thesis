@@ -80,7 +80,7 @@ export async function fetchKnownRelays(dir = OUT_DIR, { log: logImpl = log } = {
   const client = makeFastnear({ log: say, pauseMs: 80 });
   const saved = await readProgress();
   const window = saved?.window ?? (await windowFromTip(client.post));
-  say(`窓 ${window.from} .. ${window.to} 高さ ${window.from_height}..${window.to_height}`);
+  say(`window ${window.from} .. ${window.to} heights ${window.from_height}..${window.to_height}`);
   const order = await client.post("/v0/transactions", { tx_hashes: [KNOWN_HIT] });
   const opened = order.transactions?.[0]?.transaction?.signer_id;
   if (opened !== SAMPLE_SIGNER) throw new Error(`sample tx signer ${opened}`);
@@ -90,7 +90,7 @@ export async function fetchKnownRelays(dir = OUT_DIR, { log: logImpl = log } = {
     if (finished.has(spec.account)) continue;
     const open = saved?.open?.account === spec.account ? saved.open : null;
     const listed = open?.listed ?? (await listSignerTxs(client.post, spec.account, window, { log: say }));
-    say(`${spec.account} 署名取引 ${listed.rows.length} 申告 ${listed.reported} 完全 ${listed.list_complete}`);
+    say(`${spec.account} signer txs ${listed.rows.length} reported ${listed.reported} complete ${listed.list_complete}`);
     const done = new Set(open?.done ?? []);
     const priorCounted = open?.counted ?? [];
     const priorRejected = open?.rejected ?? { no_usdc_ft: 0, not_single: 0, inner_failed: 0, unchecked: 0 };
@@ -136,7 +136,7 @@ export async function fetchKnownRelays(dir = OUT_DIR, { log: logImpl = log } = {
     };
     accounts.push(row);
     await writeFile(PROGRESS, JSON.stringify({ window, accounts }));
-    say(`${spec.account} 該当 ${row.delegate_usdc}`);
+    say(`${spec.account} matched ${row.delegate_usdc}`);
   }
   const estimate = 20421;
   const biased_sample_estimate = 42675;
@@ -163,7 +163,7 @@ export async function fetchKnownRelays(dir = OUT_DIR, { log: logImpl = log } = {
   doc.token = NEAR_USDC;
   await mkdir(dir, { recursive: true });
   const stamped = await writeFacilitators(dir, doc);
-  say(`下限 ${stamped.lower} 判定 ${stamped.result} sha256 ${stamped.sha256}`);
+  say(`lower ${stamped.lower} result ${stamped.result} sha256 ${stamped.sha256}`);
   return stamped;
 }
 
