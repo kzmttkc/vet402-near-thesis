@@ -237,11 +237,25 @@ function shortId(value) {
   return `${text.slice(0, 8)}…${text.slice(-4)}`;
 }
 
-function heroDek(thesis) {
+const PREREG_VERIFY_URL = "https://github.com/kzmttkc/vet402-near-thesis/blob/main/PREREG-VERIFY.md";
+
+function heroLead(thesis) {
   const exact = formatValue(thesis?.numbers?.["near.known.named_delegate"]);
   const line = formatValue(thesis?.numbers?.["threshold.line"]);
-  if (exact == null || line == null) return "The exact-scheme count is missing. The line was posted on chain before the count.";
-  return `${exact} exact-scheme payments from the named facilitators in 30 days. The ${line} line was posted on chain before the count.`;
+  const posted = formatUtc(PREREG_RECORD.at);
+  if (exact == null || line == null) {
+    return `The exact-scheme count is missing, and the line was posted on chain at ${posted}, before the count. `;
+  }
+  return `${exact} exact-scheme payments from the named facilitators in 30 days, and the ${line} line was posted on chain at ${posted}, before the count. `;
+}
+
+function renderHeroNote(post, thesis) {
+  const note = el(post, "p", "hero-note");
+  note.textContent = `${heroLead(thesis)}An explorer shows Failure because social has no contract, so __fastdata_kv fails, and FastNEAR's indexer stores the arguments without checking success; the arguments stay in the transaction (`;
+  const link = el(note, "a", null, "PREREG-VERIFY.md");
+  link.href = PREREG_VERIFY_URL;
+  link.rel = "noreferrer";
+  el(note, "span", null, ").");
 }
 
 function renderPost(root, thesis) {
@@ -256,7 +270,7 @@ function renderPost(root, thesis) {
   const heroNum = el(post, "p", exactText == null ? "hero-num missing" : "hero-num");
   if (exactText == null) heroNum.textContent = "missing";
   else paintCount(heroNum, exactRec.value);
-  el(post, "p", "hero-note", heroDek(thesis));
+  renderHeroNote(post, thesis);
   el(post, "hr", "rule");
   el(post, "p", "brand-foot", "vet402");
 }

@@ -4,13 +4,13 @@ The four sections follow the NEAR HACKATHON thesis track. The threshold in "What
 
 ## Claim
 
-NEAR's edge in agent payments is the funding and settlement layer: NEAR Intents already settles cross-chain agent payments, and x402 has had a NEAR settlement spec since {{field:near.spec.pr_merged_at}} UTC that is ready but not yet lit.
+NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents volume was {{n:intents.volume_30d|M}} {{range:intents.volume_30d}} (retrieved {{asof:intents.volume_30d}} UTC). That volume is not a count of agent payments. x402 has had a NEAR settlement spec since {{field:near.spec.pr_merged_at}} UTC.
 
-The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled {{n:near.known.named_delegate}} exact-scheme payments {{range:near.known.lower}}.
+The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled {{n:near.known.named_delegate}} exact-scheme payments {{range:near.known.lower}}. The line of {{n:threshold.line}} was posted on chain before that count.
 
 `uvd-facilitator.near` signed {{n:near.known.uvd_signer_txs}} transactions in that window: {{n:near.known.uvd_ft_transfer_call}} Delegate `ft_transfer_call` to NEAR USDC and {{n:near.known.uvd_escrow_calls}} calls on `v1.arras-escrow.near` ({{n:near.known.uvd_withdraw_for}} `withdraw_for`, {{n:near.known.uvd_release}} `release`, {{n:near.known.uvd_refund}} `refund`). Those may be an escrow scheme of x402. This page does not classify them as x402 or as not x402. Its exact-scheme Delegate USDC `ft_transfer` count is {{n:near.known.uvd_delegate}}.
 
-The exact-scheme spec is merged and the facilitators are named, yet they settled {{n:near.known.named_delegate}} exact-scheme payments in those 30 days. That gap is the strongest evidence that the exact scheme has not lit.
+The exact-scheme spec is merged and the facilitators are named, yet they settled {{n:near.known.named_delegate}} exact-scheme payments in those 30 days. That gap is the strongest evidence that the exact scheme has not lit. The line of {{n:threshold.line}} was posted on chain before that count.
 
 ### Impact
 
@@ -18,7 +18,7 @@ The people this reaches are agents that pay through x402, and the accounts that 
 
 ### Sustainability
 
-Every figure here rebuilds from the frozen snapshot with `node thesis.mjs --offline`, with no key and no account. The line was fixed in commit f0c48d1 from the Base count frozen on 2026-10-30, so a later NEAR fetch cannot move it. The timing of the post is in [PREREG-VERIFY.md](PREREG-VERIFY.md). `node thesis.mjs --fetch-relays` counts the known relay accounts through the FastNEAR transaction API and writes `data/snapshot/near/facilitators.json`. It does not page every USDC transfer. The upkeep is to run the same script on the next 30-day window. `.github/workflows/refresh.yml` is scheduled to fetch the public counts with no key once this repository is public. It is disabled while the repository is private and is turned on at publication. When it runs, the dashboard shows when the counts move toward the line of {{n:threshold.line}}.
+Every figure here rebuilds from the frozen snapshot with `node thesis.mjs --offline`, with no key and no account. The line was fixed in commit f0c48d1 from the Base count frozen on 2026-10-30, so a later NEAR fetch cannot move it. The timing of the post is in [PREREG-VERIFY.md](PREREG-VERIFY.md). `node thesis.mjs --fetch-relays` counts the known relay accounts through the FastNEAR transaction API and writes `data/snapshot/near/facilitators.json`. It does not page every USDC transfer. The upkeep is to run the same script on the next 30-day window. `.github/workflows/refresh.yml` fetches the public counts with no key on a daily schedule. The schedule was turned on at publication, 2026-11-07 20:27 UTC. When it runs, the dashboard shows when the counts move toward the line of {{n:threshold.line}}.
 
 ## Evidence for
 

@@ -19,16 +19,22 @@ export function meterFromThesis(thesis) {
   const censusLower = recordValue(thesis, "near.relays.lower");
   const knownLower = recordValue(thesis, "near.known.lower");
   const censusUpper = recordValue(thesis, "near.relays.upper");
-  const estimateRec = thesis?.numbers?.["near.delegate.estimate"] ?? null;
   const lower = censusLower ?? knownLower ?? recordValue(thesis, "near.delegate.sample_hits");
   const lowerKind = censusLower != null ? "census" : knownLower != null ? "known_relays" : "sample_hits";
+  const lowerId = censusLower != null
+    ? "near.relays.lower"
+    : knownLower != null
+      ? "near.known.lower"
+      : "near.delegate.sample_hits";
+  const countedAt = thesis?.numbers?.[lowerId]?.as_of;
+  const counted = countedAt != null && String(countedAt).trim() !== "" ? countedAt : null;
   return {
     line: recordValue(thesis, "threshold.line"),
     lower,
     lower_kind: lowerKind,
     estimate: recordValue(thesis, "near.delegate.estimate"),
     upper: censusUpper ?? recordValue(thesis, "near.delegate.estimate_upper_95"),
-    updated: estimateRec?.as_of ?? thesis?.snapshot?.near_retrieved_at ?? thesis?.generated_at ?? null,
+    updated: counted ?? thesis?.snapshot?.near_retrieved_at ?? thesis?.generated_at ?? null,
     source: "frozen",
     relays_obtained: censusLower != null,
     date: null,
@@ -59,7 +65,7 @@ export function meterFromLive(live, thesis) {
 
 export function liveRecord(thesis, { relaysObtained = false, now = new Date() } = {}) {
   const base = meterFromThesis(thesis);
-  const updated = thesis?.snapshot?.near_retrieved_at ?? base.updated ?? now.toISOString();
+  const updated = base.updated ?? now.toISOString();
   return {
     date: now.toISOString().slice(0, 10),
     updated,

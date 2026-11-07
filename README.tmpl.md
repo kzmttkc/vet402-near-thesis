@@ -1,14 +1,16 @@
 # NEAR in agent payments: a thesis you can rerun
 
-NEAR's edge in agent payments is the funding and settlement layer: NEAR Intents already settles cross-chain agent payments, and x402 has had a NEAR settlement spec since {{field:near.spec.pr_merged_at}} UTC that is ready but not yet lit. The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled {{n:near.known.named_delegate}} exact-scheme payments {{range:near.known.lower}}.
+The dashboard is published at https://kzmttkc.github.io/vet402-near-thesis/ .
+
+NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents volume was {{n:intents.volume_30d|M}} {{range:intents.volume_30d}} (retrieved {{asof:intents.volume_30d}} UTC). That volume is not a count of agent payments. x402 has had a NEAR settlement spec since {{field:near.spec.pr_merged_at}} UTC. The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled {{n:near.known.named_delegate}} exact-scheme payments {{range:near.known.lower}}. The line of {{n:threshold.line}} was posted on chain before that count.
 
 `uvd-facilitator.near` signed {{n:near.known.uvd_signer_txs}} transactions in that window: {{n:near.known.uvd_ft_transfer_call}} Delegate `ft_transfer_call` to NEAR USDC and {{n:near.known.uvd_escrow_calls}} calls on `v1.arras-escrow.near` ({{n:near.known.uvd_withdraw_for}} `withdraw_for`, {{n:near.known.uvd_release}} `release`, {{n:near.known.uvd_refund}} `refund`). Those may be an escrow scheme of x402. This page does not classify them as x402 or as not x402. Its exact-scheme Delegate USDC `ft_transfer` count is {{n:near.known.uvd_delegate}}.
 
-The exact-scheme spec is merged and the facilitators are named, yet they settled {{n:near.known.named_delegate}} exact-scheme payments in those 30 days. That gap is the strongest evidence that the exact scheme has not lit. The argument, the evidence, and the number that would change my mind are in [THESIS.md](THESIS.md). Every figure about the market and about vet402 below comes from this repository, either from one script you can rerun without a key or an account, or from a quote in the table at the end.
+The exact-scheme spec is merged and the facilitators are named, yet they settled {{n:near.known.named_delegate}} exact-scheme payments in those 30 days. That gap is the strongest evidence that the exact scheme has not lit. The line of {{n:threshold.line}} was posted on chain before that count. The argument, the evidence, and the number that would change my mind are in [THESIS.md](THESIS.md). Every figure about the market and about vet402 below comes from this repository, either from one script you can rerun without a key or an account, or from a quote in the table at the end.
 
 ## Where this stands (2026-11-07)
 
-- As of 2026-10-30, x402scan cannot count x402 settlement on NEAR. NEAR Intents already settles payments across chains. The x402 NEAR settlement spec is present. N, the delegate-action count on NEAR, is not frozen yet.
+- As of 2026-10-30, x402scan cannot count x402 settlement on NEAR, and N, the delegate-action count on NEAR, is not frozen yet. The named facilitators settled {{n:near.known.named_delegate}} exact-scheme payments {{range:near.known.lower}}, and the line of {{n:threshold.line}} was posted on chain before that count. NEAR Intents volume in the snapshot is {{n:intents.volume_30d|M}} {{range:intents.volume_30d}}. The x402 NEAR settlement spec is present.
 - The threshold is N ≥ {{n:threshold.line}}, committed in f0c48d1. The line is 1% of the Base x402 count frozen on 2026-10-30, so it does not depend on NEAR data. The check is in [PREREG-VERIFY.md](PREREG-VERIFY.md).
 - [THESIS.md](THESIS.md) holds the claim, the evidence, and that threshold.
 
@@ -130,7 +132,7 @@ The line is the next whole number above 1% of the Base count frozen on 2026-10-3
 
 ## 7. What I watch
 
-`.github/workflows/refresh.yml` is scheduled to fetch the public counts with no key once this repository is public. It is disabled while the repository is private and is turned on at publication. When it runs, the dashboard shows when the counts move toward the line of {{n:threshold.line}}.
+`.github/workflows/refresh.yml` fetches the public counts with no key on a daily schedule. The schedule was turned on at publication, 2026-11-07 20:27 UTC. When it runs, the dashboard shows when the counts move toward the line of {{n:threshold.line}}.
 
 | Indicator | Where it comes from in this repository |
 |---|---|
