@@ -464,6 +464,31 @@ function shareOfLine(lower, line) {
   return `${((lower / line) * 100).toFixed(1)}%`;
 }
 
+function recordStamp(thesis, id) {
+  const rec = thesis?.numbers?.[id];
+  return rec?.as_of ? formatUtc(rec.as_of) : "missing";
+}
+
+function meterTimes(reading, thesis) {
+  if (reading.source === "live") {
+    const at = reading.updated ? formatUtc(reading.updated) : "missing";
+    const lineAt = recordStamp(thesis, "threshold.line");
+    return `Lower bound retrieved ${at}. Line retrieved ${lineAt}. Daily reading.`;
+  }
+  const lowerId =
+    reading.lower_kind === "census"
+      ? "near.relays.lower"
+      : reading.lower_kind === "sample_hits"
+        ? "near.delegate.sample_hits"
+        : "near.known.lower";
+  const lowerRec = thesis?.numbers?.[lowerId];
+  const lowerAt = lowerRec?.as_of ? formatUtc(lowerRec.as_of) : "missing";
+  const windowTo = lowerRec?.range?.to ? formatUtc(lowerRec.range.to) : "";
+  const window = windowTo ? ` Window ends ${windowTo}.` : "";
+  const lineAt = recordStamp(thesis, "threshold.line");
+  return `Lower bound retrieved ${lowerAt}.${window} Line retrieved ${lineAt}. Frozen snapshot.`;
+}
+
 function renderMeter(root, thesis, live) {
   const reading = meterFromLive(live, thesis);
   const section = el(root, "section", "meter");
@@ -471,14 +496,7 @@ function renderMeter(root, thesis, live) {
   figureNo += 1;
   el(section, "p", "caption", `Figure ${figureNo}. Lower bound on N and the posted line.`);
   el(section, "h2", null, "Threshold");
-  const kind = reading.source === "live" ? "Daily reading" : "Frozen snapshot";
-  const updated = reading.updated ? formatUtc(reading.updated) : "";
-  el(
-    section,
-    "p",
-    "meta",
-    updated ? `Last updated ${updated}. ${kind}.` : `Last updated missing. ${kind}.`,
-  );
+  el(section, "p", "meta", meterTimes(reading, thesis));
   const pair = el(section, "div", "meter-pair");
   const lowerBig = el(pair, "p", "meter-readout");
   lowerBig.textContent = Number.isFinite(reading.lower) ? formatCount(reading.lower) : "missing";

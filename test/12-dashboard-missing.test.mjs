@@ -68,7 +68,7 @@ test("dashboard page states the question and does not pull a CDN", () => {
   assert.match(html, /overflow-x:\s*hidden/);
   assert.match(html, /\.meter-track/);
   assert.match(js, /threshold-meter/);
-  assert.match(js, /Last updated/);
+  assert.match(js, /Lower bound retrieved/);
   assert.match(js, /Pre-registered threshold/);
   assert.doesNotMatch(html, /https?:\/\//);
   const prose = `${html}\n${js}`.replaceAll("en-US", "");
@@ -293,7 +293,10 @@ test("the threshold bar leads the page and falls back to the frozen bounds", () 
   assert.ok(left["meter-mark lower"] < left["meter-line"]);
   assert.equal(left["meter-line"], 100);
   const text = meter.children.map((node) => node.textContent).join("\n");
-  assert.match(text, /Last updated 2026-11-07 04:24 UTC/);
+  assert.match(text, /Lower bound retrieved 2026-11-07 12:47 UTC/);
+  assert.match(text, /Window ends 2026-11-07 11:42 UTC/);
+  assert.match(text, /Line retrieved 2026-10-29 23:18 UTC/);
+  assert.doesNotMatch(text, /04:24/);
   assert.match(text, /Frozen snapshot/);
   assert.match(text, /Lower, known relays 1,716 = lower bound on N/);
   assert.match(text, /1,716 is 6\.8% of the line/);
@@ -324,7 +327,8 @@ test("the threshold bar leads the page and falls back to the frozen bounds", () 
   });
   const liveMeter = findDescendant(root, (node) => node.id === "threshold-meter");
   const liveText = liveMeter.children.map((node) => node.textContent).join("\n");
-  assert.match(liveText, /Last updated 2026-11-08 00:30 UTC/);
+  assert.match(liveText, /Lower bound retrieved 2026-11-08 00:30 UTC/);
+  assert.match(liveText, /Line retrieved 2026-10-29 23:18 UTC/);
   assert.match(liveText, /Daily reading/);
   assert.match(liveText, /Lower 18,000/);
   assert.doesNotMatch(liveText, /sample hits/);
