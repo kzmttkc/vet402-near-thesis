@@ -18,7 +18,7 @@ Every figure here rebuilds from the frozen snapshot with `node thesis.mjs --offl
 
 The NEAR exact scheme is in the canonical repository x402-foundation/x402, file `specs/schemes/exact/scheme_exact_near.md`, merged in PR {{field:near.spec.pr_number}} at {{field:near.spec.pr_merged_at}} UTC. The frozen copy contains the sentence that outer-transaction success is not sufficient. On this page that fact is {{n:near.spec.settlement_sentence}}, where 1 means the sentence is present. Source: https://github.com/x402-foundation/x402/blob/main/specs/schemes/exact/scheme_exact_near.md
 
-That sentence is the same split vet402 records on its own purchases. Of {{n:vet402.attempts}} attempts, {{n:vet402.settled}} settled, and {{n:vet402.delivered}} of the settled purchases came back with an HTTP 2xx answer. A payment and a delivered answer are two records.
+That sentence is the same shape one layer up. The spec says a successful outer transaction does not mean the inner transfer succeeded. vet402's record says a settled payment does not mean the answer was delivered. Of {{n:vet402.attempts}} attempts, {{n:vet402.settled}} settled, and {{n:vet402.delivered}} of the settled purchases came back with an HTTP 2xx answer. A payment and a delivered answer are two records.
 
 NEAR Intents settles cross-chain payments through its solver network. The frozen page is https://mpp.dev/payment-methods/nearintents. The client library named there is `@defuse-protocol/nearintents-mpp-sdk`. The snapshot has the page and no payment count, so I do not state one.
 
