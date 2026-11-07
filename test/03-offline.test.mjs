@@ -30,19 +30,24 @@ function runThesis(dir, args) {
   });
 }
 
-test("--offline numbers match a normal run for the export", async () => {
+function withoutGeneratedAt(thesis) {
+  const copy = structuredClone(thesis);
+  delete copy.generated_at;
+  return copy;
+}
+
+// Compares --offline with the committed thesis.json. No fetch.
+test("--offline numbers match the frozen thesis.json", async () => {
   const dir = await mkdtemp(join(tmpdir(), "near-thesis-"));
   try {
     await cp(ROOT, dir, { recursive: true, filter: (src) => !/[\\/](\.git|node_modules)$/.test(src) });
-    const online = await runThesis(dir, []);
-    assert.equal(online.code, 0, online.stderr);
-    const first = JSON.parse(await readFile(join(dir, "data", "thesis.json"), "utf8"));
+    const frozen = JSON.parse(await readFile(join(dir, "data", "thesis.json"), "utf8"));
     const offline = await runThesis(dir, ["--offline"]);
     assert.equal(offline.code, 0, offline.stderr);
     assert.match(offline.stdout, /全数は未取得/);
     assert.equal(offline.stdout.trim().split("\n").length, 1);
     const second = JSON.parse(await readFile(join(dir, "data", "thesis.json"), "utf8"));
-    assert.deepEqual(second.numbers, first.numbers);
+    assert.deepEqual(withoutGeneratedAt(second), withoutGeneratedAt(frozen));
   } finally {
     await rm(dir, { recursive: true, force: true });
   }

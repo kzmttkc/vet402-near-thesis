@@ -21,7 +21,8 @@ Node 20 or newer. Nothing to install.
 | `node thesis.mjs --fetch-relays` | The full 30-day relayer count. It takes a long time, waits out HTTP 429 by widening the gap, and resumes from `data/snapshot/near/relay-census.progress.json`. |
 | `node thesis.mjs --check README.md` | `mismatches: 0`. The script builds this page again from `README.tmpl.md` and `data/thesis.json` and compares it line by line, so an edited figure on this page shows up as a mismatch. Figures typed into the template itself are not covered by this check. The quotes cover them. |
 | `node thesis.mjs --check-quotes` | `missing: 0`. Each quote below is fetched again and found word for word. Web pages are read directly, X posts through the public fxtwitter API, and the one PDF is reported as not machine-checked. |
-| `node --test` | All tests pass in about a minute, including one that stops on an unknown purchase status and one that runs the offline build in a throwaway copy. |
+| `node --test` | All tests pass with no network, including one that stops on an unknown purchase status and one that rebuilds from the frozen snapshot in a throwaway copy and compares it with the committed `data/thesis.json`. |
+| `node --test test/online/fetch-compare.mjs` | Needs the network. A throwaway copy fetches the public sources, then `--offline` rebuilds, and the two sets of numbers match. This file is not part of `npm test`. |
 | `node thesis.mjs` | A fresh fetch from the public sources. The figures move and the dates change. |
 | `python3 -m http.server -d docs 8123`, then open http://localhost:8123 | The dashboard. The same numbers, each with its range, date and source, and a count of any figure missing one of them. |
 
