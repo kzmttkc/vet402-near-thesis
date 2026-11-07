@@ -262,6 +262,118 @@ export function derivedNumbers(n, breakdown = []) {
   return out;
 }
 
+// The BigQuery file counts delegate ft_transfer receipts without requiring the
+// inner receipt to succeed, so each count is at least N. The ratio is computed
+// here from that count and the frozen line.
+export function bigQueryUpperBoundNumbers(doc, line, lower) {
+  if (doc == null || typeof doc !== "object" || Array.isArray(doc)) {
+    throw new Error("bigquery upper bound missing");
+  }
+  for (const key of Object.keys(doc)) {
+    if (/email|project/i.test(key)) throw new Error(`bigquery upper bound has ${key}`);
+  }
+  if (/@/.test(JSON.stringify(doc))) throw new Error("bigquery upper bound contains an email");
+  if (doc.line !== line) throw new Error(`bigquery line ${doc.line} != threshold ${line}`);
+  if (doc.known_relay_lower_bound !== lower) {
+    throw new Error(`bigquery lower ${doc.known_relay_lower_bound} != known relays ${lower}`);
+  }
+  if (!Array.isArray(doc.days) || doc.days.length === 0) throw new Error("bigquery days missing");
+  const matched = doc.days.reduce((sum, day) => sum + day.matched, 0);
+  if (matched !== doc.sum_of_daily_distinct) {
+    throw new Error(`bigquery daily sum ${matched} != ${doc.sum_of_daily_distinct}`);
+  }
+  if (!(doc.n_upper_bound < doc.line)) throw new Error("bigquery upper bound is not below the line");
+  if (!(doc.known_relay_lower_bound <= doc.n_upper_bound)) {
+    throw new Error("known-relay lower bound exceeds the upper bound");
+  }
+  if (!(doc.n_upper_bound <= doc.n_upper_bound_whole_dates)) {
+    throw new Error("exact window exceeds the widened window");
+  }
+  if (doc.n_upper_bound_whole_dates > doc.sum_of_daily_distinct) {
+    throw new Error("widened distinct count exceeds the daily sum");
+  }
+  const from = doc.window_utc?.[0];
+  const to = doc.window_utc?.[1];
+  if (typeof from !== "string" || typeof to !== "string") throw new Error("bigquery window_utc missing");
+  if (typeof doc.retrieved_at !== "string" || doc.retrieved_at === "") {
+    throw new Error("bigquery retrieved_at missing");
+  }
+  if (typeof doc.bytes_processed !== "string" || doc.bytes_processed === "") {
+    throw new Error("bigquery bytes_processed missing");
+  }
+  const census = { days: 30, from, to };
+  const widened = { from: "2026-10-08T00:00:00Z", to: "2026-11-08T00:00:00Z" };
+  const as_of = doc.retrieved_at;
+  const source = doc.source;
+  const common = { as_of, source };
+  const upper = "near.bq.n_upper_bound";
+  const share = "near.bq.upper_share_of_line";
+  const whole = "near.bq.whole_dates";
+  const daily = "near.bq.sum_of_daily";
+  const span = "near.bq.receipts_on_two_dates";
+  return {
+    [upper]: record(upper, {
+      ...common,
+      value: doc.n_upper_bound,
+      unit: "NEAR delegate-action USDC transfer receipts in 30 days",
+      range: census,
+      definition:
+        "Upper bound on N. Distinct DELEGATE_ACTION receipts in the census window whose inner receiver is NEAR USDC and whose single inner action is FunctionCall ft_transfer. The inner receipt is not required to succeed, so the count is at least N. Not a count of x402 payments.",
+    }),
+    [share]: record(share, {
+      ...common,
+      value: doc.n_upper_bound / line,
+      unit: "share of the line",
+      range: census,
+      definition:
+        "Upper bound on N divided by the line. The upper bound does not require the inner receipt to succeed.",
+    }),
+    [whole]: record(whole, {
+      ...common,
+      value: doc.n_upper_bound_whole_dates,
+      unit: "NEAR delegate-action USDC transfer receipts",
+      range: widened,
+      definition:
+        "Same match as the upper bound, with the window widened to the whole dates 2026-10-08 through 2026-11-07. Distinct receipts.",
+    }),
+    [daily]: record(daily, {
+      ...common,
+      value: doc.sum_of_daily_distinct,
+      unit: "NEAR delegate-action USDC transfer receipts",
+      range: widened,
+      definition:
+        "Sum of the per-day distinct counts for the widened window. Receipts that appear on two dates are counted on each date.",
+    }),
+    [span]: record(span, {
+      ...common,
+      value: doc.sum_of_daily_distinct - doc.n_upper_bound_whole_dates,
+      unit: "receipts",
+      range: widened,
+      definition:
+        "How many receipts the daily sum counts twice. The whole-date distinct count is lower by this many.",
+    }),
+  };
+}
+
+async function attachBigQueryUpperBound(thesis, nearDir) {
+  const path = join(nearDir, "bigquery-n-upper-bound.json");
+  if (!(await exists(path))) return;
+  const doc = JSON.parse(await readFile(path, "utf8"));
+  const line = thesis.numbers["threshold.line"]?.value;
+  const lower = thesis.numbers["near.known.lower"]?.value;
+  Object.assign(thesis.numbers, bigQueryUpperBoundNumbers(doc, line, lower));
+  const end = doc.days[doc.days.length - 1];
+  thesis.near = {
+    ...(thesis.near ?? {}),
+    bq: {
+      retrieved_at: doc.retrieved_at,
+      bytes_processed: doc.bytes_processed,
+      dates_present: doc.days.length,
+      last_block: `${end.block_date} ${end.last_block_utc} UTC`,
+    },
+  };
+}
+
 function splitPair(pair) {
   const colon = pair.indexOf(":");
   if (colon <= 0 || colon === pair.length - 1) {
@@ -514,7 +626,10 @@ export async function main(argv, { cwd = ROOT } = {}) {
     quotes,
   });
   Object.assign(thesis.numbers, derivedNumbers(thesis.numbers, thesis.breakdown));
-  if (nearLoaded) thesis.near = { ...nearLoaded.near, limits: nearLoaded.limits };
+  if (nearLoaded) {
+    thesis.near = { ...nearLoaded.near, limits: nearLoaded.limits };
+    await attachBigQueryUpperBound(thesis, nearDir);
+  }
   {
     const settledRec = thesis.numbers["vet402.settled"];
     thesis.numbers["vet402.settled_seller_claim"] = record("vet402.settled_seller_claim", {

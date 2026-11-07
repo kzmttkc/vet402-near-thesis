@@ -146,7 +146,10 @@ test("named facilitators with zero settlements sit with the claim", () => {
     assert.match(page.slice(appendix), /not used in the claim/);
   }
   assert.match(thesis, /1,716 is 6\.8% of that line/);
-  assert.match(thesis, /cannot be measured without a key/);
+  assert.match(thesis, /N ≤ 2,418 < 25,400/);
+  assert.match(thesis, /N < 25,400, all 30 days counted: the threshold is not crossed\. The claim stands\./);
+  assert.doesNotMatch(thesis, /cannot be measured without a key/);
+  assert.doesNotMatch(readme, /cannot be measured without a key/);
   assert.match(readme, /6\.8% of the line/);
 });
 

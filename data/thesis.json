@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T18:28:02.729Z",
+  "generated_at": "2026-11-07T21:23:41.678Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
@@ -785,6 +785,68 @@
       "as_of": "2026-10-29T23:18:32.677Z",
       "source": "base_vault+x402scan",
       "definition": "USDC sent out of the NEAR Intents treasury on Base (all purposes) over x402 dollars on Base, both 30 days"
+    },
+    "near.bq.n_upper_bound": {
+      "value": 2418,
+      "unit": "NEAR delegate-action USDC transfer receipts in 30 days",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:00Z",
+        "to": "2026-11-07T11:42:00Z"
+      },
+      "as_of": "2026-11-07T21:07:15Z",
+      "source": "bigquery-public-data.crypto_near_mainnet_us.receipt_actions",
+      "definition": "Upper bound on N. Distinct DELEGATE_ACTION receipts in the census window whose inner receiver is NEAR USDC and whose single inner action is FunctionCall ft_transfer. The inner receipt is not required to succeed, so the count is at least N. Not a count of x402 payments."
+    },
+    "near.bq.upper_share_of_line": {
+      "value": 0.0951968503937008,
+      "unit": "share of the line",
+      "unit_kind": "share",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:00Z",
+        "to": "2026-11-07T11:42:00Z"
+      },
+      "as_of": "2026-11-07T21:07:15Z",
+      "source": "bigquery-public-data.crypto_near_mainnet_us.receipt_actions",
+      "definition": "Upper bound on N divided by the line. The upper bound does not require the inner receipt to succeed."
+    },
+    "near.bq.whole_dates": {
+      "value": 2532,
+      "unit": "NEAR delegate-action USDC transfer receipts",
+      "unit_kind": "count",
+      "range": {
+        "from": "2026-10-08T00:00:00Z",
+        "to": "2026-11-08T00:00:00Z"
+      },
+      "as_of": "2026-11-07T21:07:15Z",
+      "source": "bigquery-public-data.crypto_near_mainnet_us.receipt_actions",
+      "definition": "Same match as the upper bound, with the window widened to the whole dates 2026-10-08 through 2026-11-07. Distinct receipts."
+    },
+    "near.bq.sum_of_daily": {
+      "value": 2534,
+      "unit": "NEAR delegate-action USDC transfer receipts",
+      "unit_kind": "count",
+      "range": {
+        "from": "2026-10-08T00:00:00Z",
+        "to": "2026-11-08T00:00:00Z"
+      },
+      "as_of": "2026-11-07T21:07:15Z",
+      "source": "bigquery-public-data.crypto_near_mainnet_us.receipt_actions",
+      "definition": "Sum of the per-day distinct counts for the widened window. Receipts that appear on two dates are counted on each date."
+    },
+    "near.bq.receipts_on_two_dates": {
+      "value": 2,
+      "unit": "receipts",
+      "unit_kind": "count",
+      "range": {
+        "from": "2026-10-08T00:00:00Z",
+        "to": "2026-11-08T00:00:00Z"
+      },
+      "as_of": "2026-11-07T21:07:15Z",
+      "source": "bigquery-public-data.crypto_near_mainnet_us.receipt_actions",
+      "definition": "How many receipts the daily sum counts twice. The whole-date distinct count is lower by this many."
     },
     "vet402.settled_seller_claim": {
       "value": 11194,
@@ -1627,6 +1689,12 @@
         "Retries re-sign the same transfer with a new nonce and deadline, so duplicates are removed by the intent body (signer_id and intents, deadline and nonce dropped). The intent_hash values in the logs are kept too.",
         "escrow.ai.near being the NEAR AI Agent Market escrow is an estimate: the Agent Market payment docs do not name this account."
       ]
+    },
+    "bq": {
+      "retrieved_at": "2026-11-07T21:07:15Z",
+      "bytes_processed": "85.36 GB",
+      "dates_present": 31,
+      "last_block": "2026-11-07 20:59:58 UTC"
     }
   },
   "rechecks": {

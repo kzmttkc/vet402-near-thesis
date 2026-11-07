@@ -357,6 +357,14 @@ function renderBand(root, thesis, live) {
       : "daily reading";
   const lowerLabel = reading.lower_kind === "known_relays" ? "Lower bound on N" : "Lower";
   paintCount(bandCell(grid, lowerLabel, lowerSub), reading.lower);
+  const upperValue = Number(thesis?.numbers?.["near.bq.n_upper_bound"]?.value);
+  if (reading.source !== "live" && Number.isFinite(upperValue)) {
+    const upperShare = shareOfLine(upperValue, reading.line);
+    paintCount(
+      bandCell(grid, "Upper bound on N", upperShare ? `${upperShare} of the line` : "census window"),
+      upperValue,
+    );
+  }
   paintCount(bandCell(grid, "Line", "posted before the count"), reading.line);
 
   const accounts = el(section, "div", "band-accounts");
@@ -545,11 +553,16 @@ function renderMeter(root, thesis, live) {
   el(section, "p", "meta", `${lowerText}. ${textOf("Line", reading.line)}.`);
   const share = shareOfLine(reading.lower, reading.line);
   if (share != null && reading.lower < reading.line) {
+    const upperValue = Number(thesis?.numbers?.["near.bq.n_upper_bound"]?.value);
+    const upperShare = shareOfLine(upperValue, reading.line);
+    const decided = reading.source !== "live" && Number.isFinite(upperValue) && upperValue < reading.line && upperShare;
     el(
       section,
       "p",
       "meta",
-      `${formatCount(reading.lower)} is ${share} of the line. Unknown relay accounts would raise N. The evidence in hand sits below the line. The upper bound on all of N cannot be measured without a key, so the reading is not decided.`,
+      decided
+        ? `${formatCount(reading.lower)} is ${share} of the line. That figure is the known-relay lower bound. The upper bound on N is ${formatCount(upperValue)}, ${upperShare} of the line. N ≤ ${formatCount(upperValue)} < ${formatCount(reading.line)}, all 30 days counted: the threshold is not crossed. The claim stands.`
+        : `${formatCount(reading.lower)} is ${share} of the line. This daily figure is a lower bound for its own window.`,
     );
   }
   cite(section, "near.known.lower");
