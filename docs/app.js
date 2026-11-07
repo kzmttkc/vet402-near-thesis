@@ -162,6 +162,28 @@ function sensitivityRows(model) {
   });
 }
 
+function renderFacilitators(root, thesis) {
+  el(root, "h2", null, "Facilitators");
+  el(root, "p", "note", "Each facilitator sees only its own account. This table lines the five up together.");
+  const roster = thesis?.near?.known?.roster;
+  if (!Array.isArray(roster) || roster.length === 0) {
+    el(root, "p", "missing", "missing");
+    return;
+  }
+  root.append(
+    table(
+      ["Account", "In /supported", "Signer txs", "Delegate USDC", "What it is"],
+      roster.map((row) => [
+        row.account ?? "",
+        row.named_in_supported ? "yes" : "no",
+        formatCount(row.signer_txs),
+        formatCount(row.delegate_usdc),
+        row.note ?? "",
+      ]),
+    ),
+  );
+}
+
 function renderMeter(root, thesis, live) {
   const reading = meterFromLive(live, thesis);
   const section = el(root, "section", "meter");
@@ -231,6 +253,7 @@ export function renderDashboard(root, thesis, live = null) {
   renderMeter(root, thesis, live);
   const incomplete = countMissing(watched);
   el(root, "p", incomplete > 0 ? "count missing" : "count", `Incomplete numbers: ${incomplete}`);
+  renderFacilitators(root, thesis);
 
   const cards = el(root, "div");
   cards.id = "cards";

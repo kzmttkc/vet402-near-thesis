@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T12:49:26.231Z",
+  "generated_at": "2026-11-07T12:51:56.897Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
@@ -1395,6 +1395,48 @@
       "generic_delegate": 1716,
       "uvd_signer_txs": 51,
       "uvd_delegate": 0,
+      "roster": [
+        {
+          "account": "x402-relayer2.mike.near",
+          "kind": "facilitator_signer",
+          "named_in_supported": true,
+          "signer_txs": 0,
+          "delegate_usdc": 0,
+          "note": "No signer transaction in the window."
+        },
+        {
+          "account": "x402-relayer.mike.near",
+          "kind": "provisioned_relayer",
+          "named_in_supported": false,
+          "signer_txs": 0,
+          "delegate_usdc": 0,
+          "note": "Provisioned mainnet relayer. Not the live signer."
+        },
+        {
+          "account": "solvador.near",
+          "kind": "facilitator_signer",
+          "named_in_supported": true,
+          "signer_txs": 0,
+          "delegate_usdc": 0,
+          "note": "No signer transaction in the window."
+        },
+        {
+          "account": "uvd-facilitator.near",
+          "kind": "facilitator_signer",
+          "named_in_supported": true,
+          "signer_txs": 51,
+          "delegate_usdc": 0,
+          "note": "Escrow movements, not a Delegate USDC ft_transfer."
+        },
+        {
+          "account": "5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c",
+          "kind": "sample_signer",
+          "named_in_supported": false,
+          "signer_txs": 7363,
+          "delegate_usdc": 1716,
+          "note": "Not named by /supported. Generic relay. Delegate USDC transfers are not known to be x402, and are counted only as a lower bound on N."
+        }
+      ],
       "window": {
         "from": "2026-10-08T11:42:27.636Z",
         "to": "2026-11-07T11:42:27.483Z"

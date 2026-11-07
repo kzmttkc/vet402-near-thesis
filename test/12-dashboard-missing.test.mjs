@@ -56,6 +56,82 @@ test("dashboard page states the question and does not pull a CDN", () => {
   assert.doesNotMatch(prose, /\b(we|our|us)\b/i);
 });
 
+function textOf(node) {
+  const own = node.textContent ?? "";
+  const nested = (node.children ?? []).map(textOf).join(" ");
+  return `${own} ${nested}`.replace(/\s+/g, " ").trim();
+}
+
+test("the facilitator table lines the five accounts up together", () => {
+  function El(tag) {
+    this.tag = tag;
+    this.children = [];
+    this.style = {};
+    this.className = "";
+    this.id = "";
+    this.textContent = "";
+    this.rel = "";
+    this.href = "";
+  }
+  El.prototype.append = function (...nodes) {
+    this.children.push(...nodes);
+  };
+  El.prototype.replaceChildren = function () {
+    this.children = [];
+  };
+  El.prototype.querySelector = function (sel) {
+    const walk = (node) => {
+      if (sel === "h1" && node.tag === "h1") return node;
+      for (const child of node.children ?? []) {
+        const found = walk(child);
+        if (found) return found;
+      }
+      return null;
+    };
+    return walk(this);
+  };
+  const previousDocument = globalThis.document;
+  globalThis.document = { createElement: (tag) => new El(tag) };
+  globalThis.Node = class Node {};
+  const root = new El("main");
+  const h1 = new El("h1");
+  root.append(h1);
+  const thesis = JSON.parse(readFileSync(join(ROOT, "docs", "thesis.json"), "utf8"));
+  try {
+    renderDashboard(root, thesis, null);
+  } finally {
+    globalThis.document = previousDocument;
+  }
+  const page = textOf(root);
+  assert.match(page, /Each facilitator sees only its own account\. This table lines the five up together\./);
+  for (const account of [
+    "x402-relayer2.mike.near",
+    "x402-relayer.mike.near",
+    "solvador.near",
+    "uvd-facilitator.near",
+    "5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c",
+  ]) {
+    assert.match(page, new RegExp(account));
+  }
+  assert.match(page, /Not named by \/supported/);
+  assert.match(page, /Escrow movements, not a Delegate USDC ft_transfer/);
+  assert.match(page, /1,716/);
+  const tableWrap = root.children.find((node) => node.className === "table-scroll");
+  assert.equal(tableWrap.className, "table-scroll");
+  const blank = structuredClone(thesis);
+  delete blank.near.known.roster;
+  const empty = new El("main");
+  empty.append(new El("h1"));
+  globalThis.document = { createElement: (tag) => new El(tag) };
+  globalThis.Node = class Node {};
+  try {
+    renderDashboard(empty, blank, null);
+  } finally {
+    globalThis.document = previousDocument;
+  }
+  assert.match(textOf(empty), /missing/);
+});
+
 test("the threshold bar leads the page and falls back to the frozen bounds", () => {
   function El(tag) {
     this.tag = tag;

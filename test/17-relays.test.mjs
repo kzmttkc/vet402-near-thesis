@@ -340,6 +340,11 @@ test("the frozen snapshot has no full relay count yet", async () => {
   assert.equal(loaded.numbers["near.known.uvd_signer_txs"].value, 51);
   assert.equal(loaded.numbers["near.known.uvd_delegate"].value, 0);
   assert.equal(loaded.numbers["near.known.generic_delegate"].value, 1716);
+  assert.equal(loaded.near.known.roster.length, 5);
+  assert.equal(loaded.near.known.roster.filter((row) => row.named_in_supported).length, 3);
+  const generic = loaded.near.known.roster.find((row) => row.kind === "sample_signer");
+  assert.equal(generic.named_in_supported, false);
+  assert.equal(generic.delegate_usdc, 1716);
   assert.equal(loaded.near.known.reading, "not decided");
   assert.equal(loaded.near.known.line, 25400);
   assert.equal(loaded.numbers["near.spec.settlement_sentence"].value, 1);
