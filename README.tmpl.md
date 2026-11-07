@@ -25,7 +25,7 @@ Node 20 or newer. Nothing to install.
 | Do this | See this |
 |---|---|
 | `node thesis.mjs --offline` | `rebuilt … numbers from data/snapshot (no network), 2 checks ok`. The numbers on this page, rebuilt from the frozen snapshot in `data/snapshot/`. It rewrites `data/thesis.json`, and only `generated_at` changes. NEAR from that same frozen snapshot, with no network: the settlement spec is present ({{n:near.spec.settlement_sentence}}), the opt-in catalog lists {{n:near.facilitator.discovery_total}} resources, the named relayer has {{n:near.relayer.payments}} payments, and N's line is {{n:threshold.line}}. The known relay accounts sum to {{n:near.known.lower}}, a lower bound on N and {{n:near.known.lower_share_of_line}} of the line, and that reading is {{field:near.known.reading}}. The biased sample estimate is in the appendix and is not used in the claim. Stdout is one line and ends with `full count not yet fetched` while `relay-census.json` is absent. |
-| `node online/fetch-intents-sample.mjs --offline` | Reprints the frozen intents.near index sample with no network: {{n:near.intents.sample_rows}} rows, {{n:near.intents.payment_count}} payment-scale settlement, {{range:near.intents.sample_rows}} UTC, blocks {{field:near.intents_sample.height_min}} to {{field:near.intents_sample.height_max}}. |
+| `node online/fetch-intents-sample.mjs --offline` | Reprints the frozen intents.near index sample with no network: {{n:near.intents.sample_rows}} rows, {{n:near.intents.payment_count}} payment-scale settlement, {{range:near.intents.sample_rows}}, blocks {{field:near.intents_sample.height_min}} to {{field:near.intents_sample.height_max}}. |
 | `node thesis.mjs --fetch-relays` | The known relay accounts over 30 days, through the FastNEAR transaction API (`POST /v0/account` and `POST /v0/transactions`). It writes `data/snapshot/near/facilitators.json` and reuses the Delegate match from the relayer census. It does not page NearBlocks. |
 | `node thesis.mjs --check README.md` | `mismatches: 0`. The script builds this page again from `README.tmpl.md` and `data/thesis.json` and compares it line by line, so an edited figure on this page shows up as a mismatch. Figures typed into the template itself are not covered by this check. The quotes cover them. |
 | `node thesis.mjs --check-quotes` | `missing: 0`. Each quote below is fetched again and found word for word. Web pages are read directly, X posts through the public fxtwitter API, and the one PDF is reported as not machine-checked. |
@@ -72,7 +72,7 @@ The word settlement is used for two different records. NEAR Intents settles a pa
 
 ## 2. A payment and a delivered answer are two different records
 
-vet402 tried to buy from x402 sellers {{range:vet402.attempts}} UTC. Of {{n:vet402.attempts}} attempts, {{n:vet402.settled}} settled. For {{n:vet402.settled_no_tx}} of those, all on Arc mainnet (eip155:5042), the export has no transaction hash. For {{n:vet402.settled_seller_claim}} of the settled purchases, the export records the seller's claim as the evidence of settlement. The rechecks below cover samples of those on Base and Solana. Of the settled purchases, {{n:vet402.delivered}} came back with an HTTP 2xx answer ({{n:vet402.delivered_share}}).
+vet402 tried to buy from x402 sellers {{range:vet402.attempts}}. Of {{n:vet402.attempts}} attempts, {{n:vet402.settled}} settled. For {{n:vet402.settled_no_tx}} of those, all on Arc mainnet (eip155:5042), the export has no transaction hash. For {{n:vet402.settled_seller_claim}} of the settled purchases, the export records the seller's claim as the evidence of settlement. The rechecks below cover samples of those on Base and Solana. Of the settled purchases, {{n:vet402.delivered}} came back with an HTTP 2xx answer ({{n:vet402.delivered_share}}).
 
 {{n:vet402.held}} settled purchases got a 4xx answer that may come from how vet402 asked, so vet402 holds them out of its own rates. Of the {{n:vet402.settled_not_held}} settled purchases left, {{n:vet402.unexplained}} ({{n:vet402.unexplained_share_excl_held}}) paid and got no usable answer, with no explanation in the record.
 
@@ -92,7 +92,7 @@ NEAR Intents lists `0x2CfF890f0378a11913B6129B2E97417a2c302680` as its treasury 
 
 NEAR Foundation names the same layer (quote `near_blog.around_payment`). Its stated intention is that an agent can pay through x402 and rely on NEAR infrastructure for everything around that payment. This section is the cross-chain settlement, the movement through Intents. It is not a count of x402 settlement on NEAR. The same post also names settlement on NEAR Protocol, covered in section 5.
 
-Of {{n:near.intents.sample_rows}} recent intents.near index rows {{range:near.intents.sample_rows}} UTC, blocks {{field:near.intents_sample.height_min}} to {{field:near.intents_sample.height_max}}, {{n:near.intents.payment_count}} is a payment-scale settlement, not the delegate-action count N.
+Of {{n:near.intents.sample_rows}} recent intents.near index rows {{range:near.intents.sample_rows}}, blocks {{field:near.intents_sample.height_min}} to {{field:near.intents_sample.height_max}}, {{n:near.intents.payment_count}} is a payment-scale settlement, not the delegate-action count N.
 
 ## 4. The model
 

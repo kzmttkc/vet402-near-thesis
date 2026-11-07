@@ -24,7 +24,7 @@ test("render format: share, USD, count, and range", () => {
   assert.equal(formatNumber({ value: 42675, unit: "USD", unit_kind: "count" }), "42,675");
   assert.equal(
     formatRange({ from: "2026-08-14T09:54:31Z", to: "2026-10-29T21:32:37Z" }),
-    "from 2026-08-14 09:54 to 2026-10-29 21:32",
+    "from 2026-08-14 09:54 to 2026-10-29 21:32 UTC",
   );
   assert.equal(formatRange({ from_block: 51965969, to_block: 53261969 }), "blocks 51965969 to 53261969");
 });
@@ -65,7 +65,7 @@ test("render fills model, breakdown, quotes, definitions, and snapshot", () => {
   );
   assert.match(out, /^0\.040% 0\.1625%/);
   assert.match(out, /\| 1x \| \$51 \| \$1,000 \| \$1,000 \|/);
-  assert.match(out, /18,683 from 2026-08-14 09:54 to 2026-10-29 21:32 2026-10-29 22:04 vet402_export/);
+  assert.match(out, /18,683 from 2026-08-14 09:54 to 2026-10-29 21:32 UTC 2026-10-29 22:04 vet402_export/);
   assert.match(out, /\| 1-not-settled \| settle_failed \| payer_unfunded \| false \| false \| 1,032 \|/);
   assert.ok(out.indexOf("1-not-settled") < out.indexOf("3-settled"));
   assert.match(out, /\| attempt \| A row whose network is non-empty\. \|/);
