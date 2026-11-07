@@ -8,7 +8,7 @@ The exact-scheme spec is merged and the facilitators are named. That is the stro
 
 ## Where this stands (2026-11-07)
 
-- x402scan still cannot count x402 settlement on NEAR. NEAR Intents already settles payments across chains. The x402 NEAR settlement spec is present. N, the delegate-action count on NEAR, is not frozen yet.
+- As of 2026-10-30, x402scan cannot count x402 settlement on NEAR. NEAR Intents already settles payments across chains. The x402 NEAR settlement spec is present. N, the delegate-action count on NEAR, is not frozen yet.
 - The threshold is N ≥ {{n:threshold.line}}, committed in f0c48d1. The line is 1% of the Base x402 count frozen on 2026-10-30, so it does not depend on NEAR data. The check is in [PREREG-VERIFY.md](PREREG-VERIFY.md).
 - [THESIS.md](THESIS.md) holds the claim, the evidence, and that threshold.
 
@@ -132,7 +132,7 @@ Each day the public counts are fetched again with no key, and the dashboard show
 | Settled and delivered purchases in vet402's sample | `lib/classify.mjs` on the vet402 export |
 | N, delegate-action USDC transfers on NEAR, 30 days | `data/snapshot/near/facilitators.json`, via `lib/sources/fastnear-census.mjs` (`node thesis.mjs --fetch-relays`). The full walk in `lib/sources/relay-census.mjs` is not frozen. |
 
-x402scan still does not list NEAR. N is the count used here for x402 settlement on NEAR, and it includes delegate-action USDC transfers that are not x402. If x402scan starts listing NEAR, that row belongs here too.
+As of 2026-10-30, x402scan does not list NEAR. N is the count used here for x402 settlement on NEAR, and it includes delegate-action USDC transfers that are not x402. If x402scan starts listing NEAR, that row belongs here too.
 
 The windows do not line up to the hour. DefiLlama counts whole days, x402scan runs to its latest block, and the treasury count uses the block range above.
 
