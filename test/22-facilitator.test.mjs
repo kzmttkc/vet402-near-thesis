@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { contentSha256, createReceipt, publicKeyFromSeed } from "../lib/delivery-proof/index.mjs";
 import { NEAR_USDC } from "../lib/sources/relay-census.mjs";
@@ -229,4 +230,17 @@ test("verify rejects an expired delegate before any transaction is submitted", a
     await facilitator.close();
     await mock.close();
   }
+});
+
+test("the README tells NEAR what it can run today", () => {
+  const readme = readFileSync(new URL("../README.md", import.meta.url), "utf8");
+  assert.match(readme, /## What NEAR can use today/);
+  assert.match(readme, /POST \/receipt/);
+  assert.match(readme, /canonical JSON, not the Borsh/);
+  assert.match(readme, /node --test test\/22-facilitator\.test\.mjs/);
+  assert.match(readme, /mock NEAR RPC, not a sandbox: buyer payment, facilitator settle, seller receipt/);
+  assert.match(readme, /spec\/delivery-proof\.md/);
+  assert.match(readme, /node --test test\/21-delivery-proof\.test\.mjs/);
+  assert.match(readme, /frozen vectors: valid receipt, tampered body, reused payment, forged signature/);
+  assert.match(readme, /ℹ fail 0/);
 });
