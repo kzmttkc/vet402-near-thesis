@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T12:47:34.789Z",
+  "generated_at": "2026-11-07T12:49:26.231Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
@@ -540,6 +540,58 @@
       "as_of": "2026-11-07T12:47:16.312Z",
       "source": "fastnear_tx_api",
       "definition": "Relay accounts named in facilitators.json and counted over that window."
+    },
+    "near.known.named_delegate": {
+      "value": 0,
+      "unit": "x402 payments",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:27.636Z",
+        "to": "2026-11-07T11:42:27.483Z"
+      },
+      "as_of": "2026-11-07T12:47:16.312Z",
+      "source": "fastnear_tx_api",
+      "definition": "Delegate-action USDC ft_transfers signed by x402-relayer2.mike.near, x402-relayer.mike.near, solvador.near, and uvd-facilitator.near. For these named facilitators this is the x402 settlement count."
+    },
+    "near.known.uvd_signer_txs": {
+      "value": 51,
+      "unit": "signer transactions",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:27.636Z",
+        "to": "2026-11-07T11:42:27.483Z"
+      },
+      "as_of": "2026-11-07T12:47:16.312Z",
+      "source": "fastnear_tx_api",
+      "definition": "Signer transactions of uvd-facilitator.near in the window. The opened bodies are escrow calls on v1.arras-escrow.near and ft_transfer_call to NEAR USDC, not a single ft_transfer."
+    },
+    "near.known.uvd_delegate": {
+      "value": 0,
+      "unit": "NEAR delegate-action USDC transfers in 30 days",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:27.636Z",
+        "to": "2026-11-07T11:42:27.483Z"
+      },
+      "as_of": "2026-11-07T12:47:16.312Z",
+      "source": "fastnear_tx_api",
+      "definition": "Delegate-action USDC ft_transfers signed by uvd-facilitator.near. ft_transfer_call is not this count."
+    },
+    "near.known.generic_delegate": {
+      "value": 1716,
+      "unit": "NEAR delegate-action USDC transfers in 30 days",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:27.636Z",
+        "to": "2026-11-07T11:42:27.483Z"
+      },
+      "as_of": "2026-11-07T12:47:16.312Z",
+      "source": "fastnear_tx_api",
+      "definition": "Delegate-action USDC ft_transfers signed by 5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c. That account is not named by a facilitator /supported response. The transfers are not known to be x402. They are counted only as a lower bound on N."
     },
     "vet402.settled_no_tx": {
       "value": 13,
@@ -1339,6 +1391,10 @@
         "uvd-facilitator.near 0",
         "5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c 1716"
       ],
+      "named_delegate": 0,
+      "generic_delegate": 1716,
+      "uvd_signer_txs": 51,
+      "uvd_delegate": 0,
       "window": {
         "from": "2026-10-08T11:42:27.636Z",
         "to": "2026-11-07T11:42:27.483Z"

@@ -103,6 +103,28 @@ test("a live record is one UTC day and a later day does not delete the earlier f
   assert.equal(first.lower, 1716);
 });
 
+test("named facilitators with zero settlements sit with the claim", () => {
+  const thesis = readFileSync(join(ROOT, "THESIS.md"), "utf8");
+  const readme = readFileSync(join(ROOT, "README.md"), "utf8");
+  const claim = thesis.indexOf("## Claim");
+  const impact = thesis.indexOf("### Impact");
+  const against = thesis.indexOf("## Evidence against");
+  const zero = thesis.indexOf("settled 0 x402 payments");
+  assert.ok(claim !== -1 && claim < zero && zero < impact);
+  assert.ok(zero < against);
+  assert.match(thesis.slice(claim, impact), /uvd-facilitator\.near` signed 51 transactions/);
+  assert.match(thesis.slice(claim, impact), /Delegate USDC `ft_transfer` count is 0/);
+  assert.doesNotMatch(thesis.slice(against, thesis.indexOf("## What would change my mind")), /settled 0 x402 payments/);
+  const generic = thesis.indexOf("It is a generic relay.");
+  assert.ok(against < generic);
+  assert.match(thesis, /not named by any facilitator `\/supported` response/);
+  assert.match(thesis, /not known to be x402/);
+  assert.match(thesis, /counted only as a lower bound on N/);
+  assert.match(readme, /settled 0 x402 payments/);
+  assert.match(readme, /It is a generic relay\./);
+  assert.match(readme, /counted only as a lower bound on N/);
+});
+
 test("the upkeep sentence says the counts are fetched again each day", () => {
   const sentence = "Each day the public counts are fetched again with no key, and the dashboard shows when they move toward the line of 25,400.";
   const thesis = readFileSync(join(ROOT, "THESIS.md"), "utf8");

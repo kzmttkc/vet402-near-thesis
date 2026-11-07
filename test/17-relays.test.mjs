@@ -336,6 +336,10 @@ test("the frozen snapshot has no full relay count yet", async () => {
   assert.equal(loaded.near.relays.pending, true);
   assert.equal(loaded.numbers["near.relays.lower"], undefined);
   assert.equal(loaded.numbers["near.known.lower"].value, 1716);
+  assert.equal(loaded.numbers["near.known.named_delegate"].value, 0);
+  assert.equal(loaded.numbers["near.known.uvd_signer_txs"].value, 51);
+  assert.equal(loaded.numbers["near.known.uvd_delegate"].value, 0);
+  assert.equal(loaded.numbers["near.known.generic_delegate"].value, 1716);
   assert.equal(loaded.near.known.reading, "not decided");
   assert.equal(loaded.near.known.line, 25400);
   assert.equal(loaded.numbers["near.spec.settlement_sentence"].value, 1);
