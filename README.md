@@ -36,7 +36,7 @@ Node 20 or newer. Nothing to install.
 
 The vet402 export behind this page has sha256 `43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077` and was retrieved 2026-10-29T22:04:40.090Z. The derived copy in this repository, `data/snapshot/export.derived.csv`, has sha256 `e47ebcf5915ca3d9ac889ae75d52ec653a54964a5dc85a0d793ffe2465744e4c`.
 
-## What NEAR can use today
+## What NEAR can run on this machine
 
 Two pieces run on this machine. Neither one sends a mainnet transaction.
 

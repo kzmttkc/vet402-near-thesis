@@ -232,9 +232,9 @@ test("verify rejects an expired delegate before any transaction is submitted", a
   }
 });
 
-test("the README tells NEAR what it can run today", () => {
+test("the README names what NEAR can run on this machine", () => {
   const readme = readFileSync(new URL("../README.md", import.meta.url), "utf8");
-  assert.match(readme, /## What NEAR can use today/);
+  assert.match(readme, /## What NEAR can run on this machine/);
   assert.match(readme, /POST \/receipt/);
   assert.match(readme, /canonical JSON, not the Borsh/);
   assert.match(readme, /node --test test\/22-facilitator\.test\.mjs/);
