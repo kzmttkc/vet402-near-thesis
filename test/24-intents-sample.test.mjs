@@ -9,10 +9,15 @@ import { NEAR_USDC } from "../lib/sources/relay-census.mjs";
 import {
   classifyIntentsCall,
   collectIntentsSample,
+  collectPoint,
   countsFromRows,
+  dailyPoints,
+  lastCompleteDate,
   PAYMENT_MAX_RAW,
   readStampedIntentsSample,
+  ROWS_PER_DAY,
   rowIsPayment,
+  SAMPLE_CLOCK,
   spanFromRows,
   stampIntentsSample,
   TX_BATCH,
@@ -152,18 +157,17 @@ test("collect opens hashes in batches of 15 and drops a repeated list hash", asy
       transactions: body.tx_hashes.map((hash) => entry({ hash, args: argsFor(hash === "hash0" ? "25000" : "0") })).reverse(),
     };
   };
-  const doc = await collectIntentsSample(post, { retrievedAt: "2026-11-07T15:23:22.000Z" });
+  const doc = await collectPoint(post);
   assert.deepEqual(calls.map((call) => call.n), [30, TX_BATCH, 1]);
   assert.equal(doc.rows.length, TX_BATCH + 1);
-  assert.equal(doc.payment_count, 1);
-  assert.equal(doc.execute_calls, TX_BATCH + 1);
-  assert.equal(doc.sample_rows, TX_BATCH + 1);
-  assert.equal(doc.height_min, 1000);
-  assert.equal(doc.height_max, 1000 + TX_BATCH);
-  assert.equal(doc.from, "2026-11-07T15:20:00.000Z");
-  assert.equal(doc.to, "2026-11-07T15:20:15.000Z");
+  assert.equal(doc.rows.filter(rowIsPayment).length, 1);
   assert.equal(doc.txs_count_reported, 50);
-  const missing = async () => collectIntentsSample(async (path, body) => {
+  const span = spanFromRows(doc.rows);
+  assert.equal(span.height_min, 1000);
+  assert.equal(span.height_max, 1000 + TX_BATCH);
+  assert.equal(span.from, "2026-11-07T15:20:00.000Z");
+  assert.equal(span.to, "2026-11-07T15:20:15.000Z");
+  const missing = async () => collectPoint(async (path, body) => {
     if (path === "/v0/account") {
       return {
         txs_count: 1,
@@ -175,31 +179,97 @@ test("collect opens hashes in batches of 15 and drops a repeated list hash", asy
   await assert.rejects(missing, /missing 1 transaction/);
 });
 
+test("thirty daily points sit on 16:20 UTC and a failed day is unavailable", async () => {
+  assert.equal(lastCompleteDate("2026-11-07T16:20:00.000Z"), "2026-11-06");
+  assert.equal(lastCompleteDate("2026-11-07T18:00:00.000Z"), "2026-11-07");
+  const points = dailyPoints("2026-11-07", 30);
+  assert.equal(points.length, 30);
+  assert.equal(points[0].at, "2026-10-09T16:20:00.000Z");
+  assert.equal(points[29].at, "2026-11-07T16:20:00.000Z");
+  const tipMs = Date.parse("2026-11-07T18:00:00.000Z");
+  const tipHeight = 2_000_000;
+  const heightAt = (iso) => tipHeight - Math.round((tipMs - Date.parse(iso)) / 1000);
+  const post = async (path, body) => {
+    if (path === "/v0/blocks") {
+      return { blocks: [{ block_height: tipHeight, block_timestamp: String(BigInt(tipMs) * 1_000_000n) }] };
+    }
+    if (path === "/v0/block") {
+      const height = body.block_id;
+      const ts = BigInt(tipMs - (tipHeight - height) * 1000) * 1_000_000n;
+      return { block: { block_height: height, block_timestamp: String(ts) } };
+    }
+    if (path === "/v0/account") {
+      if (body.from_tx_block_height < heightAt("2026-11-07T16:20:00.000Z") - 1000) {
+        throw new Error("HTTP 429");
+      }
+      const start = body.from_tx_block_height;
+      return {
+        txs_count: 30,
+        account_txs: Array.from({ length: 30 }, (_, i) => ({
+          transaction_hash: `h${start}-${i}`,
+          tx_block_timestamp: String(BigInt(tipMs - (tipHeight - (start + i)) * 1000) * 1_000_000n),
+          tx_block_height: start + i,
+        })),
+      };
+    }
+    return {
+      transactions: body.tx_hashes.map((hash) => entry({ hash, args: argsFor("25000") })),
+    };
+  };
+  const doc = await collectIntentsSample(post, { retrievedAt: "2026-11-07T18:05:00.000Z", days: 2 });
+  assert.equal(doc.days, 2);
+  assert.equal(doc.unavailable_label, "2026-11-06");
+  assert.deepEqual(doc.unavailable, ["2026-11-06"]);
+  assert.equal(doc.sample_rows, 30);
+  assert.equal(doc.payment_count, 30);
+  assert.equal(doc.points[1].status, "ok");
+  assert.equal(doc.points[1].rows, 30);
+  assert.ok(doc.points[1].first_at >= "2026-11-07T16:20:00.000Z");
+  const stamped = readStampedIntentsSample(stampIntentsSample(doc));
+  assert.equal(stamped.payment_count, 30);
+});
+
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
-test("the frozen sample is 30 index rows and 1 payment-scale settlement", async () => {
+test("the frozen sample is 30 daily points and 900 index rows", async () => {
   const text = await readFile(join(ROOT, "data/snapshot/near/intents-payment-sample.json"), "utf8");
   const doc = readStampedIntentsSample(text);
-  assert.equal(doc.retrieved_at, "2026-11-07T16:20:07.100Z");
-  assert.equal(doc.sample_rows, 30);
-  assert.equal(doc.execute_calls, 10);
-  assert.equal(doc.payment_count, 1);
-  assert.equal(doc.from, "2026-11-07T16:18:44.308Z");
-  assert.equal(doc.to, "2026-11-07T16:20:04.418Z");
-  assert.equal(doc.height_min, 223490307);
-  assert.equal(doc.height_max, 223490446);
-  assert.equal(doc.sha256, "9c1dc55c0543a20c9878c79464fdf9cc5d9be5a25d23bebab453ece38b5af154");
-  const pay = doc.rows.filter(rowIsPayment);
-  assert.equal(pay.length, 1);
-  assert.equal(pay[0].hash, "A3ono5Jj6CEkqwQTvquK8eF9sPzxcLsqXXc73kYfo4Yw");
-  assert.deepEqual(pay[0].usdc_raw, ["493701"]);
+  assert.equal(doc.retrieved_at, "2026-11-07T18:12:43.995Z");
+  assert.equal(doc.days, 30);
+  assert.equal(doc.clock_utc, SAMPLE_CLOCK);
+  assert.equal(doc.rows_per_point, ROWS_PER_DAY);
+  assert.equal(doc.unavailable_label, "none");
+  assert.deepEqual(doc.unavailable, []);
+  assert.equal(doc.points.length, 30);
+  assert.equal(doc.points[0].date, "2026-10-09");
+  assert.equal(doc.points[29].date, "2026-11-07");
+  for (const point of doc.points) {
+    assert.equal(point.status, "ok");
+    assert.equal(point.rows, ROWS_PER_DAY);
+    assert.equal(point.at, `${point.date}T${SAMPLE_CLOCK}`);
+    assert.ok(point.first_at >= point.at);
+    assert.ok(Date.parse(point.first_at) - Date.parse(point.at) < 120_000);
+    assert.equal(point.sample, undefined);
+  }
+  assert.equal(doc.sample_rows, 900);
+  assert.equal(doc.execute_calls, 336);
+  assert.equal(doc.payment_count, 0);
+  assert.equal(doc.rows.filter(rowIsPayment).length, 0);
+  assert.equal(new Set(doc.rows.map((row) => row.hash)).size, 900);
+  assert.equal(doc.from, "2026-10-09T16:20:02.447Z");
+  assert.equal(doc.to, "2026-11-07T16:21:00.596Z");
+  assert.equal(doc.height_min, 219253923);
+  assert.equal(doc.height_max, 223490544);
+  assert.equal(doc.sha256, "3723cd979d4e392c1585f6225cf233f2a52f6f278211a84328f29a7596109ca5");
   const loaded = await loadNear(join(ROOT, "data/snapshot/near"));
-  assert.equal(loaded.numbers["near.intents.sample_rows"].value, 30);
-  assert.equal(loaded.numbers["near.intents.payment_count"].value, 1);
+  assert.equal(loaded.numbers["near.intents.points"].value, 30);
+  assert.equal(loaded.numbers["near.intents.sample_rows"].value, 900);
+  assert.equal(loaded.numbers["near.intents.payment_count"].value, 0);
   assert.equal(loaded.near.intents_sample.from, doc.from);
   assert.equal(loaded.near.intents_sample.to, doc.to);
-  assert.equal(loaded.near.intents_sample.height_min, 223490307);
-  assert.equal(loaded.near.intents_sample.height_max, 223490446);
+  assert.equal(loaded.near.intents_sample.height_min, 219253923);
+  assert.equal(loaded.near.intents_sample.height_max, 223490544);
+  assert.equal(loaded.near.intents_sample.unavailable_label, "none");
   const offline = await new Promise((resolve, reject) => {
     const child = spawn(process.execPath, ["online/fetch-intents-sample.mjs", "--offline"], {
       cwd: ROOT,
@@ -219,6 +289,6 @@ test("the frozen sample is 30 index rows and 1 payment-scale settlement", async 
   assert.equal(offline.code, 0, offline.stderr);
   assert.equal(
     offline.stdout,
-    "intents sample 30 rows, payment_count 1, blocks 223490307 to 223490446, 2026-11-07T16:18:44.308Z to 2026-11-07T16:20:04.418Z UTC\n",
+    "intents sample 900 rows, payment_count 0, blocks 219253923 to 223490544, 2026-10-09T16:20:02.447Z to 2026-11-07T16:21:00.596Z UTC, unavailable none\n",
   );
 });

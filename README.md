@@ -25,7 +25,7 @@ Node 20 or newer. Nothing to install.
 | Do this | See this |
 |---|---|
 | `node thesis.mjs --offline` | `rebuilt … numbers from data/snapshot (no network), 2 checks ok`. The numbers on this page, rebuilt from the frozen snapshot in `data/snapshot/`. It rewrites `data/thesis.json` and `docs/thesis.json`; only `generated_at` changes. NEAR from that same frozen snapshot, with no network: the settlement spec is present (1), the opt-in catalog lists 0 resources, the named relayer has 6 payments, and N's line is 25,400. The known relay accounts sum to 1,716, a lower bound on N and 6.8% of the line, and that reading is not decided. The biased sample estimate is in the appendix and is not used in the claim. Stdout is one line and ends with `full count not yet fetched` while `relay-census.json` is absent. |
-| `node online/fetch-intents-sample.mjs --offline` | Reprints the frozen intents.near index sample with no network: 30 rows, 1 payment-scale settlement, from 2026-11-07 16:18 to 2026-11-07 16:20 UTC, blocks 223490307 to 223490446. |
+| `node online/fetch-intents-sample.mjs --offline` | Reprints the frozen intents.near index sample with no network: 900 rows in the 30-day sample, payment-scale settlements: 0 (from 2026-10-09 16:20 to 2026-11-07 16:21 UTC), blocks 219253923 to 223490544. Days not fetched: none. |
 | `node thesis.mjs --fetch-relays` | The known relay accounts over 30 days, through the FastNEAR transaction API (`POST /v0/account` and `POST /v0/transactions`). It writes `data/snapshot/near/facilitators.json` and reuses the Delegate match from the relayer census. It does not page NearBlocks. |
 | `node thesis.mjs --check README.md` | `mismatches: 0`. The script builds this page again from `README.tmpl.md` and `data/thesis.json` and compares it line by line, so an edited figure on this page shows up as a mismatch. Figures typed into the template itself are not covered by this check. The quotes cover them. |
 | `node thesis.mjs --check-quotes` | `missing: 0`. Each quote below is fetched again and found word for word. Web pages are read directly, X posts through the public fxtwitter API, and the one PDF is reported as not machine-checked. |
@@ -124,7 +124,7 @@ NEAR Intents lists `0x2CfF890f0378a11913B6129B2E97417a2c302680` as its treasury 
 
 NEAR Foundation names the same layer (quote `near_blog.around_payment`). Its stated intention is that an agent can pay through x402 and rely on NEAR infrastructure for everything around that payment. This section is the cross-chain settlement, the movement through Intents. It is not a count of x402 settlement on NEAR. The same post also names settlement on NEAR Protocol, covered in section 5.
 
-Of 30 intents.near index rows from 2026-11-07 16:18 to 2026-11-07 16:20 UTC, blocks 223490307 to 223490446, 1 is a payment-scale settlement, not the delegate-action count N.
+Of 900 rows in the 30-day sample, payment-scale settlements: 0 (from 2026-10-09 16:20 to 2026-11-07 16:21 UTC). Each point is 30 rows from 16:20 UTC, read from FastNEAR with no key. Days not fetched: none. This count is not the delegate-action count N.
 
 ## 4. The model
 
