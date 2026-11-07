@@ -124,6 +124,8 @@ Rerun `node thesis.mjs` on the next 30-day window and compare.
 
 ## 7. What I watch
 
+Each day the public counts are fetched again with no key, and the dashboard shows when they move toward the line of 25,400.
+
 | Indicator | Where it comes from in this repository |
 |---|---|
 | x402 dollars and payments by chain, 30 days | `lib/sources/x402scan.mjs` |

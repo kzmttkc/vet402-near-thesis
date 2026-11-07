@@ -103,6 +103,20 @@ test("a live record is one UTC day and a later day does not delete the earlier f
   assert.equal(first.lower, 5);
 });
 
+test("the upkeep sentence says the counts are fetched again each day", () => {
+  const sentence = "Each day the public counts are fetched again with no key, and the dashboard shows when they move toward the line of 25,400.";
+  const thesis = readFileSync(join(ROOT, "THESIS.md"), "utf8");
+  const readme = readFileSync(join(ROOT, "README.md"), "utf8");
+  assert.equal(thesis.includes(sentence), true);
+  assert.equal(readme.includes(sentence), true);
+  const thesisAt = thesis.indexOf("### Sustainability");
+  const thesisNext = thesis.indexOf("## Evidence for");
+  assert.ok(thesisAt !== -1 && thesisAt < thesis.indexOf(sentence) && thesis.indexOf(sentence) < thesisNext);
+  const watch = readme.indexOf("## 7. What I watch");
+  const windows = readme.indexOf("The windows do not line up");
+  assert.ok(watch !== -1 && watch < readme.indexOf(sentence) && readme.indexOf(sentence) < windows);
+});
+
 test("the daily workflow runs the two fetches apart and does not open a pull request", async () => {
   const yml = await readFile(join(ROOT, ".github", "workflows", "refresh.yml"), "utf8");
   assert.match(yml, /cron:\s*"30 0 \* \* \*"/);
