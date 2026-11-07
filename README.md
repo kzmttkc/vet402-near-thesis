@@ -1,6 +1,6 @@
 # NEAR in agent payments: a thesis you can rerun
 
-The claim stands: over all 30 days, N ≤ 2,532, below the pre-registered line of 25,400. The threshold of 25,400, posted on chain at 2026-11-07 10:13 UTC before the count, is that line. The line of 25,400 was posted on chain before that count. The dashboard is published at https://kzmttkc.github.io/vet402-near-thesis/ .
+The claim stands: over all 30 days, N ≤ 2,532, below the threshold of 25,400 that was posted on chain at 2026-11-07 10:13 UTC, before the count. The dashboard is published at https://kzmttkc.github.io/vet402-near-thesis/ .
 
 NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-28 00:00 UTC (retrieved 2026-10-29 23:18 UTC). That volume is not a count of agent payments. x402 has had a NEAR settlement spec since 2026-05-16 14:01 UTC. The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled 0 exact-scheme payments from 2026-10-08 11:42 to 2026-11-07 11:42 UTC.
 
