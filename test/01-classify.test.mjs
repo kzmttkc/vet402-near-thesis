@@ -19,15 +19,16 @@ const KNOWN = [
   { status: "settle_failed", held_reason: "", networkEmpty: false, category: "1-not-settled" },
   { status: "settle_failed", held_reason: "payer_unfunded", networkEmpty: false, category: "1-not-settled" },
   { status: "settle_claim_refuted", held_reason: "", networkEmpty: false, category: "1-not-settled" },
+  { status: "gateway_not_charged_expired", held_reason: "", networkEmpty: false, category: "1-not-settled" },
   { status: "delivered_no_receipt", held_reason: "", networkEmpty: false, category: "2-pending" },
   { status: "settle_claimed", held_reason: "", networkEmpty: false, category: "2-pending" },
   { status: "settled", held_reason: "", networkEmpty: false, category: "3-settled" },
   { status: "settled", held_reason: "settled_4xx", networkEmpty: false, category: "3-settled" },
 ];
 
-test("known 14 triples map uniquely onto ①–④", () => {
-  assert.equal(KNOWN.length, 14);
-  assert.equal(KNOWN_TRIPLES.length, 14);
+test("known 15 triples map uniquely onto ①–④", () => {
+  assert.equal(KNOWN.length, 15);
+  assert.equal(KNOWN_TRIPLES.length, 15);
   const seen = new Set();
   for (const spec of KNOWN) {
     const key = `${spec.status}\0${spec.held_reason}\0${spec.networkEmpty ? "empty" : "set"}`;
@@ -42,6 +43,23 @@ test("known 14 triples map uniquely onto ①–④", () => {
     });
     assert.equal(got.category, spec.category);
   }
+});
+
+test("gateway_not_charged_expired is not settled", () => {
+  const got = classify({
+    status: "gateway_not_charged_expired",
+    held_reason: "",
+    network: "near",
+    http_status_paid: "",
+    tx_hash: "",
+  });
+  assert.equal(got.category, "1-not-settled");
+  assert.equal(got.attempt, true);
+  assert.equal(got.settled, false);
+  assert.throws(
+    () => classify({ status: "gateway_not_charged_expired", held_reason: "", network: "", http_status_paid: "", tx_hash: "" }),
+    /unknown combination/,
+  );
 });
 
 test("unknown triple throws", () => {
