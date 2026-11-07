@@ -14,13 +14,9 @@ The exact-scheme spec is merged and the facilitators are named. That is the stro
 
 This is an entry for the NEAR HACKATHON track "Investment Thesis", which is judged on the evidence.
 
-## Publishing the pre-registered line
+## The pre-registered line
 
-When this repository is published, the history of the default branch has to contain commit `f0c48d13ed5af6147daa0e7a0b444855f3186770` (`f0c48d1`), so a third party can see the line as it was committed. Tag that commit at publication, and not before:
-
-```
-git tag prereg-threshold f0c48d13ed5af6147daa0e7a0b444855f3186770
-```
+The history of this branch contains commit `f0c48d13ed5af6147daa0e7a0b444855f3186770` (`f0c48d1`), so a third party can see the line as it was committed. At publication, the executive tags that commit `prereg-threshold`. `git show prereg-threshold:THESIS.md | shasum -a 256` prints the digest posted on NEAR (see [PREREG-VERIFY.md](PREREG-VERIFY.md)).
 
 ## Try it
 

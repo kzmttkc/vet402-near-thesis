@@ -30,6 +30,10 @@ test("the current pages point at the check and do not say the post was before an
   assert.match(verify, /10:13 UTC is before the full-count fetch and after the NEAR sample fetch \(2026-11-07 04:24 to 05:28 UTC\)/);
   assert.match(verify, /lower bound of accounts whose names are known/);
   assert.match(verify, /one known x402 facilitator relayer/);
-  assert.match(readme, /git tag prereg-threshold f0c48d13ed5af6147daa0e7a0b444855f3186770/);
+  assert.match(readme, /f0c48d13ed5af6147daa0e7a0b444855f3186770/);
+  assert.match(readme, /At publication, the executive tags that commit `prereg-threshold`/);
+  assert.match(thesis, /At publication, the executive tags commit f0c48d1 `prereg-threshold`/);
+  assert.doesNotMatch(readme, /Tag that commit/);
+  assert.doesNotMatch(thesis, /once that tag is public/);
   assert.doesNotMatch(verify, /It is still a free public count of N/);
 });
