@@ -116,7 +116,7 @@ The condition is the one in [THESIS.md](THESIS.md). I will drop the claim that x
 
 > **N ≥ {{n:threshold.line}}**, where N is the number of NEAR delegate-action USDC transfers in a 30-day window, and {{n:threshold.line}} is 1% of the x402 payments counted on Base over 30 days.
 
-N counts a NEAR transaction only when all of these are true. It carries a `Delegate` action. The delegate's `receiver_id` is the NEAR USDC contract `17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1`. That action holds exactly one `ft_transfer`. The inner transfer succeeded. The block time falls in the 30 days that end at the fetch. N also includes delegate-action USDC transfers that are not x402, so N is an upper bound, tilted against the claim. A higher N can only make me change my mind sooner.
+N counts a NEAR transaction only when all of these are true. It carries a `Delegate` action. The delegate's `receiver_id` is the NEAR USDC contract `17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1`. That action holds exactly one `ft_transfer`. The inner transfer succeeded. The block time falls in the 30 days that end at the fetch. N also includes delegate-action USDC transfers that are not x402, so N is an upper bound, tilted against the claim. N bounds exact-scheme x402 only; escrow-scheme calls such as uvd-facilitator.near's are outside N. A higher N can only make me change my mind sooner.
 
 The line is the next whole number above 1% of the Base count frozen on 2026-10-30, in `data/snapshot/x402scan/base.json`. A later NEAR fetch cannot move it. The reading rule for a partial count is in [THESIS.md](THESIS.md).
 
