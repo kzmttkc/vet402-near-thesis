@@ -10,7 +10,7 @@ The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`
 
 `uvd-facilitator.near` signed 51 transactions in that window: 14 Delegate `ft_transfer_call` to NEAR USDC and 37 calls on `v1.arras-escrow.near` (24 `withdraw_for`, 11 `release`, 2 `refund`). Those may be an escrow scheme of x402. This page does not classify them as x402 or as not x402. Its exact-scheme Delegate USDC `ft_transfer` count is 0.
 
-The exact-scheme spec is merged and the facilitators are named. That is the strongest evidence that the exact scheme has not lit.
+The exact-scheme spec is merged and the facilitators are named, yet they settled 0 exact-scheme payments in those 30 days. That gap is the strongest evidence that the exact scheme has not lit.
 
 ### Impact
 
