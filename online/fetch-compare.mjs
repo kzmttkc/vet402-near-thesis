@@ -1,5 +1,6 @@
-// Needs the public network. Not part of `npm test` or `node --test`.
-// Run: node --test test/online/fetch-compare.mjs
+// Needs the public network. Not part of `npm test` or bare `node --test`.
+// Node runs every file under test/, so this file stays outside that directory.
+// Run: node --test online/fetch-compare.mjs
 // A throwaway copy fetches the public sources, then --offline rebuilds, and the two number sets match.
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
@@ -9,7 +10,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
 function runThesis(dir, args) {
   return new Promise((resolve, reject) => {
