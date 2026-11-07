@@ -19,6 +19,12 @@ const COMPLETE = {
 };
 
 test("record throws when range, as_of, or source is missing", () => {
+  assert.equal(record("n", { ...COMPLETE, unit: "USDC transfer events" }).unit_kind, "count");
+  assert.equal(record("n", { ...COMPLETE, unit: "USD" }).unit_kind, "usd");
+  assert.equal(record("n", { ...COMPLETE, unit: "USDC" }).unit_kind, "usdc");
+  assert.equal(record("n", { ...COMPLETE, unit: "share of USD" }).unit_kind, "share");
+  assert.equal(record("n", { ...COMPLETE, unit: "USD", unit_kind: "count" }).unit_kind, "count");
+  assert.throws(() => record("n", { ...COMPLETE, unit_kind: "dollars" }), /unit_kind/);
   assert.doesNotThrow(() => record("vet402.rows", COMPLETE));
   assert.throws(() => record("vet402.rows", { ...COMPLETE, range: undefined }), /range/);
   assert.throws(() => record("vet402.rows", { ...COMPLETE, as_of: undefined }), /as_of/);

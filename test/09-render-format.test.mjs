@@ -10,6 +10,18 @@ test("render format: share, USD, count, and range", () => {
   assert.equal(formatNumber({ value: 1556904.97, unit: "USD" }), "$1,556,905");
   assert.equal(formatNumber({ value: 3965443376, unit: "USD" }, { compact: true }), "$3.97B");
   assert.equal(formatNumber({ value: 18683, unit: "purchase attempts" }), "18,683");
+  assert.equal(formatNumber({ value: 0.001, unit: "USDC", unit_kind: "usdc" }), "0.001");
+  assert.equal(formatNumber({ value: 0.006, unit: "USDC", unit_kind: "usdc" }), "0.006");
+  assert.equal(
+    formatNumber({ value: 25400, unit: "NEAR delegate-action USDC transfers in 30 days", unit_kind: "count" }),
+    "25,400",
+  );
+  assert.equal(formatNumber({ value: 1837873, unit: "USDC transfer events", unit_kind: "count" }), "1,837,873");
+  assert.equal(
+    formatNumber({ value: 20421, unit: "NEAR delegate-action USDC transfers in 30 days (estimate)", unit_kind: "count" }),
+    "20,421",
+  );
+  assert.equal(formatNumber({ value: 42675, unit: "USD", unit_kind: "count" }), "42,675");
   assert.equal(
     formatRange({ from: "2026-08-14T09:54:31Z", to: "2026-10-29T21:32:37Z" }),
     "from 2026-08-14 09:54 to 2026-10-29 21:32",

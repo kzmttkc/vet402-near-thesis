@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T05:30:33.380Z",
+  "generated_at": "2026-11-07T09:03:34.699Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
@@ -13,6 +13,7 @@
     "vet402.rows": {
       "value": 20058,
       "unit": "rows",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -24,6 +25,7 @@
     "vet402.attempts": {
       "value": 18683,
       "unit": "purchase attempts",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -35,6 +37,7 @@
     "vet402.not_attempts": {
       "value": 1375,
       "unit": "rows",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -46,6 +49,7 @@
     "vet402.not_settled": {
       "value": 6326,
       "unit": "purchase attempts",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -57,6 +61,7 @@
     "vet402.pending": {
       "value": 134,
       "unit": "purchase attempts",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -68,6 +73,7 @@
     "vet402.settled": {
       "value": 12223,
       "unit": "purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -79,6 +85,7 @@
     "vet402.held": {
       "value": 698,
       "unit": "purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -90,6 +97,7 @@
     "vet402.delivered": {
       "value": 11189,
       "unit": "purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -101,6 +109,7 @@
     "vet402.delivered_excl_202": {
       "value": 11091,
       "unit": "purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -112,6 +121,7 @@
     "vet402.unexplained": {
       "value": 336,
       "unit": "purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -123,6 +133,7 @@
     "x402.total.amount_30d": {
       "value": 1579184.911378,
       "unit": "USD",
+      "unit_kind": "usd",
       "range": {
         "days": 30,
         "to": "2026-10-29T22:45:39.000Z"
@@ -134,6 +145,7 @@
     "x402.base.share_amount_30d": {
       "value": 0.7297542594694617,
       "unit": "share of USD",
+      "unit_kind": "share",
       "range": {
         "days": 30,
         "to": "2026-10-29T22:45:39.000Z"
@@ -145,6 +157,7 @@
     "x402.base.share_count_30d": {
       "value": 0.7727125178693498,
       "unit": "share of count",
+      "unit_kind": "share",
       "range": {
         "days": 30,
         "to": "2026-10-29T22:45:39.000Z"
@@ -156,6 +169,7 @@
     "intents.volume_30d": {
       "value": 3965443376,
       "unit": "USD",
+      "unit_kind": "usd",
       "range": {
         "days": 30,
         "from": "2026-09-29T00:00:00.000Z",
@@ -169,6 +183,7 @@
     "intents.volume_all_time": {
       "value": 35604361213,
       "unit": "USD",
+      "unit_kind": "usd",
       "range": {
         "all_time": true,
         "to": "2026-10-28T00:00:00.000Z"
@@ -180,6 +195,7 @@
     "vault.usdc_out_30d.count": {
       "value": 45840,
       "unit": "transfers",
+      "unit_kind": "count",
       "range": {
         "from_block": 51965969,
         "to_block": 53261969
@@ -191,6 +207,7 @@
     "vault.usdc_out_30d.usd": {
       "value": 41050145.312122,
       "unit": "USD",
+      "unit_kind": "usd",
       "range": {
         "from_block": 51965969,
         "to_block": 53261969
@@ -202,6 +219,7 @@
     "threshold.base_count_30d": {
       "value": 2539947,
       "unit": "x402 payments on Base",
+      "unit_kind": "count",
       "range": {
         "days": 30,
         "to": "2026-10-29T22:45:39.000Z"
@@ -213,6 +231,7 @@
     "threshold.line": {
       "value": 25400,
       "unit": "NEAR delegate-action USDC transfers in 30 days",
+      "unit_kind": "count",
       "range": {
         "days": 30,
         "to": "2026-10-29T22:45:39.000Z"
@@ -221,9 +240,22 @@
       "source": "x402scan",
       "definition": "The smallest whole number above 1% of the Base count. THESIS.md: N at or above this line changes my mind."
     },
+    "near.spec.settlement_sentence": {
+      "value": 1,
+      "unit": "specs",
+      "unit_kind": "count",
+      "range": {
+        "from": "2026-05-16T14:01:46Z",
+        "to": "2026-05-16T14:01:47Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "x402-foundation/x402",
+      "definition": "1 when the canonical specs/schemes/exact/scheme_exact_near.md contains the sentence that outer-transaction success is not sufficient. Merged in PR 1459."
+    },
     "near.facilitator.discovery_total": {
       "value": 0,
       "unit": "listed resources",
+      "unit_kind": "count",
       "range": {
         "at": "2026-11-07T04:24:35.741Z"
       },
@@ -234,6 +266,7 @@
     "near.relayer.receipts": {
       "value": 22,
       "unit": "receipts",
+      "unit_kind": "count",
       "range": {
         "all_time": true,
         "to": "2026-11-07T04:24:35.741Z"
@@ -245,6 +278,7 @@
     "near.relayer.payments": {
       "value": 6,
       "unit": "payments",
+      "unit_kind": "count",
       "range": {
         "all_time": true,
         "to": "2026-11-07T04:24:35.741Z"
@@ -256,6 +290,7 @@
     "near.relayer.gas_refunds": {
       "value": 13,
       "unit": "receipts",
+      "unit_kind": "count",
       "range": {
         "all_time": true,
         "to": "2026-11-07T04:24:35.741Z"
@@ -267,6 +302,7 @@
     "near.relayer.account_setup": {
       "value": 2,
       "unit": "receipts",
+      "unit_kind": "count",
       "range": {
         "all_time": true,
         "to": "2026-11-07T04:24:35.741Z"
@@ -278,6 +314,7 @@
     "near.relayer.funding": {
       "value": 1,
       "unit": "receipts",
+      "unit_kind": "count",
       "range": {
         "all_time": true,
         "to": "2026-11-07T04:24:35.741Z"
@@ -289,6 +326,7 @@
     "near.relayer.payment_usdc_total": {
       "value": 0.006,
       "unit": "USDC",
+      "unit_kind": "usdc",
       "range": {
         "all_time": true,
         "to": "2026-11-07T04:24:35.741Z"
@@ -297,9 +335,34 @@
       "source": "nearblocks_v3+near_archival_rpc",
       "definition": "Sum of ft_transfer amounts in the relayer payments, divided by 1e6."
     },
+    "near.relayer.payment_usdc_min": {
+      "value": 0.001,
+      "unit": "USDC",
+      "unit_kind": "usdc",
+      "range": {
+        "all_time": true,
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "Smallest ft_transfer amount in the relayer payments, divided by 1e6."
+    },
+    "near.relayer.payment_usdc_max": {
+      "value": 0.001,
+      "unit": "USDC",
+      "unit_kind": "usdc",
+      "range": {
+        "all_time": true,
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "Largest ft_transfer amount in the relayer payments, divided by 1e6."
+    },
     "near.delegate.sampled_receipts": {
       "value": 450,
       "unit": "receipts",
+      "unit_kind": "count",
       "range": {
         "days": 30,
         "from": "2026-10-08T04:24:35.741Z",
@@ -312,6 +375,7 @@
     "near.delegate.sample_successful": {
       "value": 450,
       "unit": "receipts",
+      "unit_kind": "count",
       "range": {
         "days": 30,
         "from": "2026-10-08T04:24:35.741Z",
@@ -324,6 +388,7 @@
     "near.delegate.sample_hits": {
       "value": 5,
       "unit": "receipts",
+      "unit_kind": "count",
       "range": {
         "days": 30,
         "from": "2026-10-08T04:24:35.741Z",
@@ -331,11 +396,12 @@
       },
       "as_of": "2026-11-07T04:24:35.741Z",
       "source": "nearblocks_v3+near_archival_rpc",
-      "definition": "Sampled receipts whose transaction is a Delegate action with one ft_transfer to NEAR USDC (the x402 NEAR shape). This is the only exact count of N here."
+      "definition": "Sampled receipts whose transaction is a Delegate action with one ft_transfer to NEAR USDC (the x402 NEAR shape). Exact inside the sample. The 30-day total is pending full count until relay-census.json is frozen."
     },
     "near.delegate.transfers_30d": {
       "value": 1837873,
       "unit": "USDC transfer events",
+      "unit_kind": "count",
       "range": {
         "days": 30,
         "from": "2026-10-08",
@@ -345,9 +411,10 @@
       "source": "nearblocks_v3",
       "definition": "Sum of NearBlocks daily transfers_count for NEAR USDC over 30 whole UTC days. Every transfer shape, so at least as large as N."
     },
-    "near.delegate.estimate_upper_95": {
-      "value": 42675,
+    "near.delegate.estimate": {
+      "value": 20420.81111111111,
       "unit": "NEAR delegate-action USDC transfers in 30 days (estimate)",
+      "unit_kind": "count",
       "range": {
         "days": 30,
         "from": "2026-10-08T04:24:35.741Z",
@@ -355,11 +422,25 @@
       },
       "as_of": "2026-11-07T04:24:35.741Z",
       "source": "nearblocks_v3+near_archival_rpc",
-      "definition": "95% Clopper-Pearson upper bound of the sample share times transfers_30d. An estimate, not a count."
+      "definition": "Sample share (delegate hits over successful sampled receipts) times transfers_30d. An estimate, not a count. All 30 sample points fall at 16:24 UTC, so that minute is over-weighted."
+    },
+    "near.delegate.estimate_upper_95": {
+      "value": 42675,
+      "unit": "NEAR delegate-action USDC transfers in 30 days (estimate)",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T04:24:35.741Z",
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "95% Clopper-Pearson upper bound of the sample share times transfers_30d. An estimate, not a count. The sample points are all at 16:24 UTC, so that minute is over-weighted."
     },
     "near.escrow.txs": {
       "value": 100,
       "unit": "transactions",
+      "unit_kind": "count",
       "range": {
         "from": "2026-11-07T05:13:03.298Z",
         "to": "2026-11-07T05:21:40.624Z",
@@ -372,6 +453,7 @@
     "near.escrow.unique_intents": {
       "value": 15,
       "unit": "intents",
+      "unit_kind": "count",
       "range": {
         "from": "2026-11-07T05:13:03.298Z",
         "to": "2026-11-07T05:21:40.624Z",
@@ -384,6 +466,7 @@
     "near.escrow.intents_success": {
       "value": 0,
       "unit": "intents",
+      "unit_kind": "count",
       "range": {
         "from": "2026-11-07T05:13:03.298Z",
         "to": "2026-11-07T05:21:40.624Z",
@@ -396,6 +479,7 @@
     "near.escrow.intents_invalid_intent": {
       "value": 10,
       "unit": "intents",
+      "unit_kind": "count",
       "range": {
         "from": "2026-11-07T05:13:03.298Z",
         "to": "2026-11-07T05:21:40.624Z",
@@ -408,6 +492,7 @@
     "near.escrow.intents_insufficient_balance": {
       "value": 4,
       "unit": "intents",
+      "unit_kind": "count",
       "range": {
         "from": "2026-11-07T05:13:03.298Z",
         "to": "2026-11-07T05:21:40.624Z",
@@ -420,6 +505,7 @@
     "near.escrow.intents_other": {
       "value": 1,
       "unit": "intents",
+      "unit_kind": "count",
       "range": {
         "from": "2026-11-07T05:13:03.298Z",
         "to": "2026-11-07T05:21:40.624Z",
@@ -432,6 +518,7 @@
     "vet402.settled_no_tx": {
       "value": 13,
       "unit": "purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -443,6 +530,7 @@
     "vet402.settled_not_held": {
       "value": 11525,
       "unit": "purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -454,6 +542,7 @@
     "vet402.delivered_share": {
       "value": 0.9154053832937904,
       "unit": "share of settled purchases",
+      "unit_kind": "share",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -465,6 +554,7 @@
     "vet402.unexplained_share_excl_held": {
       "value": 0.02915401301518438,
       "unit": "share of settled purchases, vet402-held excluded",
+      "unit_kind": "share",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -476,6 +566,7 @@
     "compare.vault_over_x402_base_30d": {
       "value": 35.62091527603908,
       "unit": "times",
+      "unit_kind": "count",
       "range": {
         "vault": {
           "from_block": 51965969,
@@ -493,6 +584,7 @@
     "vet402.settled_seller_claim": {
       "value": 11194,
       "unit": "purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -504,6 +596,7 @@
     "recheck.base.checked": {
       "value": 100,
       "unit": "settled purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -515,6 +608,7 @@
     "recheck.base.match": {
       "value": 100,
       "unit": "settled purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -526,6 +620,7 @@
     "recheck.base.mismatch": {
       "value": 0,
       "unit": "settled purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -537,6 +632,7 @@
     "recheck.base.not_rechecked": {
       "value": 0,
       "unit": "settled purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -548,6 +644,7 @@
     "recheck.solana.checked": {
       "value": 100,
       "unit": "settled purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -559,6 +656,7 @@
     "recheck.solana.match": {
       "value": 100,
       "unit": "settled purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -570,6 +668,7 @@
     "recheck.solana.mismatch": {
       "value": 0,
       "unit": "settled purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -581,6 +680,7 @@
     "recheck.solana.not_rechecked": {
       "value": 0,
       "unit": "settled purchases",
+      "unit_kind": "count",
       "range": {
         "from": "2026-08-14T09:54:31Z",
         "to": "2026-10-29T21:32:37Z"
@@ -1213,6 +1313,9 @@
       "other_messages": {
         "Smart contract panicked: JSON: invalid value: \\": 6
       }
+    },
+    "relays": {
+      "pending": true
     },
     "limits": {
       "delegate": [
