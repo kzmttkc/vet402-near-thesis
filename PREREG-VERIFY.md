@@ -41,7 +41,7 @@ The line is the next whole number above 1% of the Base x402 count. That count is
 
 The NEAR post at 2026-11-07 10:13 UTC is before the full-count fetch and after the NEAR sample fetch (2026-11-07 04:24 to 05:28 UTC).
 
-- Commit `f0c48d1` is dated 2026-11-07T03:35:44Z (09:05:44+05:30) in this checkout. That stamp is earlier than the NEAR snapshot. A third party cannot confirm it from the public remote. This branch is not the `main` that `git ls-remote` shows.
+- Commit `f0c48d1` is dated 2026-11-07T03:35:44Z (09:05:44+05:30) in this checkout. That stamp is earlier than the NEAR snapshot. The commit is tagged `prereg-threshold`. In a checkout that has the tag, `git show prereg-threshold:THESIS.md | shasum -a 256` prints `d8925b096c421dc12afc77fe2421a2ec29e96581f9b66d4273984178764c24ec`. That is the digest of `PREREG.md` and the digest in the transaction arguments. The on-chain post is what a third party can read while this repository is private. After publication, the same `git show` command is the check.
 - `data/snapshot/near/manifest.json` records `retrieved_at` `2026-11-07T04:24:35.741Z` and `finished_at` `2026-11-07T05:28:36.141Z`. The sample estimate comes from that snapshot.
 - Block 223452268 is 2026-11-07T10:13:11Z. That is after the sample, and `data/snapshot/near/relay-census.json` is still absent. The post's own text says it was registered before the full count.
 
