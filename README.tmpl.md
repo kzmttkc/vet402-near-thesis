@@ -1,6 +1,12 @@
 # NEAR in agent payments: a thesis you can rerun
 
-x402 payments settle mostly on Base today. NEAR Intents already moves {{n:intents.volume_30d|M}} in 30 days across chains. I argue that funding agents and moving their money is where NEAR could earn from agent payments. The data here does not say how much of that volume comes from agents. Every figure about the market and about vet402 below comes from this repository, either from one script you can rerun without a key or an account, or from a quote in the table at the end.
+NEAR's edge in agent payments is the funding and settlement layer: NEAR Intents already settles cross-chain agent payments, and x402 has had a NEAR settlement spec since {{field:near.spec.pr_merged_at}} UTC that is ready but not yet lit. The argument, the evidence, and the number that would change my mind are in [THESIS.md](THESIS.md). Every figure about the market and about vet402 below comes from this repository, either from one script you can rerun without a key or an account, or from a quote in the table at the end.
+
+## What changed in this version
+
+- x402 on NEAR could not be measured from x402scan. The settlement spec is present, and the payments this page can point at are close to zero.
+- The threshold was committed before the NEAR data, in commit f0c48d1.
+- [THESIS.md](THESIS.md) is new. It holds the claim, the evidence, and that threshold.
 
 This is an entry for the NEAR HACKATHON track "Investment Thesis", which is judged on the evidence.
 
@@ -11,6 +17,8 @@ Node 20 or newer. Nothing to install.
 | Do this | See this |
 |---|---|
 | `node thesis.mjs --offline` | `rebuilt … numbers from data/snapshot (no network), 2 checks ok`. The numbers on this page, rebuilt from the frozen snapshot in `data/snapshot/`. It rewrites `data/thesis.json`, and only `generated_at` changes. |
+| `node thesis.mjs --offline` | NEAR from that same frozen snapshot, with no network: the settlement spec is present ({{n:near.spec.settlement_sentence}}), the opt-in catalog lists {{n:near.facilitator.discovery_total}} resources, the named relayer has {{n:near.relayer.payments}} payments, and N's line is {{n:threshold.line}} with a sample estimate of {{n:near.delegate.estimate}} and a 95% upper bound of {{n:near.delegate.estimate_upper_95}}. Stdout is one line and ends with `全数は未取得` while `relay-census.json` is absent. |
+| `node thesis.mjs --fetch-relays` | The full 30-day relayer count. It takes a long time, waits out HTTP 429 by widening the gap, and resumes from `data/snapshot/near/relay-census.progress.json`. |
 | `node thesis.mjs --check README.md` | `mismatches: 0`. The script builds this page again from `README.tmpl.md` and `data/thesis.json` and compares it line by line, so an edited figure on this page shows up as a mismatch. Figures typed into the template itself are not covered by this check. The quotes cover them. |
 | `node thesis.mjs --check-quotes` | `missing: 0`. Each quote below is fetched again and found word for word. Web pages are read directly, X posts through the public fxtwitter API, and the one PDF is reported as not machine-checked. |
 | `node --test` | All tests pass in about a minute, including one that stops on an unknown purchase status and one that runs the offline build in a throwaway copy. |
@@ -45,7 +53,7 @@ Every row lands in exactly one group. An unknown status stops the script instead
 
 I rechecked {{n:recheck.base.checked}} Base and {{n:recheck.solana.checked}} Solana settlements from this export against public RPCs. On Base, {{n:recheck.base.match}} receipts succeeded and carry a USDC transfer of exactly the purchase amount. On Solana, {{n:recheck.solana.match}} transactions succeeded and credit one USDC account with exactly that amount. The recheck does not compare the payee with the seller, because the export does not list the payee. Other chains are not rechecked.
 
-vet402 records whether each answer arrived for its own purchases, and the gap above is what that record shows. Illia Polosukhin says, about confidential payouts, that each payment can generate a verifiable audit link (quote `illia.audit_link`). I read that as the payer's books, which are one part of the same record.
+vet402 records whether each answer arrived for its own purchases, and the gap above is what that record shows.
 
 ## 3. NEAR already moves money around payments
 
@@ -53,7 +61,7 @@ NEAR Intents moved {{n:intents.volume_30d|M}} in its latest 30 days on DefiLlama
 
 NEAR Intents lists `0x2CfF890f0378a11913B6129B2E97417a2c302680` as its treasury address on EVM chains, Base included (quote `near_intents.treasury`). On Base, over {{range:vault.usdc_out_30d.usd}}, that address sent out {{n:vault.usdc_out_30d.usd|M}} of USDC in {{n:vault.usdc_out_30d.count}} transfers. The transfers carry no label, so this counts every purpose, and the data here cannot say how much of it, if any, is x402. For scale only, it is about {{n:compare.vault_over_x402_base_30d}} times the x402 dollars on Base over a similar 30 days.
 
-NEAR Foundation names the same layer (quote `near_blog.around_payment`). Its stated intention is that an agent can pay through x402 and rely on NEAR infrastructure for everything around that payment. The same post also names settlement on NEAR Protocol, covered in section 5. Eddy Lazzarin wrote that one balance in his wallet pays to and from almost any chain (quote `eddy.any_chain`). His post is about a wallet that does not mention NEAR. I read it as a sign that people want this layer, not as evidence for NEAR.
+NEAR Foundation names the same layer (quote `near_blog.around_payment`). Its stated intention is that an agent can pay through x402 and rely on NEAR infrastructure for everything around that payment. The same post also names settlement on NEAR Protocol, covered in section 5.
 
 ## 4. The model
 
@@ -70,8 +78,6 @@ My opinion, which this data does not test: the services around an agent payment,
 ## 5. Arguments against
 
 Settlement on NEAR itself. NEAR Foundation also names "scalable, quantum-resistant settlement through NEAR Protocol" as part of what it is building (quote `near_blog.settlement`). With Base at {{n:x402.base.share_amount_30d}} of x402 dollars, the numbers here do not support that path today.
-
-Agents may not need crypto. Haseeb Qureshi makes that case (quote `haseeb.humans`). If he is right, fewer agent payments touch any chain. The person behind an agent may still need a way to fund it and to check what it bought, but the data here does not test that.
 
 ## 6. What would change my mind
 
