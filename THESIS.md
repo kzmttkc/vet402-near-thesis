@@ -14,7 +14,7 @@ The exact-scheme spec is merged and the facilitators are named, yet they settled
 
 ### Impact
 
-The people this reaches are agents that pay through x402, and the accounts that fund them. x402scan counted 2,539,947 payments on Base over 30 days. The Intents treasury on Base sent out $41.05M of USDC in 45,840 transfers. Those transfers have no label, so they are not an x402 count. The full 30-day count of delegate-action USDC transfers on NEAR is not frozen. The known relay accounts sum to 1,716. That sum is a lower bound on N, and it is 6.8% of the line. The sum is `5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c`, a generic relay not named by `/supported`, and those transfers are not known to be x402. Unknown relay accounts would raise N. The evidence in hand sits below the line. The upper bound on all of N cannot be measured without a key, so the reading is not decided.
+The people this reaches are agents that pay through x402, and the accounts that fund them. x402scan counted 2,539,947 payments on Base over 30 days. The Intents treasury on Base sent out $41.05M of USDC in 45,840 transfers. Those transfers have no label, so they are not an x402 count. The full 30-day count of delegate-action USDC transfers on NEAR is not frozen. The known relay accounts sum to 1,716. That sum is a lower bound on N, and it is 6.8% of the line. All of that sum comes from `5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c`, a generic relay not named by `/supported`, and those transfers are not known to be x402. Unknown relay accounts would raise N. The evidence in hand sits below the line. The upper bound on all of N cannot be measured without a key, so the reading is not decided.
 
 ### Sustainability
 
