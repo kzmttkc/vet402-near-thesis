@@ -122,7 +122,7 @@ NEAR Intents lists `0x2CfF890f0378a11913B6129B2E97417a2c302680` as its treasury 
 
 NEAR Foundation names the same layer (quote `near_blog.around_payment`). Its stated intention is that an agent can pay through x402 and rely on NEAR infrastructure for everything around that payment. This section is the cross-chain settlement, the movement through Intents. It is not a count of x402 settlement on NEAR. The same post also names settlement on NEAR Protocol, covered in section 5.
 
-Of 30 recent intents.near index rows from 2026-11-07 16:18 to 2026-11-07 16:20 UTC, blocks 223490307 to 223490446, 1 is a payment-scale settlement, not the delegate-action count N.
+Of 30 intents.near index rows from 2026-11-07 16:18 to 2026-11-07 16:20 UTC, blocks 223490307 to 223490446, 1 is a payment-scale settlement, not the delegate-action count N.
 
 ## 4. The model
 
