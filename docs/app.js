@@ -355,7 +355,8 @@ function renderBand(root, thesis, live) {
   const grid = el(section, "div", "band-grid");
   const tx = bandCell(grid, "Posted transaction", formatUtc(PREREG_RECORD.at));
   tx.textContent = shortId(PREREG_RECORD.tx);
-  const liveDay = reading.source === "live";
+  // A daily figure names its own window only when that run fetched the relays; otherwise it is the frozen census lower bound.
+  const liveDay = reading.source === "live" && reading.relays_obtained === true;
   const lowerSub = liveDay
     ? "that day's window"
     : reading.lower_kind === "known_relays"
@@ -588,7 +589,7 @@ function renderMeter(root, thesis, live) {
     );
   }
   if (reading.source === "live" && Number.isFinite(reading.lower)) {
-    el(section, "p", "meta", `${formatCount(reading.lower)} is the lower bound for that day's window.`);
+    if (reading.relays_obtained === true) el(section, "p", "meta", `${formatCount(reading.lower)} is the lower bound for that day's window.`);
   }
   cite(section, "near.known.lower");
   cite(section, "threshold.line");

@@ -1,6 +1,6 @@
 # NEAR in agent payments: a thesis you can rerun
 
-The claim stands: over all 30 days, N ≤ {{n:near.bq.n_upper_bound}}, below the threshold of {{n:threshold.line}} that was posted on chain at 2026-11-07 10:13 UTC, before the count. The dashboard is published at https://kzmttkc.github.io/vet402-near-thesis/ .
+The claim stands: over all 30 days, N, the count of delegate-action USDC transfers on NEAR, is at most {{n:near.bq.n_upper_bound}}, below the threshold of {{n:threshold.line}} that was posted on chain at 2026-11-07 10:13 UTC, before the count. The dashboard is published at https://kzmttkc.github.io/vet402-near-thesis/.
 
 NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents volume was {{n:intents.volume_30d|M}} {{range:intents.volume_30d}} (retrieved {{asof:intents.volume_30d}} UTC). That volume is not a count of agent payments. x402 has had a NEAR settlement spec since {{field:near.spec.pr_merged_at}} UTC. The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled {{n:near.known.named_delegate}} exact-scheme payments {{range:near.known.lower}}.
 
@@ -128,7 +128,7 @@ N counts a NEAR transaction only when all of these are true. It carries a `Deleg
 
 The line is the next whole number above 1% of the Base count frozen on 2026-10-30, in `data/snapshot/x402scan/base.json`. A later NEAR fetch cannot move it. The reading rule for a partial count is in [THESIS.md](THESIS.md).
 
-The measured upper bound is {{n:near.bq.n_upper_bound}} (retrieved {{field:near.bq.retrieved_at}} UTC). The dates 2026-10-08 through 2026-11-07 contain the census window, and the inner receipt is not required to succeed, so N ≤ {{n:near.bq.n_upper_bound}} < {{n:threshold.line}}. N < {{n:threshold.line}}, all 30 days counted: the threshold is not crossed. The claim stands. The minute-cut window count is {{n:near.bq.minute_window}}. PREREG.md counted with free sources that need no key. Those sources reached the known-relay sum of {{n:near.known.lower}} and did not cover all 30 days, which the posted rule reads as not decided. This upper bound is BigQuery public data, and that query needs a Google Cloud account on the free tier. The result is frozen in `data/snapshot/near/bigquery-n-upper-bound.json`.
+The measured upper bound is {{n:near.bq.n_upper_bound}} (retrieved {{field:near.bq.retrieved_at}} UTC). The dates 2026-10-08 through 2026-11-07 contain the census window, and the inner receipt is not required to succeed, so N ≤ {{n:near.bq.n_upper_bound}} < {{n:threshold.line}}. N < {{n:threshold.line}}, all 30 days counted: the threshold is not crossed. The claim stands. The minute-cut window count is {{n:near.bq.minute_window}}. PREREG.md named free sources that need no key. Keyless, I reached only the known-relay sum, {{n:near.known.lower}}, which covers the named accounts and not every account. The posted rule reads that partial count as not decided. This upper bound is BigQuery public data, and that query needs a Google Cloud account on the free tier. The result is frozen in `data/snapshot/near/bigquery-n-upper-bound.json`.
 
 ## 7. What I watch
 

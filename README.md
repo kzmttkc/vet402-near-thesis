@@ -1,6 +1,6 @@
 # NEAR in agent payments: a thesis you can rerun
 
-The claim stands: over all 30 days, N ≤ 2,532, below the threshold of 25,400 that was posted on chain at 2026-11-07 10:13 UTC, before the count. The dashboard is published at https://kzmttkc.github.io/vet402-near-thesis/ .
+The claim stands: over all 30 days, N, the count of delegate-action USDC transfers on NEAR, is at most 2,532, below the threshold of 25,400 that was posted on chain at 2026-11-07 10:13 UTC, before the count. The dashboard is published at https://kzmttkc.github.io/vet402-near-thesis/.
 
 NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-28 00:00 UTC (retrieved 2026-10-29 23:18 UTC). That volume is not a count of agent payments. x402 has had a NEAR settlement spec since 2026-05-16 14:01 UTC. The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled 0 exact-scheme payments from 2026-10-08 11:42 to 2026-11-07 11:42 UTC.
 
@@ -163,7 +163,7 @@ N counts a NEAR transaction only when all of these are true. It carries a `Deleg
 
 The line is the next whole number above 1% of the Base count frozen on 2026-10-30, in `data/snapshot/x402scan/base.json`. A later NEAR fetch cannot move it. The reading rule for a partial count is in [THESIS.md](THESIS.md).
 
-The measured upper bound is 2,532 (retrieved 2026-11-07 21:04 UTC). The dates 2026-10-08 through 2026-11-07 contain the census window, and the inner receipt is not required to succeed, so N ≤ 2,532 < 25,400. N < 25,400, all 30 days counted: the threshold is not crossed. The claim stands. The minute-cut window count is 2,418. PREREG.md counted with free sources that need no key. Those sources reached the known-relay sum of 1,716 and did not cover all 30 days, which the posted rule reads as not decided. This upper bound is BigQuery public data, and that query needs a Google Cloud account on the free tier. The result is frozen in `data/snapshot/near/bigquery-n-upper-bound.json`.
+The measured upper bound is 2,532 (retrieved 2026-11-07 21:04 UTC). The dates 2026-10-08 through 2026-11-07 contain the census window, and the inner receipt is not required to succeed, so N ≤ 2,532 < 25,400. N < 25,400, all 30 days counted: the threshold is not crossed. The claim stands. The minute-cut window count is 2,418. PREREG.md named free sources that need no key. Keyless, I reached only the known-relay sum, 1,716, which covers the named accounts and not every account. The posted rule reads that partial count as not decided. This upper bound is BigQuery public data, and that query needs a Google Cloud account on the free tier. The result is frozen in `data/snapshot/near/bigquery-n-upper-bound.json`.
 
 ## 7. What I watch
 
