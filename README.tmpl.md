@@ -106,6 +106,12 @@ Each cell is a yearly amount, the 30-day x402 figure times 12, that would reach 
 
 The largest cell is a yearly figure. For comparison, NEAR captured over {{model.input.buyback_usd}} for buybacks in the seven months its fee switch has run (quotes `near_q3.fee_switch` and `near_q3.fees_buyback`). The largest cell stays below that buyback figure.
 
+Dividing that {{model.input.buyback_usd}} floor by the 1× cell of each column gives {{model.buyback_multiple.pass_50pct}}× at 50% pass-through, {{model.buyback_multiple.pass_10pct}}× at 10%, and {{model.buyback_multiple.pass_1pct}}× at 1%, rounded to the nearest whole number. The floor is the seven-month capture in those quotes, and each cell is a yearly amount, so the multiple is how many times the 30-day x402 figure in that column must grow before the yearly amount equals the floor.
+
+The printed rows stop at 1,000×. The largest cell is {{model.largest_cell}} at 1,000× and 50% pass-through, and it stays under that floor.
+
+By 2027-11, the judgment on x402 settlement on NEAR changes if N reaches {{n:threshold.line}}. The same date is when a reader can see whether the 30-day x402 dollars and the share through Intents have moved one of these cells onto the floor. Those indicators are in section 7, including that line.
+
 My opinion, which this data does not test: funding, and a record of what arrived, are the part I claim for NEAR. Cross-chain settlement through NEAR Intents is already that funding layer. x402 settlement on NEAR, the delegate-action count N, is a different question, and this model does not answer it.
 
 ## 5. Arguments against

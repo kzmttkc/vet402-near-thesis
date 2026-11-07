@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T18:06:15.324Z",
+  "generated_at": "2026-11-07T18:06:47.805Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
@@ -1153,6 +1153,11 @@
     },
     "fee_rate": 0.001625,
     "buyback_over_fees": 0.15384615384615385,
+    "buyback_multiples": {
+      "pass_1pct": 158408.52196278676,
+      "pass_10pct": 15840.852196278674,
+      "pass_50pct": 3168.170439255736
+    },
     "q3_defillama_usd": 9786001341,
     "q3_gap": 0.05903833259615385,
     "note": "Q3 gap is (official Q3 Intents - DefiLlama daily sum) / official Q3 Intents. Fee rate is cumulative fees over cumulative Intents volume.",

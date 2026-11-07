@@ -74,6 +74,9 @@ test("model states x402 30d over intents 30d above a 4x3 table, and omits the ta
   assert.equal(new Set(model.table.map((row) => row.pass_through)).size, 3);
   const cell = model.table.find((row) => row.multiple === 1 && row.pass_through === 0.5);
   assert.equal(cell.annual_near_usd, 150);
+  assert.equal(model.buyback_multiples.pass_50pct, 8 / 150);
+  assert.equal(model.buyback_multiples.pass_10pct, 8 / 30);
+  assert.equal(model.buyback_multiples.pass_1pct, 8 / 3);
   assert.ok(cell.assumption_ids.includes("take_rate"));
   assert.ok(cell.assumption_ids.includes("fee_rate_cumulative"));
   // The Q3 figure must not change the fee rate (fees and volume share one period).
