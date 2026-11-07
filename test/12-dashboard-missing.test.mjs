@@ -135,7 +135,8 @@ test("the facilitator table lines the five accounts up together", () => {
   const page = textOf(root);
   const accounts = Number(thesis.numbers["near.known.accounts"].value).toLocaleString("en-US");
   const exact = Number(thesis.numbers["near.known.named_delegate"].value).toLocaleString("en-US");
-  assert.match(page, new RegExp(`${accounts} relay accounts\\. ${exact} exact-scheme payments from the named facilitators in 30 days`));
+  const line = Number(thesis.numbers["threshold.line"].value).toLocaleString("en-US");
+  assert.match(page, new RegExp(`${exact} exact-scheme payments from the named facilitators in 30 days\\. The ${line} line was posted on chain before the count`));
   assert.match(page, new RegExp(`${accounts} accounts are on the roster\\. A facilitator sees only its own account\\. These cards line them up together\\.`));
   assert.ok(page.includes(replayLabel(PREREG_RECORD.at)));
   assert.match(page, /Replay of the frozen record\. This page does not call an RPC\./);
