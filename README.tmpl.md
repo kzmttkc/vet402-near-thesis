@@ -16,7 +16,7 @@ This is an entry for the NEAR HACKATHON track "Investment Thesis", which is judg
 
 ## The pre-registered line
 
-The history of this branch contains commit `f0c48d13ed5af6147daa0e7a0b444855f3186770` (`f0c48d1`), so a third party can see the line as it was committed. At publication, the executive tags that commit `prereg-threshold`. `git show prereg-threshold:THESIS.md | shasum -a 256` prints the digest posted on NEAR (see [PREREG-VERIFY.md](PREREG-VERIFY.md)).
+The history of this branch contains commit `f0c48d13ed5af6147daa0e7a0b444855f3186770` (`f0c48d1`), so a third party can see the line as it was committed. Commit `f0c48d1` is tagged `prereg-threshold`. `git show prereg-threshold:THESIS.md | shasum -a 256` prints the digest posted on NEAR (see [PREREG-VERIFY.md](PREREG-VERIFY.md)).
 
 ## Try it
 
@@ -36,7 +36,7 @@ Node 20 or newer. Nothing to install.
 
 The vet402 export behind this page has sha256 `{{snapshot.sha256}}` and was retrieved {{snapshot.retrieved_at}}. The derived copy in this repository, `data/snapshot/export.derived.csv`, has sha256 `{{snapshot.derived_sha256}}`.
 
-## What NEAR can run on this machine
+## What runs on this machine
 
 Two pieces run on this machine. Neither one sends a mainnet transaction.
 

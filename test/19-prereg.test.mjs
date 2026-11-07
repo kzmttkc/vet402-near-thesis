@@ -31,8 +31,8 @@ test("the current pages point at the check and do not say the post was before an
   assert.match(verify, /lower bound of accounts whose names are known/);
   assert.match(verify, /one known x402 facilitator relayer/);
   assert.match(readme, /f0c48d13ed5af6147daa0e7a0b444855f3186770/);
-  assert.match(readme, /At publication, the executive tags that commit `prereg-threshold`/);
-  assert.match(thesis, /At publication, the executive tags commit f0c48d1 `prereg-threshold`/);
+  assert.match(readme, /Commit `f0c48d1` is tagged `prereg-threshold`/);
+  assert.match(thesis, /Commit f0c48d1 is tagged `prereg-threshold`/);
   assert.doesNotMatch(readme, /Tag that commit/);
   assert.doesNotMatch(thesis, /once that tag is public/);
   assert.doesNotMatch(verify, /It is still a free public count of N/);
