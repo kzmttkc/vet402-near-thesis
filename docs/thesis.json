@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T15:16:40.643Z",
+  "generated_at": "2026-11-07T16:21:21.533Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
@@ -683,6 +683,30 @@
       "as_of": "2026-11-07T04:24:35.741Z",
       "source": "nearblocks_v3+near_archival_rpc",
       "definition": "Sample share divided by this signer's share of all-shape USDC transfer events. The frozen sample over-represents that one signer. Reference only. Not used in the claim."
+    },
+    "near.intents.sample_rows": {
+      "value": 30,
+      "unit": "index rows",
+      "unit_kind": "count",
+      "range": {
+        "from": "2026-11-07T16:18:44.308Z",
+        "to": "2026-11-07T16:20:04.418Z"
+      },
+      "as_of": "2026-11-07T16:20:07.100Z",
+      "source": "fastnear_tx_api",
+      "definition": "Newest FastNEAR index rows where intents.near is the receiver and not the signer, limit 30. The index lists any receipt receiver, so the rows are not all execute_intents. Neither a lower bound nor an upper bound on a 30-day count."
+    },
+    "near.intents.payment_count": {
+      "value": 1,
+      "unit": "payment-scale settlements",
+      "unit_kind": "count",
+      "range": {
+        "from": "2026-11-07T16:18:44.308Z",
+        "to": "2026-11-07T16:20:04.418Z"
+      },
+      "as_of": "2026-11-07T16:20:07.100Z",
+      "source": "fastnear_tx_api",
+      "definition": "Rows in that sample whose transaction receiver is intents.near, whose method is execute_intents, whose intents.near receipts all succeeded, and which have at least one transfer leg of NEAR USDC above 0 and at most 5 USDC (raw 5000000, 6 decimals). ft_withdraw is not this count."
     },
     "vet402.settled_no_tx": {
       "value": 13,
@@ -1550,6 +1574,22 @@
       "retrieved_at": "2026-11-07T12:47:16.312Z",
       "sha256": "4455a689a039f8b47af39c6a00c60ecc1e36c00b71fc5c971c876173e0acbeb9",
       "list_complete": true
+    },
+    "intents_sample": {
+      "sample_rows": 30,
+      "execute_calls": 10,
+      "payment_count": 1,
+      "from": "2026-11-07T16:18:44.308Z",
+      "to": "2026-11-07T16:20:04.418Z",
+      "height_min": 223490307,
+      "height_max": 223490446,
+      "txs_count_reported": 13918075,
+      "retrieved_at": "2026-11-07T16:20:07.100Z",
+      "sha256": "9c1dc55c0543a20c9878c79464fdf9cc5d9be5a25d23bebab453ece38b5af154",
+      "bound": "neither a lower bound nor an upper bound",
+      "usdc_token": "nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+      "payment_max_raw": 5000000,
+      "decimals": 6
     },
     "relays": {
       "pending": true

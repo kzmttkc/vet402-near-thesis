@@ -1,0 +1,292 @@
+{
+  "sha256": "9c1dc55c0543a20c9878c79464fdf9cc5d9be5a25d23bebab453ece38b5af154",
+  "retrieved_at": "2026-11-07T16:20:07.100Z",
+  "account": "intents.near",
+  "api": "POST https://tx.main.fastnear.com/v0/account with is_receiver true, is_signer false, desc true, limit 30, then POST /v0/transactions in batches of 15",
+  "usdc_token": "nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+  "payment_max_raw": 5000000,
+  "decimals": 6,
+  "bound": "neither a lower bound nor an upper bound",
+  "txs_count_reported": 13918075,
+  "sample_rows": 30,
+  "execute_calls": 10,
+  "payment_count": 1,
+  "from": "2026-11-07T16:18:44.308Z",
+  "to": "2026-11-07T16:20:04.418Z",
+  "height_min": 223490307,
+  "height_max": 223490446,
+  "rows": [
+    {
+      "hash": "DD5Qc6uTyvrihzckrrT2MVzCgCcJWKZWg2nnZ7uJ6rbu",
+      "at": "2026-11-07T16:20:04.418Z",
+      "height": 223490446,
+      "receiver_id": "intents.near",
+      "method": "execute_intents",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "2pzRVfGTLMcVPCrMqir5B6ZRPo2pQwuczkFjdYdjp5jK",
+      "at": "2026-11-07T16:19:57.356Z",
+      "height": 223490435,
+      "receiver_id": "919f317582ebc9c421e50f9010dd75a14753b184b7b70527fcabba129d5835a2",
+      "method": "none",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "CoTAVt67nSCbcmAnWyp2idNPe4ho4gXLhhJo5dQkbMxN",
+      "at": "2026-11-07T16:19:56.736Z",
+      "height": 223490434,
+      "receiver_id": "intents.near",
+      "method": "execute_intents",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "2rGhJatth3DYtLYKv79sVxxa9572rSpTY5FZtXEePSSz",
+      "at": "2026-11-07T16:19:49.580Z",
+      "height": 223490422,
+      "receiver_id": "omft.near",
+      "method": "ft_deposit",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "Avf15sV7ixFEgtcUAZPyndeyQ59Vp2YnpzLmXLPNDDSb",
+      "at": "2026-11-07T16:19:49.580Z",
+      "height": 223490422,
+      "receiver_id": "omft.near",
+      "method": "ft_deposit",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "BFsvKXX9PXJZKXF8nFGb9WtwcqjH8WxnuWnTQfCn2spX",
+      "at": "2026-11-07T16:19:37.909Z",
+      "height": 223490401,
+      "receiver_id": "omft.near",
+      "method": "ft_deposit",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "5P7oQVJjgJNAT3UR5Gh5PYn3pTHa51qJzcBkHmEnXkrK",
+      "at": "2026-11-07T16:19:30.299Z",
+      "height": 223490387,
+      "receiver_id": "omft.near",
+      "method": "ft_deposit",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "H56EUrKy6e4YYZxhV5c2evL2zpf4seamy2y17QcjSJMP",
+      "at": "2026-11-07T16:19:30.299Z",
+      "height": 223490387,
+      "receiver_id": "v2_1.omni.hot.tg",
+      "method": "mt_deposit_call",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "yJeKy4pxN2z6CvF6pRsnW8apbHndDnDzmccccBAirkx",
+      "at": "2026-11-07T16:19:27.446Z",
+      "height": 223490382,
+      "receiver_id": "omft.near",
+      "method": "ft_deposit",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "AuSGsxUfEBfTcfzwboRxwrUG8Ak4tc6A5maQzdeHaVwn",
+      "at": "2026-11-07T16:19:26.948Z",
+      "height": 223490381,
+      "receiver_id": "omft.near",
+      "method": "ft_deposit",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "1371pAk1evXyyJdQuxHqxzi9qceBFwUG64s6pYmsEBHV",
+      "at": "2026-11-07T16:19:26.948Z",
+      "height": 223490381,
+      "receiver_id": "omft.near",
+      "method": "ft_deposit",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "8vHkyaQMKuWYAkzAidkahPC6EyD9C8ZCKY7T7GwHXcVq",
+      "at": "2026-11-07T16:19:25.197Z",
+      "height": 223490378,
+      "receiver_id": "omni.bridge.near",
+      "method": "fin_transfer",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "BUuifyzQwAAorLh6RJWAq2idRk5pPsBGhRBmm8k5CAzz",
+      "at": "2026-11-07T16:19:18.783Z",
+      "height": 223490367,
+      "receiver_id": "intents.near",
+      "method": "execute_intents",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "A7vy5dim4qNdsA5pQJvHURDy1WH4EVzUUqCXqfA6uVZy",
+      "at": "2026-11-07T16:19:14.287Z",
+      "height": 223490359,
+      "receiver_id": "wrap.near",
+      "method": "near_deposit+ft_transfer_call",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "AqgcktJPpPGq5MGRRVC7SsfQEBoC69d4S7Z2bYhoZovj",
+      "at": "2026-11-07T16:19:12.730Z",
+      "height": 223490356,
+      "receiver_id": "omft.near",
+      "method": "ft_deposit",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "Co4SXQLJDAg2xrevjsh2yoAB1sfJm9nqvd6tmhGD4XJ5",
+      "at": "2026-11-07T16:19:11.482Z",
+      "height": 223490354,
+      "receiver_id": "omft.near",
+      "method": "ft_deposit",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "ENDiQzRBgyT1nXPAZKFvFzxdSRP12v2Tqe5KgyPLnFdu",
+      "at": "2026-11-07T16:19:08.751Z",
+      "height": 223490349,
+      "receiver_id": "omni.bridge.near",
+      "method": "fin_transfer",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "3uEPZwqbaYacKDrYa96NGhjpmL83WFS52pGv8Aot4zap",
+      "at": "2026-11-07T16:19:07.641Z",
+      "height": 223490347,
+      "receiver_id": "omni.bridge.near",
+      "method": "fin_transfer",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "HTAAXwH7ho62c22NEpeyMahsUZnWoPZBdTWW9pCfYeyj",
+      "at": "2026-11-07T16:19:04.040Z",
+      "height": 223490341,
+      "receiver_id": "intents.near",
+      "method": "execute_intents",
+      "intents_status": "failure",
+      "usdc_raw": []
+    },
+    {
+      "hash": "26YinA843UExFtYmDvK6RkqDoJ5PjzDM85b3v5a5oEQj",
+      "at": "2026-11-07T16:19:02.205Z",
+      "height": 223490338,
+      "receiver_id": "b5fe5e169b54ec895739a325e09aeba0815cad3aa6e4a9ba19b56ba7909fcdf4",
+      "method": "none",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "AupGbwg19Mpoks97iR8Nf8eBQ6NB9ZAMSpuBMoiu35qd",
+      "at": "2026-11-07T16:18:59.848Z",
+      "height": 223490334,
+      "receiver_id": "intents.near",
+      "method": "execute_intents",
+      "intents_status": "failure",
+      "usdc_raw": []
+    },
+    {
+      "hash": "A3ono5Jj6CEkqwQTvquK8eF9sPzxcLsqXXc73kYfo4Yw",
+      "at": "2026-11-07T16:18:56.586Z",
+      "height": 223490328,
+      "receiver_id": "intents.near",
+      "method": "execute_intents",
+      "intents_status": "success",
+      "usdc_raw": [
+        "493701"
+      ]
+    },
+    {
+      "hash": "8UByu6jx146KRyNzi9YsBwSq5YYeMzW4NwCbhb5eAZbo",
+      "at": "2026-11-07T16:18:55.280Z",
+      "height": 223490326,
+      "receiver_id": "intents.near",
+      "method": "execute_intents",
+      "intents_status": "failure",
+      "usdc_raw": []
+    },
+    {
+      "hash": "7ASsMUsYwtykJ6YXC8ruvdAHHFqbJnRKDC4TyB94Tfeb",
+      "at": "2026-11-07T16:18:54.706Z",
+      "height": 223490325,
+      "receiver_id": "intents.near",
+      "method": "execute_intents",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "4M27ibkgKzn92tEjt1rySbY3ioEDTvBqsgY5AXX33Sis",
+      "at": "2026-11-07T16:18:54.134Z",
+      "height": 223490324,
+      "receiver_id": "omni.bridge.near",
+      "method": "fin_transfer",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "2eJVhcbu1XyEEUmKhW2EFfDyib8qWbiWLHwdz2cuUzEW",
+      "at": "2026-11-07T16:18:53.036Z",
+      "height": 223490322,
+      "receiver_id": "v2_1.omni.hot.tg",
+      "method": "mt_deposit_call",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "6DwhTEGR8JvbUuetQgXqVdykzudXLrMuPcJEZoGX841j",
+      "at": "2026-11-07T16:18:51.415Z",
+      "height": 223490319,
+      "receiver_id": "intents.near",
+      "method": "execute_intents",
+      "intents_status": "failure",
+      "usdc_raw": []
+    },
+    {
+      "hash": "XFK6Xfou4jEAg4RU6yjvLxXivFhEcVJcjzWsiqULEEu",
+      "at": "2026-11-07T16:18:47.342Z",
+      "height": 223490312,
+      "receiver_id": "intents.near",
+      "method": "execute_intents",
+      "intents_status": "failure",
+      "usdc_raw": []
+    },
+    {
+      "hash": "G91Rn2KLdadZSwBrL2eKrt9w8mazwNJe7SQzGJvoaU7j",
+      "at": "2026-11-07T16:18:46.164Z",
+      "height": 223490310,
+      "receiver_id": "omft.near",
+      "method": "ft_deposit",
+      "intents_status": "success",
+      "usdc_raw": []
+    },
+    {
+      "hash": "5ggwpiKJBqEYFYpx6sa9q7TMyP714eYPhoEiEYdvXCco",
+      "at": "2026-11-07T16:18:44.308Z",
+      "height": 223490307,
+      "receiver_id": "omft.near",
+      "method": "ft_deposit",
+      "intents_status": "success",
+      "usdc_raw": []
+    }
+  ]
+}
