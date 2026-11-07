@@ -122,7 +122,7 @@ The line is the next whole number above 1% of the Base count frozen on 2026-10-3
 
 ## 7. What I watch
 
-Each day the public counts are fetched again with no key, and the dashboard shows when they move toward the line of {{n:threshold.line}}.
+`.github/workflows/refresh.yml` is scheduled to fetch the public counts with no key once this repository is public. It does not run while the repository is private. When it runs, the dashboard shows when the counts move toward the line of {{n:threshold.line}}.
 
 | Indicator | Where it comes from in this repository |
 |---|---|
