@@ -18,7 +18,7 @@ The people this reaches are agents that pay through x402, and the accounts that 
 
 ### Sustainability
 
-Every figure here rebuilds from the frozen snapshot with `node thesis.mjs --offline`, with no key and no account. The line was fixed in commit f0c48d1 from the Base count frozen on 2026-10-30, so a later NEAR fetch cannot move it. The timing of the post is in [PREREG-VERIFY.md](PREREG-VERIFY.md). `node thesis.mjs --fetch-relays` counts the known relay accounts through the FastNEAR transaction API and writes `data/snapshot/near/facilitators.json`. It does not page every USDC transfer. The upkeep is to run the same script on the next 30-day window. `.github/workflows/refresh.yml` is scheduled to fetch the public counts with no key once this repository is public. It does not run while the repository is private. When it runs, the dashboard shows when the counts move toward the line of 25,400.
+Every figure here rebuilds from the frozen snapshot with `node thesis.mjs --offline`, with no key and no account. The line was fixed in commit f0c48d1 from the Base count frozen on 2026-10-30, so a later NEAR fetch cannot move it. The timing of the post is in [PREREG-VERIFY.md](PREREG-VERIFY.md). `node thesis.mjs --fetch-relays` counts the known relay accounts through the FastNEAR transaction API and writes `data/snapshot/near/facilitators.json`. It does not page every USDC transfer. The upkeep is to run the same script on the next 30-day window. `.github/workflows/refresh.yml` is scheduled to fetch the public counts with no key once this repository is public. It is disabled while the repository is private and is turned on at publication. When it runs, the dashboard shows when the counts move toward the line of 25,400.
 
 ## Evidence for
 
@@ -26,11 +26,13 @@ The NEAR exact scheme is in the canonical repository x402-foundation/x402, file 
 
 That sentence is the same shape one layer up. The spec says a successful outer transaction does not mean the inner transfer succeeded. vet402's record says a settled payment does not mean the answer was delivered. Of 18,683 attempts, 12,223 settled, and 11,189 of the settled purchases came back with an HTTP 2xx answer. A payment and a delivered answer are two records.
 
-NEAR Intents settles cross-chain payments through its solver network. The frozen page is https://mpp.dev/payment-methods/nearintents. The client library named there is `@defuse-protocol/nearintents-mpp-sdk`. The snapshot has the page and no payment count. Of 900 rows in the 30-day sample, payment-scale settlements: 0 (from 2026-10-09 16:20 to 2026-11-07 16:21 UTC). Each point is 30 rows from 16:20 UTC, read from FastNEAR with no key. Days not fetched: none. This count is not the delegate-action count N.
+NEAR Intents settles cross-chain payments through its solver network. The frozen page is https://mpp.dev/payment-methods/nearintents. The client library named there is `@defuse-protocol/nearintents-mpp-sdk`. The snapshot has the page and no payment count.
 
 The public facilitator at x402.mikedotexe.com reports scheme `exact` on `near:mainnet` and names `x402-relayer2.mike.near` as a signer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-28 00:00 UTC (retrieved 2026-10-29 23:18 UTC). That window is not the window of the N lower bound (from 2026-10-08 11:42 to 2026-11-07 11:42 UTC) or of the sample (from 2026-10-08 04:24 to 2026-11-07 04:24 UTC). On Base, the Intents treasury address sent out $41.05M of USDC in 45,840 transfers over blocks 51965969 to 53261969. This is the funding and movement layer. Nothing in those transfers says which of them, if any, are x402.
 
 ## Evidence against
+
+I read 900 intents.near index rows, 30 a day from 16:20 UTC over 30 days (from 2026-10-09 16:20 to 2026-11-07 16:21 UTC), from FastNEAR with no key. Payment-scale settlements, meaning a successful transfer intent of NEAR USDC of 5 USDC or less: 0. Days not fetched: none. This count is not the delegate-action count N.
 
 The opt-in discovery catalog at x402.mikedotexe.com lists 0 resources. Sellers add themselves to that list. Zero there means zero listings, not zero sellers.
 

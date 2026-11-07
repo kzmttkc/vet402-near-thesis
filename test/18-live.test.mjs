@@ -151,7 +151,7 @@ test("named facilitators with zero settlements sit with the claim", () => {
 });
 
 test("the upkeep sentence says the daily fetch waits until the repository is public", () => {
-  const sentence = "`.github/workflows/refresh.yml` is scheduled to fetch the public counts with no key once this repository is public. It does not run while the repository is private. When it runs, the dashboard shows when the counts move toward the line of 25,400.";
+  const sentence = "`.github/workflows/refresh.yml` is scheduled to fetch the public counts with no key once this repository is public. It is disabled while the repository is private and is turned on at publication. When it runs, the dashboard shows when the counts move toward the line of 25,400.";
   const thesis = readFileSync(join(ROOT, "THESIS.md"), "utf8");
   const readme = readFileSync(join(ROOT, "README.md"), "utf8");
   assert.equal(thesis.includes(sentence), true);

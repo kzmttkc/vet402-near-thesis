@@ -124,7 +124,7 @@ NEAR Intents lists `0x2CfF890f0378a11913B6129B2E97417a2c302680` as its treasury 
 
 NEAR Foundation names the same layer (quote `near_blog.around_payment`). Its stated intention is that an agent can pay through x402 and rely on NEAR infrastructure for everything around that payment. This section is the cross-chain settlement, the movement through Intents. It is not a count of x402 settlement on NEAR. The same post also names settlement on NEAR Protocol, covered in section 5.
 
-Of 900 rows in the 30-day sample, payment-scale settlements: 0 (from 2026-10-09 16:20 to 2026-11-07 16:21 UTC). Each point is 30 rows from 16:20 UTC, read from FastNEAR with no key. Days not fetched: none. This count is not the delegate-action count N.
+I read 900 intents.near index rows, 30 a day from 16:20 UTC over 30 days (from 2026-10-09 16:20 to 2026-11-07 16:21 UTC), from FastNEAR with no key. Payment-scale settlements, meaning a successful transfer intent of NEAR USDC of 5 USDC or less: 0. Days not fetched: none. This count is not the delegate-action count N.
 
 ## 4. The model
 
@@ -145,7 +145,7 @@ Dividing that $8 million floor by the 1× cell of each column gives 3,168× at 5
 
 The printed rows stop at 1,000×. The largest cell is $2,525,117 at 1,000× and 50% pass-through, and it stays under that floor.
 
-By 2027-11, the judgment on x402 settlement on NEAR changes if N reaches 25,400. The same date is when a reader can see whether the 30-day x402 dollars and the share through Intents have moved one of these cells onto the floor. Those indicators are in section 7, including that line.
+My own investment horizon is one year, to 2027-11. That horizon is my choice and is not part of the pre-registered rule, which has no end date. By then, a reader can check whether N has reached 25,400 and whether the 30-day x402 dollars and the share through Intents have moved one of these cells onto the floor. Those indicators are in section 7.
 
 My opinion, which this data does not test: funding, and a record of what arrived, are the part I claim for NEAR. Cross-chain settlement through NEAR Intents is already that funding layer. x402 settlement on NEAR, the delegate-action count N, is a different question, and this model does not answer it.
 
@@ -165,7 +165,7 @@ The line is the next whole number above 1% of the Base count frozen on 2026-10-3
 
 ## 7. What I watch
 
-`.github/workflows/refresh.yml` is scheduled to fetch the public counts with no key once this repository is public. It does not run while the repository is private. When it runs, the dashboard shows when the counts move toward the line of 25,400.
+`.github/workflows/refresh.yml` is scheduled to fetch the public counts with no key once this repository is public. It is disabled while the repository is private and is turned on at publication. When it runs, the dashboard shows when the counts move toward the line of 25,400.
 
 | Indicator | Where it comes from in this repository |
 |---|---|
