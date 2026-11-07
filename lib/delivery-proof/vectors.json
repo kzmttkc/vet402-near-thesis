@@ -1,0 +1,100 @@
+{
+  "seed_base64url": "dmV0NDAyLWRlbGl2ZXJ5LXByb29mLXRlc3Qta2V5ISE",
+  "signer_public_key": "ODBXeiSmBilDMvn64YlNIIsh0fcIa20yGQzXdZXqlMo",
+  "body_utf8": "the delivered answer",
+  "content_sha256": "9cbc23193419eccbdb5a3a082a57bbe90e9eee51761cfab70cac4a367863c5c5",
+  "cases": [
+    {
+      "id": "valid",
+      "expect": "ok",
+      "receipt": {
+        "payload": {
+          "content_sha256": "9cbc23193419eccbdb5a3a082a57bbe90e9eee51761cfab70cac4a367863c5c5",
+          "hash_alg": "sha256",
+          "network": "near:mainnet",
+          "nonce": "7",
+          "scheme": "exact",
+          "tx_hash": "F7p8QyW8tWnL1QhP9j8uV1q2rM5aZ6xC3e4kT9mN2pR",
+          "version": 1
+        },
+        "signer_public_key": "ODBXeiSmBilDMvn64YlNIIsh0fcIa20yGQzXdZXqlMo",
+        "signature": "lE1d3sfko6e274TKNcKdGRXa5HxII_x1DTeZev_wkvFZtvN7lUdENz2o14uOIUYY7gaKPK8TQnbyNoVxnFheAg"
+      },
+      "expected": {
+        "publicKey": "ODBXeiSmBilDMvn64YlNIIsh0fcIa20yGQzXdZXqlMo",
+        "nonce": "7",
+        "txHash": "F7p8QyW8tWnL1QhP9j8uV1q2rM5aZ6xC3e4kT9mN2pR",
+        "contentSha256": "9cbc23193419eccbdb5a3a082a57bbe90e9eee51761cfab70cac4a367863c5c5"
+      }
+    },
+    {
+      "id": "content_tamper",
+      "expect": "content_mismatch",
+      "receipt": {
+        "payload": {
+          "content_sha256": "9cbc23193419eccbdb5a3a082a57bbe90e9eee51761cfab70cac4a367863c5c5",
+          "hash_alg": "sha256",
+          "network": "near:mainnet",
+          "nonce": "7",
+          "scheme": "exact",
+          "tx_hash": "F7p8QyW8tWnL1QhP9j8uV1q2rM5aZ6xC3e4kT9mN2pR",
+          "version": 1
+        },
+        "signer_public_key": "ODBXeiSmBilDMvn64YlNIIsh0fcIa20yGQzXdZXqlMo",
+        "signature": "lE1d3sfko6e274TKNcKdGRXa5HxII_x1DTeZev_wkvFZtvN7lUdENz2o14uOIUYY7gaKPK8TQnbyNoVxnFheAg"
+      },
+      "expected": {
+        "publicKey": "ODBXeiSmBilDMvn64YlNIIsh0fcIa20yGQzXdZXqlMo",
+        "nonce": "7",
+        "txHash": "F7p8QyW8tWnL1QhP9j8uV1q2rM5aZ6xC3e4kT9mN2pR",
+        "contentSha256": "c71d7637cc757261d0a07e8a1dfdab1fcf1aeb6cd19495f59e59da03f1e3c6f3"
+      }
+    },
+    {
+      "id": "reused_on_other_payment",
+      "expect": "payment_mismatch",
+      "receipt": {
+        "payload": {
+          "content_sha256": "9cbc23193419eccbdb5a3a082a57bbe90e9eee51761cfab70cac4a367863c5c5",
+          "hash_alg": "sha256",
+          "network": "near:mainnet",
+          "nonce": "7",
+          "scheme": "exact",
+          "tx_hash": "F7p8QyW8tWnL1QhP9j8uV1q2rM5aZ6xC3e4kT9mN2pR",
+          "version": 1
+        },
+        "signer_public_key": "ODBXeiSmBilDMvn64YlNIIsh0fcIa20yGQzXdZXqlMo",
+        "signature": "lE1d3sfko6e274TKNcKdGRXa5HxII_x1DTeZev_wkvFZtvN7lUdENz2o14uOIUYY7gaKPK8TQnbyNoVxnFheAg"
+      },
+      "expected": {
+        "publicKey": "ODBXeiSmBilDMvn64YlNIIsh0fcIa20yGQzXdZXqlMo",
+        "nonce": "7",
+        "txHash": "other-tx",
+        "contentSha256": "9cbc23193419eccbdb5a3a082a57bbe90e9eee51761cfab70cac4a367863c5c5"
+      }
+    },
+    {
+      "id": "forged_signature",
+      "expect": "bad_signature",
+      "receipt": {
+        "payload": {
+          "content_sha256": "9cbc23193419eccbdb5a3a082a57bbe90e9eee51761cfab70cac4a367863c5c5",
+          "hash_alg": "sha256",
+          "network": "near:mainnet",
+          "nonce": "7",
+          "scheme": "exact",
+          "tx_hash": "F7p8QyW8tWnL1QhP9j8uV1q2rM5aZ6xC3e4kT9mN2pR",
+          "version": 1
+        },
+        "signer_public_key": "ODBXeiSmBilDMvn64YlNIIsh0fcIa20yGQzXdZXqlMo",
+        "signature": "lU1d3sfko6e274TKNcKdGRXa5HxII_x1DTeZev_wkvFZtvN7lUdENz2o14uOIUYY7gaKPK8TQnbyNoVxnFheAg"
+      },
+      "expected": {
+        "publicKey": "ODBXeiSmBilDMvn64YlNIIsh0fcIa20yGQzXdZXqlMo",
+        "nonce": "7",
+        "txHash": "F7p8QyW8tWnL1QhP9j8uV1q2rM5aZ6xC3e4kT9mN2pR",
+        "contentSha256": "9cbc23193419eccbdb5a3a082a57bbe90e9eee51761cfab70cac4a367863c5c5"
+      }
+    }
+  ]
+}
