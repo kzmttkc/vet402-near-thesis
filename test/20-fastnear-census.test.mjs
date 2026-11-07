@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { test } from "node:test";
 import { NEAR_USDC } from "../lib/sources/relay-census.mjs";
 import {
+  classifyBatch,
   classifyFastnearTx,
   judgeKnownRelays,
   readStampedFacilitators,
@@ -55,9 +57,43 @@ test("storage calls, a second action, a failed receipt, and another signer do no
   assert.equal(classifyFastnearTx(entry({ delegates: 0, usdcReceipts: 0 }), SIGNER).reason, "no_usdc_ft");
 });
 
+test("a reversed batch counts the hash whose body matched", () => {
+  const hit = entry();
+  hit.transaction.hash = "hit";
+  const miss = entry({ method: "storage_deposit" });
+  miss.transaction.hash = "miss";
+  const slice = [
+    { hash: "hit", at: "2026-11-01T00:00:00.000Z", height: 2 },
+    { hash: "miss", at: "2026-11-01T00:00:01.000Z", height: 3 },
+  ];
+  const got = classifyBatch(slice, [miss, hit], SIGNER);
+  assert.deepEqual(
+    got.counted.map((row) => row.hash),
+    ["hit"],
+  );
+  assert.equal(got.rejected.not_single, 1);
+  assert.equal(got.rejected.unchecked, 0);
+  const missing = classifyBatch([{ hash: "absent", at: null, height: null }], [hit], SIGNER);
+  assert.equal(missing.rejected.unchecked, 1);
+  assert.equal(missing.counted.length, 0);
+});
+
 test("a known-relay sum below the line is not decided, and a sum on the line is crossed", () => {
   assert.equal(judgeKnownRelays({ lower: 7412, line: 25_400 }), "not_decided");
   assert.equal(judgeKnownRelays({ lower: 25_400, line: 25_400 }), "crossed");
+});
+
+test("the frozen facilitator file sums the known accounts and stays under the line", async () => {
+  const text = await readFile(new URL("../data/snapshot/near/facilitators.json", import.meta.url), "utf8");
+  const doc = readStampedFacilitators(text);
+  assert.equal(doc.line, 25_400);
+  assert.equal(doc.lower, 1716);
+  assert.equal(doc.result, "not_decided");
+  assert.equal(doc.list_complete, true);
+  const sample = doc.accounts.find((account) => account.account.startsWith("5a95b79b"));
+  assert.equal(sample.delegate_usdc, 1716);
+  assert.equal(sample.includes_frozen_hit, true);
+  assert.equal(sample.sample_hashes[0], "76hZkqNNi359kH266MTbce7ko9nvcqwMaWjtw92Azc4b");
 });
 
 test("the sha256 covers the document with the hash field emptied", () => {

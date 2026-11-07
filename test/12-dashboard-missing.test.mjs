@@ -114,7 +114,7 @@ test("the threshold bar leads the page and falls back to the frozen bounds", () 
   const text = meter.children.map((node) => node.textContent).join("\n");
   assert.match(text, /Last updated 2026-11-07 04:24 UTC/);
   assert.match(text, /Frozen snapshot/);
-  assert.match(text, /Lower, sample hits 5/);
+  assert.match(text, /Lower, known relays 1,716/);
   assert.match(text, /Estimate 20,421/);
   assert.match(text, /Upper 42,675/);
   assert.match(text, /Line 25,400/);

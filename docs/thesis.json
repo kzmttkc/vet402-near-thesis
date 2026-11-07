@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T11:17:04.626Z",
+  "generated_at": "2026-11-07T12:07:33.290Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
@@ -514,6 +514,32 @@
       "as_of": "2026-11-07T04:24:35.741Z",
       "source": "nearblocks_v3+near_archival_rpc",
       "definition": "Unique intents whose best outcome is other."
+    },
+    "near.known.lower": {
+      "value": 1716,
+      "unit": "NEAR delegate-action USDC transfers in 30 days",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:27.636Z",
+        "to": "2026-11-07T11:42:27.483Z"
+      },
+      "as_of": "2026-11-07T11:49:39.671Z",
+      "source": "fastnear_tx_api",
+      "definition": "Sum of delegate-action USDC ft_transfers signed by the accounts in facilitators.json. Accounts this survey did not name are absent, so this is a lower bound on N, not N."
+    },
+    "near.known.accounts": {
+      "value": 5,
+      "unit": "relay accounts",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:27.636Z",
+        "to": "2026-11-07T11:42:27.483Z"
+      },
+      "as_of": "2026-11-07T11:49:39.671Z",
+      "source": "fastnear_tx_api",
+      "definition": "Relay accounts named in facilitators.json and counted over that window."
     },
     "vet402.settled_no_tx": {
       "value": 13,
@@ -1299,6 +1325,27 @@
       "other_messages": {
         "Smart contract panicked: JSON: invalid value: \\": 6
       }
+    },
+    "known": {
+      "lower": 1716,
+      "result": "not_decided",
+      "reading": "not decided",
+      "line": 25400,
+      "accounts": 5,
+      "rows": [
+        "x402-relayer2.mike.near 0",
+        "x402-relayer.mike.near 0",
+        "solvador.near 0",
+        "uvd-facilitator.near 0",
+        "5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c 1716"
+      ],
+      "window": {
+        "from": "2026-10-08T11:42:27.636Z",
+        "to": "2026-11-07T11:42:27.483Z"
+      },
+      "retrieved_at": "2026-11-07T11:49:39.671Z",
+      "sha256": "8e1f635cb3dc0b8a9490fcdb1fbc4763e7b0f9ef98fb2fbe282fe32f99c3e3a7",
+      "list_complete": true
     },
     "relays": {
       "pending": true

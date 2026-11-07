@@ -13,7 +13,8 @@ import { readQuotes } from "./lib/quotes.mjs";
 import { loadDefillama } from "./lib/sources/defillama.mjs";
 import { loadVaultNumbers, fetchVaultLogs, writeVault, DEFAULT_RPCS } from "./lib/sources/vault.mjs";
 import { loadX402 } from "./lib/sources/x402scan.mjs";
-import { fetchNear, fetchRelayCensus, loadNear, MANIFEST as NEAR_MANIFEST } from "./lib/sources/near.mjs";
+import { fetchKnownRelays } from "./online/fetch-facilitators.mjs";
+import { fetchNear, loadNear, MANIFEST as NEAR_MANIFEST } from "./lib/sources/near.mjs";
 import { recheckRows, summaryFromFile } from "./lib/recheck.mjs";
 import { renderTemplate } from "./lib/render.mjs";
 import { checkSurfaces } from "./lib/surface.mjs";
@@ -415,7 +416,7 @@ export async function main(argv, { cwd = ROOT } = {}) {
   }
   if (args.fetchRelays) {
     if (args.offline) throw new Error("cannot --fetch-relays with --offline");
-    await fetchRelayCensus(nearDir, { log: (line) => console.error(`fetch-relays: ${line}`) });
+    await fetchKnownRelays(nearDir, { log: (line) => console.error(`fetch-relays: ${line}`) });
     args.offline = true;
   }
 

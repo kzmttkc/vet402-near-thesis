@@ -186,7 +186,12 @@ function renderMeter(root, thesis, live) {
   place("meter-mark lower", pos.lower);
   place("meter-mark estimate", pos.estimate);
   place("meter-mark upper", pos.upper);
-  const lowerName = reading.lower_kind === "sample_hits" ? "Lower, sample hits" : "Lower";
+  const lowerName =
+    reading.lower_kind === "sample_hits"
+      ? "Lower, sample hits"
+      : reading.lower_kind === "known_relays"
+        ? "Lower, known relays"
+        : "Lower";
   const textOf = (name, value) => `${name} ${value == null ? "missing" : formatCount(value)}`;
   el(
     section,

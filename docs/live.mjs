@@ -13,16 +13,19 @@ function recordValue(thesis, id) {
   return finite(thesis?.numbers?.[id]?.value);
 }
 
-// Frozen thesis.json. The census lower is used when that count exists.
-// Until then the only exact floor is the delegate hits inside the sample.
+// Frozen thesis.json. A finished relayer census wins. The known-account sum is
+// the next floor. Until either file is present, the floor is the sample hits.
 export function meterFromThesis(thesis) {
   const censusLower = recordValue(thesis, "near.relays.lower");
+  const knownLower = recordValue(thesis, "near.known.lower");
   const censusUpper = recordValue(thesis, "near.relays.upper");
   const estimateRec = thesis?.numbers?.["near.delegate.estimate"] ?? null;
+  const lower = censusLower ?? knownLower ?? recordValue(thesis, "near.delegate.sample_hits");
+  const lowerKind = censusLower != null ? "census" : knownLower != null ? "known_relays" : "sample_hits";
   return {
     line: recordValue(thesis, "threshold.line"),
-    lower: censusLower ?? recordValue(thesis, "near.delegate.sample_hits"),
-    lower_kind: censusLower == null ? "sample_hits" : "census",
+    lower,
+    lower_kind: lowerKind,
     estimate: recordValue(thesis, "near.delegate.estimate"),
     upper: censusUpper ?? recordValue(thesis, "near.delegate.estimate_upper_95"),
     updated: estimateRec?.as_of ?? thesis?.snapshot?.near_retrieved_at ?? thesis?.generated_at ?? null,

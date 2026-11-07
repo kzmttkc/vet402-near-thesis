@@ -19,8 +19,8 @@ test("with no live file the meter uses the frozen bounds", () => {
   const frozen = meterFromThesis(thesis);
   assert.equal(frozen.source, "frozen");
   assert.equal(frozen.line, 25_400);
-  assert.equal(frozen.lower, 5);
-  assert.equal(frozen.lower_kind, "sample_hits");
+  assert.equal(frozen.lower, 1716);
+  assert.equal(frozen.lower_kind, "known_relays");
   assert.equal(Math.round(frozen.estimate), 20_421);
   assert.equal(frozen.upper, 42_675);
   assert.equal(frozen.relays_obtained, false);
@@ -84,7 +84,7 @@ test("a live record is one UTC day and a later day does not delete the earlier f
   assert.equal(record.date, "2026-11-08");
   assert.equal(record.source, "live");
   assert.equal(record.relays_obtained, false);
-  assert.equal(record.lower, 5);
+  assert.equal(record.lower, 1716);
   assert.equal(record.line, 25_400);
   const root = await mkdtemp(join(tmpdir(), "near-live-"));
   await appendLiveReading({ thesis, root, now: new Date("2026-11-08T00:30:00.000Z") });
@@ -100,7 +100,7 @@ test("a live record is one UTC day and a later day does not delete the earlier f
   assert.equal(shown.date, "2026-11-09");
   const first = JSON.parse(await readFile(join(root, "data", "live", "2026-11-08.json"), "utf8"));
   assert.equal(first.date, "2026-11-08");
-  assert.equal(first.lower, 5);
+  assert.equal(first.lower, 1716);
 });
 
 test("the upkeep sentence says the counts are fetched again each day", () => {

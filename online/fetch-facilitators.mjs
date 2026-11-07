@@ -3,7 +3,8 @@
 // No key, no account, no mainnet write. Resume file stays in /tmp.
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { NEAR_USDC } from "../lib/sources/relay-census.mjs";
 import {
   countSignerTxs,
@@ -14,7 +15,7 @@ import {
   writeFacilitators,
 } from "../lib/sources/fastnear-census.mjs";
 
-const OUT_DIR = join(import.meta.dirname, "..", "data", "snapshot", "near");
+const OUT_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "snapshot", "near");
 const PROGRESS = "/tmp/vet402-facilitators-progress.json";
 const SAMPLE_SIGNER = "5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c";
 const KNOWN_HIT = "76hZkqNNi359kH266MTbce7ko9nvcqwMaWjtw92Azc4b";
@@ -74,11 +75,12 @@ async function readProgress() {
   }
 }
 
-async function main() {
-  const client = makeFastnear({ log, pauseMs: 80 });
+export async function fetchKnownRelays(dir = OUT_DIR, { log: logImpl = log } = {}) {
+  const say = logImpl;
+  const client = makeFastnear({ log: say, pauseMs: 80 });
   const saved = await readProgress();
   const window = saved?.window ?? (await windowFromTip(client.post));
-  log(`窓 ${window.from} .. ${window.to} 高さ ${window.from_height}..${window.to_height}`);
+  say(`窓 ${window.from} .. ${window.to} 高さ ${window.from_height}..${window.to_height}`);
   const order = await client.post("/v0/transactions", { tx_hashes: [KNOWN_HIT] });
   const opened = order.transactions?.[0]?.transaction?.signer_id;
   if (opened !== SAMPLE_SIGNER) throw new Error(`sample tx signer ${opened}`);
@@ -87,13 +89,13 @@ async function main() {
   for (const spec of ACCOUNTS) {
     if (finished.has(spec.account)) continue;
     const open = saved?.open?.account === spec.account ? saved.open : null;
-    const listed = open?.listed ?? (await listSignerTxs(client.post, spec.account, window, { log }));
-    log(`${spec.account} 署名取引 ${listed.rows.length} 申告 ${listed.reported} 完全 ${listed.list_complete}`);
+    const listed = open?.listed ?? (await listSignerTxs(client.post, spec.account, window, { log: say }));
+    say(`${spec.account} 署名取引 ${listed.rows.length} 申告 ${listed.reported} 完全 ${listed.list_complete}`);
     const done = new Set(open?.done ?? []);
     const priorCounted = open?.counted ?? [];
     const priorRejected = open?.rejected ?? { no_usdc_ft: 0, not_single: 0, inner_failed: 0, unchecked: 0 };
     const fresh = await countSignerTxs(client.post, spec.account, listed, {
-      log,
+      log: say,
       done,
       onProgress: async ({ done: doneNow, counted, rejected }) => {
         const merged = mergeRejected(priorRejected, rejected);
@@ -134,7 +136,7 @@ async function main() {
     };
     accounts.push(row);
     await writeFile(PROGRESS, JSON.stringify({ window, accounts }));
-    log(`${spec.account} 該当 ${row.delegate_usdc}`);
+    say(`${spec.account} 該当 ${row.delegate_usdc}`);
   }
   const estimate = 20421;
   const upper = 42675;
@@ -159,9 +161,10 @@ async function main() {
     "https://facilitator.payai.network/supported (no near kind, retrieved 2026-11-07)",
   ];
   doc.token = NEAR_USDC;
-  await mkdir(OUT_DIR, { recursive: true });
-  const stamped = await writeFacilitators(OUT_DIR, doc);
-  log(`下限 ${stamped.lower} 判定 ${stamped.result} sha256 ${stamped.sha256}`);
+  await mkdir(dir, { recursive: true });
+  const stamped = await writeFacilitators(dir, doc);
+  say(`下限 ${stamped.lower} 判定 ${stamped.result} sha256 ${stamped.sha256}`);
+  return stamped;
 }
 
 function mergeRejected(a, b) {
@@ -170,7 +173,10 @@ function mergeRejected(a, b) {
   return out;
 }
 
-main().catch((err) => {
-  console.error(err.stack ?? err.message ?? err);
-  process.exit(1);
-});
+const invoked = process.argv[1] ? resolve(process.argv[1]) : "";
+if (fileURLToPath(import.meta.url) === invoked || import.meta.url === pathToFileURL(invoked).href) {
+  fetchKnownRelays(OUT_DIR).catch((err) => {
+    console.error(err.stack ?? err.message ?? err);
+    process.exit(1);
+  });
+}
