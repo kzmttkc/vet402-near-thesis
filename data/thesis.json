@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T09:03:34.699Z",
+  "generated_at": "2026-11-07T11:14:38.317Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
@@ -396,7 +396,7 @@
       },
       "as_of": "2026-11-07T04:24:35.741Z",
       "source": "nearblocks_v3+near_archival_rpc",
-      "definition": "Sampled receipts whose transaction is a Delegate action with one ft_transfer to NEAR USDC (the x402 NEAR shape). Exact inside the sample. The 30-day total is pending full count until relay-census.json is frozen."
+      "definition": "Sampled receipts whose transaction is a Delegate action with one ft_transfer to NEAR USDC (the x402 NEAR shape). Exact inside the sample. In the frozen sample every one of these hits is signed by 5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c. The 30-day total is not this sample."
     },
     "near.delegate.transfers_30d": {
       "value": 1837873,
@@ -435,7 +435,7 @@
       },
       "as_of": "2026-11-07T04:24:35.741Z",
       "source": "nearblocks_v3+near_archival_rpc",
-      "definition": "95% Clopper-Pearson upper bound of the sample share times transfers_30d. An estimate, not a count. The sample points are all at 16:24 UTC, so that minute is over-weighted."
+      "definition": "One-sided 95% Clopper-Pearson upper bound of the sample share times transfers_30d, assuming independent draws. The sample is 30 clusters of 15 receipts, so this is optimistic. An estimate, not a count. The sample points are all at 16:24 UTC, so that minute is over-weighted."
     },
     "near.escrow.txs": {
       "value": 100,

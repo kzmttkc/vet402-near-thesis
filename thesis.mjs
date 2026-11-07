@@ -551,7 +551,7 @@ export async function main(argv, { cwd = ROOT } = {}) {
       : args.offline
         ? "data/snapshot (no network)"
         : "the public sources";
-  const pending = !nearLoaded || nearLoaded.relaysPending ? ", 全数は未取得" : "";
+  const pending = !nearLoaded || nearLoaded.relaysPending ? ", full count not yet fetched" : "";
   console.log(
     `rebuilt ${Object.keys(thesis.numbers).length} numbers from ${sourceLabel}, ${thesis.checks.length} checks ok, wrote data/thesis.json${pending}`,
   );

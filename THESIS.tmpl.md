@@ -8,7 +8,7 @@ NEAR's edge in agent payments is the funding and settlement layer: NEAR Intents 
 
 ### Impact
 
-The people this reaches are agents that pay through x402, and the accounts that fund them. x402scan counted {{n:threshold.base_count_30d}} payments on Base over 30 days. The Intents treasury on Base sent out {{n:vault.usdc_out_30d.usd|M}} of USDC in {{n:vault.usdc_out_30d.count}} transfers. Those transfers have no label, so they are not an x402 count. A full 30-day count of delegate-action USDC transfers on NEAR is pending full count. Until that file is frozen, I do not claim that x402 settlement on NEAR is a flow at the size of the line below.
+The people this reaches are agents that pay through x402, and the accounts that fund them. x402scan counted {{n:threshold.base_count_30d}} payments on Base over 30 days. The Intents treasury on Base sent out {{n:vault.usdc_out_30d.usd|M}} of USDC in {{n:vault.usdc_out_30d.count}} transfers. Those transfers have no label, so they are not an x402 count. The 30-day count of delegate-action USDC transfers on NEAR is not in the snapshot yet. Until `data/snapshot/near/relay-census.json` is frozen, I do not claim that x402 settlement on NEAR is a flow at the size of the line below.
 
 ### Sustainability
 
@@ -22,7 +22,7 @@ That sentence is the same split vet402 records on its own purchases. Of {{n:vet4
 
 NEAR Intents settles cross-chain payments through its solver network. The frozen page is https://mpp.dev/payment-methods/nearintents. The client library named there is `@defuse-protocol/nearintents-mpp-sdk`. The snapshot has the page and no payment count, so I do not state one.
 
-The public facilitator at x402.mikedotexe.com reports scheme `exact` on `near:mainnet` and names `x402-relayer2.mike.near` as a signer. Over the same 30 days, NEAR Intents volume was {{n:intents.volume_30d|M}} (retrieved {{asof:intents.volume_30d}} UTC). On Base, the Intents treasury address sent out {{n:vault.usdc_out_30d.usd|M}} of USDC in {{n:vault.usdc_out_30d.count}} transfers over {{range:vault.usdc_out_30d.usd}}. This is the funding and movement layer. Nothing in those transfers says which of them, if any, are x402.
+The public facilitator at x402.mikedotexe.com reports scheme `exact` on `near:mainnet` and names `x402-relayer2.mike.near` as a signer. NEAR Intents volume was {{n:intents.volume_30d|M}} {{range:intents.volume_30d}} UTC (retrieved {{asof:intents.volume_30d}} UTC). That window is not the window used for N ({{range:near.delegate.sampled_receipts}} UTC). On Base, the Intents treasury address sent out {{n:vault.usdc_out_30d.usd|M}} of USDC in {{n:vault.usdc_out_30d.count}} transfers over {{range:vault.usdc_out_30d.usd}}. This is the funding and movement layer. Nothing in those transfers says which of them, if any, are x402.
 
 ## Evidence against
 
@@ -30,7 +30,7 @@ The opt-in discovery catalog at x402.mikedotexe.com lists {{n:near.facilitator.d
 
 The one named relayer, `x402-relayer2.mike.near`, has {{n:near.relayer.payments}} delegate payments in the frozen receipt list. The smallest is {{n:near.relayer.payment_usdc_min}} USDC and the largest is {{n:near.relayer.payment_usdc_max}} USDC. They go from {{field:near.relayer.payment_senders}} to {{field:near.relayer.payment_receivers}}, and the last one is {{field:near.relayer.payment_last_at}} UTC. These are the operator's own accounts. They sit before the 30-day window used for N, so they are not that count. They are the payments I can point at today.
 
-N, the 30-day count of delegate-action USDC `ft_transfer`s, is pending full count. The frozen sample took {{n:near.delegate.sampled_receipts}} USDC `ft_transfer` receipts at 30 points and found {{n:near.delegate.sample_hits}} of the delegate shape. Scaling that share by {{n:near.delegate.transfers_30d}} USDC transfer events of every shape gives an estimate of {{n:near.delegate.estimate}}, rounded to the nearest transfer, with a 95% upper bound of {{n:near.delegate.estimate_upper_95}}. The line is {{n:threshold.line}}. The upper bound is above the line and the sample hits are below it, so the result is not decided.
+N, the 30-day count of delegate-action USDC `ft_transfer`s, is not frozen yet. The frozen sample took {{n:near.delegate.sampled_receipts}} USDC `ft_transfer` receipts at 30 points, 15 at each point, and found {{n:near.delegate.sample_hits}} of the delegate shape. All {{n:near.delegate.sample_hits}} of those hits are signed by the same relayer account `5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c`. Counting that account's 30 days decides N (`node thesis.mjs --fetch-relays`). Scaling that share by {{n:near.delegate.transfers_30d}} USDC transfer events of every shape gives an estimate of {{n:near.delegate.estimate}}, rounded to the nearest transfer. The one-sided 95% upper bound, assuming independent draws (the sample is 30 clusters of 15 receipts, so this is optimistic), is {{n:near.delegate.estimate_upper_95}}. The line is {{n:threshold.line}}. The upper bound is above the line and the point estimate is below it, so the result is not decided. N includes transfers that are not x402, so the count is tilted against the claim.
 
 The estimate is biased. All 30 sample points fall at 16:24 UTC, because the window opened at 04:24 and each point is one day plus half a day later. That minute weighs more than it would across a day. The upper bound is kept, with that bias. It is not a count. The {{n:near.delegate.transfers_30d}} figure counts every transfer shape, so it is larger than N and is not N. Relayers the sample missed are absent from any lower bound this page can print today.
 
@@ -39,8 +39,6 @@ The estimate is biased. All 30 sample points fall at 16:24 UTC, because the wind
 ## What would change my mind
 
 **Threshold committed before data.**
-
-, in f0c48d1
 
 My claim is that NEAR's edge in agent payments is the funding and settlement layer (NEAR Intents), and that x402 settlement on NEAR itself is specified but not yet in use. I will drop the second half and say "x402 settlement is itself a place where NEAR earns" if this holds:
 
@@ -58,7 +56,7 @@ N counts NEAR transactions in which all of these are true:
 
 This is the exact shape the x402 NEAR scheme requires (x402-foundation/x402, `specs/schemes/exact/scheme_exact_near.md`, section "Delegated Action Safety": one action, `ft_transfer`, `receiver_id` equal to the asset). Every x402 payment in NEAR USDC is in N. N also includes delegate-action USDC transfers that are not x402, so N is an upper bound. A higher N can only make me change my mind sooner.
 
-N is counted with free sources that need no key: the NearBlocks public API and NEAR public RPC (`node thesis.mjs --fetch-relays`). Each transaction is counted once. The full count is pending full count until `data/snapshot/near/relay-census.json` is frozen. The sample estimate above is not that count.
+N is counted with free sources that need no key: the NearBlocks public API and NEAR public RPC (`node thesis.mjs --fetch-relays`). Each transaction is counted once. `data/snapshot/near/relay-census.json` is not frozen, so the sample estimate above is not N. The five sample hits share one signer, so counting that account's 30 days closes this.
 
 ### The Base count, frozen before this threshold
 
@@ -76,4 +74,4 @@ This number does not change when the NEAR data is fetched again. The windows do 
 - **N < {{n:threshold.line}}, all 30 days counted**: the threshold is not crossed. The claim stands.
 - **Only part of the 30 days could be counted without a key**: the snapshot states the range counted and why the count stopped. If the partial count is already at least {{n:threshold.line}}, the threshold is crossed, because a partial count is never larger than the full one. If it is below {{n:threshold.line}}, the result is "not decided", and I do not report it as a pass.
 
-The lower bound, the payments through the one known x402 facilitator relayer, is reported next to N. It does not change the rule. While the census file is absent, `--offline` prints 全数は未取得 and does not treat the estimate as a result.
+The lower bound, the payments through the one known x402 facilitator relayer, is reported next to N. It does not change the rule. While the census file is absent, `--offline` prints `full count not yet fetched` and does not treat the estimate as a result.
