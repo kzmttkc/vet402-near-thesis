@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
-import { countMissing, isMissingRecord } from "../docs/app.js";
+import { countMissing, formatValue, isMissingRecord } from "../docs/app.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -25,6 +25,17 @@ test("countMissing counts numbers that lack range, date, or source", () => {
     { value: 2 },
     { value: 3, range: { days: 30, to: "2026-10-29T00:00:00Z" }, as_of: "t" },
   ]), 2);
+});
+
+test("dashboard dollars follow unit_kind, so a USDC count stays a count", () => {
+  assert.equal(formatValue({ value: 25400, unit: "NEAR delegate-action USDC transfers in 30 days", unit_kind: "count" }), "25,400");
+  assert.equal(formatValue({ value: 41050145.312122, unit: "USD", unit_kind: "usd" }), "$41,050,145");
+  assert.equal(formatValue({ value: 0.001, unit: "USDC", unit_kind: "usdc" }), "0.001");
+  const thesis = JSON.parse(readFileSync(join(ROOT, "docs", "thesis.json"), "utf8"));
+  for (const id of ["vet402.attempts", "vault.usdc_out_30d.count", "threshold.line", "near.delegate.transfers_30d"]) {
+    assert.equal(formatValue(thesis.numbers[id]).includes("$"), false, id);
+  }
+  assert.equal(formatValue(thesis.numbers["vault.usdc_out_30d.usd"]).startsWith("$"), true);
 });
 
 test("dashboard page states the question and does not pull a CDN", () => {

@@ -52,12 +52,25 @@ function formatCount(value) {
   return Math.round(Number(value)).toLocaleString("en-US");
 }
 
-function formatValue(rec) {
+function unitKind(rec) {
+  if (typeof rec?.unit_kind === "string" && rec.unit_kind !== "") return rec.unit_kind;
+  const unit = String(rec?.unit ?? "");
+  if (/share/i.test(unit)) return "share";
+  if (unit === "USD") return "usd";
+  if (unit === "USDC") return "usdc";
+  return "count";
+}
+
+export function formatValue(rec) {
   if (rec == null || !Number.isFinite(Number(rec.value))) return null;
-  const unit = String(rec.unit ?? "");
   const value = Number(rec.value);
-  if (/share/i.test(unit)) return formatShare(value);
-  if (/usd/i.test(unit)) return formatUsdInteger(value);
+  const kind = unitKind(rec);
+  if (kind === "share") return formatShare(value);
+  if (kind === "usd") return formatUsdInteger(value);
+  if (kind === "usdc") {
+    const text = value.toFixed(6).replace(/0+$/, "").replace(/\.$/, "");
+    return text === "" ? "0" : text;
+  }
   return formatCount(value);
 }
 
