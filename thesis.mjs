@@ -401,7 +401,7 @@ export async function main(argv, { cwd = ROOT } = {}) {
     return { exitCode: missing ? 1 : 0 };
   }
   if (args.checkFiles) return runCheck(args, cwd);
-  if (args.renderPairs) return runRender(args, cwd);
+  if (args.renderPairs && !args.offline) return runRender(args, cwd);
   if (args.recheck && !args.offline) return runRecheck(args, cwd);
 
   const snapshotPath = resolve(cwd, args.snapshotDir);
@@ -563,6 +563,7 @@ export async function main(argv, { cwd = ROOT } = {}) {
   console.log(
     `rebuilt ${Object.keys(thesis.numbers).length} numbers from ${sourceLabel}, ${thesis.checks.length} checks ok, wrote data/thesis.json${pending}`,
   );
+  if (args.renderPairs) await runRender(args, cwd);
   return thesis;
 }
 
