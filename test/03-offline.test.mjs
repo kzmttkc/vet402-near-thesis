@@ -39,6 +39,8 @@ test("--offline numbers match a normal run for the export", async () => {
     const first = JSON.parse(await readFile(join(dir, "data", "thesis.json"), "utf8"));
     const offline = await runThesis(dir, ["--offline"]);
     assert.equal(offline.code, 0, offline.stderr);
+    assert.match(offline.stdout, /全数は未取得/);
+    assert.equal(offline.stdout.trim().split("\n").length, 1);
     const second = JSON.parse(await readFile(join(dir, "data", "thesis.json"), "utf8"));
     assert.deepEqual(second.numbers, first.numbers);
   } finally {

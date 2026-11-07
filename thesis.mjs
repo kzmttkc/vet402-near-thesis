@@ -13,7 +13,7 @@ import { readQuotes } from "./lib/quotes.mjs";
 import { loadDefillama } from "./lib/sources/defillama.mjs";
 import { loadVaultNumbers, fetchVaultLogs, writeVault, DEFAULT_RPCS } from "./lib/sources/vault.mjs";
 import { loadX402 } from "./lib/sources/x402scan.mjs";
-import { fetchNear, loadNear, MANIFEST as NEAR_MANIFEST } from "./lib/sources/near.mjs";
+import { fetchNear, fetchRelayCensus, loadNear, MANIFEST as NEAR_MANIFEST } from "./lib/sources/near.mjs";
 import { recheckRows, summaryFromFile } from "./lib/recheck.mjs";
 import { renderTemplate } from "./lib/render.mjs";
 import { checkSurfaces } from "./lib/surface.mjs";
@@ -32,6 +32,7 @@ function parseArgs(argv) {
   const offline = argv.includes("--offline");
   const fetchVault = argv.includes("--fetch-vault");
   const fetchNearFlag = argv.includes("--fetch-near");
+  const fetchRelaysFlag = argv.includes("--fetch-relays");
   const snapIdx = argv.indexOf("--snapshot");
   const snapshotDir = snapIdx >= 0 ? argv[snapIdx + 1] : join("data", "snapshot");
   const thesisIdx = argv.indexOf("--thesis");
@@ -64,6 +65,7 @@ function parseArgs(argv) {
     offline,
     fetchVault,
     fetchNear: fetchNearFlag,
+    fetchRelays: fetchRelaysFlag,
     snapshotDir,
     thesisPath: thesisIdx >= 0 ? argv[thesisIdx + 1] : null,
     fromBlock: fromIdx >= 0 ? Number(argv[fromIdx + 1]) : null,
@@ -404,10 +406,16 @@ export async function main(argv, { cwd = ROOT } = {}) {
     await runFetchVault(args, snapshotPath);
   }
   const nearDir = join(snapshotPath, "near");
+  if (args.fetchNear && args.fetchRelays) throw new Error("cannot --fetch-relays with --fetch-near");
   if (args.fetchNear) {
     if (args.offline) throw new Error("cannot --fetch-near with --offline");
     await fetchNear(nearDir, { log: (line) => console.error(`fetch-near: ${line}`) });
     // Only the NEAR sources are fetched. Everything else is rebuilt from the frozen snapshot.
+    args.offline = true;
+  }
+  if (args.fetchRelays) {
+    if (args.offline) throw new Error("cannot --fetch-relays with --offline");
+    await fetchRelayCensus(nearDir, { log: (line) => console.error(`fetch-relays: ${line}`) });
     args.offline = true;
   }
 
@@ -536,8 +544,16 @@ export async function main(argv, { cwd = ROOT } = {}) {
     const failed = thesis.checks.filter((c) => !c.ok).map((c) => c.name);
     throw new Error(`checks failed: ${failed.join(", ")}`);
   }
+  const sourceLabel = args.fetchNear
+    ? "fresh NEAR sources and data/snapshot"
+    : args.fetchRelays
+      ? "the relayer census and data/snapshot"
+      : args.offline
+        ? "data/snapshot (no network)"
+        : "the public sources";
+  const pending = !nearLoaded || nearLoaded.relaysPending ? ", 全数は未取得" : "";
   console.log(
-    `rebuilt ${Object.keys(thesis.numbers).length} numbers from ${args.fetchNear ? "fresh NEAR sources and data/snapshot" : args.offline ? "data/snapshot (no network)" : "the public sources"}, ${thesis.checks.length} checks ok, wrote data/thesis.json`,
+    `rebuilt ${Object.keys(thesis.numbers).length} numbers from ${sourceLabel}, ${thesis.checks.length} checks ok, wrote data/thesis.json${pending}`,
   );
   return thesis;
 }
