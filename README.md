@@ -1,6 +1,10 @@
 # NEAR in agent payments: a thesis you can rerun
 
-NEAR's edge in agent payments is the funding and settlement layer: NEAR Intents already settles cross-chain agent payments, and x402 has had a NEAR settlement spec since 2026-05-16 14:01 UTC that is ready but not yet lit. The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled 0 x402 payments over from 2026-10-08 11:42 to 2026-11-07 11:42. `uvd-facilitator.near` signed 51 transactions in that window. Those are escrow movements, and its Delegate USDC `ft_transfer` count is 0. The spec is merged and the facilitators are named. That is the strongest evidence that this settlement has not lit. The argument, the evidence, and the number that would change my mind are in [THESIS.md](THESIS.md). Every figure about the market and about vet402 below comes from this repository, either from one script you can rerun without a key or an account, or from a quote in the table at the end.
+NEAR's edge in agent payments is the funding and settlement layer: NEAR Intents already settles cross-chain agent payments, and x402 has had a NEAR settlement spec since 2026-05-16 14:01 UTC that is ready but not yet lit. The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled 0 exact-scheme payments over from 2026-10-08 11:42 to 2026-11-07 11:42.
+
+`uvd-facilitator.near` signed 51 transactions in that window: 14 Delegate `ft_transfer_call` to NEAR USDC and 37 calls on `v1.arras-escrow.near` (24 `withdraw_for`, 11 `release`, 2 `refund`). Those may be an escrow scheme of x402. This page does not classify them as x402 or as not x402. Its exact-scheme Delegate USDC `ft_transfer` count is 0.
+
+The exact-scheme spec is merged and the facilitators are named. That is the strongest evidence that the exact scheme has not lit. The argument, the evidence, and the number that would change my mind are in [THESIS.md](THESIS.md). Every figure about the market and about vet402 below comes from this repository, either from one script you can rerun without a key or an account, or from a quote in the table at the end.
 
 ## What changed in this version
 

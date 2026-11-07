@@ -109,18 +109,23 @@ test("named facilitators with zero settlements sit with the claim", () => {
   const claim = thesis.indexOf("## Claim");
   const impact = thesis.indexOf("### Impact");
   const against = thesis.indexOf("## Evidence against");
-  const zero = thesis.indexOf("settled 0 x402 payments");
+  const zero = thesis.indexOf("settled 0 exact-scheme payments");
   assert.ok(claim !== -1 && claim < zero && zero < impact);
   assert.ok(zero < against);
   assert.match(thesis.slice(claim, impact), /uvd-facilitator\.near` signed 51 transactions/);
-  assert.match(thesis.slice(claim, impact), /Delegate USDC `ft_transfer` count is 0/);
-  assert.doesNotMatch(thesis.slice(against, thesis.indexOf("## What would change my mind")), /settled 0 x402 payments/);
+  assert.match(thesis.slice(claim, impact), /14 Delegate `ft_transfer_call` to NEAR USDC and 37 calls on `v1\.arras-escrow\.near`/);
+  assert.match(thesis.slice(claim, impact), /does not classify them as x402 or as not x402/);
+  assert.match(thesis.slice(claim, impact), /exact-scheme Delegate USDC `ft_transfer` count is 0/);
+  assert.doesNotMatch(thesis.slice(claim, impact), /Those are escrow movements/);
+  assert.doesNotMatch(thesis, /settled 0 x402 payments/);
   const generic = thesis.indexOf("It is a generic relay.");
   assert.ok(against < generic);
   assert.match(thesis, /not named by any facilitator `\/supported` response/);
   assert.match(thesis, /not known to be x402/);
   assert.match(thesis, /the whole of this lower bound/);
-  assert.match(readme, /settled 0 x402 payments/);
+  assert.match(readme, /settled 0 exact-scheme payments/);
+  assert.match(readme, /does not classify them as x402 or as not x402/);
+  assert.doesNotMatch(readme, /settled 0 x402 payments/);
   assert.match(readme, /It is a generic relay\./);
   assert.match(readme, /counted only as a lower bound on N/);
   for (const page of [thesis, readme]) {

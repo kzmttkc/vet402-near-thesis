@@ -338,6 +338,11 @@ test("the frozen snapshot has no full relay count yet", async () => {
   assert.equal(loaded.numbers["near.known.lower"].value, 1716);
   assert.equal(loaded.numbers["near.known.named_delegate"].value, 0);
   assert.equal(loaded.numbers["near.known.uvd_signer_txs"].value, 51);
+  assert.equal(loaded.numbers["near.known.uvd_ft_transfer_call"].value, 14);
+  assert.equal(loaded.numbers["near.known.uvd_escrow_calls"].value, 37);
+  assert.equal(loaded.numbers["near.known.uvd_withdraw_for"].value, 24);
+  assert.equal(loaded.numbers["near.known.uvd_release"].value, 11);
+  assert.equal(loaded.numbers["near.known.uvd_refund"].value, 2);
   assert.equal(loaded.numbers["near.known.uvd_delegate"].value, 0);
   assert.equal(loaded.numbers["near.known.generic_delegate"].value, 1716);
   assert.equal(loaded.near.known.roster.length, 5);

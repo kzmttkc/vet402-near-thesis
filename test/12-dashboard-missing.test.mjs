@@ -114,7 +114,9 @@ test("the facilitator table lines the five accounts up together", () => {
     assert.match(page, new RegExp(account));
   }
   assert.match(page, /Not named by \/supported/);
-  assert.match(page, /Escrow movements, not a Delegate USDC ft_transfer/);
+  assert.match(page, /14 Delegate ft_transfer_call to NEAR USDC and 37 calls on v1\.arras-escrow\.near/);
+  assert.match(page, /Not classified as x402 or as not x402/);
+  assert.doesNotMatch(page, /Escrow movements, not a Delegate USDC ft_transfer/);
   assert.match(page, /1,716/);
   const tableWrap = root.children.find((node) => node.className === "table-scroll");
   assert.equal(tableWrap.className, "table-scroll");

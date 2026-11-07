@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T13:38:26.291Z",
+  "generated_at": "2026-11-07T13:43:43.066Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
@@ -543,7 +543,7 @@
     },
     "near.known.named_delegate": {
       "value": 0,
-      "unit": "x402 payments",
+      "unit": "exact-scheme payments",
       "unit_kind": "count",
       "range": {
         "days": 30,
@@ -552,7 +552,7 @@
       },
       "as_of": "2026-11-07T12:47:16.312Z",
       "source": "fastnear_tx_api",
-      "definition": "Delegate-action USDC ft_transfers signed by x402-relayer2.mike.near, x402-relayer.mike.near, solvador.near, and uvd-facilitator.near. For these named facilitators this is the x402 settlement count."
+      "definition": "Delegate-action USDC ft_transfers signed by x402-relayer2.mike.near, x402-relayer.mike.near, solvador.near, and uvd-facilitator.near. For these named facilitators this is the exact-scheme settlement count. ft_transfer_call and escrow calls are not in it."
     },
     "near.known.uvd_signer_txs": {
       "value": 51,
@@ -565,7 +565,72 @@
       },
       "as_of": "2026-11-07T12:47:16.312Z",
       "source": "fastnear_tx_api",
-      "definition": "Signer transactions of uvd-facilitator.near in the window. The opened bodies are escrow calls on v1.arras-escrow.near and ft_transfer_call to NEAR USDC, not a single ft_transfer."
+      "definition": "Signer transactions of uvd-facilitator.near in the window. The opened bodies are ft_transfer_call to NEAR USDC and calls on v1.arras-escrow.near. Not classified as x402 or as not x402."
+    },
+    "near.known.uvd_ft_transfer_call": {
+      "value": 14,
+      "unit": "transactions",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:27.636Z",
+        "to": "2026-11-07T11:42:27.483Z"
+      },
+      "as_of": "2026-11-07T12:47:16.312Z",
+      "source": "fastnear_tx_api",
+      "definition": "Opened signer transactions of uvd-facilitator.near whose delegate receiver is NEAR USDC and whose method is ft_transfer_call. Not the exact-scheme ft_transfer count. Not classified as x402 or as not x402."
+    },
+    "near.known.uvd_escrow_calls": {
+      "value": 37,
+      "unit": "transactions",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:27.636Z",
+        "to": "2026-11-07T11:42:27.483Z"
+      },
+      "as_of": "2026-11-07T12:47:16.312Z",
+      "source": "fastnear_tx_api",
+      "definition": "Opened signer transactions of uvd-facilitator.near whose delegate receiver is v1.arras-escrow.near. These may be an escrow scheme of x402. Not classified as x402 or as not x402."
+    },
+    "near.known.uvd_withdraw_for": {
+      "value": 24,
+      "unit": "transactions",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:27.636Z",
+        "to": "2026-11-07T11:42:27.483Z"
+      },
+      "as_of": "2026-11-07T12:47:16.312Z",
+      "source": "fastnear_tx_api",
+      "definition": "Opened calls on v1.arras-escrow.near whose method is withdraw_for, signed by uvd-facilitator.near. Part of the escrow-call row. Not classified as x402 or as not x402."
+    },
+    "near.known.uvd_release": {
+      "value": 11,
+      "unit": "transactions",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:27.636Z",
+        "to": "2026-11-07T11:42:27.483Z"
+      },
+      "as_of": "2026-11-07T12:47:16.312Z",
+      "source": "fastnear_tx_api",
+      "definition": "Opened calls on v1.arras-escrow.near whose method is release, signed by uvd-facilitator.near. Part of the escrow-call row. Not classified as x402 or as not x402."
+    },
+    "near.known.uvd_refund": {
+      "value": 2,
+      "unit": "transactions",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:27.636Z",
+        "to": "2026-11-07T11:42:27.483Z"
+      },
+      "as_of": "2026-11-07T12:47:16.312Z",
+      "source": "fastnear_tx_api",
+      "definition": "Opened calls on v1.arras-escrow.near whose method is refund, signed by uvd-facilitator.near. Part of the escrow-call row. Not classified as x402 or as not x402."
     },
     "near.known.uvd_delegate": {
       "value": 0,
@@ -578,7 +643,7 @@
       },
       "as_of": "2026-11-07T12:47:16.312Z",
       "source": "fastnear_tx_api",
-      "definition": "Delegate-action USDC ft_transfers signed by uvd-facilitator.near. ft_transfer_call is not this count."
+      "definition": "Exact-scheme Delegate USDC ft_transfers signed by uvd-facilitator.near. ft_transfer_call is not this count."
     },
     "near.known.generic_delegate": {
       "value": 1716,
@@ -1420,6 +1485,11 @@
       "named_delegate": 0,
       "generic_delegate": 1716,
       "uvd_signer_txs": 51,
+      "uvd_ft_transfer_call": 14,
+      "uvd_escrow_calls": 37,
+      "uvd_withdraw_for": 24,
+      "uvd_release": 11,
+      "uvd_refund": 2,
       "uvd_delegate": 0,
       "roster": [
         {
@@ -1452,7 +1522,7 @@
           "named_in_supported": true,
           "signer_txs": 51,
           "delegate_usdc": 0,
-          "note": "Escrow movements, not a Delegate USDC ft_transfer."
+          "note": "14 Delegate ft_transfer_call to NEAR USDC and 37 calls on v1.arras-escrow.near. These may be an escrow scheme of x402. Not classified as x402 or as not x402."
         },
         {
           "account": "5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c",
