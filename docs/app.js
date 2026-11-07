@@ -1,4 +1,4 @@
-import { PREREGISTERED_POST, meterFromLive, meterPositions } from "./live.mjs";
+import { PREREGISTERED_POST, meterFromLive } from "./live.mjs";
 
 export function isMissingRecord(rec) {
   if (rec == null || typeof rec !== "object") return true;
@@ -184,6 +184,18 @@ function renderFacilitators(root, thesis) {
   );
 }
 
+function claimPercents(reading) {
+  const values = [reading?.line, reading?.lower].filter((number) => Number.isFinite(number) && number >= 0);
+  const max = Math.max(1, ...values);
+  const at = (number) => (Number.isFinite(number) && number >= 0 ? (number / max) * 100 : null);
+  return { line: at(reading?.line), lower: at(reading?.lower) };
+}
+
+function shareOfLine(lower, line) {
+  if (!Number.isFinite(lower) || !Number.isFinite(line) || line <= 0) return null;
+  return `${((lower / line) * 100).toFixed(1)}%`;
+}
+
 function renderMeter(root, thesis, live) {
   const reading = meterFromLive(live, thesis);
   const section = el(root, "section", "meter");
@@ -197,7 +209,7 @@ function renderMeter(root, thesis, live) {
     "meta",
     updated ? `Last updated ${updated}. ${kind}.` : `Last updated missing. ${kind}.`,
   );
-  const pos = meterPositions(reading);
+  const pos = claimPercents(reading);
   const track = el(section, "div", "meter-track");
   const place = (className, percent) => {
     if (percent == null) return;
@@ -206,25 +218,40 @@ function renderMeter(root, thesis, live) {
   };
   place("meter-line", pos.line);
   place("meter-mark lower", pos.lower);
-  place("meter-mark estimate", pos.estimate);
-  place("meter-mark upper", pos.upper);
+  const textOf = (name, value) => `${name} ${value == null ? "missing" : formatCount(value)}`;
   const lowerName =
     reading.lower_kind === "sample_hits"
       ? "Lower, sample hits"
       : reading.lower_kind === "known_relays"
         ? "Lower, known relays"
         : "Lower";
-  const textOf = (name, value) => `${name} ${value == null ? "missing" : formatCount(value)}`;
-  el(
-    section,
-    "p",
-    "meta",
-    `${textOf(lowerName, reading.lower)}. ${textOf("Estimate", reading.estimate)}. ${textOf("Upper", reading.upper)}. ${textOf("Line", reading.line)}.`,
-  );
+  const lowerText =
+    reading.lower_kind === "known_relays"
+      ? `${textOf("Lower, known relays", reading.lower)} = lower bound on N`
+      : textOf(lowerName, reading.lower);
+  el(section, "p", "meta", `${lowerText}. ${textOf("Line", reading.line)}.`);
+  const share = shareOfLine(reading.lower, reading.line);
+  if (share != null && reading.lower < reading.line) {
+    el(
+      section,
+      "p",
+      "meta",
+      `${formatCount(reading.lower)} is ${share} of the line. Unknown relay accounts would raise N. The evidence in hand sits below the line. The upper bound on all of N cannot be measured without a key, so the reading is not decided.`,
+    );
+  }
   const note = el(section, "p", "meta");
   const anchor = el(note, "a", null, "Pre-registered threshold");
   anchor.href = PREREGISTERED_POST;
   anchor.rel = "noreferrer";
+}
+
+function renderSampleAppendix(root, thesis) {
+  el(root, "h2", null, "Appendix");
+  el(root, "p", "note", "Biased sample estimate. Reference only. Not used in the claim.");
+  const numbers = thesis?.numbers ?? {};
+  const box = el(root, "div");
+  figure(box, "Sample estimate", formatValue(numbers["near.delegate.estimate"]), numbers["near.delegate.estimate"]);
+  figure(box, "Sample upper bound", formatValue(numbers["near.delegate.estimate_upper_95"]), numbers["near.delegate.estimate_upper_95"]);
 }
 
 export function renderDashboard(root, thesis, live = null) {
@@ -318,6 +345,8 @@ export function renderDashboard(root, thesis, live = null) {
   const sense = sensitivityRows(thesis?.model);
   if (!sense) el(root, "p", "missing", "missing");
   else root.append(table(["Multiple", "1%", "10%", "50%"], sense));
+
+  renderSampleAppendix(root, thesis);
 
   el(root, "h2", null, "Quotes");
   if (!Array.isArray(thesis?.quotes)) el(root, "p", "missing", "missing");

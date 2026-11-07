@@ -119,10 +119,22 @@ test("named facilitators with zero settlements sit with the claim", () => {
   assert.ok(against < generic);
   assert.match(thesis, /not named by any facilitator `\/supported` response/);
   assert.match(thesis, /not known to be x402/);
-  assert.match(thesis, /counted only as a lower bound on N/);
+  assert.match(thesis, /the whole of this lower bound/);
   assert.match(readme, /settled 0 x402 payments/);
   assert.match(readme, /It is a generic relay\./);
   assert.match(readme, /counted only as a lower bound on N/);
+  for (const page of [thesis, readme]) {
+    const appendix = page.indexOf("## Appendix: biased sample estimate");
+    assert.ok(appendix > page.indexOf("not decided"));
+    assert.equal(page.slice(0, appendix).includes("20,421"), false);
+    assert.equal(page.slice(0, appendix).includes("42,675"), false);
+    assert.match(page.slice(appendix), /20,421/);
+    assert.match(page.slice(appendix), /42,675/);
+    assert.match(page.slice(appendix), /not used in the claim/);
+  }
+  assert.match(thesis, /1,716 is 6\.8% of that line/);
+  assert.match(thesis, /cannot be measured without a key/);
+  assert.match(readme, /6\.8% of the line/);
 });
 
 test("the upkeep sentence says the counts are fetched again each day", () => {

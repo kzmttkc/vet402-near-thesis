@@ -17,7 +17,7 @@ Node 20 or newer. Nothing to install.
 | Do this | See this |
 |---|---|
 | `node thesis.mjs --offline` | `rebuilt … numbers from data/snapshot (no network), 2 checks ok`. The numbers on this page, rebuilt from the frozen snapshot in `data/snapshot/`. It rewrites `data/thesis.json`, and only `generated_at` changes. |
-| `node thesis.mjs --offline` | NEAR from that same frozen snapshot, with no network: the settlement spec is present (1), the opt-in catalog lists 0 resources, the named relayer has 6 payments, and N's line is 25,400 with a sample estimate of 20,421 and a one-sided 95% upper bound, assuming independent draws (the sample is 30 clusters of 15 receipts, so this is optimistic), of 42,675. The known relay accounts sum to 1,716, and that reading is not decided. Stdout is one line and ends with `full count not yet fetched` while `relay-census.json` is absent. |
+| `node thesis.mjs --offline` | NEAR from that same frozen snapshot, with no network: the settlement spec is present (1), the opt-in catalog lists 0 resources, the named relayer has 6 payments, and N's line is 25,400. The known relay accounts sum to 1,716, a lower bound on N and 6.8% of the line, and that reading is not decided. The biased sample estimate is in the appendix and is not used in the claim. Stdout is one line and ends with `full count not yet fetched` while `relay-census.json` is absent. |
 | `node thesis.mjs --fetch-relays` | The known relay accounts over 30 days, through the FastNEAR transaction API (`POST /v0/account` and `POST /v0/transactions`). It writes `data/snapshot/near/facilitators.json` and reuses the Delegate match from the relayer census. It does not page NearBlocks. |
 | `node thesis.mjs --check README.md` | `mismatches: 0`. The script builds this page again from `README.tmpl.md` and `data/thesis.json` and compares it line by line, so an edited figure on this page shows up as a mismatch. Figures typed into the template itself are not covered by this check. The quotes cover them. |
 | `node thesis.mjs --check-quotes` | `missing: 0`. Each quote below is fetched again and found word for word. Web pages are read directly, X posts through the public fxtwitter API, and the one PDF is reported as not machine-checked. |
@@ -113,7 +113,7 @@ My opinion, which this data does not test: funding, and a record of what arrived
 
 ## 5. Arguments against
 
-x402 settlement on NEAR itself. NEAR Foundation also names "scalable, quantum-resistant settlement through NEAR Protocol" as part of what it is building (quote `near_blog.settlement`). That sentence is about a transfer settling on NEAR, not about Intents moving value across chains. The number that would make that path the claim is N ≥ 25,400, where N is the 30-day count of delegate-action USDC transfers defined in [THESIS.md](THESIS.md). The frozen sample's point estimate is 20,421. The one-sided 95% upper bound, assuming independent draws (the sample is 30 clusters of 15 receipts, so this is optimistic), is 42,675. The point estimate is below the line and that upper bound is above it, so that estimate is not decided. The known relay accounts sum to 1,716 over from 2026-10-08 11:42 to 2026-11-07 11:42. `5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c` is not named by any facilitator `/supported` response. It is a generic relay. Its 1,716 delegate-action USDC transfers are not known to be x402. They are counted only as a lower bound on N. That sum is below the line and it is not every relayer, so its reading is not decided. Base at 73.0% of x402 dollars is where x402scan can see volume. It does not measure N.
+x402 settlement on NEAR itself. NEAR Foundation also names "scalable, quantum-resistant settlement through NEAR Protocol" as part of what it is building (quote `near_blog.settlement`). That sentence is about a transfer settling on NEAR, not about Intents moving value across chains. The number that would make that path the claim is N ≥ 25,400, where N is the 30-day count of delegate-action USDC transfers defined in [THESIS.md](THESIS.md). The known relay accounts sum to 1,716 over from 2026-10-08 11:42 to 2026-11-07 11:42. That sum is a lower bound on N, 6.8% of the line. `5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c` is not named by any facilitator `/supported` response. It is a generic relay. Its 1,716 delegate-action USDC transfers are not known to be x402. They are counted only as a lower bound on N. Unknown relay accounts would raise N. The evidence in hand sits below the line. The upper bound on all of N cannot be measured without a key, so the reading is not decided. The biased sample estimate is in the appendix. It is not used in the claim. Base at 73.0% of x402 dollars is where x402scan can see volume. It does not measure N.
 
 ## 6. What would change my mind
 
@@ -140,6 +140,12 @@ Each day the public counts are fetched again with no key, and the dashboard show
 x402scan still does not list NEAR. N is the count used here for x402 settlement on NEAR, and it includes delegate-action USDC transfers that are not x402. If x402scan starts listing NEAR, that row belongs here too.
 
 The windows do not line up to the hour. DefiLlama counts whole days, x402scan runs to its latest block, and the treasury count uses the block range above.
+
+## Appendix: biased sample estimate
+
+This estimate is a reference. It is not used in the claim.
+
+The frozen sample took 450 USDC `ft_transfer` receipts at 30 points, 15 at each point, and found 5 of the delegate shape. All 5 are signed by `5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c`. That signer's complete 30-day delegate-action count is 1,716. The sample share is about 12 times that signer's share of 1,837,873 USDC transfer events of every shape, so the sample over-represents that signer. All 30 sample points fall at 16:24 UTC. Scaling the sample share by those events gives 20,421, rounded to the nearest transfer. The one-sided 95% upper bound, assuming independent draws (the sample is 30 clusters of 15 receipts, so this is optimistic), is 42,675. Neither number is N.
 
 ## Quotes
 

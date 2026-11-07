@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T12:51:56.897Z",
+  "generated_at": "2026-11-07T13:38:26.291Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
@@ -422,7 +422,7 @@
       },
       "as_of": "2026-11-07T04:24:35.741Z",
       "source": "nearblocks_v3+near_archival_rpc",
-      "definition": "Sample share (delegate hits over successful sampled receipts) times transfers_30d. An estimate, not a count. All 30 sample points fall at 16:24 UTC, so that minute is over-weighted."
+      "definition": "Biased sample estimate (reference, not used in the claim). Sample share (delegate hits over successful sampled receipts) times transfers_30d. All 30 sample points fall at 16:24 UTC, and every frozen hit is one signer, so the sample over-represents that signer."
     },
     "near.delegate.estimate_upper_95": {
       "value": 42675,
@@ -435,7 +435,7 @@
       },
       "as_of": "2026-11-07T04:24:35.741Z",
       "source": "nearblocks_v3+near_archival_rpc",
-      "definition": "One-sided 95% Clopper-Pearson upper bound of the sample share times transfers_30d, assuming independent draws. The sample is 30 clusters of 15 receipts, so this is optimistic. An estimate, not a count. The sample points are all at 16:24 UTC, so that minute is over-weighted."
+      "definition": "Biased sample estimate (reference, not used in the claim). One-sided 95% Clopper-Pearson upper bound of the sample share times transfers_30d, assuming independent draws. The sample is 30 clusters of 15 receipts, so this is optimistic. The sample points are all at 16:24 UTC."
     },
     "near.escrow.txs": {
       "value": 100,
@@ -592,6 +592,32 @@
       "as_of": "2026-11-07T12:47:16.312Z",
       "source": "fastnear_tx_api",
       "definition": "Delegate-action USDC ft_transfers signed by 5a95b79bab56cbd3a338f616e4d6752dc23602242dd35338b57ee9e4ceb2364c. That account is not named by a facilitator /supported response. The transfers are not known to be x402. They are counted only as a lower bound on N."
+    },
+    "near.known.lower_share_of_line": {
+      "value": 0.06755905511811024,
+      "unit": "share of the line",
+      "unit_kind": "share",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T11:42:27.636Z",
+        "to": "2026-11-07T11:42:27.483Z"
+      },
+      "as_of": "2026-11-07T12:47:16.312Z",
+      "source": "fastnear_tx_api",
+      "definition": "Known-relay lower bound divided by the line. Unknown relay accounts are absent, so this is not a share of N."
+    },
+    "near.delegate.sample_over_signer": {
+      "value": 11.900239575239576,
+      "unit": "times",
+      "unit_kind": "count",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T04:24:35.741Z",
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "Sample share divided by this signer's share of all-shape USDC transfer events. The frozen sample over-represents that one signer. Reference only. Not used in the claim."
     },
     "vet402.settled_no_tx": {
       "value": 13,
