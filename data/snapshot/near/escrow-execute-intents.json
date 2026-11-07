@@ -1,0 +1,3526 @@
+{
+  "account": "escrow.ai.near",
+  "list": "https://api.nearblocks.io/v3/accounts/escrow.ai.near/txns?receiver=intents.near&limit=100",
+  "rpc": [
+    "https://archival-rpc.mainnet.fastnear.com",
+    "https://archival-rpc.mainnet.near.org"
+  ],
+  "txs": [
+    {
+      "hash": "4X6ynpb7GL3AX3jUwv74L6mc5Eoujenp4v6Suon3GQn6",
+      "at": "2026-11-07T05:21:40.624Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:23:40.091943Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "NQLQIBUSNXOPKpda5TsRSAqIckCWDz04xcoZUylwjBA=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:5x1GqycrsfRJB6RLBtX4uPFnhyHzGDRWjpa5UzMprjpy1CoJ1tCW7CwWqU3iLkTMcUJy3qdPeuWzu5zDrzLRV279",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "A4VqWRZrx3w6LAyCsrYweCNZXSFzfR3XFuMi3LPdnFt3"
+        ]
+      }
+    },
+    {
+      "hash": "EbR7LP85So43RwEfmMVjM6U6cp1iHVaX5JCag2foQTBS",
+      "at": "2026-11-07T05:21:36.775Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:23:36.132778Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "ad3mqs5mud197IR+L9pW8cX2Zeeb5a7qLg4bAGMoUEE=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:3YbwiQPuGXTirNCe5ags1YNKGkbymyYFkwzfjdP33tH4etXy7YMPyZ5xNByMf396MTQHzQYJ7PXnNmbPQVqtSyej",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "CoQRDJd1ZPEKf6eESdvxDibPgT64oCt61sDPGQfbCfXm"
+        ]
+      }
+    },
+    {
+      "hash": "891WMtEWJCMSHtrMy5t3kdqikzMKXjFwsnQJG1wKBcu2",
+      "at": "2026-11-07T05:21:32.735Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:23:32.198200Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "ovZ4fvVShpJcKFoUTR4Ol9d9YjYO0EX8UxVm9Uv2xYE=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:3usdLndwoDd9E1zoZysUqSVp6NpWJzSQtKt9fMWrqkjFGpGDyYuqahvn3bXUMLQyMTG3WPPvJkM8z1AMGDKife7z",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "k3w2PFzDmLDwQxMXBbLVn9foQ7C33etncKzjMfnDy8S"
+        ]
+      }
+    },
+    {
+      "hash": "6b7S5ErN7VJYPXW1mP65QBWXCFGVtC6Sn3akK9s8JTpu",
+      "at": "2026-11-07T05:21:28.789Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:23:27.958960Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "k7Q6DGztusqclK59gEqvA0pNF1YbkudfBgLz/CZHi/E=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:394L71p5mLXzj73me8Q7BfGepUfLtExXXiq1gQZ15WytcNU3qL4fwtasFr2rvqTwJHP8WFxnXvwWMQGCoYiJqDLX",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "6BzmxpoQpBq8vLfoQm1dZfLcBP4Voqjy5JBBBNaphHPU"
+        ]
+      }
+    },
+    {
+      "hash": "AovbEC7mYnXxQw4Bw8W4JcmX2oGaQeYNB2XfguWfpjSY",
+      "at": "2026-11-07T05:21:24.927Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:23:24.371822Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141480000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "QYo5D85fG5e1AgGpBeKAe06+7jJ6VUBrcVPEebQUUxU=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:4YMpYBCs5BVLqDgggVLzbe57URQbib9HZgeUi2e4xBDFPMUw7dcmySBBfzerpqGbS27EQWDaRZLV5xqqUuEe1Mi1",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "D8UuSbWbSqf5qx6WBafdGf7NqUS47RMGvucnt3iDndN4",
+      "at": "2026-11-07T05:21:21.093Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:23:20.436326Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"escrow.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"1000\"}}],\"signer_id\":\"f0958f9b0e15a05a1a84d716d2921a7e5dfec3e219cb4c23ff48352aa4fdd6ad\"}",
+              "nonce": "/URgcMxvngZMwpU2Me+7vOs5xb9RxuY/7wUcHtSsEoc=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:HC97xTVa6T3uNf9Nnwb65idkKQDwRjp2WtDeaPL4pWPv",
+            "signature": "ed25519:5DoiD32pkEPNCcm1o4Xzarapu7RNyvHukj1z1XcJW33iRUWssp1zecGJQoLvRn7y1sWjHCEqHcVCAB2Yv3o4jWLY",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "Dgj6SYcUraQLtwcKoKD3ckzG4cM8PdiH2e5TRBrdqSQW"
+        ]
+      }
+    },
+    {
+      "hash": "9aT5FRZ5zuTxEMdDZKwk9HXsHtZKXhDECTraBxH5RnUm",
+      "at": "2026-11-07T05:21:17.377Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:23:16.714331Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"0\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "KwtDqq8WVOciaE81LJC2EuR8kMz3yoIb4sKyFMB/DEY=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:uohBPdKL9EviUPNr1eXJhJgonXxUYCzDsNkLKmUA8VTdEZU6Mhn22aUqXJ1cZhCC8vjoZrVCN81GTwgJqEfbV4M",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "RrV68XsRqHBf1mZ6iCgvQgAnoaoVYnqYdkCVt4iQ6zF"
+        ]
+      }
+    },
+    {
+      "hash": "Ezki9bgEQCk813sg1XJfoiqQocgABS9P5UQdQnXi4Etn",
+      "at": "2026-11-07T05:21:13.492Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:23:12.751326Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"af32c76cd89d75fb79f93c83f435ada738b4cb2a9c7e79019c178f6b8677968b\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"0\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "Nb2rIu/VgVWjl93ePSsKvT2S3O7rAmQSaNc3ivTJaPw=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:MhQUUefknid7qYWw3f4CSANNTJt4vE6Y6PWMHj2zXKNHYPJnn45kD5K2JTATYQahmRzyDegWcjEk2X7kNaENhTB",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "BQCmgasXJpUHNRGHmYywo5seYgtz2g55uTQ3EUPCRzm6"
+        ]
+      }
+    },
+    {
+      "hash": "5QUDvZLoRbbvyQwTNrH9tZpFX9UUPF4g32mNMkSvY2qJ",
+      "at": "2026-11-07T05:21:09.536Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:23:08.943576Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1142480000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "5anX/RZCh9TBGDSZypxaMbGTXCJb0tsoH2VT2dLY7nQ=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:4Fk9rjfQeUvHCoeECHrBJVr9hDywzftCbJw1VsAh4LSzvueCo8Zg8s9P6jW5kGmyBqVd45isZ8Dmn9m6Jr4evhvs",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "4kz3THQTxYkPG752fx5LwJZWDMMd2p8ivxq6oVba9YQa",
+      "at": "2026-11-07T05:21:05.531Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:23:04.975602Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141480000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "GZiZS0mwY/TQKnOqFKQvaw1gyvk+3J0rugCahvI37h8=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:24wB92r2x67nuo9LyDkfQTxmm5rgsHM3SoARvHmYSDKECsQv6qLndyKJGY4xPTbV9FqJL32QNwmMGdaVekT6D876",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "AP42kFQLtwmHkktwijbU6mkzY1QCyaTGkA9Ac9Vc7TZH",
+      "at": "2026-11-07T05:21:01.322Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:23:00.701792Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1140490000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "6RMw4O8m1/51hZgmTCugBZ9a86SZ0/LdAW+ONQdHcR8=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:5y4jY3vnqssVzR7WJ75wdGmtRyqzaqfG886wbuakoRpEJnPWMkBgEf7EvJ2S9JLidn9EuqNt2wcRZ4ec1rG8dVBd",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "CBhxyKeprynYNFK55K1GznmcWpdfEuNFG6KVgWmT5Rvf",
+      "at": "2026-11-07T05:20:57.314Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:56.231536Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1000000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "s5t8pNwN43slCvxHc/49qV5as+Uox5S0ZUlJYrz2N5Y=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:4wgTvBFYcybNZQhopTBzmhqcQ8gbr9UapjuEh8B6m3bpa1Gmjgw4GLdY9f452szDKEdtV8HLa2qUGbHyjvvP15WX",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "234sZYUyuLiufiga5ffDeU2gM26uNU4UKQLChYzvbFtJ",
+      "at": "2026-11-07T05:20:52.562Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:52.043631Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141500000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "xleaHGa2fXzYFz8YahJ+cZ6NWUsjlWtsiIwzw1/16Bk=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:3qRtrJMjggLiGxaPeHwAh91apPrYhjXGqKFm1Jasph3tPLTgjzMLgU7ZHGVdWs3diuoFuUp3okRmccRSayGXNgGQ",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "To24PGQ2By5kXeq31T9Ho3zQ9TWAJvdLwLj1zYQr6HC",
+      "at": "2026-11-07T05:20:48.694Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:48.167687Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1000000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "i+/mDevj7dH1zzA/hhg0WTtgJKUXAGyxd61DeQj3gOQ=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:4eRMNEGZwLGgesXMbz2Zk3hvpRc41X5y3U4eNpCgU5Txta77Q5VypuD9dA8pUYRnkhD2VLguaemizsiBSTHmrUpf",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "8p3FV9sJ515Zo6HbPhtNj5zVeUNVCrnm75eqFYS7R8dT",
+      "at": "2026-11-07T05:20:44.773Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:43.738370Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141510000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "N7os6Go4jM0gwSLcaEML+k+G21Cntdyfqg41bzvQklI=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:Sne7oY8PgLdhED1dKiGDFwWFJWgWagCCQtRDjQ6LGiGbMZqX1GThiobHW3nS8QnNWQQr52CwdHhK3AFwjLdFRuE",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "EC9RB9ryvp1VhTiHvSQ2jivGigxdo4fcWPeNaAnpmW8f",
+      "at": "2026-11-07T05:20:39.998Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:39.026233Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1142660000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "eIWBAHv6lKk72+9mhXIyXH6shYF7n0pYv48bC+sdjlM=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:5tMvbCqA3vgMD9wmj9c2YunfRBgtutJgeWN2a6qwxsmLB2ez3uWRsxDJnx7na8puz6A2TZdvWdm4LrbxjB5FAGtS",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "EzmdBPeMcPqCrreHKS7rDkRLuEz8oXkGc8tTnzPWkNkH",
+      "at": "2026-11-07T05:20:35.374Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:34.584152Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1144760000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "qqht2Fz2Q4gRlPrIXKVzbUUVUgoUcC/QB+9A/u7E83g=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:2LC2ga2JvMK7bYeawtpxPAxPZT4D5DqM5doXJmZjhj3Pi6HmkREw8eWag6wYGsCswrN5Ajhi2WkeFfZjj5fvpeiU",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "33PVpC7fJ3bSVXQ3FF3RSVLSSDD69gPRYpyjopSjUv5V",
+      "at": "2026-11-07T05:20:31.157Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:30.521186Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1144760000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "38I2WQleBrdI7j7e6t1h+0iBgvN8N1lxSGcmeEqIV4A=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:mW5LpytGSuAZ5jBazUtWeJGGkYipjZGFgAgDSVk4Xu9kMSW8s2cbJadpcCWN9KQnjM1JQ3zPZkCae2byjAYrLWQ",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "GRRwrDVghiL3XPiL7Hx6iABZ5KaCBiwdqce1uoTxLyJD",
+      "at": "2026-11-07T05:20:27.114Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:26.597502Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"escrow.ai.near\",\"tokens\":{\"nep141:wrap.near\":\"1000000000000000000000000\"}}],\"signer_id\":\"6830cc6c62b9f9334d8a5b18ef7729549bf625344c4bf933eb0a31fbed58fc65\"}",
+              "nonce": "ZMasR6nvTpMHoa+v6w2HMJGTTtiswpTRpgwZ9JlwBQA=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:81iZNu3bApGmuLHf4nxwch25q5viiMcs8S6BNtb6sar8",
+            "signature": "ed25519:3h4LiPcnCWGN4oLzyQ7Hb4hqeJNaSxcKbPdiQNUYpWBPAwpcwZuk4CCAvfDRBJNo2eYvW53LvXWvmEPvzbFtdjRT",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "C3of62AAg1u62HDQNeNaJx5voTTUi9an46bVNkCoVXME"
+        ]
+      }
+    },
+    {
+      "hash": "BVxH5E6Wsxzhb3rJbyjwgaxuXCZKaNe6matGHipeqxqG",
+      "at": "2026-11-07T05:20:24.443Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:23.846058Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"0x980E5F15E788Cb653C77781099Fb739d7A1aEEd0\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"399980\"}}],\"signer_id\":\"640fe25db01169c70ef4c6de5d146a3a5b9ff95d968fb91bb518a254c28e5bc0\"}",
+              "nonce": "mCDrbV7H9gQ4N33/CjGkJB+K+d/i0hISIOGoQ5KxU60=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7jbpSMGTRc7nMVDwgjL52Qc4GAYjPnkgE93cMAGacnw9",
+            "signature": "ed25519:2iVDAtrzzxBZ83rKm2Q9tS3rLfCDxS5tFP4WNH5mVAoBs5aagdHUkCb4MCX5kfLNCe2hUrYP8dFTGFKhGbj5wdP6",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: JSON: invalid value: \"0x980E5F15E788Cb653C77781099Fb739d7A1aEEd0\", the Account ID contains an invalid character 'E' at index 5 at line 1 column 308"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "2AbjE6v8UsW1P8GwhhmBpyv75hbVkVJ7v7nYYSULgLea",
+      "at": "2026-11-07T05:20:20.454Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:19.823751Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"0x980E5F15E788Cb653C77781099Fb739d7A1aEEd0\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"399980\"}}],\"signer_id\":\"640fe25db01169c70ef4c6de5d146a3a5b9ff95d968fb91bb518a254c28e5bc0\"}",
+              "nonce": "YVCmVVZovg7V9Hnkm1s/VCVvHpSl+uogxpIPciWkR0s=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7jbpSMGTRc7nMVDwgjL52Qc4GAYjPnkgE93cMAGacnw9",
+            "signature": "ed25519:SCXx3nfUgzHirh37GMDgr1Jq1Q9NtWHuJN7MQ2rfyWXyLiq1yfZdDieEsDbipdq5v5FaS45HXUWmoVWUpP7QJp9",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: JSON: invalid value: \"0x980E5F15E788Cb653C77781099Fb739d7A1aEEd0\", the Account ID contains an invalid character 'E' at index 5 at line 1 column 308"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "HtsL6NR5axvBJdyvfpPeS2Xo5RE8SDsqqfxQoSSzqYWG",
+      "at": "2026-11-07T05:20:16.405Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:15.664659Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "Do3vyoTmkSdp4jAsGtowTc0WSSzFMToNmK+H6nu7ONM=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:4aZomKkJdzHav2XvzC8p52ykqZDjnfz5gJtxBkSsZ1uUAByxJ8Fmnye2DeVjvEqoiBQnevakzsrVZCDbBmCcSnMm",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "EadHJEzSs8QrN9xEPUzu8ypoeSag5QW5AJYDNa3AKCZo"
+        ]
+      }
+    },
+    {
+      "hash": "5ZMBk6ugGerp3yoyt4UdDDw4ucpBuJ27At5hifZQjXQc",
+      "at": "2026-11-07T05:20:12.555Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:11.663153Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "g3MMytVOdYtN0p5079s/0zmjcDD5OBnd1vG3/plEl3k=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:VPzNAKnzJd6EnmXEzYsLH6enTZDMQ3UJKFSrmjYgAVor6MJoZ9DpGqJtPshcDpgBnL3u8dsvoXSpdvuoFo3rvGm",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "DzS6bd5H4eQMt9hNXgkEWNx54RngUR5t1YijWvwsNgDg"
+        ]
+      }
+    },
+    {
+      "hash": "2kk36coh78q2Jbict1EuD1uqZUuBsAUPMaBxKGcaReyG",
+      "at": "2026-11-07T05:20:08.503Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:08.010103Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "uhUkNrMJyvHiJTqjiL06HMI2M6ZqPrNcwkgJYzBNzzc=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:3na811r8mBeLbkmzV3Djtxct1E7eaTMk2CuZuznMDhSdJ2eqvC5FPThQv7tfvPC1QWnbAEdhsPBnZUcQtkgyCaCN",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "DTRPawzixrZy8Pwr7SLeCsoqL8Fqyn5c2gBWcNtrRhLT"
+        ]
+      }
+    },
+    {
+      "hash": "J9dHk1gdXShTaMFab5c3ffkZAeJ5zDNkrLT3gCGggKN3",
+      "at": "2026-11-07T05:20:04.630Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:22:03.309535Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "3/ftvFrcOWRyFH3r9dh6ufP0ONzswOAUUFXC1lbvi24=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:5bw2gyEJ7b282sPyia9x7gXpwGQDePHcKN1VSwJpuWqzjqwp1xhVzDMxggWJQYrTyqitr9aSWPyQg622NPeQmCqq",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "FfkDUJdMkPUExQDxn5Mbh1VDpnct2DDCsQbh4FJqtaRK"
+        ]
+      }
+    },
+    {
+      "hash": "7TdXUB9LES1sVtYiARyf9YWYjTV7F4gYayuKbZqSUjv9",
+      "at": "2026-11-07T05:20:00.155Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:59.413690Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "3UMtp5RvkyrQlHsYZf/5IKORNUTFpuV+SMqz0tAK5BQ=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:3HExoLSefjw12Syc7YJGgSB7JVx4nNj2AHiNunZQXRN41XiQbTM3yJDsWLBi1NNNKkjL7Q932Tumzfics9pUGvUF",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "7jet1f43ndLNYey3yW1LX6R1v1AAyAa8qvRRo4uCPm7b"
+        ]
+      }
+    },
+    {
+      "hash": "TtTicYLLDGZJPB6vrWYuXYBEEiLtLvPrcLXB2EVmydb",
+      "at": "2026-11-07T05:19:56.265Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:55.525378Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "DqxeGLXSQ19LcZGKcvlnjKQZPZUdapxI8n62DYtyzj0=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:5VsXmRqMUyGU2B8xeY532it8VaYrzRgALqCkjuTVtVEz1oVHovPKQw4qPKSnRGCnEEsy68FCWHTsgxgAEYWfyQKu",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "6cSNZW6bAsEKfor1GyMxvXxWZ3a7EDfxmwn5MWBpprve"
+        ]
+      }
+    },
+    {
+      "hash": "DhhX8qo5QrZw3GK7tZn28ZEw3CtocQfSVCpwKYoufdXK",
+      "at": "2026-11-07T05:19:52.237Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:51.486906Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "Xxd+lw0GmNkF4skrr7b+WWxx4jzEK4zR8QlbB0MWuME=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:3RxjFsVNntRJpJDRphwAZVVbvxYXbTscWPJLr8t6e2DxfabGaMDkZLoBsDypyMbJyocx88mnpSHcjt8WLG1GdL7s",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "AXCotH3seFQzPZKRQif54uWvZHuFSQFPeKxXpAuveGGG"
+        ]
+      }
+    },
+    {
+      "hash": "2kC55msfC7VQhnZdcsxzUWcmNt5Sdjj5Qf8KF42DH6bD",
+      "at": "2026-11-07T05:19:48.190Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:47.555848Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "rM8txrguzB6uONAg0VA6t3RGMqfhBr58rSYyn00VeYY=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:4MhMeEAVnhiez9FhBw7aj4ZXZtGbNhoojh1JYSYe8FjqFgwu1vPqekjzsQMNdzEMLAk4WTYmrRaNNMsZVTeqAEvf",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "GMZ9P3WZUoNrnTQ4KEtxqExCbddDupEQzcwmgh9T58KY"
+        ]
+      }
+    },
+    {
+      "hash": "EDwncwNxLgzR7qsQY9hLn13UhE1ad6ihmhMfH4KiTBqm",
+      "at": "2026-11-07T05:19:44.077Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:43.503612Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "dichoBSb5fpLGR/rfTmCWLTAg3RYVwAQeyMmFSbV9ec=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:Fo7dPSzcpXkkzNC6nV93zZrEsshXBDrgXWf665Tyivts4QaSe95j4eLKYEn9V3d5SkjW8viNdQeZ9BjR5rTM9Ly",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "C6XjxJ8H3n42nNKxJLV3jAebNsWYcgbNG7oA7FN5P8pZ"
+        ]
+      }
+    },
+    {
+      "hash": "AFBXdYu8usPupYT9ESefPRrPLhg7Jh2DUrP5KYZBvFAG",
+      "at": "2026-11-07T05:19:40.298Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:39.687501Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "VO/REsPlzVoZ6ZrE3B8ODAd+WpjvhRZKsjN2koa5hFw=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:dLFvY65DH4oFke8nPJJzfA9XM976PWqoSFSAPBewegbHyZDWGHvJmQXgri64bxwa4pVrk8p2wHrYhcXPHJPwnw1",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "CvYywt6C6EHy9LPfGCQ3SBdQLcPeYHzZn296NWasKYfk"
+        ]
+      }
+    },
+    {
+      "hash": "GLCxduFD9Cau2tRcc72F8YFEnR4C9rLAP9AoQmkVtbbW",
+      "at": "2026-11-07T05:19:36.312Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:35.783018Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "NQWZApjKMWyGWaXL2it2ibZLmkyCX9wi9mgUgAuByvo=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:w2pm6ekAEYukYhEppSCKqJNHyCB5MyVxtmFQyi7QsVc9ZTnvjaSoi4iFzKxvBHVzrfkmMjedQHckLWxkiXC44Xh",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "HcZ8xfoUnJ4iVz9HkYZxa3sBJs63oWUi4yY4Xefv1yph"
+        ]
+      }
+    },
+    {
+      "hash": "D3PvVgoBuudZzwLH7H1sXujcRcjemRUK8Tj6HyKXK8ST",
+      "at": "2026-11-07T05:19:32.600Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:32.026967Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "j3ern3NYSfoZBSDF0Tkv0B7JQ09h8UYv7Tm/weDzgoE=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:39eBgans1qeZzCbpMow5MLyzzHq21sLG8dRqA9zqpm9w1xPKcaHuwwue4viptqygwN7q6pqMwfjEnSAwpWrWQ6oX",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "3ZoHmiaKDsyGdKLbYEaoYAR17bBQVwjUYmgGtP1UiEQE"
+        ]
+      }
+    },
+    {
+      "hash": "8na9hWD57v56KNR3BDyETu85AnM9KtvuufzYMvgDZ6Up",
+      "at": "2026-11-07T05:19:28.662Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:27.961157Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "vP9biCsKzdcznOIiAYKtpscSDzbIUIFoggW1JqgkVbY=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:2fCexsHzxkU95b6qZh9jPgyLba3E947Ykaj2vRbaFjefxz4TWdVnTuEmyrHHXqWU3CZiu4V4LeRqe7pNYz5DJbCW",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "4465DhGkMGmY3WsbTx2947aJ73QwSc2s1VhpiwRag15R"
+        ]
+      }
+    },
+    {
+      "hash": "4kDpkucof6hwZcCn5Y6oikrM7AVb4WYVeDnfAL2aaE68",
+      "at": "2026-11-07T05:19:24.810Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:24.062937Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141480000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "H+xl3yRo55nKgbyCIkxQw3KNRYgYa4fqTp6qOsX93YE=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:3G3cWuaeKjeaV1pq7XNR68HcagRsMjS9g9YMSUmqw9LDEuSjpDKiZyX9NkQuFwr5R3oeLA8B9Gh8JsX6U8KDhnd8",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "7GHehRWQAUR8iuPNFiLC8GyEGtfezcFwkRDe5tCd6CFg",
+      "at": "2026-11-07T05:19:20.745Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:20.287288Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"escrow.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"1000\"}}],\"signer_id\":\"f0958f9b0e15a05a1a84d716d2921a7e5dfec3e219cb4c23ff48352aa4fdd6ad\"}",
+              "nonce": "VV8V1oQjGFc8hlAt0WdoYjXeB3lDlsMdLSjs/3WTuYU=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:HC97xTVa6T3uNf9Nnwb65idkKQDwRjp2WtDeaPL4pWPv",
+            "signature": "ed25519:4BTDw3nwrccD9ZR1CVaQ25JnkadGmCj4ekB7zjAq6hdpgpJcETiFu6YX5nfYK9H5h6RQQpsWnntSaSNVLgCBsZgc",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "21CY8EiRZMrQzo2NdP3ibRfxsPvjkD9kXatrvgDk7VZR"
+        ]
+      }
+    },
+    {
+      "hash": "7CugtDjftnkiWFkzAxayfeNtgFDPXGY2ZNupU8ng4Uv6",
+      "at": "2026-11-07T05:19:16.528Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:15.930625Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"0\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "xmZ+87l2Gopd0LE4q+LDBakTYzS+FG3bW6SsVu484C0=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:5hgGN9DMuHayfk2S4BSbP1YDcMoiSweb4WP9AX5ybKCNbs3cUqKdmKz4srqeUhPJgQy1dvcSo6hv3NtZ9F72CJon",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "FZj7vwy5bQjCQCPLSNDSA9CtjtSXXvmhJ149HDgLsJuG"
+        ]
+      }
+    },
+    {
+      "hash": "6e5qQCHbJj44CfZaKT63qohbGM567kHx6eSBqz7EgsbL",
+      "at": "2026-11-07T05:19:12.609Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:11.956675Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"af32c76cd89d75fb79f93c83f435ada738b4cb2a9c7e79019c178f6b8677968b\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"0\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "ryUHfs77EDzvIRbzSuT8ez2vHcrN6sdVskaS0uiY+PU=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:3Mjz8FvgXGsrL1FPxm2PorDZMDhLXKv4GjzYLDskMjBN6jW2bm62Y8FEeUnB7EhgnfViGbiwtUQM5gBYeEMUUDd9",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "BbA6hxb4NXzpfnrEQHYLQAj8Dy3NDW7iFQrwscUFWzsk"
+        ]
+      }
+    },
+    {
+      "hash": "647Kvg1dbKzgZRFCLqu8kJsPzs913mtACti2v6hL9zp3",
+      "at": "2026-11-07T05:19:08.620Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:08.078661Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1142480000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "TyEEDdgN4VSH05ui5OEHErQSVWKzZVG7oJ1CPzCroM0=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:RtV4d8eiLaKv6BGMZQDmzW7W3qF9V23HqG7NEWq1qc4sRVCibsRnhnttr56G66vRb1jBZtgMzdDf419vfDaGNUA",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "BZBofXoCg4CLWuZWigJVQhmcWzcUTpcQ5pGz87sTppit",
+      "at": "2026-11-07T05:19:04.800Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:04.236277Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141480000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "cx6Ky2v+9VKF98O9MQfBxz4AZV71SejbtHvhYtdypZ0=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:5FXh5Nge2ioxUUkVKobun2y6sig6xuvCXF6RNG1nTEABPUHy7QDWjs3V6ydPJM5Cwjo5sa4Qbr67wJiNQbWXVTgo",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "BT6W7x5nDBrbi4FHwnqPenNZKTKc3p2bSwZrsCAms8iP",
+      "at": "2026-11-07T05:19:00.990Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:21:00.454496Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1140490000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "E1X/O/mJABSXplIAX1VNYZOCEHVJ999Rij4lcoY2FmQ=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:4goTrjKMvzA4uU6ndvCCE5bmRw1pvV1BzSWx1uMm224MNMjKetYEfCuy6NNQe2Ys4w7efoNLwUAnJAS716yMvnq5",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "AeUiZXmqGkAjzLRFDhm3cjaivaMA2rDXFQT28ZTBUF5V",
+      "at": "2026-11-07T05:18:57.052Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:56.509084Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1000000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "uPOX9xrGTQxs6VSJk0hjDQCbk7tBR7EQUO7X69MfqB0=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:ZCCXXLPxwZJdtndhq6u1qg3nUbGzxAxhZ6gth8TkMKErnRaZd2tZvfHYBUdceKgGyJhkLwLT9G32WEAE9qkgEuW",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "3Hwi8z8UMjVJuUko7cxvPZFdkV4Arrno1ZWt6ybKkcg1",
+      "at": "2026-11-07T05:18:53.147Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:52.550477Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141500000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "OEOtRYODVw62Nj/Mvgs3k0J558rZvc9PC44h+UeNdY8=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:rNTbCEp8tymc9nBUNFdFULmQFu9sALeYCnqGC69WZppUQMrBdeswHvrmtYUUECd8TKjWCdzMR2HCmL2jrGDcFUP",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "CHKmKtu9QxxnfbCw8pKsst74Tu5vtZq3jcy3QeuFzsAs",
+      "at": "2026-11-07T05:18:49.525Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:48.844135Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1000000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "qQQXpLNBsBiDnBzd3WHGm8FfefqMzdSWP6Q/cglkVV4=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:4R851nj9zpZLNmVxjuLy3apjm9DL6WG1aLSKCoRukTW7rQ9qEznvy8SgzhwRs7V94754X3gQzuDVcBacLaAvWna6",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "DUZ7G7fBfJt51fdhNYpgEqt27D9ABwUM2BhqpBooHsoD",
+      "at": "2026-11-07T05:18:45.371Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:44.882412Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141510000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "k87P7LWFZ3qGt6LI2HA5bb33rBrp1O0dmxt5wNkpUL0=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:3jN8b3pa6ARR36ijmC1AQCrQzcVDeq15P6UyGGt3f2HM2pY5vou9CqLFPgeVpDaK2K1YFQPHS5TYfBY6zaCdUpne",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "GyaANSWVTsCEb8m3furQx3ow5n4fJRJwzBoiPyzR27rs",
+      "at": "2026-11-07T05:18:41.356Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:40.611812Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1142660000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "kQ4sHrORs5li0QoZM58V1P/EavRTNbR7LtHloqBtdoI=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:58be6dNnqvk1zj7Ba5QsiWBw3PhGbYRMPqLFpcqB7LXgbGMXzdnVqvn3VVEAdF2csessxaFnB3yJVkw6fH74Fhrp",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "SNGtrJN9xVhF1ANiFx656udgkyDgApLJQfYtAeDmgH8",
+      "at": "2026-11-07T05:18:37.452Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:36.737980Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1144760000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "K38fAlWWfImWm+34AijNQHDCxrfONXli/G1S7blB0wc=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:4XsRAYErYWc6AP2UJBhzfDcNtEoxq5H6gf6shuHsJvTMASQ7Kv6GvUzAyChMstaUL3xMpHHwZNcB9nDc1qR2vunt",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "KGSztJR2U3jQWsf3zs1jmfVE7Q2RLZGg9wnYYLJGd1C",
+      "at": "2026-11-07T05:18:33.408Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:32.902170Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1144760000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "u+zXyYYhiCUi1ooCilBLsvXsXrv4l3ub3/a2O1h22fI=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:4fmXwwYpLiHrfLseo6HEy7JgY5pQav2VodTYKrdTaRmeG5GUdJxqhZK22yxekC9GA2tpdy5KUobBzsBeQS1jjqs8",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "8etVUhXiFuh62RVmSPm44GzyDShBtadU6LRtNHquqPoq",
+      "at": "2026-11-07T05:18:29.542Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:26.588271Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"escrow.ai.near\",\"tokens\":{\"nep141:wrap.near\":\"1000000000000000000000000\"}}],\"signer_id\":\"6830cc6c62b9f9334d8a5b18ef7729549bf625344c4bf933eb0a31fbed58fc65\"}",
+              "nonce": "SPzliGaBkfSPmikzzXJsMI+P3aSOENHOcdpjgBmlY44=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:81iZNu3bApGmuLHf4nxwch25q5viiMcs8S6BNtb6sar8",
+            "signature": "ed25519:4EkSyPFKiAryjuhnnm71XJaQwKmCM2MPDoKHFngtqMDJtHL62iaU77dKJgMFSKn5hXUVV8iP2L6abmTHzU7UwQxx",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "AHoUG8tF1h34MPBXfXVYmDmsVrVrqGCkPs9dNY8AGBDj"
+        ]
+      }
+    },
+    {
+      "hash": "DVQHpoCFme3S8ymFNzZ1tJBEGQvLj5eC29Rjgf8z6R35",
+      "at": "2026-11-07T05:18:22.559Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:22.022506Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"0x980E5F15E788Cb653C77781099Fb739d7A1aEEd0\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"399980\"}}],\"signer_id\":\"640fe25db01169c70ef4c6de5d146a3a5b9ff95d968fb91bb518a254c28e5bc0\"}",
+              "nonce": "q5qhWwOH2BmdEXillu9xxqQbtLeXXhaUdCReRSfSfL0=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7jbpSMGTRc7nMVDwgjL52Qc4GAYjPnkgE93cMAGacnw9",
+            "signature": "ed25519:2fE6hCkbAagkD19ChcEBeYfWw9GNL8eahdXiJWzGeQUtXhHfqEK3CpJPQKd1MxZsi2oUa78y6uboh1BsNwHAbFUG",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: JSON: invalid value: \"0x980E5F15E788Cb653C77781099Fb739d7A1aEEd0\", the Account ID contains an invalid character 'E' at index 5 at line 1 column 308"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "Gsss1GajNFHByWfAbGCMFWpfmjJoXjk3HFDPNkjrh2Jv",
+      "at": "2026-11-07T05:18:18.665Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:17.895649Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"0x980E5F15E788Cb653C77781099Fb739d7A1aEEd0\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"399980\"}}],\"signer_id\":\"640fe25db01169c70ef4c6de5d146a3a5b9ff95d968fb91bb518a254c28e5bc0\"}",
+              "nonce": "dw4vOrcWrJOPhPH6taCi9Cl96VscNoszMOk0XKfqMQs=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7jbpSMGTRc7nMVDwgjL52Qc4GAYjPnkgE93cMAGacnw9",
+            "signature": "ed25519:5u4yVJT5yACazb5Ez3XofyD3snma7hKybAWhKmQ3aYp2QvVx1ATdvhXu4SYfv2cfeVcdvWGrsLKRJRsEnRvPKCfB",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: JSON: invalid value: \"0x980E5F15E788Cb653C77781099Fb739d7A1aEEd0\", the Account ID contains an invalid character 'E' at index 5 at line 1 column 308"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "5hyjjKDdUGjrFHKcMzk4GL3Ncutu6ajErzaohZauHtPW",
+      "at": "2026-11-07T05:18:14.598Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:13.850337Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "1iV6CbTXGMOIzmD5kOHbVuj2YMQU5kpcS9bs1GKW8hs=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:2av3wRHfRSk53nypnCzdCBYuiE8XRV74ZntPQsdt1C7MsuekYz98khdpo6fENxpHE9r8GB4CTYyWTh6RccJ4AHUv",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "5c8h6zWbmMFGtkrooyH7hSbDH3QAQubLa7ivkDuQe1s5"
+        ]
+      }
+    },
+    {
+      "hash": "4Ar6Yys5nRj4JonjKDG5QBizfpKkW8Qoq4DeuftnBDFb",
+      "at": "2026-11-07T05:18:10.689Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:10.111157Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "FfEQgngXrgEQRM8XZBR6Zi2fgTLisZNc4hZnau59CfM=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:49biZptJ4VRQRPMZSZfxNGT9Be18ZuFVPoEB5TtiHxokL3dVjpZU3EbGUPpSMvjZToY4LpfrdRSNd1dx74KAU6st",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "G7WrRRG6tiDWaW3dhnVZUsUmexPekk15d7Gnb7cM7NP6"
+        ]
+      }
+    },
+    {
+      "hash": "2yDEHypLNwkb2pcqrP41khwbFsiLzmnVSUxhQZwCwv5a",
+      "at": "2026-11-07T05:18:06.727Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:06.144367Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "QEzecxJCCzsF/alY6MJG2AMrPq8niqtZ31rl7KoS1Vs=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:56bGCPuxm4duuyyLbaTS6vKzvqtL4m1STW3XKtLaAhT4uZ6TmFMmLLSx7VQhgXuyhErCJ9TC9G2vn5H1uZNxLhyx",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "9BADBHBvf7wgmCnYcHTJf9A4c22ez6N9q6exeoJXS3uz"
+        ]
+      }
+    },
+    {
+      "hash": "5mvTc75GeBi3LVDh6Vhxt9kCy6STnW2ns8MEayHtmPyy",
+      "at": "2026-11-07T05:18:02.912Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:20:02.264809Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "h57J4pdkoWPoPok+2sL+oj41Sq5o9xE8ylGO385NkK0=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:4LioD1jt1kwyM558z3VPPrkri12aW8mz7MbXHrcZEeJC1Jh5WwVKftdFaVJ5rv4b5TYS8mXptj4b6ch9bpHoT1Us",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "9f3HHayRKS8oMtarRFN7qb4q48Ed1DAQzxxMrUuhmrGj"
+        ]
+      }
+    },
+    {
+      "hash": "FW7ePTADR78Pip7qQaduZ46QgDc117ZFcrZ9kJBfr5KQ",
+      "at": "2026-11-07T05:17:59.022Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:58.267164Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "FA6jNsjNhY89TH5yca0IKZjBkWYKvVhlYsDM7kj9peM=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:F2R8VbuexmZumPH1fEcps43tQrBHfULmePE2XCa1TEHqyQXYsdoFbmZmSos41NcUrbo6LgiRxjDgdPghBwLm1HJ",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "8c2DxWFGQfnrWDgo2uPWaHYpiZsfJRjZSZjAzdQL5RPp"
+        ]
+      }
+    },
+    {
+      "hash": "DTN4k5xZMqLHzoSbZD5eEt4vfAPSxxkvmkgC65dxUVXm",
+      "at": "2026-11-07T05:17:54.874Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:54.070720Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "W06ZuVxt+0ZP0jpu59c49cGW1wduB8JMLmbAramYlPM=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:f9MsUwMyrz5MSDUjB63hhGW6Pd8EERfv9EvKMyuEMGpbGRjbPSsTcWLAxepJ7vLpvW2nwWLi9SkAu46oszSwJxM",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "BVkjKvprgnn8qnEMVTKwPaintvx2eGJEs2SoUJJ7Xnsa"
+        ]
+      }
+    },
+    {
+      "hash": "GLcJBoh2RP2gLTLJhMPEz8GW9RrUf4FKvkjdzARCjpz2",
+      "at": "2026-11-07T05:17:51.025Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:50.274313Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "m9AUBmIsgQQ3sWPVzW/jnsT1yp4EM6OiDfaouEk/EoI=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:5E33gTgDz78xuhvMa4nKsHsh7h5dMzUzFSRB7Ypr7a3SaQ8myjeYnzcqEGGxqbPp6j2tJJp1cy6XrQAy8N38M7Gy",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "ANJwvduQ2zS3iB7dQvXrCCCuw7pVTAEfq2HUzBywt3Xd"
+        ]
+      }
+    },
+    {
+      "hash": "84FEh3hc7VzXGT8RweAwN4NJ4fkzogxsH9nwoXFMDjEY",
+      "at": "2026-11-07T05:17:47.086Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:46.420341Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "TQUIlQAc7+kD2uXeaHZwrGMoqt46ykWDCWMKwDDcLv4=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:67MDMyXbCMj8AJBqXdrxA4gu7aUMUFey6LM98oB2buZo4bZF7f9BUNax5q7RL8PtvmChkr4o5AzZhDU2Sf5G22QL",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "4T91rTdgU6VmFnKU3sspjScsjXUAJT5PTEarXkzrQs58"
+        ]
+      }
+    },
+    {
+      "hash": "HPZXLf8qhmq8UTi2fEwifKrBTjWPwbSG9KdjMeSoq5W2",
+      "at": "2026-11-07T05:17:43.317Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:42.537445Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "/iv+JZDXez5SG93hNz3J+B6GjQ22LUt8hbfYi7IzaQc=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:jXt4JbD86hgmTmmpkE74SMr4CZ26DZtJ1anWzL7VDLJcxB9Rv66eRZ4HFJVVg8JC62JMdB4QXyHU2DNC4vAT5xA",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "vvgD4Ams8V1YEDwHxGn6FC6LguiXMwDAaAqtbyh9jxo"
+        ]
+      }
+    },
+    {
+      "hash": "F49Q2gqpJFL3ZEr2HhkKhKtAizq2L6mHEHerAt9tEr4N",
+      "at": "2026-11-07T05:17:39.324Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:38.672289Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "umzAUyhYvDmZEDP6JJmqwyxfcKHR3si1zzbXME5AQq8=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:5VCBrDJGD6CV1Cf2KyLAVWDtRtGyf2KnRLsVnQWEMEzBwtyKwzUqRWd9zEsnTWUjNRwc9HFX8hYp5SRLHJNsjkT5",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "C7s1URNBeBPVVPGn4K9Z9D4n3jJyXzq7MpoNAYKJSprq"
+        ]
+      }
+    },
+    {
+      "hash": "BCknXEEXck7p5MFtk7Uaaw9ZUHUhkRkhx7gEcYggcV3D",
+      "at": "2026-11-07T05:17:35.335Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:34.484999Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "QV7cqsp+xv0q8eVE2b5jeqNB+/hToPqbInHFRHLiBrA=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:2SSSuYHUdUevkBe8TemLKRPMSKUQ8TaeGpAd5ZPGA2i9ydz1k3uThoh1zAvwDLqX56AKXmK4XPFxC9W6b3jYBpms",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "FZ3ykZRMzgu7QggJiJbJVS835sK3QB5t2uSpEDfAhSRp"
+        ]
+      }
+    },
+    {
+      "hash": "CfhHQV4XSi75Q9rWQobWh8kWFigtrC4LJ2Yw6NP7s1ms",
+      "at": "2026-11-07T05:17:31.177Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:30.504031Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "gmVxHXdxiSMQvDQB8xYP2U0+mzc5bhK/MTt9PoJu1wY=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:39RQKTFQ3j73v3NZPohn2mB6T7FngnpzNPAcPE2SvXsfxFjJ1BY3LHZYm4JXWHcpuDKbyXJFr5vNJZ2xrpBZdJ7a",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "51NdYi31vVqrcGggvznRxtR91dsjBWTtQs34xxZ86eeq"
+        ]
+      }
+    },
+    {
+      "hash": "BfPUQXdr7XvvtfMpXQwXe9DViSgQekkwxyMoibhEeUJ8",
+      "at": "2026-11-07T05:17:27.257Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:26.655652Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "M9IUwxSOg7lBlN+AHNuJNSCyvqa/bMk97EjR6DlGBls=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:5bTfZRoTQzEtUu8mGV1YjHPFJSEVZ9qLmwZiEFkmWNy92bFzbf1GsJMhxNq3JcMj1QoM2TDR7PvZx3RnVU56fDpk",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "B192aitLgPnQ83ndCGThQWoXb11FrCptgHwWVViUGxa5"
+        ]
+      }
+    },
+    {
+      "hash": "BK7CthESN4cB4TcUup2ersFroDAumA3qDiE8P4xEuwyy",
+      "at": "2026-11-07T05:17:23.518Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:22.509750Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141480000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "jtt9zP/oPd43nsL/iTsFsPd66SJ0nAaS+dCJ/zBQf4o=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:2MHVhJCcS6EZjereL1URMz6zsPcpsmx77AsXUd1UWioyeQQXuecNyjDKCuiKtt4rbg9Bjp4E34LmroXAJVyD6hQi",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "5WdtNsrToZAADnwgvWL4DZW94gSx59oojhizYBDNGmgY",
+      "at": "2026-11-07T05:17:19.186Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:18.519699Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"escrow.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"1000\"}}],\"signer_id\":\"f0958f9b0e15a05a1a84d716d2921a7e5dfec3e219cb4c23ff48352aa4fdd6ad\"}",
+              "nonce": "snIKWVtGNe1eiqABZZgRZaLCxovI9NE2yL8KFIoPwxo=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:HC97xTVa6T3uNf9Nnwb65idkKQDwRjp2WtDeaPL4pWPv",
+            "signature": "ed25519:5xVYPDqcx4zsxTcH1mh6YAXJmD6qgpRgHbGMjp2yTK2XAx8aZAgVZ7b4auoftwbNptkdPCiYRLxfbUZBrHqmxshM",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "2AbwWiTzcYB8Pv3yt28Sw4XjrSnHQAP2k3suiG75rgKe"
+        ]
+      }
+    },
+    {
+      "hash": "C2tkkUzEJpNzy8KhwCR39rb7bVYs4bc4B4wD1KVqAQH5",
+      "at": "2026-11-07T05:17:15.229Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:14.580836Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"0\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "IGKok7Oq+P/Brbd/jhJaNuw4IBlRXepCdwBUYH3whvw=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:55A4eJEtNmrD7D2X1dETBnWoJEKbxG9Dm11YDhpVqj8Mi14ccMFJYuBk9MTHiELRHYN5DqidywrRWPaqTFtEN1Gd",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "YWwMrHofJNLMmNYnqMbYitF5sgw6ZbaovkenrfpiNvd"
+        ]
+      }
+    },
+    {
+      "hash": "BEZ6dkupff6juAfXhWUmq6XA1t58q8FULF9GA4yyme4e",
+      "at": "2026-11-07T05:17:11.231Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:10.581326Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"af32c76cd89d75fb79f93c83f435ada738b4cb2a9c7e79019c178f6b8677968b\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"0\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "Dk0wt2tx4bFchGvmeLtTOhBWTsfSxWFk3f3nYHjm8JM=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:4Z9JEsQxUhXVBeEuDz7kYMHfNM31PSVU77CJdyYqYkJZfPNTHZdsypzSw5catsR2CF2gsANKXEdy2xk6wyWj6Gdz",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "86gvcYyvdpjfu3Mjrj7E7EWGaKgNfD3J6Myj2jzgBp6o"
+        ]
+      }
+    },
+    {
+      "hash": "9ZZ3MgpPMvbch8MUpavy6b441f2Acx9cYs5YXY5kJiHa",
+      "at": "2026-11-07T05:17:07.222Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:06.623557Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1142480000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "MwlbKFAiG1NERq9xqNL6MqjBGgOhH5wmUp7pw1ortpM=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:2JqoYfqJq9tyaaSZuLc3PYUMw7iWt2kbao9Kzvm3zakdWk7gzfw8v6NQfGRFkyY5RQ56qrqmtPQPM7RNRBRt7dwU",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "7jxpnFjur91m1To4uY2FnBfTu3np5hrM1kGfJnjUniiv",
+      "at": "2026-11-07T05:17:03.177Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:19:02.568415Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141480000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "iDnNIAKn+Mt+MXWp4BPsrY0nSGDrznvcepE9Q/yu2EI=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:umf8c9uyjwVx4XTwnej2pZPg4T2ZwELqchF8tdWsuHiV8MEGoDM5WG4G5Ct6TJ1G6f8KmsVKPvKvwQ42pDCBVYS",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "9cVFLGJZXtZWUv9RJwQjCiV1D58PhKUFrK6dgrQVtpw1",
+      "at": "2026-11-07T05:16:59.217Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:18:58.446849Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1140490000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "gS7S5NEk6ftwcmMicn2oGOKutDZJmvuUK/nM3OWbLvI=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:3grHJULu4mZbCKZPhYqb7fekfULD9167b44SrMnhgcifBy8J8C6smANu13EvkKoWt2ZJrNgbbur8qBKYeCT97St3",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "HN8zHyGVXh5U2zKkLtL2Zb2MMVSiBNX4PWgwjeajpnFM",
+      "at": "2026-11-07T05:16:55.376Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:18:54.693382Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1000000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "d+oUfTwdCUa7vuUR1K3N007ev90Fj/B+cxrgnAyu2wk=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:4MNtiBtwnM5mCEZzuvA8gZ2fnAS73r2PFNJgKcEkv1Sv84PHUwkNKkc4sKKcbgTBoXahGSXFyaNn8H4jyFghpgu7",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "AwGd6zpveih3bsvKYtcMQYYKqrtYoRToNYbn8U5Gqdku",
+      "at": "2026-11-07T05:16:51.446Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:18:50.860463Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141500000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "CDXQAemcMOmvYzdg/REjLlyk9NeCSCduW2IBorq3cCI=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:w5SRwPzacx9PKadzr5oLizESN8uqSAxotjneM7ABr2FvnvRcyiLhVdZC4o7QXvsKTGo2Rg2zSzPYB6y4o68Ua8A",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "Fnd9WKox6e6p3yTEMjrNF73ax2fcUcBzYNSA6fMsuwBG",
+      "at": "2026-11-07T05:16:47.507Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:18:46.874310Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1000000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "+/lxAkdbDfwY5DljhqGtecjFheS8jT21lfJ2Und0AHU=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:3hpALCTg1RxJzkDrtKrM6REhzceEgiL6kEXzP9poqg4d4tnfSmQ5Pm6YHf1thMGxZZB7H7P9BYBShjFZkNAAGLEV",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "8ztbKm8VNEXVERBWKyBK7Wcra4oNdRsYBuXEi28vTxjB",
+      "at": "2026-11-07T05:16:43.786Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:18:43.272006Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141510000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "Pjmw3Hzqq5BaSj2ilku4SI0/CPzuKEr6ve6Ppnl93+o=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:5gSLyi6CRJCLUxE9uaAJbB9d8c74s6GiBUkN7MS5JHfZVVCpokf3EEgDqhxEDNG4VKJjcXazX5fSDoDmGUD3iQef",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "G2kbWDVvnmTQbkb7kb1sqeZVtYAJLDdoYj7voL6RUBs7",
+      "at": "2026-11-07T05:16:39.697Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:18:39.106382Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1142660000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "ar+zoI2HqHAZDkrCdKNDpYzuNzcuCAD6TMgAcltSXtc=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:4fWLaxmPLZMDybF4ZN8Sf6NapBHxw2Xmw9hZtkwKNfjKv6ySXERmso5HSUoq3x6wHTdgK3Vt8FRvCLQbYGDqucdK",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "136XjtpYFK5Edsr2G5r5yf2PmeMijyVBkDFKu58y77Ps",
+      "at": "2026-11-07T05:16:35.582Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:18:34.817498Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1144760000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "0AJDDPwQNRN7pmEubFRXVCOwMVDR2oTWEIPk9KStY5g=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:46WsRpGAqwh4fp53Y1DrfXTzDvERFH5ccLsoXo9ruREJ6J8bTpDf4vFuLXXxrNjdAYA9KUnLkepdfRaQg5U1wRyi",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "4zg9vkg3BCCnvHjnPZQxF6KfTcqe6wpiUkhWDRu4Kpfv",
+      "at": "2026-11-07T05:16:31.507Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:18:30.870352Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1144760000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "Yxsdh6AIEr1t4qagUAXIgkWdrxjAzGFURm6+bEuNi1U=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:5cSS6qCqdoEQToHT4iCB7XshP7rov8rfiD1MojjwiQRSPYDpG3dr1Ap4KV7JRaWUwye62XasQMkBWAQCBJA8o9Fw",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "HWuGMfdj7i6gbLGTaLxRysJVc7PFzL6HNqf4CuaVLQRY",
+      "at": "2026-11-07T05:16:27.316Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:18:26.667976Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"escrow.ai.near\",\"tokens\":{\"nep141:wrap.near\":\"1000000000000000000000000\"}}],\"signer_id\":\"6830cc6c62b9f9334d8a5b18ef7729549bf625344c4bf933eb0a31fbed58fc65\"}",
+              "nonce": "FddbDtHOOGxn6kJZqyL+y6CbBtL2Yg7MUiLIFnNSO/E=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:81iZNu3bApGmuLHf4nxwch25q5viiMcs8S6BNtb6sar8",
+            "signature": "ed25519:5pWVbYkyzm5r9jopxoA8Khum3JwEEoyxjMpb6c3e6PvBSyMTLemT6eK1rLCbz9TL4buUunNmD6hTEa9aGGXbKpZw",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "GJBSrbT6Y3vMScniH1TsfeE7fqJ7QuLniDA2WMEKcxyz"
+        ]
+      }
+    },
+    {
+      "hash": "DqPxf9a61uWRu85jcu8fGCBaKZy3T3xtDxGPay1N6bT3",
+      "at": "2026-11-07T05:14:25.872Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:16:25.171655Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"0x980E5F15E788Cb653C77781099Fb739d7A1aEEd0\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"399980\"}}],\"signer_id\":\"640fe25db01169c70ef4c6de5d146a3a5b9ff95d968fb91bb518a254c28e5bc0\"}",
+              "nonce": "LOIHRmeTZlDzsaRAHNN8rLKumsi2DP0dQZfQcfzFIDA=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7jbpSMGTRc7nMVDwgjL52Qc4GAYjPnkgE93cMAGacnw9",
+            "signature": "ed25519:3qzhsa1SG6w7Np31rZ2RCSHZBL8uSAJvtPKMkRqbmpzok4r1fg877SkDuNyQZ3tsEkwa8hFTjXxvGqRCW6wJdzkU",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: JSON: invalid value: \"0x980E5F15E788Cb653C77781099Fb739d7A1aEEd0\", the Account ID contains an invalid character 'E' at index 5 at line 1 column 308"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "BWiGpjUFg1pqgUxtthkEBoBHbtLLi5jX5TEHqcsMy2i",
+      "at": "2026-11-07T05:14:21.977Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:16:21.233317Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"0x980E5F15E788Cb653C77781099Fb739d7A1aEEd0\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"399980\"}}],\"signer_id\":\"640fe25db01169c70ef4c6de5d146a3a5b9ff95d968fb91bb518a254c28e5bc0\"}",
+              "nonce": "i9FRrI4fLLae0i91LuVmjSfAp07rocIfiDcgmFRw7CU=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7jbpSMGTRc7nMVDwgjL52Qc4GAYjPnkgE93cMAGacnw9",
+            "signature": "ed25519:y4Nna8MzLbvq2Zx4PukE6GMVkooJzUABxDFvcaPF4LmBtdC7y5bVAwy4z7zKcg9SXqFVYYV2zybfc9qy9TbpCWj",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: JSON: invalid value: \"0x980E5F15E788Cb653C77781099Fb739d7A1aEEd0\", the Account ID contains an invalid character 'E' at index 5 at line 1 column 308"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "BhpPPBy6jkhFr82hi8foHciN8Rz4ZRVxR7Rayx41vpP4",
+      "at": "2026-11-07T05:14:17.885Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:16:17.402853Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "VZGfSQ3MCmOXUEXbMuM867yuHVPoUhmwevhl2AvTnXs=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:2R5tiiRpnofkeKToJnNwwCmbeD8stFXiZmcy4K7Go2WMQRwFoGs5qQnQHW9sNYwgAZvcXg3BxcWt89UwUdggF2np",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "6J6kUHMk5Nbkc5sQAkPvEU93fGFDYu8QkmgzRoqHU5jb"
+        ]
+      }
+    },
+    {
+      "hash": "8qGCJ2gHXnfEYD7d7WWYiCVmR8cqRGFg4sJaUbg569Mc",
+      "at": "2026-11-07T05:14:14.016Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:16:13.339932Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "mVoHjZL68/npZ9P7GWpQgjsBIIITko3PBKUmsszVuK8=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:62okKrXFFink91QBWDrs5hJabK3TcwyHBwdZWXyJHStwEfEXGuEg8BJuqnWp7rfTpWZ9rodJNTAUj7vp47QKooDo",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "45c51vFsqcfqnqCUqoMvWfw77TbxRRFagKArFBihSPd1"
+        ]
+      }
+    },
+    {
+      "hash": "HFETLbv8ADdBuDgeDX18RoLZB4rCd3RAcL8J6wa6U97z",
+      "at": "2026-11-07T05:14:10.052Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:16:09.217577Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "8vM/Kyn579ovRtpbBhET7IyvTSQVPQ+Vj7MMo8KwiwY=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:4b4k2qYSxuY8PDH4kuXbMTTx5SeJsEWwePcWgdbQxvpnWv3qQw9qZvvJx3BS3VeVH5vjuaMdXX9Q46PnRpN9t8y3",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "6CWcQuzacLQ71JSzGJDdnWgG45aiDkd4pdNtjxRZ5esV"
+        ]
+      }
+    },
+    {
+      "hash": "Ht3JBmVdL6ZUXhPyHaTWi1F5tzRgPZdAtU7iZf8kX5rJ",
+      "at": "2026-11-07T05:14:06.038Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:16:05.371586Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "rzo2BsPyvXT/fyPYJ5Bwbmyf+Mad+dIbCBVskxOn7mo=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:4EMwbESzkokdCkV2EkZh7sQ5Yik9hF78KcZgYvpg8ng4HZaJ9iTv9bNuEs9UKG83SKcJsUv8jVQLbH4bupD8GkqG",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "BfuFRzAAaQR5tVqJfppjGBMYDvjxFVBL1KvfDCWTYz4P"
+        ]
+      }
+    },
+    {
+      "hash": "JDpAP63U1GRQCBf8pPdGpvFMzBaHY2BMesVrzNbMCrUs",
+      "at": "2026-11-07T05:14:02.074Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:16:00.757841Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "qOeJ944Ocv57lVz9VXi2YbDY6ynF/igOzpVkvbSqXAU=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:4qN9eVX2JuemB2z7n5bpfNJ2LfdT1Zwf4FBT4ZzuV82hrpzoyhYwvZsSFgkPcpMpAfPDWmQKW2hPArxixixDBkLx",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "6oHaijnk91jGJWXxKWAoSFrVxwdUoeKuyH4BG5Bwfk1J"
+        ]
+      }
+    },
+    {
+      "hash": "Ar3cF3GmC3Ls2h69avDn1fQD1zoVqLaXGcgZQsGKhYUL",
+      "at": "2026-11-07T05:13:57.369Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:56.623168Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "aftYDkc2N268lHt1OntT/zybS4k6MPE/cJEbeDESnQs=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:4p6YSiHmiLTpCoNuGurvKqsVmAnqff7B9dEke8NZjgMe4CKdpY7ULUcrmL6Z8Rd6jVogX8sRZahgwCosAZetssBc",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "3vvWukmWrkgWMm4UNWt77C9MihWpDz9Ca9QEBgAPwbA2"
+        ]
+      }
+    },
+    {
+      "hash": "5UEbCr8PgwzgQHWsdZeoubJa2mhH3zetX7iTy5RACK83",
+      "at": "2026-11-07T05:13:53.416Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:52.580714Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "IjCIUCzT1nop2juWeD2xu72HZb11Enc64XRFFna+xic=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:3Shj1VciGcivRtRwkc6Ynh4yJDXVGH2p1oL1kie48Qugb6RsQXvKqR69i385SxEfFH8F7JoZqsXjjGLf4S8yRjHS",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "Gd1pjVpvjQwpPeTH2XfssKHzuJjGA8aQwReAzZZGCpo1"
+        ]
+      }
+    },
+    {
+      "hash": "H3g2f4dAtkrvuemDKNFzADmavEuXYASSLuTzgMTXHmMB",
+      "at": "2026-11-07T05:13:49.110Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:48.316859Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "ktNQ8O5wFfn3qcLjvEq+CxLy1IQ+J/zWg+MaROdZL+U=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:u5kpx4z753d76kGoFxHytmGc9R7GqvzqybY3BLJP7zg1Em1zEjAyVm1L15kWoMkPVriL84a6bbMNEkTb9SSGWo4",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "4EZE1NCH2S4pRM8R2qKxK3L2KZvBCX7m9vfEf5BtjL54"
+        ]
+      }
+    },
+    {
+      "hash": "FJVDKPe2rvWZhSwnR5XJyMukwAK3mSFbT89eKexYrpZS",
+      "at": "2026-11-07T05:13:45.143Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:44.493831Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "CRoCaQ57T2LWw6je3s13mKHI8PiRNjaQDAQWZpDwFSU=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:5CTgZn4gnFkuw3GPG3QHGG5KNdbZ2RSA7HAZGWMAtYPYVKZsPYxqvbpGrXuW9wWpKB6RA223LaP2TDj2sTBWZX29",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "HvgwmsCiUMERracSRuNDsHjsfV3PeHCsLaHC9McdSLYa"
+        ]
+      }
+    },
+    {
+      "hash": "79HU85E4JhjpzLHMRzTd89TVszz8DydNjzpY3uNpT9jW",
+      "at": "2026-11-07T05:13:41.061Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:40.290050Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "qCbS62bzx653gC2HaRQLJUBGG6xxqCdmCFs4zcuQPlM=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:T3GNgLJpsPexyoczUvvKt1J6K2HXeGbAPR33ctQWD7ufTprE381qYFbBqQPMhdru1sT7vvj8aFuEkUyELjYNVs6",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "9M5QNNshBWdp5f88hj5rvJZvSpQJRqN9UnXiaXngVdNp"
+        ]
+      }
+    },
+    {
+      "hash": "343NhakDesss2hsJ2mJEqgwTH7QFBZ1oAUnKNoq9Jn62",
+      "at": "2026-11-07T05:13:36.821Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:36.120422Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "6Ii32dJDgnjAQ2Xri/Lf09TgB/UeoNcIKkrG1OtoptA=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:5ByCFcD7j3oZTwtZwViLqjg37HopsmZCSvfB6Kj6153xrR6Uy5jx7N846ajbPLRBeYPjAFB3uT32C4q6wUHyehk",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "HmwQbEQq1gizRHgJy2o6M7EnDiJnbSUw2saT1MDP9fGK"
+        ]
+      }
+    },
+    {
+      "hash": "FHDa9dpUEsfCRNjooEhwFwh4DHJVG1KLSt9Mx8JoYs1s",
+      "at": "2026-11-07T05:13:32.968Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:32.246815Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"51500a5a9387af1cf8c1a52028a9ab51c66f36db763ff09bfe1cd7a54027b2ab\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"975000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "hYMfZYxHQfPrAoTsp17473OwVMt9DOBXXvBi1ohD4GQ=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:2JCLhs9cTPcbWDSdujmd5hiPbme7r8wh5MqbJfm13fKdXnVDTU7J2xivephd4ZF7FBetvDcxTsRAdSA3UpNHEwze",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "7Him5PE5Niw7C7AEPigwrUocKQJjptQZdigpR2bRK44p"
+        ]
+      }
+    },
+    {
+      "hash": "4dWbxH87CSEfzTag4mZiiFBRqzwZaMDz8L6xsDQfUNCj",
+      "at": "2026-11-07T05:13:28.754Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:28.122897Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"25000\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "xOsZaqc4KSsCg9QhXzwa3ZVVvXuNl1OxaT9Si8Th9Uw=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:56P2o5tnB1MbXtFGQuZZaBSH2F15bPfzcg9KJvbpymFt67RZuVAgKTC32SHsmnneYTCyTTh5n2SSmcsnLzUo82QN",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "HfVc5F9GUhYWEAZzxENuMWi8uWC6HoJ6kxVmygzzShRb"
+        ]
+      }
+    },
+    {
+      "hash": "3Kab6oaqvCcy2C3Pnz2ie7wVpVoedgYxRaxnQ1R7HJTt",
+      "at": "2026-11-07T05:13:24.676Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:24.088314Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141480000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "VsfKJ72yeuQjQXM/KOqp9eXS5RkaamH7Wm7N8ueZR70=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:4UTsNUSYfy7WGG9vHc9jiqkM2tJ4mtRqaohAvGiFM93QHWu5bz41ULYSnFa84ELmh5pYeL2iUbuyAwGkVox43m33",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "5TEjaNrCJEE1LpK6BKT75HsCNMK4fJVehhPJD3PbjDhd",
+      "at": "2026-11-07T05:13:20.757Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:20.263506Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"escrow.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"1000\"}}],\"signer_id\":\"f0958f9b0e15a05a1a84d716d2921a7e5dfec3e219cb4c23ff48352aa4fdd6ad\"}",
+              "nonce": "owJ+0fASUXgaJb5DjZHWhCSc7r3r1eTZR5BFwLFIpkY=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:HC97xTVa6T3uNf9Nnwb65idkKQDwRjp2WtDeaPL4pWPv",
+            "signature": "ed25519:4ghuEKVDL3NuNFnDQhaKKU86QXG8gY61H7npwLTjXuxsxpeQout9M3KmoQRhejxSMu5LgZHPgcsDW72LXhjWxCpu",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: insufficient balance or overflow"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "2VsxWDAmygBpG38DUeXofZ5tYGRn9gR1irjtqVTjB3kL"
+        ]
+      }
+    },
+    {
+      "hash": "E5gNgSycXrP5nn4E8nYPLUaKdzumhmAiXwTydh4HQjR6",
+      "at": "2026-11-07T05:13:16.653Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:14.731928Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"treasury.ai.near\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"0\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "MEpunOmCJ0ApV2BcDEIyGz7YZqnvD4yW4LOJItKaloY=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:2Rn7WzAZ3aUZWgPi1iDDBHBuTsXysgg2PK7HHb5aR6gfjvFk2HXiLSsqaAV2y6uJ8GwygRYCqnBzmLrRGrsL1d4Z",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "3wb6GYt2WgyanoEKXPCMYsfrVKRdahEwC3du62kbpAca"
+        ]
+      }
+    },
+    {
+      "hash": "4KYcDvMEeqoPCg3oS51i5hqHES2zdrp3Hd4CiR5x9KRa",
+      "at": "2026-11-07T05:13:11.338Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:10.727651Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"af32c76cd89d75fb79f93c83f435ada738b4cb2a9c7e79019c178f6b8677968b\",\"tokens\":{\"nep141:17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\":\"0\"}}],\"signer_id\":\"escrow.ai.near\"}",
+              "nonce": "x8xC7fjnSOtv5lOcbUFe9K87IsacynaZQIO0mlyXAzI=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:Bo2UCTsedL6RxBkj5GabHtVPXQz61zTkJgwsGFvUxmW6",
+            "signature": "ed25519:2ivUDGwWAMCS8JMUHqnw7roWarq3acF7MmeRF28oQ4Zj2xFwzKfX444JRyBJFfvtW9VPHNZAVt2GzKUmM4fxzWTq",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": [
+          "FrDHVWpK6x5XPJWfAW9BFXEhdmJBQ2W7HjVfMR9EYDBg"
+        ]
+      }
+    },
+    {
+      "hash": "G1GVTcRfXxqWj2UpjqC8Hfm7kqp5hwKyiAomqVP1kA2R",
+      "at": "2026-11-07T05:13:07.460Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:06.473566Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1142480000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "PwRrDkonxZh/xPlewquEqOdSwfo+BhYyDyqindsNQoo=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:p8CD4qKjnp3EfPLaP7m6ptt9tmi92Kob2VGQZhp9EgiXdKYgwRMLo58RCR7948bcjEvg8upVa1ohng4TP49aUKZ",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    },
+    {
+      "hash": "28anNe7JuxBiF3PqPqADFJarFvXfKe8ZBqaX9fEdwEp2",
+      "at": "2026-11-07T05:13:03.298Z",
+      "receiver_id": "intents.near",
+      "args": {
+        "signed": [
+          {
+            "payload": {
+              "message": "{\"deadline\":\"2026-11-07T05:15:02.766212Z\",\"intents\":[{\"intent\":\"transfer\",\"receiver_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\",\"tokens\":{\"nep141:wrap.near\":\"1141480000000000000000000000\"}}],\"signer_id\":\"5cdaee04aeec7abf076fd197411ffab6b08cf7aaefba14b57f6fc5fbececc3c8\"}",
+              "nonce": "UQmx/2II5JYgJhoJKPwvdK9urThju6y+KfZvCn7zFrI=",
+              "recipient": "intents.near"
+            },
+            "public_key": "ed25519:7FU8axGtFor8u5YQGVu9U5HwyGXZHHkzqsymnaSPEaZV",
+            "signature": "ed25519:2GMaUBj7aqgBxgKN8kguUgsHJEqGr4tiX1HNwzWrDpNPsPZNR4TabQaWRE2wkTSBWqGDSK9Cgjwhtmdz2wLM3omo",
+            "standard": "nep413"
+          }
+        ]
+      },
+      "execute": {
+        "status": {
+          "Failure": {
+            "ActionError": {
+              "index": 0,
+              "kind": {
+                "FunctionCallError": {
+                  "ExecutionError": "Smart contract panicked: invalid intent"
+                }
+              }
+            }
+          }
+        },
+        "intent_hashes": []
+      }
+    }
+  ]
+}

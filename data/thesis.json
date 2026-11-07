@@ -1,9 +1,10 @@
 {
-  "generated_at": "2026-10-30T01:46:09.752Z",
+  "generated_at": "2026-11-07T05:30:33.380Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
     "export_retrieved_at": "2026-10-29T22:04:40.090Z",
+    "near_retrieved_at": "2026-11-07T04:24:35.741Z",
     "x402scan_retrieved_at": "2026-10-29T23:18:32.677Z",
     "defillama_retrieved_at": "2026-10-29T23:18:32.768Z",
     "derived_sha256": "e47ebcf5915ca3d9ac889ae75d52ec653a54964a5dc85a0d793ffe2465744e4c"
@@ -197,6 +198,236 @@
       "as_of": "2026-10-29T22:38:06.066Z",
       "source": "base_vault",
       "definition": "USDC sent out of the NEAR Intents treasury on Base (all purposes)"
+    },
+    "threshold.base_count_30d": {
+      "value": 2539947,
+      "unit": "x402 payments on Base",
+      "range": {
+        "days": 30,
+        "to": "2026-10-29T22:45:39.000Z"
+      },
+      "as_of": "2026-10-29T23:18:32.677Z",
+      "source": "x402scan",
+      "definition": "x402scan total_transactions, chain base, timeframe 30, frozen in data/snapshot/x402scan/base.json (sha256 9bc61df7abfbbb3f96b511503ce2d52481118b4b34cbdbc414afc4c1671fa55e) before the threshold was committed."
+    },
+    "threshold.line": {
+      "value": 25400,
+      "unit": "NEAR delegate-action USDC transfers in 30 days",
+      "range": {
+        "days": 30,
+        "to": "2026-10-29T22:45:39.000Z"
+      },
+      "as_of": "2026-10-29T23:18:32.677Z",
+      "source": "x402scan",
+      "definition": "The smallest whole number above 1% of the Base count. THESIS.md: N at or above this line changes my mind."
+    },
+    "near.facilitator.discovery_total": {
+      "value": 0,
+      "unit": "listed resources",
+      "range": {
+        "at": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "x402_mikedotexe",
+      "definition": "pagination.total of x402.mikedotexe.com/discovery/resources, an opt-in list sellers add themselves to."
+    },
+    "near.relayer.receipts": {
+      "value": 22,
+      "unit": "receipts",
+      "range": {
+        "all_time": true,
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "NearBlocks v3 receipts for x402-relayer2.mike.near, every kind."
+    },
+    "near.relayer.payments": {
+      "value": 6,
+      "unit": "payments",
+      "range": {
+        "all_time": true,
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "Receipts from x402-relayer2.mike.near carrying a Delegate action with one ft_transfer, each opened on archival RPC."
+    },
+    "near.relayer.gas_refunds": {
+      "value": 13,
+      "unit": "receipts",
+      "range": {
+        "all_time": true,
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "TRANSFER receipts from system to the relayer (gas refunds)."
+    },
+    "near.relayer.account_setup": {
+      "value": 2,
+      "unit": "receipts",
+      "range": {
+        "all_time": true,
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "CREATE_ACCOUNT or ADD_KEY receipts for the relayer."
+    },
+    "near.relayer.funding": {
+      "value": 1,
+      "unit": "receipts",
+      "range": {
+        "all_time": true,
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "TRANSFER receipts to the relayer from an account other than system."
+    },
+    "near.relayer.payment_usdc_total": {
+      "value": 0.006,
+      "unit": "USDC",
+      "range": {
+        "all_time": true,
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "Sum of ft_transfer amounts in the relayer payments, divided by 1e6."
+    },
+    "near.delegate.sampled_receipts": {
+      "value": 450,
+      "unit": "receipts",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T04:24:35.741Z",
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "ft_transfer receipts on NEAR USDC sampled at 30 points, 15 newest before each."
+    },
+    "near.delegate.sample_successful": {
+      "value": 450,
+      "unit": "receipts",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T04:24:35.741Z",
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "Sampled receipts that succeeded and were classified."
+    },
+    "near.delegate.sample_hits": {
+      "value": 5,
+      "unit": "receipts",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T04:24:35.741Z",
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "Sampled receipts whose transaction is a Delegate action with one ft_transfer to NEAR USDC (the x402 NEAR shape). This is the only exact count of N here."
+    },
+    "near.delegate.transfers_30d": {
+      "value": 1837873,
+      "unit": "USDC transfer events",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08",
+        "to": "2026-11-06"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3",
+      "definition": "Sum of NearBlocks daily transfers_count for NEAR USDC over 30 whole UTC days. Every transfer shape, so at least as large as N."
+    },
+    "near.delegate.estimate_upper_95": {
+      "value": 42675,
+      "unit": "NEAR delegate-action USDC transfers in 30 days (estimate)",
+      "range": {
+        "days": 30,
+        "from": "2026-10-08T04:24:35.741Z",
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "95% Clopper-Pearson upper bound of the sample share times transfers_30d. An estimate, not a count."
+    },
+    "near.escrow.txs": {
+      "value": 100,
+      "unit": "transactions",
+      "range": {
+        "from": "2026-11-07T05:13:03.298Z",
+        "to": "2026-11-07T05:21:40.624Z",
+        "sample_txs": 100
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "Newest execute_intents transactions signed by escrow.ai.near at the fetch time."
+    },
+    "near.escrow.unique_intents": {
+      "value": 15,
+      "unit": "intents",
+      "range": {
+        "from": "2026-11-07T05:13:03.298Z",
+        "to": "2026-11-07T05:21:40.624Z",
+        "sample_txs": 100
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "Sampled transactions after removing retries of the same intent body."
+    },
+    "near.escrow.intents_success": {
+      "value": 0,
+      "unit": "intents",
+      "range": {
+        "from": "2026-11-07T05:13:03.298Z",
+        "to": "2026-11-07T05:21:40.624Z",
+        "sample_txs": 100
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "Unique intents whose best outcome is success."
+    },
+    "near.escrow.intents_invalid_intent": {
+      "value": 10,
+      "unit": "intents",
+      "range": {
+        "from": "2026-11-07T05:13:03.298Z",
+        "to": "2026-11-07T05:21:40.624Z",
+        "sample_txs": 100
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "Unique intents whose best outcome is invalid_intent."
+    },
+    "near.escrow.intents_insufficient_balance": {
+      "value": 4,
+      "unit": "intents",
+      "range": {
+        "from": "2026-11-07T05:13:03.298Z",
+        "to": "2026-11-07T05:21:40.624Z",
+        "sample_txs": 100
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "Unique intents whose best outcome is insufficient_balance."
+    },
+    "near.escrow.intents_other": {
+      "value": 1,
+      "unit": "intents",
+      "range": {
+        "from": "2026-11-07T05:13:03.298Z",
+        "to": "2026-11-07T05:21:40.624Z",
+        "sample_txs": 100
+      },
+      "as_of": "2026-11-07T04:24:35.741Z",
+      "source": "nearblocks_v3+near_archival_rpc",
+      "definition": "Unique intents whose best outcome is other."
     },
     "vet402.settled_no_tx": {
       "value": 13,
@@ -792,6 +1023,211 @@
         ]
       }
     ]
+  },
+  "near": {
+    "retrieved_at": "2026-11-07T04:24:35.741Z",
+    "finished_at": "2026-11-07T05:28:36.141Z",
+    "spec": {
+      "sha256": "1e51187db3f7d5cd417f19ac1b10e691e5c23578b9bd9efed87332319a5dc8d4",
+      "bytes": 19151,
+      "commits": 1,
+      "first_commit_at": "2026-05-16T14:01:46Z",
+      "last_commit_at": "2026-05-16T14:01:46Z",
+      "last_commit_sha": "f5dd40efb4529331fb17ac22f6a09dc41cd6d041",
+      "pr_number": 1459,
+      "pr_merged_at": "2026-05-16T14:01:47Z",
+      "pr_user": "mikedotexe",
+      "settlement_sentence": true
+    },
+    "facilitator": {
+      "kinds": [
+        "exact:near:mainnet:v2"
+      ],
+      "signers": {
+        "near:mainnet": [
+          "x402-relayer2.mike.near"
+        ]
+      },
+      "discovery_total": 0,
+      "discovery_items": 0
+    },
+    "relayer": {
+      "receipts": 22,
+      "transactions": 9,
+      "kinds": {
+        "payment": 6,
+        "gas_refund": 13,
+        "account_setup": 2,
+        "funding": 1,
+        "other": 0
+      },
+      "payments": [
+        {
+          "hash": "3KpKfbGcgKTsnbF9cj9y6Eh3oRM2yLdSfXXxV6RPgQrs",
+          "at": "2026-07-23T16:41:30.476Z",
+          "sender_id": "mike.near",
+          "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+          "ft_receiver": "count.mike.near",
+          "amount_usdc": 0.001,
+          "inner_success": true
+        },
+        {
+          "hash": "DR76XNQcR1NNkDk8RZ62NXM3a7KDv1hbjYrPCGhf8S2P",
+          "at": "2026-07-23T21:03:27.767Z",
+          "sender_id": "mike.near",
+          "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+          "ft_receiver": "count.mike.near",
+          "amount_usdc": 0.001,
+          "inner_success": true
+        },
+        {
+          "hash": "6VCZNjomBRzW8WahjLyDaUHDT3SN2Qa73MWrKjGdktyi",
+          "at": "2026-07-23T21:03:40.108Z",
+          "sender_id": "mike.near",
+          "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+          "ft_receiver": "count.mike.near",
+          "amount_usdc": 0.001,
+          "inner_success": true
+        },
+        {
+          "hash": "A5MPRMSwAiLXxU3VT6jmFYepvf7d9W8NzWpGxT1qqF3Q",
+          "at": "2026-07-27T00:13:30.134Z",
+          "sender_id": "mike.near",
+          "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+          "ft_receiver": "count.mike.near",
+          "amount_usdc": 0.001,
+          "inner_success": true
+        },
+        {
+          "hash": "5dm822stypkWdK7A5s2owV9QBPbh4uZhLPoWou2mw4zs",
+          "at": "2026-07-27T19:17:05.682Z",
+          "sender_id": "mike.near",
+          "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+          "ft_receiver": "count.mike.near",
+          "amount_usdc": 0.001,
+          "inner_success": true
+        },
+        {
+          "hash": "2AzhbSqm1nT5QizVBmas3xFisNiqx9upYnKbGfReWnb5",
+          "at": "2026-07-30T15:47:04.600Z",
+          "sender_id": "mike.near",
+          "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+          "ft_receiver": "count.mike.near",
+          "amount_usdc": 0.001,
+          "inner_success": true
+        }
+      ],
+      "payment_count": 6,
+      "payment_usdc_total": 0.006,
+      "payment_usdc_min": 0.001,
+      "payment_usdc_max": 0.001,
+      "payment_first_at": "2026-07-23T16:41:30.476Z",
+      "payment_last_at": "2026-07-30T15:47:04.600Z",
+      "payment_tokens": [
+        "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1"
+      ],
+      "payment_senders": [
+        "mike.near"
+      ],
+      "payment_receivers": [
+        "count.mike.near"
+      ],
+      "all_inner_success": true
+    },
+    "delegate": {
+      "window": {
+        "from": "2026-10-08T04:24:35.741Z",
+        "to": "2026-11-07T04:24:35.741Z"
+      },
+      "points": 30,
+      "per_point": 15,
+      "counts": {
+        "sampled": 450,
+        "failed": 0,
+        "not_single_ft_transfer": 9,
+        "direct": 59,
+        "contract_call": 377,
+        "delegate": 5,
+        "unchecked": 0
+      },
+      "successful": 450,
+      "hits": [
+        {
+          "receipt_id": "EXfUguEDUnLxV2PFYPZqY1kwBQYifJ83jETuRYQctjRS",
+          "hash": "76hZkqNNi359kH266MTbce7ko9nvcqwMaWjtw92Azc4b",
+          "at": "2026-10-18T16:23:36.905Z"
+        },
+        {
+          "receipt_id": "DhFAxdCWab7vk4d51HaGc9pq7JeopGCo2gk26TbgFYsW",
+          "hash": "CQeyVSrvx5hJL97U1qjLZzWdew4DNqiWfngi4CiCXiTx",
+          "at": "2026-10-25T16:23:56.366Z"
+        },
+        {
+          "receipt_id": "23eKZkjQHgTxgsxLaEvVZfiNkK239dQMuoyoJXPPrpEw",
+          "hash": "8Dwd1jukYzDNmbokJRopjj9VJ2B6H23evMFkUvpGQLGF",
+          "at": "2026-10-25T16:23:30.226Z"
+        },
+        {
+          "receipt_id": "HuKGRSgRyuHjNymWAExAZoMJDkHGpp4Yn8XihkKhnhDi",
+          "hash": "A5CbPxzLiYoQrPdz2eJrjDNerD6QEH2MfK8qGuoeotLH",
+          "at": "2026-11-01T16:24:32.806Z"
+        },
+        {
+          "receipt_id": "7xYTy9SqJj8mzTGWw4d5TvDtBikvbi8iEvoSnNuoA8h7",
+          "hash": "4uUNeFAhvzQjfspKTNSHFpykwYUQ8yVe12RLz5D3gu2",
+          "at": "2026-11-05T16:22:59.481Z"
+        }
+      ],
+      "share": 0.011111111111111112,
+      "share_upper_95": 0.023219425711872688,
+      "transfers_30d": {
+        "total": 1837873,
+        "from": "2026-10-08",
+        "to": "2026-11-06"
+      },
+      "estimate": 20420.81111111111,
+      "estimate_upper_95": 42675,
+      "line": 25400,
+      "result": "not_decided",
+      "estimate_upper_below_line": false
+    },
+    "escrow": {
+      "txs": 100,
+      "from": "2026-11-07T05:13:03.298Z",
+      "to": "2026-11-07T05:21:40.624Z",
+      "per_tx": {
+        "success": 0,
+        "invalid_intent": 44,
+        "insufficient_balance": 50,
+        "other": 6,
+        "unchecked": 0
+      },
+      "unique_intents": 15,
+      "unique_intent_hashes": 58,
+      "per_intent": {
+        "success": 0,
+        "invalid_intent": 10,
+        "insufficient_balance": 4,
+        "other": 1
+      },
+      "other_messages": {
+        "Smart contract panicked: JSON: invalid value: \\": 6
+      }
+    },
+    "limits": {
+      "delegate": [
+        "NearBlocks v3 count endpoints are closed to callers without a key (HTTP 403), and the v1 count with a date filter returns Server Error, so the 30-day N cannot be counted in full without a key.",
+        "NearBlocks lists a delegated ft_transfer receipt with predecessor = the payer and the same action as a direct call, so each receipt is opened on NEAR archival RPC: EXPERIMENTAL_receipt gives signer_id, and when signer_id differs from the predecessor, tx gives the outer Delegate action.",
+        "Only the sampled receipts are counted. The estimate scales the sample share by NearBlocks daily USDC transfer events, which include every transfer shape, so it is an upper estimate of N, not a count.",
+        "Public archival RPCs answer callers without a key with HTTP 429 when asked too fast, so the sample is kept small (15 receipts at each of 30 points). A receipt the RPC never answered is counted as unchecked, not as a miss.",
+        "Sample points are evenly spaced, one per day. Each takes the newest receipts before that instant, so bursts in those minutes weigh more than they would in a random sample."
+      ],
+      "escrow": [
+        "One sample: the newest transactions signed by escrow.ai.near at the fetch time, not a 30-day count.",
+        "Retries re-sign the same transfer with a new nonce and deadline, so duplicates are removed by the intent body (signer_id and intents, deadline and nonce dropped). The intent_hash values in the logs are kept too.",
+        "escrow.ai.near being the NEAR AI Agent Market escrow is an estimate: the Agent Market payment docs do not name this account."
+      ]
+    }
   },
   "rechecks": {
     "base": {

@@ -1,0 +1,69 @@
+{
+  "rpc": [
+    "https://archival-rpc.mainnet.fastnear.com",
+    "https://archival-rpc.mainnet.near.org"
+  ],
+  "method": "tx",
+  "payments": [
+    {
+      "hash": "2AzhbSqm1nT5QizVBmas3xFisNiqx9upYnKbGfReWnb5",
+      "signer_id": "x402-relayer2.mike.near",
+      "sender_id": "mike.near",
+      "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+      "method": "ft_transfer",
+      "ft_receiver": "count.mike.near",
+      "amount_raw": "1000",
+      "inner_success": true
+    },
+    {
+      "hash": "5dm822stypkWdK7A5s2owV9QBPbh4uZhLPoWou2mw4zs",
+      "signer_id": "x402-relayer2.mike.near",
+      "sender_id": "mike.near",
+      "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+      "method": "ft_transfer",
+      "ft_receiver": "count.mike.near",
+      "amount_raw": "1000",
+      "inner_success": true
+    },
+    {
+      "hash": "A5MPRMSwAiLXxU3VT6jmFYepvf7d9W8NzWpGxT1qqF3Q",
+      "signer_id": "x402-relayer2.mike.near",
+      "sender_id": "mike.near",
+      "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+      "method": "ft_transfer",
+      "ft_receiver": "count.mike.near",
+      "amount_raw": "1000",
+      "inner_success": true
+    },
+    {
+      "hash": "6VCZNjomBRzW8WahjLyDaUHDT3SN2Qa73MWrKjGdktyi",
+      "signer_id": "x402-relayer2.mike.near",
+      "sender_id": "mike.near",
+      "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+      "method": "ft_transfer",
+      "ft_receiver": "count.mike.near",
+      "amount_raw": "1000",
+      "inner_success": true
+    },
+    {
+      "hash": "DR76XNQcR1NNkDk8RZ62NXM3a7KDv1hbjYrPCGhf8S2P",
+      "signer_id": "x402-relayer2.mike.near",
+      "sender_id": "mike.near",
+      "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+      "method": "ft_transfer",
+      "ft_receiver": "count.mike.near",
+      "amount_raw": "1000",
+      "inner_success": true
+    },
+    {
+      "hash": "3KpKfbGcgKTsnbF9cj9y6Eh3oRM2yLdSfXXxV6RPgQrs",
+      "signer_id": "x402-relayer2.mike.near",
+      "sender_id": "mike.near",
+      "token": "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1",
+      "method": "ft_transfer",
+      "ft_receiver": "count.mike.near",
+      "amount_raw": "1000",
+      "inner_success": true
+    }
+  ]
+}

@@ -13,6 +13,7 @@ import { readQuotes } from "./lib/quotes.mjs";
 import { loadDefillama } from "./lib/sources/defillama.mjs";
 import { loadVaultNumbers, fetchVaultLogs, writeVault, DEFAULT_RPCS } from "./lib/sources/vault.mjs";
 import { loadX402 } from "./lib/sources/x402scan.mjs";
+import { fetchNear, loadNear, MANIFEST as NEAR_MANIFEST } from "./lib/sources/near.mjs";
 import { recheckRows, summaryFromFile } from "./lib/recheck.mjs";
 import { renderTemplate } from "./lib/render.mjs";
 import { checkSurfaces } from "./lib/surface.mjs";
@@ -30,6 +31,7 @@ function sha256Buffer(buf) {
 function parseArgs(argv) {
   const offline = argv.includes("--offline");
   const fetchVault = argv.includes("--fetch-vault");
+  const fetchNearFlag = argv.includes("--fetch-near");
   const snapIdx = argv.indexOf("--snapshot");
   const snapshotDir = snapIdx >= 0 ? argv[snapIdx + 1] : join("data", "snapshot");
   const thesisIdx = argv.indexOf("--thesis");
@@ -61,6 +63,7 @@ function parseArgs(argv) {
   return {
     offline,
     fetchVault,
+    fetchNear: fetchNearFlag,
     snapshotDir,
     thesisPath: thesisIdx >= 0 ? argv[thesisIdx + 1] : null,
     fromBlock: fromIdx >= 0 ? Number(argv[fromIdx + 1]) : null,
@@ -400,6 +403,13 @@ export async function main(argv, { cwd = ROOT } = {}) {
     }
     await runFetchVault(args, snapshotPath);
   }
+  const nearDir = join(snapshotPath, "near");
+  if (args.fetchNear) {
+    if (args.offline) throw new Error("cannot --fetch-near with --offline");
+    await fetchNear(nearDir, { log: (line) => console.error(`fetch-near: ${line}`) });
+    // Only the NEAR sources are fetched. Everything else is rebuilt from the frozen snapshot.
+    args.offline = true;
+  }
 
   const derivedPath = join(snapshotPath, "export.derived.csv");
   const metaPath = join(snapshotPath, "export.meta.json");
@@ -458,8 +468,10 @@ export async function main(argv, { cwd = ROOT } = {}) {
     offline: args.offline,
   });
   const vaultNumbers = await loadVaultNumbers(snapshotPath);
+  const nearLoaded = (await exists(join(nearDir, NEAR_MANIFEST))) ? await loadNear(nearDir) : null;
   snapshot = {
     ...snapshot,
+    ...(nearLoaded ? { near_retrieved_at: nearLoaded.near.retrieved_at } : {}),
     x402scan_retrieved_at: x402["x402.total.amount_30d"].as_of,
     defillama_retrieved_at: llama.numbers["intents.volume_30d"].as_of,
     derived_sha256: sha256Buffer(await readFile(derivedPath)),
@@ -482,11 +494,12 @@ export async function main(argv, { cwd = ROOT } = {}) {
     summary,
     snapshot,
     generated_at,
-    extraNumbers: { ...x402, ...llama.numbers, ...(vaultNumbers ?? {}) },
+    extraNumbers: { ...x402, ...llama.numbers, ...(vaultNumbers ?? {}), ...(nearLoaded?.numbers ?? {}) },
     model,
     quotes,
   });
   Object.assign(thesis.numbers, derivedNumbers(thesis.numbers, thesis.breakdown));
+  if (nearLoaded) thesis.near = { ...nearLoaded.near, limits: nearLoaded.limits };
   {
     const settledRec = thesis.numbers["vet402.settled"];
     thesis.numbers["vet402.settled_seller_claim"] = record("vet402.settled_seller_claim", {
@@ -524,7 +537,7 @@ export async function main(argv, { cwd = ROOT } = {}) {
     throw new Error(`checks failed: ${failed.join(", ")}`);
   }
   console.log(
-    `rebuilt ${Object.keys(thesis.numbers).length} numbers from ${args.offline ? "data/snapshot (no network)" : "the public sources"}, ${thesis.checks.length} checks ok, wrote data/thesis.json`,
+    `rebuilt ${Object.keys(thesis.numbers).length} numbers from ${args.fetchNear ? "fresh NEAR sources and data/snapshot" : args.offline ? "data/snapshot (no network)" : "the public sources"}, ${thesis.checks.length} checks ok, wrote data/thesis.json`,
   );
   return thesis;
 }

@@ -1,0 +1,65 @@
+{
+  "retrieved_at": "2026-11-07T04:24:35.741Z",
+  "finished_at": "2026-11-07T05:28:36.141Z",
+  "note": "Every file below is read by `node thesis.mjs --offline`, which stops if a sha256 differs.",
+  "files": {
+    "x402-scheme_exact_near.md": {
+      "sha256": "1e51187db3f7d5cd417f19ac1b10e691e5c23578b9bd9efed87332319a5dc8d4",
+      "source": "https://raw.githubusercontent.com/x402-foundation/x402/main/specs/schemes/exact/scheme_exact_near.md"
+    },
+    "x402-scheme_exact_near.commits.json": {
+      "sha256": "71d56bddd6222e7fd9a7f4c95885de3e3ed9808f497a5eb6e6cae4f2d5c7cef5",
+      "source": "https://api.github.com/repos/x402-foundation/x402/commits?path=specs/schemes/exact/scheme_exact_near.md&per_page=100"
+    },
+    "x402-pr-1459.json": {
+      "sha256": "fce52584adf9c77ed981e6b0f9e7f1b848279eb290b0e2bb7ba4dc7feaeed6ab",
+      "source": "https://api.github.com/repos/x402-foundation/x402/pulls/1459"
+    },
+    "facilitator-supported.json": {
+      "sha256": "f7a072b5ec0c0cb5ed9f07e61fd7dddb0565fdaec00e3beeb69233ac48559397",
+      "source": "https://x402.mikedotexe.com/supported"
+    },
+    "facilitator-discovery-resources.json": {
+      "sha256": "9a27e82e0232d4717a4c85d7a7dde7f60179a1f91eb440594148ceec80e28793",
+      "source": "https://x402.mikedotexe.com/discovery/resources"
+    },
+    "mpp-nearintents.md": {
+      "sha256": "8bb3708613b2bbca615f7b3bd8a690d8059960cf6328378334d21c6808be8a61",
+      "source": "https://mpp.dev/payment-methods/nearintents"
+    },
+    "usdc-transfer-stats.json": {
+      "sha256": "9fbed32b42837ffdfd303645f6187b2972f05e487c41acac01709415c99b799e",
+      "source": "https://api.nearblocks.io/v3/fts/17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1/stats/transfers?limit=40"
+    },
+    "relayer-receipts.json": {
+      "sha256": "85bd6f670f380c7e2fd04617c13b1be034cc24ee0dae6e9b56812f57c47070d9",
+      "source": "https://api.nearblocks.io/v3/accounts/x402-relayer2.mike.near/receipts?limit=100"
+    },
+    "relayer-payments.json": {
+      "sha256": "58ad3787bfb233d6cf26d920270a8d1abbc7bcf58476b0a94a1d5c07c9be789f",
+      "source": "NEAR archival RPC tx(tx_hash, sender_account_id=x402-relayer2.mike.near)"
+    },
+    "usdc-delegate-sample.json": {
+      "sha256": "efbde42f82b195fdc61a9766d1b16193f61aaf09a93c5103a47044555d0b7e91",
+      "source": "https://api.nearblocks.io/v3/accounts/17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1/receipts?method=ft_transfer&before_ts=<point>&limit=15 at 30 points, then NEAR archival RPC EXPERIMENTAL_receipt and tx"
+    },
+    "escrow-execute-intents.json": {
+      "sha256": "fb0881a76ae6545eff38f03ca13d68acfb4946aed6f57fbc170991f97fe3c9cf",
+      "source": "https://api.nearblocks.io/v3/accounts/escrow.ai.near/txns?receiver=intents.near&limit=100, then NEAR archival RPC EXPERIMENTAL_tx_status"
+    }
+  },
+  "limits": {
+    "delegate": [
+      "NearBlocks v3 count endpoints are closed to callers without a key (HTTP 403), and the v1 count with a date filter returns Server Error, so the 30-day N cannot be counted in full without a key.",
+      "NearBlocks lists a delegated ft_transfer receipt with predecessor = the payer and the same action as a direct call, so each receipt is opened on NEAR archival RPC: EXPERIMENTAL_receipt gives signer_id, and when signer_id differs from the predecessor, tx gives the outer Delegate action.",
+      "Only the sampled receipts are counted. The estimate scales the sample share by NearBlocks daily USDC transfer events, which include every transfer shape, so it is an upper estimate of N, not a count.",
+      "Public archival RPCs answer callers without a key with HTTP 429 when asked too fast, so the sample is kept small (15 receipts at each of 30 points). A receipt the RPC never answered is counted as unchecked, not as a miss.",
+      "Sample points are evenly spaced, one per day. Each takes the newest receipts before that instant, so bursts in those minutes weigh more than they would in a random sample."
+    ],
+    "escrow": [
+      "One sample: the newest transactions signed by escrow.ai.near at the fetch time, not a 30-day count.",
+      "Retries re-sign the same transfer with a new nonce and deadline, so duplicates are removed by the intent body (signer_id and intents, deadline and nonce dropped). The intent_hash values in the logs are kept too.",
+      "escrow.ai.near being the NEAR AI Agent Market escrow is an estimate: the Agent Market payment docs do not name this account."
+    ]
+  }
+}
