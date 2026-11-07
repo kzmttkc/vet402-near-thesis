@@ -60,7 +60,7 @@ N counts NEAR transactions in which all of these are true:
 
 This is the exact shape the x402 NEAR scheme requires (x402-foundation/x402, `specs/schemes/exact/scheme_exact_near.md`, section "Delegated Action Safety": one action, `ft_transfer`, `receiver_id` equal to the asset). Every x402 payment in NEAR USDC is in N. This holds for the exact scheme. Escrow-scheme calls such as uvd-facilitator.near's are outside N. N also includes delegate-action USDC transfers that are not x402, so N is an upper bound. A higher N can only make me change my mind sooner.
 
-The known-account sum is in `data/snapshot/near/facilitators.json` (sha256 `{{field:near.known.sha256}}`), counted with the FastNEAR transaction API (`node thesis.mjs --fetch-relays`). Each opened transaction is counted once. `data/snapshot/near/relay-census.json` is not frozen, so that sum is not all of N. The five sample hits share one signer. That signer's 30 days are inside the sum, and other signers can still exist.
+The known-account sum is in `data/snapshot/near/facilitators.json` (sha256 `{{field:near.known.sha256}}`). That digest is the file with its `sha256` field set to "". `shasum -a 256` of the file itself prints `{{field:near.known.file_sha256}}`. The sum was counted with the FastNEAR transaction API (`node thesis.mjs --fetch-relays`). Each opened transaction is counted once. `data/snapshot/near/relay-census.json` is not frozen, so that sum is not all of N. The five sample hits share one signer. That signer's 30 days are inside the sum, and other signers can still exist.
 
 ### The Base count, frozen before this threshold
 

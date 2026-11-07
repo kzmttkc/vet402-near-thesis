@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { test } from "node:test";
 import { NEAR_USDC } from "../lib/sources/relay-census.mjs";
@@ -147,4 +148,15 @@ test("the sha256 covers the document with the hash field emptied", () => {
   assert.equal(doc.sha256.length, 64);
   const tampered = text.replace('"lower": 3', '"lower": 4');
   assert.throws(() => readStampedFacilitators(tampered), /sha256|lower/);
+});
+
+test("THESIS names both the emptied-field digest and the file digest", async () => {
+  const text = await readFile(new URL("../data/snapshot/near/facilitators.json", import.meta.url));
+  const fileHash = createHash("sha256").update(text).digest("hex");
+  const doc = readStampedFacilitators(text.toString("utf8"));
+  assert.notEqual(fileHash, doc.sha256);
+  const thesis = await readFile(new URL("../THESIS.md", import.meta.url), "utf8");
+  assert.match(thesis, new RegExp(doc.sha256));
+  assert.match(thesis, new RegExp(fileHash));
+  assert.match(thesis, /digest is the file with its `sha256` field set to ""/);
 });
