@@ -4,9 +4,9 @@ NEAR's edge in agent payments is the funding and settlement layer: NEAR Intents 
 
 ## What changed in this version
 
-- x402 on NEAR could not be measured from x402scan. The settlement spec is present, and the payments this page can point at are close to zero.
-- The threshold was committed before the NEAR data, in commit f0c48d1.
-- [THESIS.md](THESIS.md) is new. It holds the claim, the evidence, and that threshold.
+- x402scan still cannot count x402 settlement on NEAR. NEAR Intents already settles payments across chains. The x402 NEAR settlement spec is present. N, the delegate-action count on NEAR, is not frozen yet.
+- The threshold is N ≥ 25,400, committed in f0c48d1. The line is 1% of the Base x402 count frozen on 2026-10-30, so it does not depend on NEAR data.
+- [THESIS.md](THESIS.md) holds the claim, the evidence, and that threshold.
 
 This is an entry for the NEAR HACKATHON track "Investment Thesis", which is judged on the evidence.
 
@@ -49,7 +49,7 @@ x402scan lists Base, Solana, Polygon and Optimism. Polygon and Optimism show zer
 
 Visa and Artemis Analytics describe a longer window the same way: Base carries "the vast majority of transaction volume", with data as of April 21, 2026 (quote `visa_artemis.base`). The report calls the figures in its section 1 raw onchain totals and gives adjusted figures without wash and test transactions elsewhere. Section 3.3 does not say which kind it uses. Nothing here is adjusted.
 
-x402scan's chain filter accepts only those four chains (its answer to a NEAR filter is saved in `data/snapshot/x402scan/near-rejected.json`), so this repository cannot measure x402 settlement on NEAR, and no source here shows any. I treat Base as where agent payments settle today.
+The word settlement is used for two different records. NEAR Intents settles a payment by moving value across chains, through its solver network. x402 settlement on NEAR is a USDC transfer that is a delegate action on NEAR itself. x402scan's chain filter accepts only those four chains (its answer to a NEAR filter is saved in `data/snapshot/x402scan/near-rejected.json`), so x402scan cannot count the second one. The count this thesis uses for that second one is N, defined in [THESIS.md](THESIS.md): delegate-action USDC `ft_transfer`s on NEAR in 30 days. The line is N ≥ 25,400. The full count is not in the snapshot yet, so this page does not say that flow has reached the line. Base is where x402scan can see agent payments settle today. That is not a measurement of N.
 
 ## 2. A payment and a delivered answer are two different records
 
@@ -91,7 +91,7 @@ NEAR Intents moved $3.97B in its latest 30 days on DefiLlama (retrieved 2026-10-
 
 NEAR Intents lists `0x2CfF890f0378a11913B6129B2E97417a2c302680` as its treasury address on EVM chains, Base included (quote `near_intents.treasury`). On Base, over blocks 51965969 to 53261969, that address sent out $41.05M of USDC in 45,840 transfers. The transfers carry no label, so this counts every purpose, and the data here cannot say how much of it, if any, is x402. For scale only, it is about 36 times the x402 dollars on Base over a similar 30 days.
 
-NEAR Foundation names the same layer (quote `near_blog.around_payment`). Its stated intention is that an agent can pay through x402 and rely on NEAR infrastructure for everything around that payment. The same post also names settlement on NEAR Protocol, covered in section 5.
+NEAR Foundation names the same layer (quote `near_blog.around_payment`). Its stated intention is that an agent can pay through x402 and rely on NEAR infrastructure for everything around that payment. This section is the cross-chain settlement, the movement through Intents. It is not a count of x402 settlement on NEAR. The same post also names settlement on NEAR Protocol, covered in section 5.
 
 ## 4. The model
 
@@ -108,19 +108,21 @@ Each cell is a yearly amount, the 30-day x402 figure times 12, that would reach 
 
 The largest cell is a yearly figure. For comparison, NEAR captured over $8 million for buybacks in the seven months its fee switch has run (quotes `near_q3.fee_switch` and `near_q3.fees_buyback`). The largest cell stays below that buyback figure.
 
-My opinion, which this data does not test: the services around an agent payment, funding and cross-chain movement and a record of what arrived, fit NEAR better than settlement does.
+My opinion, which this data does not test: funding, and a record of what arrived, are the part I claim for NEAR. Cross-chain settlement through NEAR Intents is already that funding layer. x402 settlement on NEAR, the delegate-action count N, is a different question, and this model does not answer it.
 
 ## 5. Arguments against
 
-Settlement on NEAR itself. NEAR Foundation also names "scalable, quantum-resistant settlement through NEAR Protocol" as part of what it is building (quote `near_blog.settlement`). With Base at 73.0% of x402 dollars, the numbers here do not support that path today.
+x402 settlement on NEAR itself. NEAR Foundation also names "scalable, quantum-resistant settlement through NEAR Protocol" as part of what it is building (quote `near_blog.settlement`). That sentence is about a transfer settling on NEAR, not about Intents moving value across chains. The number that would make that path the claim is N ≥ 25,400, where N is the 30-day count of delegate-action USDC transfers defined in [THESIS.md](THESIS.md). The frozen sample's point estimate is 20,421. The one-sided 95% upper bound, assuming independent draws (the sample is 30 clusters of 15 receipts, so this is optimistic), is 42,675. The point estimate is below the line and that upper bound is above it, so the result is not decided. Base at 73.0% of x402 dollars is where x402scan can see volume. It does not measure N.
 
 ## 6. What would change my mind
 
-Rerun `node thesis.mjs` on the next 30-day window and compare.
+The condition is the one in [THESIS.md](THESIS.md). I will drop the claim that x402 settlement on NEAR is specified but not yet in use, and say that x402 settlement on NEAR is itself a place where NEAR earns, if this holds:
 
-- Base's share of x402 dollars on x402scan falls below half.
-- USDC sent out of the NEAR Intents treasury on Base falls in each of the next three 30-day windows.
-- In vet402's sample, the share of settled purchases with no usable answer falls close to zero, so a delivery record matters less.
+> **N ≥ 25,400**, where N is the number of NEAR delegate-action USDC transfers in a 30-day window, and 25,400 is 1% of the x402 payments counted on Base over 30 days.
+
+N counts a NEAR transaction only when all of these are true. It carries a `Delegate` action. The delegate's `receiver_id` is the NEAR USDC contract `17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1`. That action holds exactly one `ft_transfer`. The inner transfer succeeded. The block time falls in the 30 days that end at the fetch. N also includes delegate-action USDC transfers that are not x402, so N is an upper bound, tilted against the claim. A higher N can only make me change my mind sooner.
+
+The line is the next whole number above 1% of the Base count frozen on 2026-10-30, in `data/snapshot/x402scan/base.json`. A later NEAR fetch cannot move it. The reading rule for a partial count is in [THESIS.md](THESIS.md).
 
 ## 7. What I watch
 
@@ -132,8 +134,9 @@ Each day the public counts are fetched again with no key, and the dashboard show
 | NEAR Intents volume, 30 days and all time | `lib/sources/defillama.mjs` |
 | USDC sent out of the NEAR Intents treasury on Base | `lib/sources/vault.mjs` (`--fetch-vault`) |
 | Settled and delivered purchases in vet402's sample | `lib/classify.mjs` on the vet402 export |
+| N, delegate-action USDC transfers on NEAR, 30 days | `lib/sources/relay-census.mjs` (`node thesis.mjs --fetch-relays`) |
 
-None of these measures whether x402 sellers accept payment on NEAR. If x402scan starts listing NEAR, that row belongs here.
+x402scan still does not list NEAR. N is the count used here for x402 settlement on NEAR, and it includes delegate-action USDC transfers that are not x402. If x402scan starts listing NEAR, that row belongs here too.
 
 The windows do not line up to the hour. DefiLlama counts whole days, x402scan runs to its latest block, and the treasury count uses the block range above.
 
