@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-07T11:14:38.317Z",
+  "generated_at": "2026-11-07T11:17:04.626Z",
   "snapshot": {
     "export_sha256": "43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077",
     "export_url": "https://vet402.com/api/v1/observatory/export.csv?days=365",
@@ -913,20 +913,6 @@
       "url": "https://www.visa.com/vcom-assets/content/dam/visa/reimagine-visa/thought-leadership/documents/agentic-payments-report.pdf",
       "full_sentence": "In practice, activity today is concentrated on Base, Solana, and Polygon, with Base carrying the vast majority of transaction volume.",
       "context": "Visa and Artemis Analytics, agentic payments report, section 3.3. Footnote 2 dates the data to April 21, 2026.",
-      "retrieved_at": "2026-10-29T23:10:00Z"
-    },
-    {
-      "id": "illia.audit_link",
-      "url": "https://x.com/ilblackdragon/status/2112768975855907186",
-      "full_sentence": "Each payment can generate a verifiable audit link + can share view key for audit of the full books.",
-      "context": "Illia Polosukhin, reply on X, 2026-10-21, to a question about how an auditor gets the approval trail for confidential payouts. It is about the payer's books, not about whether an answer arrived.",
-      "retrieved_at": "2026-10-29T23:10:00Z"
-    },
-    {
-      "id": "eddy.any_chain",
-      "url": "https://x.com/eddylazzarin/status/2112596538119848324",
-      "full_sentence": "I float a balance in Alcove and I can send/receive payments to/from basically any blockchain at nearly no cost.",
-      "context": "Eddy Lazzarin, post on X, 2026-10-20, recommending the Alcove wallet. The next sentence says this used to take a stack of tools. The post does not mention NEAR.",
       "retrieved_at": "2026-10-29T23:10:00Z"
     },
     {

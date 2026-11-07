@@ -49,20 +49,6 @@
     "retrieved_at": "2026-10-29T23:10:00Z"
   },
   {
-    "id": "illia.audit_link",
-    "url": "https://x.com/ilblackdragon/status/2112768975855907186",
-    "full_sentence": "Each payment can generate a verifiable audit link + can share view key for audit of the full books.",
-    "context": "Illia Polosukhin, reply on X, 2026-10-21, to a question about how an auditor gets the approval trail for confidential payouts. It is about the payer's books, not about whether an answer arrived.",
-    "retrieved_at": "2026-10-29T23:10:00Z"
-  },
-  {
-    "id": "eddy.any_chain",
-    "url": "https://x.com/eddylazzarin/status/2112596538119848324",
-    "full_sentence": "I float a balance in Alcove and I can send/receive payments to/from basically any blockchain at nearly no cost.",
-    "context": "Eddy Lazzarin, post on X, 2026-10-20, recommending the Alcove wallet. The next sentence says this used to take a stack of tools. The post does not mention NEAR.",
-    "retrieved_at": "2026-10-29T23:10:00Z"
-  },
-  {
     "id": "haseeb.humans",
     "url": "https://x.com/hosseeb/status/2112182846110732348",
     "full_sentence": "Agents don't need crypto. It's us humans who do.",
