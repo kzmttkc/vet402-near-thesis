@@ -36,11 +36,13 @@ Node 20 or newer. Nothing to install.
 
 The vet402 export behind this page has sha256 `43efa1c2694f9e95eaa6ef771358ff9aa9c1756a1cd3f967cbc3b95b366eb077` and was retrieved 2026-10-29T22:04:40.090Z. The derived copy in this repository, `data/snapshot/export.derived.csv`, has sha256 `e47ebcf5915ca3d9ac889ae75d52ec653a54964a5dc85a0d793ffe2465744e4c`.
 
-## What runs on this machine
+## What NEAR can use from this repository
 
-Two pieces run on this machine. Neither one sends a mainnet transaction.
+Three pieces in this repository are a next step. None of them sends a mainnet transaction.
 
-`facilitator/` is a reference facilitator for the NEAR exact scheme, plus a delivery receipt at `POST /receipt`. The chain is an in-process mock of JSON-RPC on `127.0.0.1`. The signed delegate is canonical JSON, not the Borsh `SignedDelegateAction` a production facilitator verifies.
+A reviewer uses [PREREG-VERIFY.md](PREREG-VERIFY.md). `git show prereg-threshold:THESIS.md | shasum -a 256` prints the posted digest, and a public RPC read of `BbegySAyn8WSh8StsGBFxKKk4YDWzHSePyLtiH5k5vLB` shows the same commit and digest in the transaction arguments.
+
+A facilitator operator uses `facilitator/`, a reference facilitator for the NEAR exact scheme, plus a delivery receipt at `POST /receipt`. The chain is an in-process mock of JSON-RPC on `127.0.0.1`. The signed delegate is canonical JSON, not the Borsh `SignedDelegateAction` a production facilitator verifies.
 
 ```
 node --test test/22-facilitator.test.mjs
@@ -48,7 +50,7 @@ node --test test/22-facilitator.test.mjs
 
 Expected: `✔ mock NEAR RPC, not a sandbox: buyer payment, facilitator settle, seller receipt` and `ℹ fail 0`.
 
-`spec/delivery-proof.md` is a proposal that adds a delivery proof on top of NEAR exact. It does not change that scheme's settlement rules.
+A spec reader uses `spec/delivery-proof.md`, a proposal that adds a delivery proof on top of NEAR exact. It does not change that scheme's settlement rules.
 
 ```
 node --test test/21-delivery-proof.test.mjs

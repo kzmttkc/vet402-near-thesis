@@ -232,9 +232,13 @@ test("verify rejects an expired delegate before any transaction is submitted", a
   }
 });
 
-test("the README names what NEAR can run on this machine", () => {
+test("the README names what NEAR can use from this repository", () => {
   const readme = readFileSync(new URL("../README.md", import.meta.url), "utf8");
-  assert.match(readme, /## What runs on this machine/);
+  assert.match(readme, /## What NEAR can use from this repository/);
+  assert.doesNotMatch(readme, /## What runs on this machine/);
+  assert.match(readme, /A reviewer uses \[PREREG-VERIFY\.md\]/);
+  assert.match(readme, /A facilitator operator uses `facilitator\/`/);
+  assert.match(readme, /A spec reader uses `spec\/delivery-proof\.md`/);
   assert.match(readme, /POST \/receipt/);
   assert.match(readme, /canonical JSON, not the Borsh/);
   assert.match(readme, /node --test test\/22-facilitator\.test\.mjs/);
