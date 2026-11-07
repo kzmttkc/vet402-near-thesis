@@ -1,3 +1,5 @@
+import { PREREGISTERED_POST, meterFromLive, meterPositions } from "./live.mjs";
+
 export function isMissingRecord(rec) {
   if (rec == null || typeof rec !== "object") return true;
   const range = rec.range;
@@ -160,7 +162,45 @@ function sensitivityRows(model) {
   });
 }
 
-function renderDashboard(root, thesis) {
+function renderMeter(root, thesis, live) {
+  const reading = meterFromLive(live, thesis);
+  const section = el(root, "section", "meter");
+  section.id = "threshold-meter";
+  el(section, "h2", null, "Threshold");
+  const kind = reading.source === "live" ? "Daily reading" : "Frozen snapshot";
+  const updated = reading.updated ? formatUtc(reading.updated) : "";
+  el(
+    section,
+    "p",
+    "meta",
+    updated ? `Last updated ${updated}. ${kind}.` : `Last updated missing. ${kind}.`,
+  );
+  const pos = meterPositions(reading);
+  const track = el(section, "div", "meter-track");
+  const place = (className, percent) => {
+    if (percent == null) return;
+    const mark = el(track, "span", className);
+    mark.style.left = `${percent}%`;
+  };
+  place("meter-line", pos.line);
+  place("meter-mark lower", pos.lower);
+  place("meter-mark estimate", pos.estimate);
+  place("meter-mark upper", pos.upper);
+  const lowerName = reading.lower_kind === "sample_hits" ? "Lower, sample hits" : "Lower";
+  const textOf = (name, value) => `${name} ${value == null ? "missing" : formatCount(value)}`;
+  el(
+    section,
+    "p",
+    "meta",
+    `${textOf(lowerName, reading.lower)}. ${textOf("Estimate", reading.estimate)}. ${textOf("Upper", reading.upper)}. ${textOf("Line", reading.line)}.`,
+  );
+  const note = el(section, "p", "meta");
+  const anchor = el(note, "a", null, "Pre-registered threshold");
+  anchor.href = PREREGISTERED_POST;
+  anchor.rel = "noreferrer";
+}
+
+export function renderDashboard(root, thesis, live = null) {
   const numbers = thesis?.numbers ?? {};
   const watched = [];
   const take = (id) => {
@@ -183,6 +223,7 @@ function renderDashboard(root, thesis) {
   root.replaceChildren();
   if (h1) root.append(h1);
   else el(root, "h1", null, "Where does NEAR fit in agent payments? Numbers from one re-runnable script.");
+  renderMeter(root, thesis, live);
   const incomplete = countMissing(watched);
   el(root, "p", incomplete > 0 ? "count missing" : "count", `Incomplete numbers: ${incomplete}`);
 
@@ -280,7 +321,15 @@ async function boot() {
   try {
     const res = await fetch("./thesis.json");
     if (!res.ok) throw new Error(String(res.status));
-    renderDashboard(root, await res.json());
+    const thesis = await res.json();
+    let live = null;
+    try {
+      const liveRes = await fetch("./live.json");
+      if (liveRes.ok) live = await liveRes.json();
+    } catch {
+      live = null;
+    }
+    renderDashboard(root, thesis, live);
   } catch {
     const fail = document.createElement("p");
     fail.className = "missing";

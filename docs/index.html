@@ -89,6 +89,35 @@
       font-family: ui-sans-serif, system-ui, sans-serif;
       font-size: 0.8rem;
     }
+    .meter { margin: 0 0 8px; min-width: 0; }
+    .meter h2 { margin-top: 4px; }
+    .meter-track {
+      position: relative;
+      height: 12px;
+      margin: 18px 2px 8px;
+      background: var(--line);
+    }
+    .meter-line, .meter-mark {
+      position: absolute;
+      width: 2px;
+      transform: translateX(-1px);
+    }
+    .meter-line {
+      top: -12px;
+      height: 36px;
+      width: 3px;
+      background: var(--fg);
+    }
+    .meter-mark {
+      top: -4px;
+      height: 20px;
+      background: var(--muted);
+    }
+    .meter-mark.estimate {
+      top: -8px;
+      height: 28px;
+      background: var(--fg);
+    }
     .table-scroll { overflow-x: auto; }
     table {
       width: 100%;
