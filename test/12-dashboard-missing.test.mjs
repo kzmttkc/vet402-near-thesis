@@ -3,8 +3,14 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
-import { countMissing, formatValue, isMissingRecord, renderDashboard } from "../docs/app.js";
+import { countMissing, formatValue, isMissingRecord, renderDashboard, X402_ALL_URL, X402_BASE_URL, EXPORT_URL, DEFILLAMA_URL, FASTNEAR_ACCOUNT_URL, NEARBLOCKS_FT_URL, BASE_RPC_URL } from "../docs/app.js";
 import { PREREGISTERED_POST } from "../docs/live.mjs";
+import { x402Url } from "../lib/sources/x402scan.mjs";
+import { DEFILLAMA_URL as LLAMA } from "../lib/sources/defillama.mjs";
+import { EXPORT_URL as THESIS_EXPORT } from "../thesis.mjs";
+import { DEFAULT_RPCS } from "../lib/sources/vault.mjs";
+import { FASTNEAR_TX_ORIGIN } from "../lib/sources/fastnear-census.mjs";
+import { URLS } from "../lib/sources/near.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -37,6 +43,16 @@ test("dashboard dollars follow unit_kind, so a USDC count stays a count", () => 
     assert.equal(formatValue(thesis.numbers[id]).includes("$"), false, id);
   }
   assert.equal(formatValue(thesis.numbers["vault.usdc_out_30d.usd"]).startsWith("$"), true);
+});
+
+test("dashboard citations use the same public URLs as the fetchers", () => {
+  assert.equal(X402_ALL_URL, x402Url("all"));
+  assert.equal(X402_BASE_URL, x402Url("base"));
+  assert.equal(EXPORT_URL, THESIS_EXPORT);
+  assert.equal(DEFILLAMA_URL, LLAMA);
+  assert.equal(FASTNEAR_ACCOUNT_URL, `${FASTNEAR_TX_ORIGIN}/v0/account`);
+  assert.equal(NEARBLOCKS_FT_URL, URLS.usdc_receipts);
+  assert.equal(BASE_RPC_URL, DEFAULT_RPCS[2]);
 });
 
 test("dashboard page states the question and does not pull a CDN", () => {
@@ -114,6 +130,14 @@ test("the facilitator table lines the five accounts up together", () => {
     assert.match(page, new RegExp(account));
   }
   assert.match(page, /Not named by \/supported/);
+  assert.match(page, /exact x402 settlements \(30 days\)/);
+  assert.match(page, /other activity/);
+  assert.match(page, /51 \(14 ft_transfer_call, 37 escrow calls\)\. Not classified\./);
+  assert.match(page, /not x402/);
+  assert.match(page, /Command: node thesis\.mjs --fetch-relays\. Source URL: https:\/\/tx\.main\.fastnear\.com\/v0\/account/);
+  assert.match(page, /Command: node thesis\.mjs --offline\. Source URL: https:\/\/vet402\.com\/api\/v1\/observatory\/export\.csv\?days=365/);
+  assert.match(page, /Command: node thesis\.mjs --fetch-vault\. Source URL: https:\/\/mainnet\.base\.org/);
+  assert.match(page, /Command: node thesis\.mjs --fetch-near\. Source URL: https:\/\/api\.nearblocks\.io\/v3\/accounts\/17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1\/receipts\?method=ft_transfer/);
   assert.match(page, /14 Delegate ft_transfer_call to NEAR USDC and 37 calls on v1\.arras-escrow\.near/);
   assert.match(page, /Not classified as x402 or as not x402/);
   assert.doesNotMatch(page, /Escrow movements, not a Delegate USDC ft_transfer/);

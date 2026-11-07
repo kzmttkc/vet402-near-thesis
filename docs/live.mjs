@@ -39,6 +39,9 @@ export function meterFromThesis(thesis) {
 export function meterFromLive(live, thesis) {
   const frozen = meterFromThesis(thesis);
   if (live == null || typeof live !== "object" || Array.isArray(live)) return frozen;
+  // A committed placeholder keeps the frozen numbers on disk so the page does not 404.
+  // It is not a daily reading, and it does not replace the frozen meter.
+  if (live.placeholder === true) return frozen;
   const hasAny = ["line", "lower", "estimate", "upper"].some((key) => finite(live[key]) != null);
   if (!hasAny) return frozen;
   return {

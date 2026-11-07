@@ -1,0 +1,13 @@
+{
+  "placeholder": true,
+  "source": "frozen",
+  "note": "Frozen reading so the dashboard fetch does not 404. Not a daily reading. The daily job overwrites this file.",
+  "date": null,
+  "updated": "2026-11-07T04:24:35.741Z",
+  "line": 25400,
+  "lower": 1716,
+  "lower_kind": "known_relays",
+  "estimate": 20421,
+  "upper": 42675,
+  "relays_obtained": false
+}

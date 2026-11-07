@@ -90,7 +90,40 @@ function metaLine(parent, label, text, absent) {
   el(p, "span", absent ? "missing" : null, absent ? "missing" : text);
 }
 
-function figure(parent, label, valueText, rec) {
+export const X402_ALL_URL =
+  "https://www.x402scan.com/api/trpc/public.stats.overall?input=%7B%22json%22%3A%7B%22timeframe%22%3A30%7D%7D";
+export const X402_BASE_URL =
+  "https://www.x402scan.com/api/trpc/public.stats.overall?input=%7B%22json%22%3A%7B%22timeframe%22%3A30%2C%22chain%22%3A%22base%22%7D%7D";
+export const EXPORT_URL = "https://vet402.com/api/v1/observatory/export.csv?days=365";
+export const DEFILLAMA_URL = "https://api.llama.fi/summary/dexs/near-intents";
+export const FASTNEAR_ACCOUNT_URL = "https://tx.main.fastnear.com/v0/account";
+export const NEARBLOCKS_FT_URL =
+  "https://api.nearblocks.io/v3/accounts/17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1/receipts?method=ft_transfer";
+export const BASE_RPC_URL = "https://mainnet.base.org";
+
+export function provenanceFor(id) {
+  if (id === "threshold.line" || id === "x402.base.share_amount_30d" || id === "x402.base.share_count_30d") {
+    return { command: "node thesis.mjs --offline", url: X402_BASE_URL };
+  }
+  if (typeof id === "string" && id.startsWith("x402.")) return { command: "node thesis.mjs --offline", url: X402_ALL_URL };
+  if (typeof id === "string" && id.startsWith("vet402.")) return { command: "node thesis.mjs --offline", url: EXPORT_URL };
+  if (typeof id === "string" && id.startsWith("intents.")) return { command: "node thesis.mjs --offline", url: DEFILLAMA_URL };
+  if (typeof id === "string" && id.startsWith("vault.")) return { command: "node thesis.mjs --fetch-vault", url: BASE_RPC_URL };
+  if (typeof id === "string" && id.startsWith("near.known.")) return { command: "node thesis.mjs --fetch-relays", url: FASTNEAR_ACCOUNT_URL };
+  if (typeof id === "string" && id.startsWith("near.delegate.")) return { command: "node thesis.mjs --fetch-near", url: NEARBLOCKS_FT_URL };
+  if (id === "breakdown") return { command: "node thesis.mjs --offline", url: EXPORT_URL };
+  if (id === "sensitivity" || id === "ratio") return { command: "node thesis.mjs --offline", url: `${X402_ALL_URL} ${DEFILLAMA_URL}` };
+  return { command: "", url: "" };
+}
+
+function cite(parent, id) {
+  const prov = provenanceFor(id);
+  const command = prov.command || "";
+  const url = prov.url || "";
+  el(parent, "p", "meta", command && url ? `Command: ${command}. Source URL: ${url}` : "Command: missing. Source URL: missing");
+}
+
+function figure(parent, label, valueText, rec, id) {
   const box = el(parent, "div", "figure");
   el(box, "h3", null, label);
   const missingValue = valueText == null;
@@ -101,6 +134,7 @@ function figure(parent, label, valueText, rec) {
   metaLine(box, "Retrieved", dateText, dateText === "");
   const sourceText = rec?.source != null && String(rec.source).trim() !== "" ? String(rec.source) : "";
   metaLine(box, "Source", sourceText, sourceText === "");
+  cite(box, id);
 }
 
 function card(parent) {
@@ -172,16 +206,29 @@ function renderFacilitators(root, thesis) {
   }
   root.append(
     table(
-      ["Account", "In /supported", "Signer txs", "Delegate USDC", "What it is"],
+      ["Account", "In /supported", "Signer txs", "Delegate USDC", "exact x402 settlements (30 days)", "other activity", "What it is"],
       roster.map((row) => [
         row.account ?? "",
         row.named_in_supported ? "yes" : "no",
         formatCount(row.signer_txs),
         formatCount(row.delegate_usdc),
+        row.kind === "sample_signer" ? "not x402" : formatCount(row.delegate_usdc),
+        otherActivity(row),
         row.note ?? "",
       ]),
     ),
   );
+  cite(root, "near.known.lower");
+}
+
+function otherActivity(row) {
+  if (row?.account === "uvd-facilitator.near") {
+    return `${formatCount(row.signer_txs)} (${formatCount(row.ft_transfer_call)} ft_transfer_call, ${formatCount(row.escrow_calls)} escrow calls). Not classified.`;
+  }
+  if (row?.kind === "sample_signer") {
+    return `${formatCount(row.delegate_usdc)} delegate USDC transfers, not known to be x402`;
+  }
+  return formatCount(row?.signer_txs ?? 0);
 }
 
 function claimPercents(reading) {
@@ -239,6 +286,8 @@ function renderMeter(root, thesis, live) {
       `${formatCount(reading.lower)} is ${share} of the line. Unknown relay accounts would raise N. The evidence in hand sits below the line. The upper bound on all of N cannot be measured without a key, so the reading is not decided.`,
     );
   }
+  cite(section, "near.known.lower");
+  cite(section, "threshold.line");
   const note = el(section, "p", "meta");
   const anchor = el(note, "a", null, "Pre-registered threshold");
   anchor.href = PREREGISTERED_POST;
@@ -250,8 +299,8 @@ function renderSampleAppendix(root, thesis) {
   el(root, "p", "note", "Biased sample estimate. Reference only. Not used in the claim.");
   const numbers = thesis?.numbers ?? {};
   const box = el(root, "div");
-  figure(box, "Sample estimate", formatValue(numbers["near.delegate.estimate"]), numbers["near.delegate.estimate"]);
-  figure(box, "Sample upper bound", formatValue(numbers["near.delegate.estimate_upper_95"]), numbers["near.delegate.estimate_upper_95"]);
+  figure(box, "Sample estimate", formatValue(numbers["near.delegate.estimate"]), numbers["near.delegate.estimate"], "near.delegate.estimate");
+  figure(box, "Sample upper bound", formatValue(numbers["near.delegate.estimate_upper_95"]), numbers["near.delegate.estimate_upper_95"], "near.delegate.estimate_upper_95");
 }
 
 export function renderDashboard(root, thesis, live = null) {
@@ -284,22 +333,22 @@ export function renderDashboard(root, thesis, live = null) {
 
   const cards = el(root, "div");
   cards.id = "cards";
-  figure(card(cards), "vet402 attempts", formatValue(attempts), attempts);
-  figure(card(cards), "vet402 settled", formatValue(settled), settled);
+  figure(card(cards), "vet402 attempts", formatValue(attempts), attempts, "vet402.attempts");
+  figure(card(cards), "vet402 settled", formatValue(settled), settled, "vet402.settled");
   let deliveredText = null;
   if (formatValue(delivered) != null) {
     const share = settled && Number(settled.value) > 0 ? formatShare(Number(delivered.value) / Number(settled.value)) : "missing";
     deliveredText = `${formatValue(delivered)} (${share} of settled)`;
   }
-  figure(card(cards), "vet402 delivered", deliveredText, delivered);
+  figure(card(cards), "vet402 delivered", deliveredText, delivered, "vet402.delivered");
   const x402Card = card(cards);
-  figure(x402Card, "x402, 30 days", formatValue(x402), x402);
-  figure(x402Card, "Base share of dollars", formatValue(baseShare), baseShare);
-  figure(card(cards), "NEAR Intents, 30 days", formatValue(intents), intents);
+  figure(x402Card, "x402, 30 days", formatValue(x402), x402, "x402.total.amount_30d");
+  figure(x402Card, "Base share of dollars", formatValue(baseShare), baseShare, "x402.base.share_amount_30d");
+  figure(card(cards), "NEAR Intents, 30 days", formatValue(intents), intents, "intents.volume_30d");
   const vaultCard = card(cards);
-  figure(vaultCard, "Treasury USDC out, 30 days", formatValue(vaultUsd), vaultUsd);
+  figure(vaultCard, "Treasury USDC out, 30 days", formatValue(vaultUsd), vaultUsd, "vault.usdc_out_30d.usd");
   const countText = formatValue(vaultCount);
-  figure(vaultCard, "Treasury transfers, 30 days", countText == null ? null : `${countText} transfers`, vaultCount);
+  figure(vaultCard, "Treasury transfers, 30 days", countText == null ? null : `${countText} transfers`, vaultCount, "vault.usdc_out_30d.count");
   const ratioCard = card(cards);
   el(ratioCard, "h3", null, "x402 / Intents, 30 days");
   const ratioOk = typeof ratioText === "string" && ratioText.trim() !== "";
@@ -316,8 +365,10 @@ export function renderDashboard(root, thesis, live = null) {
     const sourceText = rec?.source != null && String(rec.source).trim() !== "" ? String(rec.source) : "";
     metaLine(ratioCard, `${name} source`, sourceText, sourceText === "");
   }
+  cite(ratioCard, "ratio");
 
   el(root, "h2", null, "Breakdown");
+  cite(root, "breakdown");
   if (!Array.isArray(thesis?.breakdown)) el(root, "p", "missing", "missing");
   else {
     root.append(table(
@@ -342,6 +393,7 @@ export function renderDashboard(root, thesis, live = null) {
     Number.isFinite(fee) ? `Fee rate ${(fee * 100).toFixed(3)}%.` : "missing",
   );
   el(root, "p", "note", "Rows are multiples of x402 volume. Columns are the share that passes through NEAR Intents. Values are yearly USD.");
+  cite(root, "sensitivity");
   const sense = sensitivityRows(thesis?.model);
   if (!sense) el(root, "p", "missing", "missing");
   else root.append(table(["Multiple", "1%", "10%", "50%"], sense));

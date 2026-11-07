@@ -26,6 +26,14 @@ test("with no live file the meter uses the frozen bounds", () => {
   assert.equal(frozen.relays_obtained, false);
   assert.equal(meterFromLive(null, thesis).source, "frozen");
   assert.equal(meterFromLive({}, thesis).source, "frozen");
+  const placeholder = JSON.parse(readFileSync(join(ROOT, "docs", "live.json"), "utf8"));
+  assert.equal(placeholder.placeholder, true);
+  assert.equal(placeholder.lower, 1716);
+  assert.equal(placeholder.line, 25_400);
+  const ignored = meterFromLive({ ...placeholder, lower: 1, line: 2, estimate: 3, upper: 4 }, thesis);
+  assert.equal(ignored.source, "frozen");
+  assert.equal(ignored.lower, 1716);
+  assert.equal(ignored.line, 25_400);
   const pos = meterPositions(frozen);
   assert.ok(pos.lower < pos.estimate);
   assert.ok(pos.estimate < pos.line);
