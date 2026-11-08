@@ -1,0 +1,223 @@
+{
+  "source": "bigquery-public-data.crypto_near_mainnet_us.receipt_actions",
+  "query_file": "sql/n-upper-bound-daily.sql",
+  "retrieved_at": "2026-11-07T21:07:15Z",
+  "job_location": "us-east1",
+  "bytes_processed": "85.36 GB",
+  "window_utc": [
+    "2026-10-08T11:42:00Z",
+    "2026-11-07T11:42:00Z"
+  ],
+  "n_upper_bound": 2418,
+  "n_upper_bound_whole_dates": 2532,
+  "sum_of_daily_distinct": 2534,
+  "line": 25400,
+  "known_relay_lower_bound": 1716,
+  "jobs": [
+    {
+      "id": "job_9RryoOYvLbEXZ1Emk9d0ThJ273x2",
+      "location": "us-east1",
+      "ran_at": "2026-11-07T21:04:39Z",
+      "bytes_processed": "83.96 GB",
+      "count": 2532,
+      "query_file": "sql/n-upper-bound.sql"
+    },
+    {
+      "id": "job_P2IOUNAwg1YB614m6IbO97J1B8BV",
+      "location": "us-east1",
+      "ran_at": "2026-11-07T21:07:15Z",
+      "bytes_processed": "85.36 GB",
+      "count": 2418,
+      "query_file": "sql/n-upper-bound-daily.sql"
+    }
+  ],
+  "note": "The decision upper bound is n_upper_bound_whole_dates, the distinct count on the dates 2026-10-08 through 2026-11-07. Those dates contain the census window, and the inner receipt is not required to succeed, so the count is at least N. That count is job_9RryoOYvLbEXZ1Emk9d0ThJ273x2 at 2026-11-07T21:04:39Z, 83.96 GB, location us-east1. n_upper_bound is the minute-cut window in window_utc, which ends before the census end, from job_P2IOUNAwg1YB614m6IbO97J1B8BV at 2026-11-07T21:07:15Z, 85.36 GB, location us-east1. All 31 dates are present; the last block on 2026-11-07 is 20:59:58 UTC, after the census end. The daily sum is 2 higher than the whole-dates distinct count because 2 receipts appear on two dates.",
+  "days": [
+    {
+      "block_date": "2026-10-08",
+      "delegate_receipts": 254822,
+      "matched": 112,
+      "last_block_utc": "23:59:58"
+    },
+    {
+      "block_date": "2026-10-09",
+      "delegate_receipts": 247464,
+      "matched": 64,
+      "last_block_utc": "23:59:57"
+    },
+    {
+      "block_date": "2026-10-10",
+      "delegate_receipts": 235684,
+      "matched": 41,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-11",
+      "delegate_receipts": 235757,
+      "matched": 49,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-12",
+      "delegate_receipts": 244199,
+      "matched": 18,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-13",
+      "delegate_receipts": 242729,
+      "matched": 87,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-14",
+      "delegate_receipts": 237367,
+      "matched": 74,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-15",
+      "delegate_receipts": 240523,
+      "matched": 88,
+      "last_block_utc": "23:59:58"
+    },
+    {
+      "block_date": "2026-10-16",
+      "delegate_receipts": 240472,
+      "matched": 207,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-17",
+      "delegate_receipts": 224996,
+      "matched": 100,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-18",
+      "delegate_receipts": 222184,
+      "matched": 82,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-19",
+      "delegate_receipts": 237260,
+      "matched": 195,
+      "last_block_utc": "23:59:58"
+    },
+    {
+      "block_date": "2026-10-20",
+      "delegate_receipts": 234655,
+      "matched": 69,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-21",
+      "delegate_receipts": 239696,
+      "matched": 76,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-22",
+      "delegate_receipts": 199033,
+      "matched": 90,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-23",
+      "delegate_receipts": 252405,
+      "matched": 153,
+      "last_block_utc": "23:59:57"
+    },
+    {
+      "block_date": "2026-10-24",
+      "delegate_receipts": 243725,
+      "matched": 73,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-25",
+      "delegate_receipts": 206467,
+      "matched": 165,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-26",
+      "delegate_receipts": 208819,
+      "matched": 119,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-27",
+      "delegate_receipts": 225647,
+      "matched": 31,
+      "last_block_utc": "23:59:58"
+    },
+    {
+      "block_date": "2026-10-28",
+      "delegate_receipts": 212840,
+      "matched": 92,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-29",
+      "delegate_receipts": 214864,
+      "matched": 61,
+      "last_block_utc": "23:59:58"
+    },
+    {
+      "block_date": "2026-10-30",
+      "delegate_receipts": 227341,
+      "matched": 23,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-10-31",
+      "delegate_receipts": 207701,
+      "matched": 12,
+      "last_block_utc": "23:59:58"
+    },
+    {
+      "block_date": "2026-11-01",
+      "delegate_receipts": 205776,
+      "matched": 12,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-11-02",
+      "delegate_receipts": 210890,
+      "matched": 42,
+      "last_block_utc": "23:59:56"
+    },
+    {
+      "block_date": "2026-11-03",
+      "delegate_receipts": 217074,
+      "matched": 53,
+      "last_block_utc": "23:59:58"
+    },
+    {
+      "block_date": "2026-11-04",
+      "delegate_receipts": 222937,
+      "matched": 131,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-11-05",
+      "delegate_receipts": 237043,
+      "matched": 84,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-11-06",
+      "delegate_receipts": 234230,
+      "matched": 56,
+      "last_block_utc": "23:59:59"
+    },
+    {
+      "block_date": "2026-11-07",
+      "delegate_receipts": 275222,
+      "matched": 75,
+      "last_block_utc": "20:59:58"
+    }
+  ]
+}

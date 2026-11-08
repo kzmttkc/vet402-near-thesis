@@ -125,6 +125,10 @@ function cite(parent, id) {
 }
 
 let figureNo = 0;
+let dailyCaption = null;
+
+const SQL_BLOB = "https://github.com/kzmttkc/vet402-near-thesis/blob/main/";
+const SQL_FILE = /^sql\/[a-z0-9.-]+\.sql$/;
 
 function figure(parent, label, valueText, rec, id) {
   figureNo += 1;
@@ -249,9 +253,143 @@ function heroLead(thesis) {
   return `${exact} exact-scheme payments from the named facilitators in 30 days, and the ${line} line was posted on chain at ${posted}, before the count. `;
 }
 
+function verdictLine(thesis) {
+  const upperRec = thesis?.numbers?.["near.bq.n_upper_bound"];
+  const lineRec = thesis?.numbers?.["threshold.line"];
+  const days = Number(thesis?.numbers?.["near.bq.minute_window"]?.range?.days);
+  const upperText = formatValue(upperRec);
+  const lineText = formatValue(lineRec);
+  if (upperText == null || lineText == null || !Number.isFinite(days)) return null;
+  if (!(Number(upperRec.value) < Number(lineRec.value))) return null;
+  return `N ≤ ${upperText} < ${lineText} over all ${formatCount(days)} days: the threshold is not crossed.`;
+}
+
 function renderHeroNote(post, thesis) {
   const note = el(post, "p", "hero-note");
   note.textContent = heroLead(thesis).trim();
+  const verdict = verdictLine(thesis);
+  if (verdict) el(post, "p", "hero-note verdict", verdict);
+}
+
+function svgEl(tag) {
+  if (typeof document.createElementNS === "function") {
+    return document.createElementNS("http://www.w3.org/2000/svg", tag);
+  }
+  return document.createElement(tag);
+}
+
+function attr(node, name, value) {
+  if (typeof node.setAttribute === "function") node.setAttribute(name, value);
+  else if (name === "class") node.className = value;
+  else node[name] = value;
+}
+
+function dailyDiffSentence(thesis) {
+  const sumText = formatValue(thesis?.numbers?.["near.bq.sum_of_daily"]);
+  const upperText = formatValue(thesis?.numbers?.["near.bq.n_upper_bound"]);
+  const spanText = formatValue(thesis?.numbers?.["near.bq.receipts_on_two_dates"]);
+  if (sumText == null || upperText == null || spanText == null) return null;
+  return `The daily counts sum to ${sumText} and the whole-date upper bound is ${upperText}, because ${spanText} receipts appear on two dates.`;
+}
+
+function renderQueryLine(parent, bq) {
+  const jobs = Array.isArray(bq?.jobs) ? bq.jobs : [];
+  const shown = jobs.filter((job) => SQL_FILE.test(String(job?.query_file ?? "")) && /^job_[A-Za-z0-9]+$/.test(String(job?.id ?? "")));
+  if (shown.length === 0) return;
+  const p = el(parent, "p", "meta");
+  for (let index = 0; index < shown.length; index += 1) {
+    const job = shown[index];
+    if (index > 0) {
+      const gap = document.createElement("span");
+      gap.textContent = " ";
+      p.append(gap);
+    }
+    const href = `${SQL_BLOB}${job.query_file}`;
+    const link = document.createElement("a");
+    link.href = href;
+    link.rel = "noreferrer";
+    link.textContent = href;
+    p.append(link);
+    const when = formatUtc(job.ran_at);
+    const stamp = document.createElement("span");
+    stamp.textContent = ` ${job.id} counted ${when}.`;
+    p.append(stamp);
+  }
+}
+
+function renderDailyChart(parent, thesis, bq) {
+  const days = Array.isArray(bq?.days) ? bq.days.filter((day) => day && typeof day.block_date === "string") : [];
+  if (days.length === 0) return;
+  const box = el(parent, "figure", "figure");
+  box.id = "daily-matched";
+  dailyCaption = el(box, "p", "caption", "");
+  const svg = svgEl("svg");
+  attr(svg, "class", "day-chart");
+  attr(svg, "role", "img");
+  attr(svg, "viewBox", "0 0 640 156");
+  attr(svg, "width", "100%");
+  const title = svgEl("title");
+  title.textContent = "Matched receipts on each whole date.";
+  svg.append(title);
+  const width = 640;
+  const barTop = 16;
+  const barBase = 120;
+  const barArea = barBase - barTop;
+  const gap = 2;
+  const barW = (width - gap * (days.length - 1)) / days.length;
+  const values = days.map((day) => {
+    const value = Number(day.matched);
+    return Number.isFinite(value) ? value : 0;
+  });
+  const max = Math.max(...values);
+  const maxLabel = svgEl("text");
+  attr(maxLabel, "class", "day-label");
+  attr(maxLabel, "x", "0");
+  attr(maxLabel, "y", "11");
+  maxLabel.textContent = formatCount(max);
+  svg.append(maxLabel);
+  days.forEach((day, i) => {
+    const safe = values[i];
+    const h = max > 0 ? (safe / max) * barArea : 0;
+    const rect = svgEl("rect");
+    attr(rect, "class", "day-bar");
+    attr(rect, "x", String(i * (barW + gap)));
+    attr(rect, "y", String(barBase - h));
+    attr(rect, "width", String(barW));
+    attr(rect, "height", String(h));
+    const tip = svgEl("title");
+    tip.textContent = `${day.block_date} ${formatCount(safe)}`;
+    rect.append(tip);
+    svg.append(rect);
+  });
+  const axis = svgEl("line");
+  attr(axis, "class", "day-axis");
+  attr(axis, "x1", "0");
+  attr(axis, "y1", String(barBase));
+  attr(axis, "x2", String(width));
+  attr(axis, "y2", String(barBase));
+  svg.append(axis);
+  const first = svgEl("text");
+  attr(first, "class", "day-label");
+  attr(first, "x", "0");
+  attr(first, "y", "140");
+  first.textContent = days[0].block_date;
+  const last = svgEl("text");
+  attr(last, "class", "day-label");
+  attr(last, "x", String(width));
+  attr(last, "y", "140");
+  attr(last, "text-anchor", "end");
+  last.textContent = days[days.length - 1].block_date;
+  svg.append(first, last);
+  box.append(svg);
+  const sentence = dailyDiffSentence(thesis);
+  el(box, "p", sentence ? "meta" : "missing", sentence ?? "missing");
+}
+
+function numberDailyChart() {
+  if (!dailyCaption) return;
+  figureNo += 1;
+  dailyCaption.textContent = `Figure ${figureNo}. Daily matched receipts.`;
 }
 
 function renderPreregFailure(root) {
@@ -339,7 +477,7 @@ function bandCell(parent, label, sub) {
   return num;
 }
 
-function renderBand(root, thesis, live) {
+function renderBand(root, thesis, live, bq) {
   const reading = meterFromLive(live, thesis);
   const section = el(root, "section", "band");
   const head = el(section, "div", "band-head");
@@ -379,6 +517,7 @@ function renderBand(root, thesis, live) {
     );
   }
   paintCount(bandCell(grid, "Line", "posted before the count"), reading.line);
+  renderQueryLine(section, bq);
 
   const accounts = el(section, "div", "band-accounts");
   const roster = thesis?.near?.known?.roster;
@@ -628,14 +767,17 @@ export function renderDashboard(root, thesis, live = null, context = null) {
   if (typeof ratioText !== "string" || ratioText.trim() === "") watched.push(null);
 
   figureNo = 0;
+  dailyCaption = null;
   root.replaceChildren();
   renderPost(root, thesis);
   renderActions(root);
-  renderBand(root, thesis, live);
+  renderBand(root, thesis, live, context?.bq ?? null);
   renderPreregFailure(root);
   renderReplay(root, context?.preregDigest ?? null);
   renderFacilitators(root, thesis, context?.sources ?? null);
   renderMeter(root, thesis, live);
+  renderDailyChart(root, thesis, context?.bq ?? null);
+  numberDailyChart();
   const evidenceUnread = context != null && (context.preregDigest == null || context.sources == null);
   if (evidenceUnread) {
     el(root, "p", "missing", "Evidence files were not loaded. The missing-number count is withheld.");
@@ -763,6 +905,16 @@ async function loadSources() {
   }
 }
 
+async function loadBigQuery() {
+  try {
+    const res = await fetch(new URL("./bigquery-n-upper-bound.json", import.meta.url));
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
 async function boot() {
   const root = document.querySelector("#app");
   if (!root) return;
@@ -777,8 +929,8 @@ async function boot() {
     } catch {
       live = null;
     }
-    const [preregDigest, sources] = await Promise.all([loadPreregDigest(), loadSources()]);
-    renderDashboard(root, thesis, live, { preregDigest, sources });
+    const [preregDigest, sources, bq] = await Promise.all([loadPreregDigest(), loadSources(), loadBigQuery()]);
+    renderDashboard(root, thesis, live, { preregDigest, sources, bq });
   } catch {
     const fail = document.createElement("p");
     fail.className = "missing";
