@@ -4,7 +4,7 @@ The four sections follow the NEAR HACKATHON thesis track. The threshold in "What
 
 ## Claim
 
-NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-28 00:00 UTC (retrieved 2026-10-29 23:18 UTC). That volume is not a count of agent payments. x402 has had a NEAR settlement spec since 2026-05-16 14:01 UTC.
+NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-29 00:00 UTC (retrieved 2026-10-29 23:18 UTC). That volume is not a count of agent payments. x402 has had a NEAR settlement spec since 2026-05-16 14:01 UTC.
 
 The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled 0 exact-scheme payments from 2026-10-08 11:42 to 2026-11-07 11:42 UTC.
 
@@ -28,7 +28,7 @@ That sentence is the same shape one layer up. The spec says a successful outer t
 
 NEAR Intents settles cross-chain payments through its solver network. The frozen page is https://mpp.dev/payment-methods/nearintents. The client library named there is `@defuse-protocol/nearintents-mpp-sdk`. The snapshot has the page and no payment count.
 
-The public facilitator at x402.mikedotexe.com reports scheme `exact` on `near:mainnet` and names `x402-relayer2.mike.near` as a signer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-28 00:00 UTC (retrieved 2026-10-29 23:18 UTC). That window is not the window of the N lower bound (from 2026-10-08 11:42 to 2026-11-07 11:42 UTC) or of the sample (from 2026-10-08 04:24 to 2026-11-07 04:24 UTC). On Base, the Intents treasury address sent out $41.05M of USDC in 45,840 transfers over blocks 51965969 to 53261969. This is the funding and movement layer. Nothing in those transfers says which of them, if any, are x402.
+The public facilitator at x402.mikedotexe.com reports scheme `exact` on `near:mainnet` and names `x402-relayer2.mike.near` as a signer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-29 00:00 UTC (retrieved 2026-10-29 23:18 UTC). That window is not the window of the N lower bound (from 2026-10-08 11:42 to 2026-11-07 11:42 UTC) or of the sample (from 2026-10-08 04:24 to 2026-11-07 04:24 UTC). On Base, the Intents treasury address sent out $41.05M of USDC in 45,840 transfers over blocks 51965969 to 53261969. This is the funding and movement layer. Nothing in those transfers says which of them, if any, are x402.
 
 ## Evidence against
 

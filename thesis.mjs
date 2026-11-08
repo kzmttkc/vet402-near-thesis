@@ -23,6 +23,15 @@ import { checkQuotes } from "./lib/quotecheck.mjs";
 export { USER_AGENT };
 export const EXPORT_URL = "https://vet402.com/api/v1/observatory/export.csv?days=365";
 
+const DAY_MS = 86_400_000;
+
+// totalDataChart stores the start of each daily bucket. The window end is one day later.
+export function closeIntentsVolume30d(range) {
+  const startMs = Date.parse(range?.to);
+  if (!Number.isFinite(startMs)) throw new Error("intents.volume_30d range.to is not a time");
+  return { ...range, to: new Date(startMs + DAY_MS).toISOString() };
+}
+
 const ROOT = dirname(fileURLToPath(import.meta.url));
 
 function sha256Buffer(buf) {
@@ -639,6 +648,11 @@ export async function main(argv, { cwd = ROOT } = {}) {
     metaPath: join(snapshotPath, "defillama-near-intents.meta.json"),
     offline: args.offline,
   });
+  // Each DefiLlama point is stamped at 00:00 UTC, the start of that day.
+  // The 30-day window ends when the last day ends. No other range moves.
+  llama.numbers["intents.volume_30d"].range = closeIntentsVolume30d(
+    llama.numbers["intents.volume_30d"].range,
+  );
   const vaultNumbers = await loadVaultNumbers(snapshotPath);
   const nearLoaded = (await exists(join(nearDir, NEAR_MANIFEST))) ? await loadNear(nearDir) : null;
   snapshot = {

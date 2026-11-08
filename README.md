@@ -2,13 +2,13 @@
 
 The claim stands: over all 30 days, N, the count of delegate-action USDC transfers on NEAR, is at most 2,532, below the threshold of 25,400 that was posted on chain at 2026-11-07 10:13 UTC, before the count. The dashboard is published at https://kzmttkc.github.io/vet402-near-thesis/.
 
-NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-28 00:00 UTC (retrieved 2026-10-29 23:18 UTC). That volume is not a count of agent payments. x402 has had a NEAR settlement spec since 2026-05-16 14:01 UTC. The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled 0 exact-scheme payments from 2026-10-08 11:42 to 2026-11-07 11:42 UTC.
+NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-29 00:00 UTC (retrieved 2026-10-29 23:18 UTC). That volume is not a count of agent payments. x402 has had a NEAR settlement spec since 2026-05-16 14:01 UTC. The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled 0 exact-scheme payments from 2026-10-08 11:42 to 2026-11-07 11:42 UTC.
 
 The exact-scheme spec is merged and the facilitators are named, yet they settled 0 exact-scheme payments in those 30 days. That gap is the strongest evidence that the exact scheme has not lit. The argument, the evidence, and the number that would change my mind are in [THESIS.md](THESIS.md). Every figure about the market and about vet402 below comes from this repository, either from one script you can rerun without a key or an account, or from a quote in the table at the end. The BigQuery upper bound is the exception: it needs a Google Cloud account, and the result is frozen in `data/snapshot/near/bigquery-n-upper-bound.json`.
 
 ## Where this stands (2026-11-07)
 
-- As of 2026-10-30, x402scan cannot count x402 settlement on NEAR. The upper bound on N is 2,532, below the line (section 6). The named facilitators settled 0 exact-scheme payments from 2026-10-08 11:42 to 2026-11-07 11:42 UTC. NEAR Intents volume in the snapshot is $3.97B from 2026-09-29 00:00 to 2026-10-28 00:00 UTC. The x402 NEAR settlement spec is present.
+- As of 2026-10-30, x402scan cannot count x402 settlement on NEAR. The upper bound on N is 2,532, below the line (section 6). The named facilitators settled 0 exact-scheme payments from 2026-10-08 11:42 to 2026-11-07 11:42 UTC. NEAR Intents volume in the snapshot is $3.97B from 2026-09-29 00:00 to 2026-10-29 00:00 UTC. The x402 NEAR settlement spec is present.
 - The threshold is N ≥ 25,400, committed in f0c48d1. The line is 1% of the Base x402 count frozen on 2026-10-30, so it does not depend on NEAR data. The check is in [PREREG-VERIFY.md](PREREG-VERIFY.md).
 - [THESIS.md](THESIS.md) holds the claim, the evidence, and that threshold.
 
