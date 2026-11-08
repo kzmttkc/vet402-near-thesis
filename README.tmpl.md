@@ -1,6 +1,6 @@
 # NEAR in agent payments: a thesis you can rerun
 
-The claim stands: over all 30 days, N, the count of delegate-action USDC transfers on NEAR, is at most {{n:near.bq.n_upper_bound}}, below the threshold of {{n:threshold.line}} that was posted on chain at 2026-11-07 10:13 UTC, before the count. The dashboard is published at https://kzmttkc.github.io/vet402-near-thesis/.
+The claim stands: over all 30 days, N, the count of delegate-action USDC transfers on NEAR, is at most {{n:near.bq.n_upper_bound}}, below the threshold of {{n:threshold.line}} that was posted on chain at 2026-11-07 10:13 UTC, before the count. The dashboard is published at https://kzmttkc.github.io/vet402-near-thesis/. A two-minute walkthrough video is at https://youtu.be/hF-hsxQAq9I.
 
 NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents volume was {{n:intents.volume_30d|M}} {{range:intents.volume_30d}} (retrieved {{asof:intents.volume_30d}} UTC). That volume is not a count of agent payments. x402 has had a NEAR settlement spec since {{field:near.spec.pr_merged_at}} UTC. The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled {{n:near.known.named_delegate}} exact-scheme payments {{range:near.known.lower}}.
 
