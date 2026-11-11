@@ -33,7 +33,10 @@ export function meterFromThesis(thesis) {
     lower,
     lower_kind: lowerKind,
     estimate: recordValue(thesis, "near.delegate.estimate"),
-    upper: censusUpper ?? recordValue(thesis, "near.delegate.estimate_upper_95"),
+    // The band's upper bound is the BigQuery count. A finished census may replace it.
+    // The sample 95% figure is a different ruler and stays on its own key.
+    upper: censusUpper ?? recordValue(thesis, "near.bq.n_upper_bound"),
+    sample_upper_95: recordValue(thesis, "near.delegate.estimate_upper_95"),
     updated: counted ?? thesis?.snapshot?.near_retrieved_at ?? thesis?.generated_at ?? null,
     source: "frozen",
     relays_obtained: censusLower != null,
@@ -56,6 +59,7 @@ export function meterFromLive(live, thesis) {
     lower_kind: typeof live.lower_kind === "string" ? live.lower_kind : null,
     estimate: finite(live.estimate),
     upper: finite(live.upper),
+    sample_upper_95: finite(live.sample_upper_95),
     updated: live.updated ?? null,
     source: "live",
     relays_obtained: live.relays_obtained === true,
@@ -74,6 +78,7 @@ export function liveRecord(thesis, { relaysObtained = false, now = new Date() } 
     lower_kind: base.lower_kind,
     estimate: base.estimate,
     upper: base.upper,
+    sample_upper_95: base.sample_upper_95,
     relays_obtained: relaysObtained === true || base.relays_obtained === true,
     source: "live",
   };

@@ -130,12 +130,13 @@ let dailyCaption = null;
 const SQL_BLOB = "https://github.com/kzmttkc/vet402-near-thesis/blob/main/";
 const SQL_FILE = /^sql\/[a-z0-9.-]+\.sql$/;
 
-function figure(parent, label, valueText, rec, id) {
+function figure(parent, label, valueText, rec, id, underValue) {
   figureNo += 1;
   const box = el(parent, "figure", "figure");
   el(box, "p", "caption", `Figure ${figureNo}. ${label}`);
   const missingValue = valueText == null;
   el(box, "p", missingValue ? "value missing" : "value", missingValue ? "missing" : valueText);
+  if (underValue) el(box, "p", "meta", underValue);
   const rangeText = formatRange(rec?.range);
   metaLine(box, "Range", rangeText, rangeText === "");
   const dateText = rec?.as_of != null && String(rec.as_of).trim() !== "" ? formatUtc(rec.as_of) : "";
@@ -253,15 +254,38 @@ function heroLead(thesis) {
   return `${exact} exact-scheme payments from the named facilitators in 30 days, and the ${line} line was posted on chain at ${posted}, before the count. `;
 }
 
+function censusWindowDays(thesis) {
+  const known = Number(thesis?.numbers?.["near.known.lower"]?.range?.days);
+  if (Number.isFinite(known)) return known;
+  return Number(thesis?.numbers?.["near.bq.minute_window"]?.range?.days);
+}
+
 function verdictLine(thesis) {
   const upperRec = thesis?.numbers?.["near.bq.n_upper_bound"];
   const lineRec = thesis?.numbers?.["threshold.line"];
-  const days = Number(thesis?.numbers?.["near.bq.minute_window"]?.range?.days);
+  const days = censusWindowDays(thesis);
+  const dates = Number(thesis?.near?.bq?.dates_present);
   const upperText = formatValue(upperRec);
   const lineText = formatValue(lineRec);
-  if (upperText == null || lineText == null || !Number.isFinite(days)) return null;
+  if (upperText == null || lineText == null || !Number.isFinite(days) || !Number.isFinite(dates)) return null;
   if (!(Number(upperRec.value) < Number(lineRec.value))) return null;
-  return `N ≤ ${upperText} < ${lineText} over all ${formatCount(days)} days: the threshold is not crossed.`;
+  return `N ≤ ${upperText} < ${lineText} over the ${formatCount(days)} days of the census window: the threshold is not crossed. BigQuery counts the ${formatCount(dates)} whole dates that contain the window.`;
+}
+
+// The chip says "Daily reading" only for a new count of N. A file that repeats the frozen BigQuery bound does not.
+export function showsDailyReading(reading, thesis) {
+  if (reading?.source !== "live") return false;
+  if (reading.relays_obtained === true) return true;
+  const frozen = Number(thesis?.numbers?.["near.bq.n_upper_bound"]?.value);
+  const upper = Number(reading?.upper);
+  return Number.isFinite(upper) && Number.isFinite(frozen) && upper !== frozen;
+}
+
+function defillamaWindowLine(rec) {
+  const from = rec?.range?.from;
+  const to = rec?.range?.to;
+  if (typeof from !== "string" || typeof to !== "string" || from.length < 10 || to.length < 10) return null;
+  return `DefiLlama totalDataChart, ${from.slice(0, 10)} to ${to.slice(0, 10)} UTC.`;
 }
 
 function renderHeroNote(post, thesis) {
@@ -477,11 +501,19 @@ function bandCell(parent, label, sub) {
   return num;
 }
 
-function renderBand(root, thesis, live, bq) {
+function renderUpperQuery(cell, querySql) {
+  el(cell, "p", "meta", "The inner ft_transfer receipt is not required to succeed, so this count is at least N.");
+  if (typeof querySql !== "string" || querySql.trim() === "") return;
+  const details = el(cell, "details", "query-behind");
+  el(details, "summary", null, "Query behind this number");
+  el(details, "pre", "query-sql", querySql);
+}
+
+function renderBand(root, thesis, live, bq, querySql) {
   const reading = meterFromLive(live, thesis);
   const section = el(root, "section", "band");
   const head = el(section, "div", "band-head");
-  const kind = reading.source === "live" ? "Daily reading" : "Frozen snapshot";
+  const kind = showsDailyReading(reading, thesis) ? "Daily reading" : "Frozen snapshot";
   el(head, "p", "band-chip", `${kind} · read in-block`);
   const block = el(head, "p", "band-block");
   block.append("Block ");
@@ -510,11 +542,13 @@ function renderBand(root, thesis, live, bq) {
   paintCount(bandCell(grid, lowerLabel, lowerSub), reading.lower);
   const upperValue = Number(thesis?.numbers?.["near.bq.n_upper_bound"]?.value);
   if (Number.isFinite(upperValue)) {
+    const upperCell = el(grid, "div", "band-cell");
+    el(upperCell, "p", "meta", "Upper bound on N");
+    const upperNum = el(upperCell, "p", "band-num", "");
     const upperShare = shareOfLine(upperValue, reading.line);
-    paintCount(
-      bandCell(grid, "Upper bound on N", upperShare ? `${upperShare} of the line` : "whole dates"),
-      upperValue,
-    );
+    el(upperCell, "p", "meta", upperShare ? `${upperShare} of the line` : "whole dates");
+    paintCount(upperNum, upperValue);
+    renderUpperQuery(upperCell, querySql);
   }
   paintCount(bandCell(grid, "Line", "posted before the count"), reading.line);
   renderQueryLine(section, bq);
@@ -523,19 +557,27 @@ function renderBand(root, thesis, live, bq) {
   const roster = thesis?.near?.known?.roster;
   if (!Array.isArray(roster) || roster.length === 0) {
     el(accounts, "p", "missing", "missing");
-    return;
-  }
-  for (const row of roster) {
-    const cell = el(accounts, "div", "band-cell");
-    el(cell, "p", "meta account", shortId(row.account));
-    el(cell, "p", "meta", "exact x402 settlements (30 days)");
-    const num = el(cell, "p", "band-num");
-    if (row.kind === "sample_signer") num.textContent = "not x402";
-    else paintCount(num, row.delegate_usdc);
-    el(cell, "p", "meta", `delegate USDC ${formatCount(row.delegate_usdc)}`);
+  } else {
+    for (const row of roster) {
+      const cell = el(accounts, "div", "band-cell");
+      el(cell, "p", "meta account", shortId(row.account));
+      el(cell, "p", "meta", "exact x402 settlements (30 days)");
+      const num = el(cell, "p", "band-num");
+      if (row.kind === "sample_signer") num.textContent = "not x402";
+      else paintCount(num, row.delegate_usdc);
+      el(cell, "p", "meta", `delegate USDC ${formatCount(row.delegate_usdc)}`);
+    }
   }
   const range = formatRange(thesis?.numbers?.["near.known.named_delegate"]?.range);
   if (range) el(section, "p", "meta", range);
+  if (Number.isFinite(upperValue)) {
+    el(
+      section,
+      "p",
+      "meta",
+      `The daily file keeps the frozen bounds until a new full count arrives. The number that decides the claim is ${formatCount(upperValue)}.`,
+    );
+  }
 }
 
 function renderReplay(root, fileDigest) {
@@ -644,7 +686,7 @@ function recordStamp(thesis, id) {
 }
 
 function meterTimes(reading, thesis) {
-  if (reading.source === "live") {
+  if (showsDailyReading(reading, thesis)) {
     const at = reading.updated ? formatUtc(reading.updated) : "missing";
     const lineAt = recordStamp(thesis, "threshold.line");
     return `Lower bound retrieved ${at}. Line retrieved ${lineAt}. Daily reading.`;
@@ -771,7 +813,7 @@ export function renderDashboard(root, thesis, live = null, context = null) {
   root.replaceChildren();
   renderPost(root, thesis);
   renderActions(root);
-  renderBand(root, thesis, live, context?.bq ?? null);
+  renderBand(root, thesis, live, context?.bq ?? null, context?.querySql ?? "");
   renderPreregFailure(root);
   renderReplay(root, context?.preregDigest ?? null);
   renderFacilitators(root, thesis, context?.sources ?? null);
@@ -799,7 +841,14 @@ export function renderDashboard(root, thesis, live = null, context = null) {
   const x402Card = card(cards);
   figure(x402Card, "x402, 30 days", formatValue(x402), x402, "x402.total.amount_30d");
   figure(x402Card, "Base share of dollars", formatValue(baseShare), baseShare, "x402.base.share_amount_30d");
-  figure(card(cards), "NEAR Intents, 30 days", formatValue(intents), intents, "intents.volume_30d");
+  figure(
+    card(cards),
+    "NEAR Intents, 30 days",
+    formatValue(intents),
+    intents,
+    "intents.volume_30d",
+    defillamaWindowLine(intents),
+  );
   const vaultCard = card(cards);
   figure(vaultCard, "Treasury USDC out, 30 days", formatValue(vaultUsd), vaultUsd, "vault.usdc_out_30d.usd");
   const countText = formatValue(vaultCount);
@@ -915,6 +964,16 @@ async function loadBigQuery() {
   }
 }
 
+async function loadUpperQuery() {
+  try {
+    const res = await fetch(new URL("./sql/n-upper-bound.sql", import.meta.url));
+    if (!res.ok) return "";
+    return await res.text();
+  } catch {
+    return "";
+  }
+}
+
 async function boot() {
   const root = document.querySelector("#app");
   if (!root) return;
@@ -929,8 +988,13 @@ async function boot() {
     } catch {
       live = null;
     }
-    const [preregDigest, sources, bq] = await Promise.all([loadPreregDigest(), loadSources(), loadBigQuery()]);
-    renderDashboard(root, thesis, live, { preregDigest, sources, bq });
+    const [preregDigest, sources, bq, querySql] = await Promise.all([
+      loadPreregDigest(),
+      loadSources(),
+      loadBigQuery(),
+      loadUpperQuery(),
+    ]);
+    renderDashboard(root, thesis, live, { preregDigest, sources, bq, querySql });
   } catch {
     const fail = document.createElement("p");
     fail.className = "missing";

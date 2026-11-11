@@ -44,7 +44,7 @@ test("--offline numbers match the frozen thesis.json", async () => {
     const frozen = JSON.parse(await readFile(join(dir, "data", "thesis.json"), "utf8"));
     const offline = await runThesis(dir, ["--offline"]);
     assert.equal(offline.code, 0, offline.stderr);
-    assert.match(offline.stdout, /full count not yet fetched/);
+    assert.match(offline.stdout.trim(), /N ≤ 2,532 < 25,400: the threshold is not crossed \(BigQuery bound, frozen\), relay census not fetched$/);
     assert.equal(offline.stdout.trim().split("\n").length, 1);
     const second = JSON.parse(await readFile(join(dir, "data", "thesis.json"), "utf8"));
     assert.deepEqual(withoutGeneratedAt(second), withoutGeneratedAt(frozen));

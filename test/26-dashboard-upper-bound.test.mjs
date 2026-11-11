@@ -131,7 +131,8 @@ test("the dashboard shows the upper-bound query, 31 daily bars, and the verdict 
   assert.ok(page.includes("Figure 2. Daily matched receipts."));
   assert.ok(page.indexOf("Figure 1. Lower bound on N and the posted line") < page.indexOf("Figure 2. Daily matched receipts."));
   assert.ok(page.includes(`The daily counts sum to ${sumText} and the whole-date upper bound is ${upperText}, because ${spanText} receipts appear on two dates.`));
-  assert.ok(page.includes(`N ≤ ${upperText} < ${lineText} over all ${days} days: the threshold is not crossed.`));
+  const dates = thesis.near.bq.dates_present;
+  assert.ok(page.includes(`N ≤ ${upperText} < ${lineText} over the ${days} days of the census window: the threshold is not crossed. BigQuery counts the ${dates} whole dates that contain the window.`));
   assert.equal(page.includes("marine"), false);
   assert.equal(page.includes("@gmail"), false);
   assert.equal(page.includes("kzmttkc314"), false);
@@ -140,8 +141,8 @@ test("the dashboard shows the upper-bound query, 31 daily bars, and the verdict 
   shifted.numbers["near.bq.n_upper_bound"] = { ...shifted.numbers["near.bq.n_upper_bound"], value: 1 };
   shifted.numbers["threshold.line"] = { ...shifted.numbers["threshold.line"], value: 25400 };
   const shiftedPage = render(shifted, null);
-  assert.ok(shiftedPage.includes("N ≤ 1 < 25,400 over all 30 days: the threshold is not crossed."));
-  assert.equal(shiftedPage.includes("N ≤ 2,532 < 25,400 over all 30 days: the threshold is not crossed."), false);
+  assert.ok(shiftedPage.includes("N ≤ 1 < 25,400 over the 30 days of the census window: the threshold is not crossed. BigQuery counts the 31 whole dates that contain the window."));
+  assert.equal(shiftedPage.includes("N ≤ 2,532 < 25,400 over the 30 days of the census window: the threshold is not crossed."), false);
   assert.equal(shiftedPage.includes("Figure 2. Daily matched receipts."), false);
 });
 

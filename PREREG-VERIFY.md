@@ -59,3 +59,5 @@ The differences:
 6. The decisive count moved from keyless sources to BigQuery public data. Keyless, the FastNEAR transaction API gave the known-relay sum, 1,716: all 30 days, but only the named accounts. The full keyless walk over NearBlocks and archival RPC (`relay-census.json`) did not finish. A partial count below the line stays "not decided" under the posted rule. The whole-date BigQuery count covers those 30 days, and that query needs a Google Cloud account. The result is frozen in `data/snapshot/near/bigquery-n-upper-bound.json`.
 
 The claim and the evidence in the current `THESIS.md` were written after `f0c48d1`. `PREREG.md` leaves those sections as "(Written after the data.)". They are not part of the posted text.
+
+2026-11-11: the offline stdout now ends with the BigQuery verdict. The line and the definition of N did not move.

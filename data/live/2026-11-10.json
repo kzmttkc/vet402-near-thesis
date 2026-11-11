@@ -5,7 +5,8 @@
   "lower": 1716,
   "lower_kind": "known_relays",
   "estimate": 7952.0888888888885,
-  "upper": 24914,
+  "upper": 2532,
+  "sample_upper_95": 24914,
   "relays_obtained": false,
   "source": "live"
 }

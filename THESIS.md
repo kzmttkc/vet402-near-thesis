@@ -4,13 +4,13 @@ The four sections follow the NEAR HACKATHON thesis track. The threshold in "What
 
 ## Claim
 
-NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-29 00:00 UTC (retrieved 2026-10-29 23:18 UTC). That volume is not a count of agent payments. x402 has had a NEAR settlement spec since 2026-05-16 14:01 UTC.
+NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-29 00:00 UTC (retrieved 2026-10-29 23:18 UTC). DefiLlama totalDataChart, 2026-09-29 to 2026-10-29 UTC. That volume is not a count of agent payments. x402 has had a NEAR settlement spec since 2026-05-16 14:01 UTC.
 
 The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled 0 exact-scheme payments from 2026-10-08 11:42 to 2026-11-07 11:42 UTC.
 
 `uvd-facilitator.near` signed 51 transactions in that window: 14 Delegate `ft_transfer_call` to NEAR USDC and 37 calls on `v1.arras-escrow.near` (24 `withdraw_for`, 11 `release`, 2 `refund`). Those may be an escrow scheme of x402. This page does not classify them as x402 or as not x402. Its exact-scheme Delegate USDC `ft_transfer` count is 0.
 
-The exact-scheme spec is merged and the facilitators are named, yet they settled 0 exact-scheme payments in those 30 days. That gap is the strongest evidence that the exact scheme has not lit. The upper bound on N is 2,532, below the line (How the result is read).
+The exact-scheme spec is merged and the facilitators are named, yet they settled 0 exact-scheme payments in the 30 days of the census window. That gap is the strongest evidence that the exact scheme has not lit. The upper bound on N is 2,532, the count on the 31 whole dates that contain the window, below the line (How the result is read).
 
 ### Impact
 
@@ -18,7 +18,7 @@ The people this reaches are agents that pay through x402, and the accounts that 
 
 ### Sustainability
 
-Every figure here rebuilds from the frozen snapshot with `node thesis.mjs --offline`, with no key and no account. The line was fixed in commit f0c48d1 from the Base count frozen on 2026-10-30, so a later NEAR fetch cannot move it. The timing of the post is in [PREREG-VERIFY.md](PREREG-VERIFY.md). `node thesis.mjs --fetch-relays` counts the known relay accounts through the FastNEAR transaction API and writes `data/snapshot/near/facilitators.json`. It does not page every USDC transfer. The upkeep is to run the same script on the next 30-day window. `.github/workflows/refresh.yml` fetches the public counts with no key on a daily schedule. The schedule was turned on at publication, 2026-11-07 20:27 UTC. When it runs, the dashboard shows when the counts move toward the line of 25,400.
+Every figure here rebuilds from the frozen snapshot with `node thesis.mjs --offline`, with no key and no account. That command's one line ends with `N ≤ 2,532 < 25,400: the threshold is not crossed (BigQuery bound, frozen)`. While `relay-census.json` is absent, the line adds `relay census not fetched`. The line was fixed in commit f0c48d1 from the Base count frozen on 2026-10-30, so a later NEAR fetch cannot move it. The timing of the post is in [PREREG-VERIFY.md](PREREG-VERIFY.md). `node thesis.mjs --fetch-relays` counts the known relay accounts through the FastNEAR transaction API and writes `data/snapshot/near/facilitators.json`. It does not page every USDC transfer. The upkeep is to run the same script on the next 30-day window. `.github/workflows/refresh.yml` fetches the public counts with no key on a daily schedule. The schedule was turned on at publication, 2026-11-07 20:27 UTC. When it runs, the dashboard shows when the counts move toward the line of 25,400.
 
 ## Evidence for
 

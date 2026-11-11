@@ -25,6 +25,18 @@ export const EXPORT_URL = "https://vet402.com/api/v1/observatory/export.csv?days
 
 const DAY_MS = 86_400_000;
 
+function commaCount(value) {
+  return Math.round(Number(value)).toLocaleString("en-US");
+}
+
+// The offline line states the frozen BigQuery verdict. The census note, if any, follows it.
+export function offlineVerdict(thesis) {
+  const upper = Number(thesis?.numbers?.["near.bq.n_upper_bound"]?.value);
+  const line = Number(thesis?.numbers?.["threshold.line"]?.value);
+  if (!Number.isFinite(upper) || !Number.isFinite(line) || !(upper < line)) return "";
+  return `, N ≤ ${commaCount(upper)} < ${commaCount(line)}: the threshold is not crossed (BigQuery bound, frozen)`;
+}
+
 // totalDataChart stores the start of each daily bucket. The window end is one day later.
 export function closeIntentsVolume30d(range) {
   const startMs = Date.parse(range?.to);
@@ -107,6 +119,9 @@ export async function publishDashboardFiles(cwd) {
   if (await exists(thesisPath)) await copyFile(thesisPath, join(docsDir, "thesis.json"));
   await copyFile(join(cwd, "PREREG.md"), join(docsDir, "PREREG.md"));
   await copyFile(join(cwd, "data", "snapshot", "near", "facilitators.json"), join(docsDir, "facilitators.json"));
+  const sqlDir = join(docsDir, "sql");
+  await mkdir(sqlDir, { recursive: true });
+  await copyFile(join(cwd, "sql", "n-upper-bound.sql"), join(sqlDir, "n-upper-bound.sql"));
 }
 
 async function fetchExport(rawPath) {
@@ -733,9 +748,9 @@ export async function main(argv, { cwd = ROOT } = {}) {
       : args.offline
         ? "data/snapshot (no network)"
         : "the public sources";
-  const pending = !nearLoaded || nearLoaded.relaysPending ? ", full count not yet fetched" : "";
+  const pending = !nearLoaded || nearLoaded.relaysPending ? ", relay census not fetched" : "";
   console.log(
-    `rebuilt ${Object.keys(thesis.numbers).length} numbers from ${sourceLabel}, ${thesis.checks.length} checks ok, wrote data/thesis.json${pending}`,
+    `rebuilt ${Object.keys(thesis.numbers).length} numbers from ${sourceLabel}, ${thesis.checks.length} checks ok, wrote data/thesis.json${offlineVerdict(thesis)}${pending}`,
   );
   if (args.renderPairs) await runRender(args, cwd);
   return thesis;

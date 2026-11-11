@@ -22,23 +22,23 @@ test("with no live file the meter uses the frozen bounds", () => {
   assert.equal(frozen.lower, 1716);
   assert.equal(frozen.lower_kind, "known_relays");
   assert.equal(Math.round(frozen.estimate), 20_421);
-  assert.equal(frozen.upper, 42_675);
+  assert.equal(frozen.upper, 2_532);
+  assert.equal(frozen.sample_upper_95, 42_675);
   assert.equal(frozen.relays_obtained, false);
   assert.equal(meterFromLive(null, thesis).source, "frozen");
+  assert.equal(meterFromLive(null, thesis).upper, 2_532);
   assert.equal(meterFromLive({}, thesis).source, "frozen");
-  const placeholder = JSON.parse(readFileSync(join(ROOT, "docs", "live.json"), "utf8"));
-  assert.equal(placeholder.placeholder, true);
-  assert.equal(placeholder.lower, 1716);
-  assert.equal(placeholder.line, 25_400);
+  const placeholder = { placeholder: true, lower: 1716, line: 25_400, upper: 24_914 };
   const ignored = meterFromLive({ ...placeholder, lower: 1, line: 2, estimate: 3, upper: 4 }, thesis);
   assert.equal(ignored.source, "frozen");
   assert.equal(ignored.lower, 1716);
   assert.equal(ignored.line, 25_400);
+  assert.equal(ignored.upper, 2_532);
   const pos = meterPositions(frozen);
-  assert.ok(pos.lower < pos.estimate);
+  assert.ok(pos.lower < pos.upper);
+  assert.ok(pos.upper < pos.estimate);
   assert.ok(pos.estimate < pos.line);
-  assert.ok(pos.line < pos.upper);
-  assert.equal(pos.upper, 100);
+  assert.equal(pos.line, 100);
 });
 
 test("a census lower replaces the sample hits", () => {
@@ -94,6 +94,8 @@ test("a live record is one UTC day and a later day does not delete the earlier f
   assert.equal(record.relays_obtained, false);
   assert.equal(record.lower, 1716);
   assert.equal(record.line, 25_400);
+  assert.equal(record.upper, 2_532);
+  assert.equal(record.sample_upper_95, 42_675);
   const root = await mkdtemp(join(tmpdir(), "near-live-"));
   await appendLiveReading({ thesis, root, now: new Date("2026-11-08T00:30:00.000Z") });
   await appendLiveReading({
@@ -109,6 +111,18 @@ test("a live record is one UTC day and a later day does not delete the earlier f
   const first = JSON.parse(await readFile(join(root, "data", "live", "2026-11-08.json"), "utf8"));
   assert.equal(first.date, "2026-11-08");
   assert.equal(first.lower, 1716);
+  assert.equal(first.upper, 2_532);
+  assert.equal(shown.upper, 2_532);
+  assert.equal(shown.sample_upper_95, 42_675);
+});
+
+test("a bot live file without placeholder still leaves the no-file meter on the frozen bounds", () => {
+  const thesis = thesisFixture();
+  const written = JSON.parse(readFileSync(join(ROOT, "docs", "live.json"), "utf8"));
+  assert.equal(written.placeholder, undefined);
+  assert.equal(written.upper, 2_532);
+  assert.equal(meterFromLive(null, thesis).upper, thesis.numbers["near.bq.n_upper_bound"].value);
+  assert.equal(meterFromLive(null, thesis).source, "frozen");
 });
 
 test("named facilitators with zero settlements sit with the claim", () => {
