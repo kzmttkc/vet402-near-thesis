@@ -30,6 +30,8 @@ NEAR Intents settles cross-chain payments through its solver network. The frozen
 
 The public facilitator at x402.mikedotexe.com reports scheme `exact` on `near:mainnet` and names `x402-relayer2.mike.near` as a signer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-29 00:00 UTC (retrieved 2026-10-29 23:18 UTC). That window is not the window of the N lower bound (from 2026-10-08 11:42 to 2026-11-07 11:42 UTC) or of the sample (from 2026-10-08 04:24 to 2026-11-07 04:24 UTC). On Base, the Intents treasury address sent out $41.05M of USDC in 45,840 transfers over blocks 51965969 to 53261969. This is the funding and movement layer. Nothing in those transfers says which of them, if any, are x402.
 
+Three rails move value on NEAR. NEAR Intents moves it through solvers ($3.97B in the window above). The x402 exact scheme is a NEP-366 delegate ft_transfer of NEAR USDC that a facilitator submits; N counts only this rail. Chain Signatures let a NEAR account sign on another chain; this thesis does not count that rail.
+
 ## Evidence against
 
 I read 900 intents.near index rows, 30 a day from 16:20 UTC over 30 days (from 2026-10-09 16:20 to 2026-11-07 16:21 UTC), from FastNEAR with no key. Payment-scale settlements, meaning a successful transfer intent of NEAR USDC of 5 USDC or less: 0. Days not fetched: none. This count is not the delegate-action count N.

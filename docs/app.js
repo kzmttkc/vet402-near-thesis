@@ -242,6 +242,18 @@ function shortId(value) {
   return `${text.slice(0, 8)}…${text.slice(-4)}`;
 }
 
+const SETTLED_EXACT_HASH = "2AzhbSqm1nT5QizVBmas3xFisNiqx9upYnKbGfReWnb5";
+
+function settledExactLine(payment, windowFrom) {
+  if (!payment || payment.inner_success !== true) return "";
+  const atMs = new Date(payment.at).getTime();
+  const fromMs = new Date(windowFrom).getTime();
+  if (!Number.isFinite(atMs) || !Number.isFinite(fromMs) || atMs >= fromMs) return "";
+  const amount = formatValue({ value: payment.amount_usdc, unit: "USDC", unit_kind: "usdc" });
+  if (amount == null || typeof payment.hash !== "string" || payment.hash.length <= 28) return "";
+  return `One exact payment did settle: ${amount} USDC, inner receipt succeeded, ${formatUtc(payment.at)}, before this window. Hash ${shortId(payment.hash)}.`;
+}
+
 const PREREG_VERIFY_URL = "https://github.com/kzmttkc/vet402-near-thesis/blob/main/PREREG-VERIFY.md";
 
 function heroLead(thesis) {
@@ -661,6 +673,12 @@ function renderFacilitators(root, thesis, sources) {
     el(box, "p", "meta", "other activity");
     el(box, "p", "activity", otherActivity(row));
     if (row.note) el(box, "p", "meta", row.note);
+    if (row.account === "x402-relayer2.mike.near") {
+      const payments = thesis?.near?.relayer?.payments;
+      const payment = Array.isArray(payments) ? payments.find((item) => item?.hash === SETTLED_EXACT_HASH) : null;
+      const settled = settledExactLine(payment, thesis?.near?.known?.window?.from);
+      if (settled) el(box, "p", "meta", settled);
+    }
   }
   cite(root, "near.known.lower");
 }
