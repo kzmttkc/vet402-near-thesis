@@ -242,16 +242,20 @@ function shortId(value) {
   return `${text.slice(0, 8)}…${text.slice(-4)}`;
 }
 
-const SETTLED_EXACT_HASH = "2AzhbSqm1nT5QizVBmas3xFisNiqx9upYnKbGfReWnb5";
 
-function settledExactLine(payment, windowFrom) {
-  if (!payment || payment.inner_success !== true) return "";
-  const atMs = new Date(payment.at).getTime();
+function settledExactLine(payments, windowFrom) {
   const fromMs = new Date(windowFrom).getTime();
-  if (!Number.isFinite(atMs) || !Number.isFinite(fromMs) || atMs >= fromMs) return "";
-  const amount = formatValue({ value: payment.amount_usdc, unit: "USDC", unit_kind: "usdc" });
-  if (amount == null || typeof payment.hash !== "string" || payment.hash.length <= 28) return "";
-  return `One exact payment did settle: ${amount} USDC, inner receipt succeeded, ${formatUtc(payment.at)}, before this window. Hash ${shortId(payment.hash)}.`;
+  if (!Array.isArray(payments) || !Number.isFinite(fromMs)) return "";
+  const settled = payments
+    .filter((item) => item?.inner_success === true && Number.isFinite(new Date(item.at).getTime()) && new Date(item.at).getTime() < fromMs)
+    .sort((a, b) => new Date(a.at).getTime() - new Date(b.at).getTime());
+  if (settled.length === 0) return "";
+  const last = settled[settled.length - 1];
+  if (typeof last.hash !== "string" || last.hash.length <= 28) return "";
+  const amounts = new Set(settled.map((item) => item.amount_usdc));
+  const amount = amounts.size === 1 ? formatValue({ value: last.amount_usdc, unit: "USDC", unit_kind: "usdc" }) : null;
+  const each = amount == null ? "" : `, ${amount} USDC each`;
+  return `${formatCount(settled.length)} exact payments settled before this window${each}, inner receipt succeeded. The last was ${formatUtc(last.at)}, hash ${shortId(last.hash)}.`;
 }
 
 const PREREG_VERIFY_URL = "https://github.com/kzmttkc/vet402-near-thesis/blob/main/PREREG-VERIFY.md";
@@ -674,9 +678,7 @@ function renderFacilitators(root, thesis, sources) {
     el(box, "p", "activity", otherActivity(row));
     if (row.note) el(box, "p", "meta", row.note);
     if (row.account === "x402-relayer2.mike.near") {
-      const payments = thesis?.near?.relayer?.payments;
-      const payment = Array.isArray(payments) ? payments.find((item) => item?.hash === SETTLED_EXACT_HASH) : null;
-      const settled = settledExactLine(payment, thesis?.near?.known?.window?.from);
+      const settled = settledExactLine(thesis?.near?.relayer?.payments, thesis?.near?.known?.window?.from);
       if (settled) el(box, "p", "meta", settled);
     }
   }

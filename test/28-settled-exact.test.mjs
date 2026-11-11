@@ -82,7 +82,7 @@ function mount() {
   };
 }
 
-test("the relayer card quotes the one exact payment from the frozen json, outside the window", () => {
+test("the relayer card counts the exact payments that settled before the window, from the frozen json", () => {
   const raw = JSON.parse(readFileSync(join(ROOT, "data/snapshot/near/relayer-payments.json"), "utf8"));
   const payment = raw.payments.find((item) => item.hash === HASH);
   assert.ok(payment);
@@ -111,7 +111,9 @@ test("the relayer card quotes the one exact payment from the frozen json, outsid
   assert.ok(at < thesis.near.known.window.from);
 
   const amount = usdcText(payment.amount_raw);
-  const line = `One exact payment did settle: ${amount} USDC, inner receipt succeeded, ${formatUtc(at)}, before this window. Hash ${payment.hash.slice(0, 8)}…${payment.hash.slice(-4)}.`;
+  const before = thesis.near.relayer.payments.filter((item) => item.inner_success === true && item.at < thesis.near.known.window.from);
+  assert.equal(before.length, 6);
+  const line = `${before.length} exact payments settled before this window, ${amount} USDC each, inner receipt succeeded. The last was ${formatUtc(at)}, hash ${payment.hash.slice(0, 8)}…${payment.hash.slice(-4)}.`;
 
   const mounted = mount();
   try {
@@ -121,7 +123,7 @@ test("the relayer card quotes the one exact payment from the frozen json, outsid
     assert.ok(own);
     const paragraph = own.children.find((child) => child.textContent === line);
     assert.ok(paragraph, textOf(own));
-    const hits = cards.filter((card) => textOf(card).includes("One exact payment did settle"));
+    const hits = cards.filter((card) => textOf(card).includes("exact payments settled before this window"));
     assert.deepEqual(hits.map((card) => card.children.find((child) => child.tag === "h3")?.textContent), [payment.signer_id]);
   } finally {
     mounted.restore();
