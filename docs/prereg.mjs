@@ -43,5 +43,6 @@ export function replaySteps(record, fileDigest) {
     `Transaction ${record.tx}. Signer ${record.signer}. Receiver ${record.receiver}. Method ${record.method}. Block ${record.block}. Block hash ${record.blockHash}. ${record.at}.`,
     `Arguments name commit ${record.commit} and sha256 ${posted}. Key ${record.postKey}.`,
     check,
+    `Explorer status is Failure: the receiver ${record.receiver} has no contract (CodeDoesNotExist). The arguments stay in the transaction, and the line is read from them.`,
   ];
 }

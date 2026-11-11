@@ -39,6 +39,7 @@ test("replay steps compare the file digest and do not invent a chain read", () =
   assert.match(match[1], new RegExp(PREREG_RECORD.tx));
   assert.match(match[1], new RegExp(String(PREREG_RECORD.block)));
   assert.match(match[3], /matches the posted digest/);
+  assert.match(match[4], /Explorer status is Failure: the receiver social has no contract \(CodeDoesNotExist\)/);
   const missing = replaySteps(PREREG_RECORD, null);
   assert.match(missing[3], /was not loaded/);
   assert.doesNotMatch(missing[3], /matches/);
