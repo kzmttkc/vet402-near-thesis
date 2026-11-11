@@ -1,6 +1,6 @@
 # NEAR in agent payments: a thesis you can rerun
 
-The claim stands: over the 30 days of the census window, N, the count of delegate-action USDC transfers on NEAR, is at most 2,532. That figure counts the 31 whole dates that contain the window, and it is below the threshold of 25,400 that was posted on chain at 2026-11-07 10:13 UTC, before the count. The dashboard is published at https://kzmttkc.github.io/vet402-near-thesis/. A two-minute walkthrough video is at https://youtu.be/hF-hsxQAq9I. DefiLlama totalDataChart, 2026-09-29 to 2026-10-29 UTC.
+The claim stands: over the 30 days of the census window, N, the count of delegate-action USDC transfers on NEAR, is at most 2,532. That figure counts the 31 whole dates that contain the window, and it is below the threshold of 25,400 that was posted on chain at 2026-11-07 10:13 UTC, before the count. The dashboard is published at https://kzmttkc.github.io/vet402-near-thesis/. A two-minute walkthrough video is at https://youtu.be/cE9f1kyVa8c. DefiLlama totalDataChart, 2026-09-29 to 2026-10-29 UTC.
 
 NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents volume was $3.97B from 2026-09-29 00:00 to 2026-10-29 00:00 UTC (retrieved 2026-10-29 23:18 UTC). That volume is not a count of agent payments. x402 has had a NEAR settlement spec since 2026-05-16 14:01 UTC. The known x402 facilitators, `x402-relayer2.mike.near`, `x402-relayer.mike.near`, `solvador.near`, and `uvd-facilitator.near`, settled 0 exact-scheme payments from 2026-10-08 11:42 to 2026-11-07 11:42 UTC.
 
