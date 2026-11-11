@@ -501,14 +501,6 @@ function bandCell(parent, label, sub) {
   return num;
 }
 
-function renderUpperQuery(cell, querySql) {
-  el(cell, "p", "meta", "The inner ft_transfer receipt is not required to succeed, so this count is at least N.");
-  if (typeof querySql !== "string" || querySql.trim() === "") return;
-  const details = el(cell, "details", "query-behind");
-  el(details, "summary", null, "Query behind this number");
-  el(details, "pre", "query-sql", querySql);
-}
-
 function renderBand(root, thesis, live, bq, querySql) {
   const reading = meterFromLive(live, thesis);
   const section = el(root, "section", "band");
@@ -548,10 +540,15 @@ function renderBand(root, thesis, live, bq, querySql) {
     const upperShare = shareOfLine(upperValue, reading.line);
     el(upperCell, "p", "meta", upperShare ? `${upperShare} of the line` : "whole dates");
     paintCount(upperNum, upperValue);
-    renderUpperQuery(upperCell, querySql);
+    el(upperCell, "p", "meta", "The inner ft_transfer receipt is not required to succeed, so this count is at least N.");
   }
   paintCount(bandCell(grid, "Line", "posted before the count"), reading.line);
   renderQueryLine(section, bq);
+  if (Number.isFinite(upperValue) && typeof querySql === "string" && querySql.trim() !== "") {
+    const details = el(section, "details", "query-behind");
+    el(details, "summary", null, "Query behind this number");
+    el(details, "pre", "query-sql", querySql);
+  }
 
   const accounts = el(section, "div", "band-accounts");
   const roster = thesis?.near?.known?.roster;
