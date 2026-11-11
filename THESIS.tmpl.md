@@ -30,7 +30,7 @@ NEAR Intents settles cross-chain payments through its solver network. The frozen
 
 The public facilitator at x402.mikedotexe.com reports scheme `exact` on `near:mainnet` and names `x402-relayer2.mike.near` as a signer. NEAR Intents volume was {{n:intents.volume_30d|M}} {{range:intents.volume_30d}} (retrieved {{asof:intents.volume_30d}} UTC). That window is not the window of the N lower bound ({{range:near.known.lower}}) or of the sample ({{range:near.delegate.sampled_receipts}}). On Base, the Intents treasury address sent out {{n:vault.usdc_out_30d.usd|M}} of USDC in {{n:vault.usdc_out_30d.count}} transfers over {{range:vault.usdc_out_30d.usd}}. This is the funding and movement layer. Nothing in those transfers says which of them, if any, are x402.
 
-Three rails move value on NEAR. NEAR Intents moves it through solvers ({{n:intents.volume_30d|M}} in the window above). The x402 exact scheme is a NEP-366 delegate ft_transfer of NEAR USDC that a facilitator submits; N counts only this rail. Chain Signatures let a NEAR account sign on another chain; this thesis does not count that rail.
+Three rails move value on NEAR. NEAR Intents moves it through solvers ({{n:intents.volume_30d|M}} in the window above). The x402 exact scheme is a NEP-366 delegate ft_transfer of NEAR USDC that a facilitator submits. N counts only this rail. Chain Signatures let a NEAR account sign on another chain, and this thesis does not count that rail.
 
 ## Evidence against
 
