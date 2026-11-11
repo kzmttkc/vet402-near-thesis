@@ -7,7 +7,7 @@ NEAR's edge in agent payments is the funding and settlement layer. NEAR Intents 
 ## Where this stands (2026-11-07)
 
 - As of 2026-10-30, x402scan cannot count x402 settlement on NEAR. The named facilitators settled {{n:near.known.named_delegate}} exact-scheme payments {{range:near.known.lower}}. That window is not the Intents window above.
-- The known-relay sum is {{n:near.known.lower_share_of_line}} of the line.
+- The known relay accounts sum to {{n:near.known.lower}}, a lower bound on N and {{n:near.known.lower_share_of_line}} of the line.
 - The threshold is N ≥ {{n:threshold.line}}, committed in f0c48d1 ([section 6](THESIS.md#6-what-would-change-my-mind)). The line is 1% of the Base x402 count frozen on 2026-10-30, so it does not depend on NEAR data. The check is in [PREREG-VERIFY.md](PREREG-VERIFY.md).
 - [THESIS.md](THESIS.md) holds the claim, the evidence, and that threshold.
 
