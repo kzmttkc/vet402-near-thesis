@@ -162,7 +162,7 @@ test("the BigQuery upper bound is a file on disk and this test does not run it",
   assert.match(daily, /prints one row per day/);
   assert.match(daily, /TIMESTAMP '2026-10-08 11:42:00\+00'/);
   assert.match(daily, /TIMESTAMP '2026-11-07 11:42:00\+00'/);
-  const readme = await readFile(join(ROOT, "README.md"), "utf8");
+  const readme = await readFile(join(ROOT, "THESIS.md"), "utf8");
   assert.match(readme, /sql\/n-upper-bound-daily\.sql/);
   assert.match(readme, /`sql\/n-upper-bound\.sql` is the whole-date count/);
 });

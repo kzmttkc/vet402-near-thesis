@@ -73,7 +73,7 @@ test("0.040% matches the frozen snapshot at the published rounding", async () =>
   const windowLine = "DefiLlama totalDataChart, 2026-09-29 to 2026-10-29 UTC.";
   for (const name of ["README.tmpl.md", "README.md", "THESIS.tmpl.md", "THESIS.md"]) {
     const text = await readFile(join(ROOT, name), "utf8");
-    if (name.startsWith("README")) assert.ok(text.includes(sentence), name);
+    if (name.startsWith("THESIS")) assert.ok(text.includes(sentence), name);
     assert.ok(text.includes(windowLine), name);
   }
 });

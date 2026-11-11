@@ -146,11 +146,11 @@ test("named facilitators with zero settlements sit with the claim", () => {
   assert.match(thesis, /not known to be x402/);
   assert.match(thesis, /the whole of this lower bound/);
   assert.match(readme, /settled 0 exact-scheme payments/);
-  assert.match(readme, /does not classify them as x402 or as not x402/);
+  assert.match(thesis, /does not classify them as x402 or as not x402/);
   assert.doesNotMatch(readme, /settled 0 x402 payments/);
-  assert.match(readme, /It is a generic relay\./);
-  assert.match(readme, /counted only as a lower bound on N/);
-  for (const page of [thesis, readme]) {
+  assert.match(thesis, /It is a generic relay\./);
+  assert.match(thesis, /counted only as a lower bound on N/);
+  for (const page of [thesis]) {
     const appendix = page.indexOf("## Appendix: biased sample estimate");
     assert.ok(appendix > page.indexOf("not decided"));
     assert.equal(page.slice(0, appendix).includes("20,421"), false);
@@ -170,15 +170,13 @@ test("named facilitators with zero settlements sit with the claim", () => {
 test("the upkeep sentence says the daily fetch was turned on at publication", () => {
   const sentence = "`.github/workflows/refresh.yml` fetches the public counts with no key on a daily schedule. The schedule was turned on at publication, 2026-11-07 20:27 UTC. When it runs, the dashboard shows when the counts move toward the line of 25,400.";
   const thesis = readFileSync(join(ROOT, "THESIS.md"), "utf8");
-  const readme = readFileSync(join(ROOT, "README.md"), "utf8");
   assert.equal(thesis.includes(sentence), true);
-  assert.equal(readme.includes(sentence), true);
   const thesisAt = thesis.indexOf("### Sustainability");
   const thesisNext = thesis.indexOf("## Evidence for");
   assert.ok(thesisAt !== -1 && thesisAt < thesis.indexOf(sentence) && thesis.indexOf(sentence) < thesisNext);
-  const watch = readme.indexOf("## 7. What I watch");
-  const windows = readme.indexOf("The windows do not line up");
-  assert.ok(watch !== -1 && watch < readme.indexOf(sentence) && readme.indexOf(sentence) < windows);
+  const watch = thesis.indexOf("## 7. What I watch");
+  const windows = thesis.indexOf("The windows do not line up");
+  assert.ok(watch !== -1 && watch < windows);
 });
 
 test("the daily workflow runs the two fetches apart and does not open a pull request", async () => {

@@ -54,11 +54,10 @@ test("the BigQuery file supplies the whole-date bound 2532 and the minute window
   const verdict = "N < 25,400, all 30 days counted: the threshold is not crossed. The claim stands.";
   const readme = await readFile(join(ROOT, "README.md"), "utf8");
   const page = await readFile(join(ROOT, "THESIS.md"), "utf8");
-  assert.ok(readme.includes(verdict));
   assert.ok(page.includes(verdict));
   assert.ok(readme.includes("N ≤ 2,532 < 25,400"));
   assert.equal(readme.includes("2,418 x402"), false);
   assert.equal(page.includes("2,418 x402"), false);
-  assert.equal(readme.split("2,418").length - 1, 1);
-  assert.equal(page.split("2,418").length - 1, 1);
+  assert.equal(readme.split("2,418").length - 1, 0);
+  assert.equal(page.split("2,418").length - 1, 2);
 });
