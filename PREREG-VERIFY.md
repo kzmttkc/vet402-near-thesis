@@ -20,7 +20,7 @@ The digest is `d8925b096c421dc12afc77fe2421a2ec29e96581f9b66d4273984178764c24ec`
 The same digest and the commit are in the arguments of that transaction. Read them with no key:
 
 ```
-curl -s https://rpc.mainnet.near.org -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","id":"1","method":"tx","params":["BbegySAyn8WSh8StsGBFxKKk4YDWzHSePyLtiH5k5vLB","smartbread5934.near"]}'
+curl -s https://archival-rpc.mainnet.near.org -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","id":"1","method":"tx","params":["BbegySAyn8WSh8StsGBFxKKk4YDWzHSePyLtiH5k5vLB","smartbread5934.near"]}'
 ```
 
 The arguments are base64. Decoded, they are one JSON object whose key is `post/1794046390265`. The text names commit `f0c48d13ed5af6147daa0e7a0b444855f3186770` and sha256 `d8925b096c421dc12afc77fe2421a2ec29e96581f9b66d4273984178764c24ec`.
