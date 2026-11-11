@@ -82,14 +82,16 @@ test("the band names a daily reading only for a new count, and shows the upper-b
   const thesis = JSON.parse(readFileSync(join(ROOT, "docs/thesis.json"), "utf8"));
   const live = JSON.parse(readFileSync(join(ROOT, "docs/live.json"), "utf8"));
   const sql = readFileSync(join(ROOT, "sql/n-upper-bound.sql"), "utf8");
-  assert.equal(showsDailyReading(live, thesis), false);
-  assert.equal(showsDailyReading({ ...live, relays_obtained: true }, thesis), true);
-  assert.equal(showsDailyReading({ ...live, upper: 3_000 }, thesis), true);
+  // A frozen reading: the daily file has no new census and keeps the BigQuery bound. The real live.json changes every day.
+  const frozen = { ...live, relays_obtained: false, upper: thesis.numbers["near.bq.n_upper_bound"].value };
+  assert.equal(showsDailyReading(frozen, thesis), false);
+  assert.equal(showsDailyReading({ ...frozen, relays_obtained: true }, thesis), true);
+  assert.equal(showsDailyReading({ ...frozen, upper: 3_000 }, thesis), true);
   assert.equal(showsDailyReading(null, thesis), false);
 
   const mounted = mount();
   try {
-    renderDashboard(mounted.root, thesis, live, { bq: null, sources: { account: [] }, preregDigest: "abc", querySql: sql });
+    renderDashboard(mounted.root, thesis, frozen, { bq: null, sources: { account: [] }, preregDigest: "abc", querySql: sql });
     const page = textOf(mounted.root);
     assert.ok(page.includes("Frozen snapshot · read in-block"));
     assert.equal(page.includes("Daily reading · read in-block"), false);
