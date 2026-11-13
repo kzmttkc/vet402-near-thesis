@@ -1,12 +1,12 @@
 {
-  "date": "2026-11-12",
+  "date": "2026-11-13",
   "updated": "2026-11-07T12:47:16.312Z",
   "line": 25400,
   "lower": 1716,
   "lower_kind": "known_relays",
-  "estimate": 8281.342222222222,
+  "estimate": 20758.722222222223,
   "upper": 2532,
-  "sample_upper_95": 25945,
+  "sample_upper_95": 43381,
   "relays_obtained": false,
   "source": "live"
 }
